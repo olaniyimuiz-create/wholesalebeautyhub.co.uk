@@ -1,0 +1,14 @@
+# Raw DB export and parsed intermediates - contain real customer PII
+# (names, emails, phone numbers, addresses). Never commit these.
+migration/sql/*.sql
+migration/sql/*.sql.gz
+migration/data/*.json
+
+# Generated Shopify import CSVs - also contain customer PII
+shopify-theme/assets/shopify_products_import.csv
+shopify-theme/assets/shopify_customers_import.csv
+
+# Python
+__pycache__/
+*.pyc
+
