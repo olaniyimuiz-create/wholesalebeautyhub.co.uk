@@ -5,15 +5,21 @@ WooCommerce (WordPress) to Shopify: products, variants, images, categories,
 brands, and customers, exported as Shopify-importable CSVs.
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the pipeline works
-internally and [docs/MIGRATION_PROGRESS.md](docs/MIGRATION_PROGRESS.md) for
-task status.
+internally, [docs/SEO_STRATEGY.md](docs/SEO_STRATEGY.md) for the URL
+migration plan, [docs/DECISIONS.md](docs/DECISIONS.md) for why things were
+built the way they were, and
+[docs/MIGRATION_PROGRESS.md](docs/MIGRATION_PROGRESS.md) for task status.
 
 ## Status
 
-Data pipeline (SQL dump → Shopify CSVs) is built and validated against the
-live store's export: 611 products (497 variations) and 12,096 customers,
-parsed in ~19s with zero malformed CSV rows. Theme, redirects, and Shopify
-API integration are not started yet.
+- **Data pipeline** (SQL dump → Shopify CSVs): built and validated against
+  the live store's export — 611 products (497 variations) and 12,096
+  customers, parsed in ~19s with zero malformed CSV rows.
+- **SEO & URL mapping**: built and validated — 875-row redirect matrix plus
+  duplicate/orphan/broken-link reports in `reports/`, cross-checked against
+  the live site. One real slug collision and a few smaller findings are
+  documented in `docs/SEO_STRATEGY.md` and need a decision before Phase 6.
+- Theme, collections, and Shopify API integration are not started yet.
 
 ## Prerequisites
 
@@ -35,11 +41,14 @@ API integration are not started yet.
    ```bash
    python migration/scripts/database_parser.py   # dump.sql -> migration/data/*.json
    python migration/scripts/csv_generator.py      # *.json -> shopify-theme/assets/*.csv
+   python migration/scripts/seo_url_mapper.py     # dump.sql + products.json -> reports/*.csv
    ```
 
 3. Import `shopify-theme/assets/shopify_products_import.csv` and
    `shopify_customers_import.csv` via Shopify Admin → Products/Customers →
-   Import.
+   Import. `reports/redirect_matrix.csv` is shaped for Shopify's URL
+   Redirect bulk importer but isn't meant to be imported yet — read
+   `docs/SEO_STRATEGY.md` first, there's an open slug collision to resolve.
 
 ## Project layout
 
@@ -50,7 +59,8 @@ migration/
   scripts/    The pipeline itself
 shopify-theme/
   assets/     Generated Shopify import CSVs (git-ignored, contains PII)
-docs/         Architecture notes and migration progress log
+reports/      SEO/URL analysis reports (safe to commit - no PII)
+docs/         Architecture, SEO strategy, decisions, progress, risk register
 ```
 
 Folders are added as tasks need them rather than scaffolded up front.
