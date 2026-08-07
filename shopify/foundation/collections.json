@@ -1,0 +1,1141 @@
+{
+  "$schema_note": "Planning artifact for Phase 9 collection creation. Not consumed by any script yet. Source: migration/sql/dump.sql + migration/data/products.json, compiled during Phase 6.5. Re-verify counts before Phase 9 - the catalog changes.",
+  "generated_for_phase": "6.5",
+  "total_planned_collections": 156,
+  "category_collections": [
+    {
+      "name": "Face",
+      "handle": "face",
+      "type": "category",
+      "group": "Makeup",
+      "rule": "product category equals Face",
+      "product_count": 91
+    },
+    {
+      "name": "Eyes",
+      "handle": "eyes",
+      "type": "category",
+      "group": "Makeup",
+      "rule": "product category equals Eyes",
+      "product_count": 60
+    },
+    {
+      "name": "Lips",
+      "handle": "lips",
+      "type": "category",
+      "group": "Makeup",
+      "rule": "product category equals Lips",
+      "product_count": 27
+    },
+    {
+      "name": "Brushes & Beauty Blenders",
+      "handle": "brushes-beauty-blenders",
+      "type": "category",
+      "group": "Makeup",
+      "rule": "product category equals Brushes & Beauty Blenders",
+      "product_count": 15
+    },
+    {
+      "name": "Serums & Treatment",
+      "handle": "serums-treatment",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Serums & Treatment (absorbs Glow Serum, Dark Spots & Discoloration Serums, Eye Cream, Glow Spray per approved cleanup)",
+      "product_count": 89
+    },
+    {
+      "name": "Moisturizers & Cream",
+      "handle": "moisturizers",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Moisturizers & Cream",
+      "product_count": 63
+    },
+    {
+      "name": "Face Cleansers & Wash",
+      "handle": "face-cleansers-wash",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Face Cleansers & Wash",
+      "product_count": 43
+    },
+    {
+      "name": "Face Toners, Mist & Essence",
+      "handle": "face-toners-mist-essence",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Face Toners, Mist & Essence",
+      "product_count": 37
+    },
+    {
+      "name": "Sunscreen",
+      "handle": "sunscreen",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Sunscreen",
+      "product_count": 32
+    },
+    {
+      "name": "Brightening",
+      "handle": "brightening",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Brightening",
+      "product_count": 32
+    },
+    {
+      "name": "Hyperpigmentation",
+      "handle": "hyperpigmentation",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Hyperpigmentation",
+      "product_count": 21
+    },
+    {
+      "name": "Exfoliators, Peels & Scrubs",
+      "handle": "exfoliators-peels-scrubs",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Exfoliators, Peels & Scrubs",
+      "product_count": 20
+    },
+    {
+      "name": "Acne Treatment",
+      "handle": "acne-treatment",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Acne Treatment (promoted from WooCommerce top level - approved cleanup)",
+      "product_count": 25
+    },
+    {
+      "name": "Mask",
+      "handle": "face-mask",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Mask",
+      "product_count": 4
+    },
+    {
+      "name": "Face Oil",
+      "handle": "face-oil",
+      "type": "category",
+      "group": "Skin Care",
+      "rule": "product category equals Face Oil",
+      "product_count": 1
+    },
+    {
+      "name": "Body Lotion",
+      "handle": "body-lotion",
+      "type": "category",
+      "group": "Bath & Body Care",
+      "rule": "product category equals Body Lotion",
+      "product_count": 63
+    },
+    {
+      "name": "Body Wash",
+      "handle": "body-wash",
+      "type": "category",
+      "group": "Bath & Body Care",
+      "rule": "product category equals Body Wash",
+      "product_count": 54
+    },
+    {
+      "name": "Body Moisturizers",
+      "handle": "body-moisturizers",
+      "type": "category",
+      "group": "Bath & Body Care",
+      "rule": "product category equals Body Moisturizers",
+      "product_count": 34
+    },
+    {
+      "name": "Body Oil",
+      "handle": "body-oil",
+      "type": "category",
+      "group": "Bath & Body Care",
+      "rule": "product category equals Body Oil",
+      "product_count": 18
+    },
+    {
+      "name": "Body Care",
+      "handle": "body-care",
+      "type": "category",
+      "group": "Bath & Body Care",
+      "rule": "product category equals 'Body Body' (renamed - promoted from WooCommerce top level, approved cleanup)",
+      "product_count": 18
+    },
+    {
+      "name": "Body Scrubs",
+      "handle": "body-scrubs",
+      "type": "category",
+      "group": "Bath & Body Care",
+      "rule": "product category equals Body Scrubs",
+      "product_count": 7
+    },
+    {
+      "name": "Body Butter",
+      "handle": "body-butter",
+      "type": "category",
+      "group": "Bath & Body Care",
+      "rule": "product category equals Body Butter (promoted from WooCommerce top level, approved cleanup)",
+      "product_count": 9
+    },
+    {
+      "name": "Baby Wash & Lotion",
+      "handle": "baby-wash-lotion",
+      "type": "category",
+      "group": "Bath & Body Care",
+      "rule": "product category equals Baby Wash & Lotion (promoted from WooCommerce top level, approved cleanup)",
+      "product_count": 8
+    },
+    {
+      "name": "Roll On",
+      "handle": "roll-on",
+      "type": "category",
+      "group": "Bath & Body Care",
+      "rule": "product category equals Roll On",
+      "product_count": 2
+    },
+    {
+      "name": "Body Mist",
+      "handle": "body-mist",
+      "type": "category",
+      "group": "Bath & Body Care",
+      "rule": "product category equals Body Mist (promoted from WooCommerce top level, approved cleanup)",
+      "product_count": 2
+    },
+    {
+      "name": "Tools & Accessories",
+      "handle": "tools-accessories",
+      "type": "category",
+      "group": "Beauty Tools",
+      "rule": "product category equals Tools & Accessories (absorbs 'sponge' per approved cleanup)",
+      "product_count": 23
+    }
+  ],
+  "brand_collections": [
+    {
+      "name": "Olay",
+      "handle": "olay",
+      "type": "brand",
+      "rule": "vendor equals 'Olay'",
+      "product_count": 28
+    },
+    {
+      "name": "Eos",
+      "handle": "eos",
+      "type": "brand",
+      "rule": "vendor equals 'Eos'",
+      "product_count": 26
+    },
+    {
+      "name": "Zaron",
+      "handle": "zaron",
+      "type": "brand",
+      "rule": "vendor equals 'Zaron'",
+      "product_count": 25
+    },
+    {
+      "name": "Naturium",
+      "handle": "naturium",
+      "type": "brand",
+      "rule": "vendor equals 'Naturium'",
+      "product_count": 22
+    },
+    {
+      "name": "Good Molecules",
+      "handle": "good-molecules",
+      "type": "brand",
+      "rule": "vendor equals 'Good Molecules'",
+      "product_count": 20
+    },
+    {
+      "name": "Hegai & Esther",
+      "handle": "hegai-esther",
+      "type": "brand",
+      "rule": "vendor equals 'Hegai & Esther'",
+      "product_count": 16
+    },
+    {
+      "name": "Msmetics",
+      "handle": "msmetics",
+      "type": "brand",
+      "rule": "vendor equals 'Msmetics'",
+      "product_count": 15
+    },
+    {
+      "name": "Vee Beauty",
+      "handle": "vee-beauty",
+      "type": "brand",
+      "rule": "vendor equals 'Vee Beauty'",
+      "product_count": 15
+    },
+    {
+      "name": "25 Pskyn",
+      "handle": "25-pskyn",
+      "type": "brand",
+      "rule": "vendor equals '25 Pskyn'",
+      "product_count": 13
+    },
+    {
+      "name": "Cosrx",
+      "handle": "cosrx",
+      "type": "brand",
+      "rule": "vendor equals 'Cosrx'",
+      "product_count": 13
+    },
+    {
+      "name": "Dr Teal's",
+      "handle": "dr-teals",
+      "type": "brand",
+      "rule": "vendor equals 'Dr Teal's'",
+      "product_count": 13
+    },
+    {
+      "name": "Advanced Clinicals",
+      "handle": "advanced-clinicals",
+      "type": "brand",
+      "rule": "vendor equals 'Advanced Clinicals'",
+      "product_count": 11
+    },
+    {
+      "name": "BM PRO",
+      "handle": "bm-pro",
+      "type": "brand",
+      "rule": "vendor equals 'BM PRO'",
+      "product_count": 11
+    },
+    {
+      "name": "Panoxyl",
+      "handle": "panoxyl",
+      "type": "brand",
+      "rule": "vendor equals 'Panoxyl'",
+      "product_count": 11
+    },
+    {
+      "name": "Anua",
+      "handle": "anua",
+      "type": "brand",
+      "rule": "vendor equals 'Anua'",
+      "product_count": 10
+    },
+    {
+      "name": "Beauty Line by Didi",
+      "handle": "beauty-line-by-didi",
+      "type": "brand",
+      "rule": "vendor equals 'Beauty Line by Didi'",
+      "product_count": 10
+    },
+    {
+      "name": "Yglam",
+      "handle": "yglam",
+      "type": "brand",
+      "rule": "vendor equals 'Yglam'",
+      "product_count": 10
+    },
+    {
+      "name": "Merak",
+      "handle": "merak",
+      "type": "brand",
+      "rule": "vendor equals 'Merak'",
+      "product_count": 9
+    },
+    {
+      "name": "Beauty by AD",
+      "handle": "beauty-by-ad",
+      "type": "brand",
+      "rule": "vendor equals 'Beauty by AD'",
+      "product_count": 8
+    },
+    {
+      "name": "BOJ Cosmetics",
+      "handle": "boj-cosmetics",
+      "type": "brand",
+      "rule": "vendor equals 'BOJ Cosmetics'",
+      "product_count": 7
+    },
+    {
+      "name": "Faded",
+      "handle": "faded",
+      "type": "brand",
+      "rule": "vendor equals 'Faded'",
+      "product_count": 7
+    },
+    {
+      "name": "Isntree",
+      "handle": "isntree",
+      "type": "brand",
+      "rule": "vendor equals 'Isntree'",
+      "product_count": 7
+    },
+    {
+      "name": "Medix 5.5",
+      "handle": "medix-5-5",
+      "type": "brand",
+      "rule": "vendor equals 'Medix 5.5'",
+      "product_count": 7
+    },
+    {
+      "name": "Omaricode",
+      "handle": "omaricode",
+      "type": "brand",
+      "rule": "vendor equals 'Omaricode'",
+      "product_count": 7
+    },
+    {
+      "name": "The Ordinary",
+      "handle": "the-ordinary",
+      "type": "brand",
+      "rule": "vendor equals 'The Ordinary'",
+      "product_count": 7
+    },
+    {
+      "name": "Tiam",
+      "handle": "tiam",
+      "type": "brand",
+      "rule": "vendor equals 'Tiam'",
+      "product_count": 7
+    },
+    {
+      "name": "Vaseline",
+      "handle": "vaseline",
+      "type": "brand",
+      "rule": "vendor equals 'Vaseline'",
+      "product_count": 7
+    },
+    {
+      "name": "Acwell",
+      "handle": "acwell",
+      "type": "brand",
+      "rule": "vendor equals 'Acwell'",
+      "product_count": 6
+    },
+    {
+      "name": "Beauty of Joseon",
+      "handle": "beauty-of-joseon",
+      "type": "brand",
+      "rule": "vendor equals 'Beauty of Joseon'",
+      "product_count": 6
+    },
+    {
+      "name": "Becharm",
+      "handle": "becharm",
+      "type": "brand",
+      "rule": "vendor equals 'Becharm'",
+      "product_count": 6
+    },
+    {
+      "name": "Dove",
+      "handle": "dove",
+      "type": "brand",
+      "rule": "vendor equals 'Dove'",
+      "product_count": 6
+    },
+    {
+      "name": "La Roche-Posay",
+      "handle": "la-roche-posay",
+      "type": "brand",
+      "rule": "vendor equals 'La Roche-Posay'",
+      "product_count": 6
+    },
+    {
+      "name": "Nuban",
+      "handle": "nuban",
+      "type": "brand",
+      "rule": "vendor equals 'Nuban'",
+      "product_count": 6
+    },
+    {
+      "name": "Sooo Pro",
+      "handle": "sooo-pro",
+      "type": "brand",
+      "rule": "vendor equals 'Sooo Pro'",
+      "product_count": 6
+    },
+    {
+      "name": "Touch",
+      "handle": "touch",
+      "type": "brand",
+      "rule": "vendor equals 'Touch'",
+      "product_count": 6
+    },
+    {
+      "name": "Uncover",
+      "handle": "uncover",
+      "type": "brand",
+      "rule": "vendor equals 'Uncover'",
+      "product_count": 6
+    },
+    {
+      "name": "Wynkk Beauty",
+      "handle": "wynkk-beauty",
+      "type": "brand",
+      "rule": "vendor equals 'Wynkk Beauty'",
+      "product_count": 6
+    },
+    {
+      "name": "Accessories _make_up",
+      "handle": "unnamed",
+      "type": "brand",
+      "rule": "vendor equals 'Accessories _make_up'",
+      "product_count": 5
+    },
+    {
+      "name": "Annies Beauty",
+      "handle": "annies-beauty",
+      "type": "brand",
+      "rule": "vendor equals 'Annies Beauty'",
+      "product_count": 5
+    },
+    {
+      "name": "Blossom",
+      "handle": "blossom",
+      "type": "brand",
+      "rule": "vendor equals 'Blossom'",
+      "product_count": 5
+    },
+    {
+      "name": "Cerave",
+      "handle": "cerave",
+      "type": "brand",
+      "rule": "vendor equals 'Cerave'",
+      "product_count": 5
+    },
+    {
+      "name": "Paula Beauty",
+      "handle": "paula-beauty",
+      "type": "brand",
+      "rule": "vendor equals 'Paula Beauty'",
+      "product_count": 5
+    },
+    {
+      "name": "Sylvimak",
+      "handle": "sylvimak",
+      "type": "brand",
+      "rule": "vendor equals 'Sylvimak'",
+      "product_count": 5
+    },
+    {
+      "name": "Tehila",
+      "handle": "tehila",
+      "type": "brand",
+      "rule": "vendor equals 'Tehila'",
+      "product_count": 5
+    },
+    {
+      "name": "Topicals",
+      "handle": "topicals",
+      "type": "brand",
+      "rule": "vendor equals 'Topicals'",
+      "product_count": 5
+    },
+    {
+      "name": "Alpha Skin Care",
+      "handle": "alpha-skin-care",
+      "type": "brand",
+      "rule": "vendor equals 'Alpha Skin Care'",
+      "product_count": 4
+    },
+    {
+      "name": "Amlactin",
+      "handle": "amlactin",
+      "type": "brand",
+      "rule": "vendor equals 'Amlactin'",
+      "product_count": 4
+    },
+    {
+      "name": "Aveeno",
+      "handle": "aveeno",
+      "type": "brand",
+      "rule": "vendor equals 'Aveeno'",
+      "product_count": 4
+    },
+    {
+      "name": "Blackgirl",
+      "handle": "blackgirl",
+      "type": "brand",
+      "rule": "vendor equals 'Blackgirl'",
+      "product_count": 4
+    },
+    {
+      "name": "Bolden",
+      "handle": "bolden",
+      "type": "brand",
+      "rule": "vendor equals 'Bolden'",
+      "product_count": 4
+    },
+    {
+      "name": "Elastalift",
+      "handle": "elastalift",
+      "type": "brand",
+      "rule": "vendor equals 'Elastalift'",
+      "product_count": 4
+    },
+    {
+      "name": "Eucerin",
+      "handle": "eucerin",
+      "type": "brand",
+      "rule": "vendor equals 'Eucerin'",
+      "product_count": 4
+    },
+    {
+      "name": "Facefacts",
+      "handle": "facefacts",
+      "type": "brand",
+      "rule": "vendor equals 'Facefacts'",
+      "product_count": 4
+    },
+    {
+      "name": "Frudia",
+      "handle": "frudia",
+      "type": "brand",
+      "rule": "vendor equals 'Frudia'",
+      "product_count": 4
+    },
+    {
+      "name": "NINELESS",
+      "handle": "nineless",
+      "type": "brand",
+      "rule": "vendor equals 'NINELESS'",
+      "product_count": 4
+    },
+    {
+      "name": "Neutrogena",
+      "handle": "neutrogena",
+      "type": "brand",
+      "rule": "vendor equals 'Neutrogena'",
+      "product_count": 4
+    },
+    {
+      "name": "Palmer's",
+      "handle": "palmers",
+      "type": "brand",
+      "rule": "vendor equals 'Palmer's'",
+      "product_count": 4
+    },
+    {
+      "name": "Tree Hut",
+      "handle": "tree-hut",
+      "type": "brand",
+      "rule": "vendor equals 'Tree Hut'",
+      "product_count": 4
+    },
+    {
+      "name": "Yanga Beauty",
+      "handle": "yanga-beauty",
+      "type": "brand",
+      "rule": "vendor equals 'Yanga Beauty'",
+      "product_count": 4
+    },
+    {
+      "name": "Classic Makeup",
+      "handle": "classic-makeup",
+      "type": "brand",
+      "rule": "vendor equals 'Classic Makeup'",
+      "product_count": 3
+    },
+    {
+      "name": "Differin",
+      "handle": "differin",
+      "type": "brand",
+      "rule": "vendor equals 'Differin'",
+      "product_count": 3
+    },
+    {
+      "name": "Heimish",
+      "handle": "heimish",
+      "type": "brand",
+      "rule": "vendor equals 'Heimish'",
+      "product_count": 3
+    },
+    {
+      "name": "Koji San",
+      "handle": "koji-san",
+      "type": "brand",
+      "rule": "vendor equals 'Koji San'",
+      "product_count": 3
+    },
+    {
+      "name": "Missha",
+      "handle": "missha",
+      "type": "brand",
+      "rule": "vendor equals 'Missha'",
+      "product_count": 3
+    },
+    {
+      "name": "Nip + Fab",
+      "handle": "nip-fab",
+      "type": "brand",
+      "rule": "vendor equals 'Nip + Fab'",
+      "product_count": 3
+    },
+    {
+      "name": "Skin by Zaron",
+      "handle": "skin-by-zaron",
+      "type": "brand",
+      "rule": "vendor equals 'Skin by Zaron'",
+      "product_count": 3
+    },
+    {
+      "name": "Some by Mi",
+      "handle": "some-by-mi",
+      "type": "brand",
+      "rule": "vendor equals 'Some by Mi'",
+      "product_count": 3
+    },
+    {
+      "name": "Tola Banks",
+      "handle": "tola-banks",
+      "type": "brand",
+      "rule": "vendor equals 'Tola Banks'",
+      "product_count": 3
+    },
+    {
+      "name": "Axis-y",
+      "handle": "axis-y",
+      "type": "brand",
+      "rule": "vendor equals 'Axis-y'",
+      "product_count": 2
+    },
+    {
+      "name": "Candybeauty",
+      "handle": "candybeauty",
+      "type": "brand",
+      "rule": "vendor equals 'Candybeauty'",
+      "product_count": 2
+    },
+    {
+      "name": "Davies",
+      "handle": "davies",
+      "type": "brand",
+      "rule": "vendor equals 'Davies'",
+      "product_count": 2
+    },
+    {
+      "name": "Dr Althea",
+      "handle": "dr-althea",
+      "type": "brand",
+      "rule": "vendor equals 'Dr Althea'",
+      "product_count": 2
+    },
+    {
+      "name": "Dr Jart",
+      "handle": "dr-jart",
+      "type": "brand",
+      "rule": "vendor equals 'Dr Jart'",
+      "product_count": 2
+    },
+    {
+      "name": "E45",
+      "handle": "e45",
+      "type": "brand",
+      "rule": "vendor equals 'E45'",
+      "product_count": 2
+    },
+    {
+      "name": "Embryolisse",
+      "handle": "embryolisse",
+      "type": "brand",
+      "rule": "vendor equals 'Embryolisse'",
+      "product_count": 2
+    },
+    {
+      "name": "Hadalabo",
+      "handle": "hadalabo",
+      "type": "brand",
+      "rule": "vendor equals 'Hadalabo'",
+      "product_count": 2
+    },
+    {
+      "name": "Kiss Beauty",
+      "handle": "kiss-beauty",
+      "type": "brand",
+      "rule": "vendor equals 'Kiss Beauty'",
+      "product_count": 2
+    },
+    {
+      "name": "Luzta",
+      "handle": "luzta",
+      "type": "brand",
+      "rule": "vendor equals 'Luzta'",
+      "product_count": 2
+    },
+    {
+      "name": "Mabrook",
+      "handle": "mabrook",
+      "type": "brand",
+      "rule": "vendor equals 'Mabrook'",
+      "product_count": 2
+    },
+    {
+      "name": "Rimmel",
+      "handle": "rimmel",
+      "type": "brand",
+      "rule": "vendor equals 'Rimmel'",
+      "product_count": 2
+    },
+    {
+      "name": "SKIN1004",
+      "handle": "skin1004",
+      "type": "brand",
+      "rule": "vendor equals 'SKIN1004'",
+      "product_count": 2
+    },
+    {
+      "name": "Skin Aqua",
+      "handle": "skin-aqua",
+      "type": "brand",
+      "rule": "vendor equals 'Skin Aqua'",
+      "product_count": 2
+    },
+    {
+      "name": "TM Essentials",
+      "handle": "tm-essential",
+      "type": "brand",
+      "rule": "vendor equals 'TM Essentials'",
+      "product_count": 2
+    },
+    {
+      "name": "Timeless",
+      "handle": "timeless",
+      "type": "brand",
+      "rule": "vendor equals 'Timeless'",
+      "product_count": 2
+    },
+    {
+      "name": "Topicrem",
+      "handle": "topicrem",
+      "type": "brand",
+      "rule": "vendor equals 'Topicrem'",
+      "product_count": 2
+    },
+    {
+      "name": "Viccabel",
+      "handle": "viccabel",
+      "type": "brand",
+      "rule": "vendor equals 'Viccabel'",
+      "product_count": 2
+    },
+    {
+      "name": "Absolute",
+      "handle": "absolute",
+      "type": "brand",
+      "rule": "vendor equals 'Absolute'",
+      "product_count": 1
+    },
+    {
+      "name": "Aquaphor",
+      "handle": "aquaphor",
+      "type": "brand",
+      "rule": "vendor equals 'Aquaphor'",
+      "product_count": 1
+    },
+    {
+      "name": "B-Small",
+      "handle": "b-small",
+      "type": "brand",
+      "rule": "vendor equals 'B-Small'",
+      "product_count": 1
+    },
+    {
+      "name": "Balance",
+      "handle": "balance",
+      "type": "brand",
+      "rule": "vendor equals 'Balance'",
+      "product_count": 1
+    },
+    {
+      "name": "Ben Nye",
+      "handle": "ben-nye",
+      "type": "brand",
+      "rule": "vendor equals 'Ben Nye'",
+      "product_count": 1
+    },
+    {
+      "name": "Biore",
+      "handle": "biore",
+      "type": "brand",
+      "rule": "vendor equals 'Biore'",
+      "product_count": 1
+    },
+    {
+      "name": "Cpd",
+      "handle": "cpd",
+      "type": "brand",
+      "rule": "vendor equals 'Cpd'",
+      "product_count": 1
+    },
+    {
+      "name": "D'Alba",
+      "handle": "dalba",
+      "type": "brand",
+      "rule": "vendor equals 'D'Alba'",
+      "product_count": 1
+    },
+    {
+      "name": "Dammel",
+      "handle": "dammel",
+      "type": "brand",
+      "rule": "vendor equals 'Dammel'",
+      "product_count": 1
+    },
+    {
+      "name": "Elf",
+      "handle": "elf",
+      "type": "brand",
+      "rule": "vendor equals 'Elf'",
+      "product_count": 1
+    },
+    {
+      "name": "Ezanic",
+      "handle": "ezanic",
+      "type": "brand",
+      "rule": "vendor equals 'Ezanic'",
+      "product_count": 1
+    },
+    {
+      "name": "Ferrarucci",
+      "handle": "ferrarucci",
+      "type": "brand",
+      "rule": "vendor equals 'Ferrarucci'",
+      "product_count": 1
+    },
+    {
+      "name": "Flawless Ivy cosmetics",
+      "handle": "flawless-ivy-cosmetics",
+      "type": "brand",
+      "rule": "vendor equals 'Flawless Ivy cosmetics'",
+      "product_count": 1
+    },
+    {
+      "name": "Glove sponge",
+      "handle": "glove-sponge",
+      "type": "brand",
+      "rule": "vendor equals 'Glove sponge'",
+      "product_count": 1
+    },
+    {
+      "name": "Haruharu",
+      "handle": "haruharu",
+      "type": "brand",
+      "rule": "vendor equals 'Haruharu'",
+      "product_count": 1
+    },
+    {
+      "name": "Hatomugi",
+      "handle": "hatomugi",
+      "type": "brand",
+      "rule": "vendor equals 'Hatomugi'",
+      "product_count": 1
+    },
+    {
+      "name": "I’m From",
+      "handle": "im-from",
+      "type": "brand",
+      "rule": "vendor equals 'I’m From'",
+      "product_count": 1
+    },
+    {
+      "name": "Juba Cosmetics",
+      "handle": "juba-cosmetics",
+      "type": "brand",
+      "rule": "vendor equals 'Juba Cosmetics'",
+      "product_count": 1
+    },
+    {
+      "name": "Jumiso",
+      "handle": "jumiso",
+      "type": "brand",
+      "rule": "vendor equals 'Jumiso'",
+      "product_count": 1
+    },
+    {
+      "name": "Kojivit",
+      "handle": "kojivit",
+      "type": "brand",
+      "rule": "vendor equals 'Kojivit'",
+      "product_count": 1
+    },
+    {
+      "name": "Kose Suncut",
+      "handle": "kose-suncut",
+      "type": "brand",
+      "rule": "vendor equals 'Kose Suncut'",
+      "product_count": 1
+    },
+    {
+      "name": "Laneige",
+      "handle": "laneige",
+      "type": "brand",
+      "rule": "vendor equals 'Laneige'",
+      "product_count": 1
+    },
+    {
+      "name": "Mario Badescu",
+      "handle": "mario-badescu",
+      "type": "brand",
+      "rule": "vendor equals 'Mario Badescu'",
+      "product_count": 1
+    },
+    {
+      "name": "Mary & May",
+      "handle": "mary-may",
+      "type": "brand",
+      "rule": "vendor equals 'Mary & May'",
+      "product_count": 1
+    },
+    {
+      "name": "Medi Peel",
+      "handle": "medi-peel",
+      "type": "brand",
+      "rule": "vendor equals 'Medi Peel'",
+      "product_count": 1
+    },
+    {
+      "name": "Mehron",
+      "handle": "mehron",
+      "type": "brand",
+      "rule": "vendor equals 'Mehron'",
+      "product_count": 1
+    },
+    {
+      "name": "Milani",
+      "handle": "milani",
+      "type": "brand",
+      "rule": "vendor equals 'Milani'",
+      "product_count": 1
+    },
+    {
+      "name": "Nivea",
+      "handle": "nivea",
+      "type": "brand",
+      "rule": "vendor equals 'Nivea'",
+      "product_count": 1
+    },
+    {
+      "name": "O'Cosmetics",
+      "handle": "ocosmetics",
+      "type": "brand",
+      "rule": "vendor equals 'O'Cosmetics'",
+      "product_count": 1
+    },
+    {
+      "name": "Paula’s choice",
+      "handle": "paulas-choice",
+      "type": "brand",
+      "rule": "vendor equals 'Paula’s choice'",
+      "product_count": 1
+    },
+    {
+      "name": "ROC",
+      "handle": "roc",
+      "type": "brand",
+      "rule": "vendor equals 'ROC'",
+      "product_count": 1
+    },
+    {
+      "name": "Sephora",
+      "handle": "sephora",
+      "type": "brand",
+      "rule": "vendor equals 'Sephora'",
+      "product_count": 1
+    },
+    {
+      "name": "Simple",
+      "handle": "simple",
+      "type": "brand",
+      "rule": "vendor equals 'Simple'",
+      "product_count": 1
+    },
+    {
+      "name": "Sun bum",
+      "handle": "sun-bum",
+      "type": "brand",
+      "rule": "vendor equals 'Sun bum'",
+      "product_count": 1
+    },
+    {
+      "name": "Tiger",
+      "handle": "tiger",
+      "type": "brand",
+      "rule": "vendor equals 'Tiger'",
+      "product_count": 1
+    },
+    {
+      "name": "Tony Moly",
+      "handle": "tony-moly",
+      "type": "brand",
+      "rule": "vendor equals 'Tony Moly'",
+      "product_count": 1
+    },
+    {
+      "name": "Topicream",
+      "handle": "topicream",
+      "type": "brand",
+      "rule": "vendor equals 'Topicream'",
+      "product_count": 1
+    },
+    {
+      "name": "Tropicrem",
+      "handle": "tropicrem",
+      "type": "brand",
+      "rule": "vendor equals 'Tropicrem'",
+      "product_count": 1
+    },
+    {
+      "name": "Viange",
+      "handle": "viange",
+      "type": "brand",
+      "rule": "vendor equals 'Viange'",
+      "product_count": 1
+    },
+    {
+      "name": "Zapzyt",
+      "handle": "zapzyt",
+      "type": "brand",
+      "rule": "vendor equals 'Zapzyt'",
+      "product_count": 1
+    },
+    {
+      "name": "illiyoon",
+      "handle": "illiyoon",
+      "type": "brand",
+      "rule": "vendor equals 'illiyoon'",
+      "product_count": 1
+    }
+  ],
+  "manual_promo_collections": [
+    {
+      "name": "Valentine Combo Deals",
+      "handle": "valentine-combo-deals",
+      "type": "manual_promo",
+      "rule": "manual - hand-picked, not rule-based (ADR-007)",
+      "product_count": 8
+    },
+    {
+      "name": "Tradefair Combo Deals",
+      "handle": "tradefair-combo-deals",
+      "type": "manual_promo",
+      "rule": "manual - hand-picked, not rule-based (ADR-007); consolidates the WooCommerce category 'TRADEFAIR COMBO DEAL' and the near-duplicate brand term 'TRADEFAIR COMBO DEALS'",
+      "product_count": 20
+    },
+    {
+      "name": "Combo Deals",
+      "handle": "combo-deals",
+      "type": "manual_promo",
+      "rule": "manual - hand-picked, not rule-based",
+      "product_count": 17
+    }
+  ],
+  "excluded": [
+    {
+      "name": "Cotton Pad",
+      "handle": "cotton-pad",
+      "reason": "0 published products - skip until populated"
+    },
+    {
+      "name": "Uncategorized",
+      "handle": "uncategorized",
+      "reason": "WordPress default bucket, 4 products - needs manual audit of what their real category should be, not a 1:1 collection"
+    }
+  ]
+}

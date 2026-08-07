@@ -1,0 +1,22 @@
+{
+  "$schema_note": "Metaobject definitions for Phase 9 Admin API/GraphQL setup. Fast-follow per ADR-006 - schema fixed now so Phase 7 theme work can build against a stable contract, entries not created until after Phase 7.",
+  "generated_for_phase": "6.5",
+  "types": [
+    {
+      "type": "brand",
+      "display_name_field": "name",
+      "fields": [
+        { "key": "name", "name": "Name", "type": "single_line_text_field", "required": true },
+        { "key": "logo", "name": "Logo", "type": "file_reference", "required": false },
+        { "key": "hero_image", "name": "Hero Image", "type": "file_reference", "required": false },
+        { "key": "description", "name": "Description", "type": "rich_text_field", "required": false },
+        { "key": "founded_year", "name": "Founded Year", "type": "number_integer", "required": false },
+        { "key": "website", "name": "Website", "type": "url", "required": false },
+        { "key": "seo_title", "name": "SEO Title", "type": "single_line_text_field", "required": false },
+        { "key": "seo_description", "name": "SEO Description", "type": "single_line_text_field", "required": false }
+      ],
+      "handle_convention": "Must match the paired brand collection's handle exactly (see collections.json brand_collections) - enforced by convention, not the platform.",
+      "entry_count_planned": 127
+    }
+  ]
+}

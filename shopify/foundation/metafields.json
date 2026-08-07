@@ -1,0 +1,34 @@
+{
+  "$schema_note": "Metafield definitions for Phase 9 Admin API/GraphQL setup. See docs/SHOPIFY_FOUNDATION.md for rationale.",
+  "generated_for_phase": "6.5",
+  "definitions": [
+    {
+      "namespace": "custom",
+      "key": "brand",
+      "name": "Brand",
+      "type": "metaobject_reference",
+      "metaobject_type": "brand",
+      "applies_to": "product",
+      "required": false,
+      "purpose": "Links a product to its rich brand content metaobject. Fast-follow per ADR-006 - not populated until the brand metaobject layer is built after Phase 7."
+    },
+    {
+      "namespace": "custom",
+      "key": "included_items",
+      "name": "Included Items",
+      "type": "list.single_line_text_field",
+      "applies_to": "product",
+      "required": false,
+      "purpose": "Populated only for combo/bundle products (product.combo-deal.json template). Powers the 'what's included' block."
+    },
+    {
+      "namespace": "custom",
+      "key": "legacy_woo_id",
+      "name": "Legacy WooCommerce ID",
+      "type": "single_line_text_field",
+      "applies_to": ["product", "customer"],
+      "required": false,
+      "purpose": "Original WooCommerce post_id/user ID, kept for support/audit traceability during and after cutover."
+    }
+  ]
+}

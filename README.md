@@ -7,10 +7,18 @@ brands, and customers, exported as Shopify-importable CSVs.
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the pipeline works
 internally, [docs/SEO_STRATEGY.md](docs/SEO_STRATEGY.md) for the URL
 migration plan, [docs/SHOPIFY_ARCHITECTURE.md](docs/SHOPIFY_ARCHITECTURE.md)
-for the target Shopify information architecture,
-[docs/DECISIONS.md](docs/DECISIONS.md) for why things were built the way
-they were, and [docs/MIGRATION_PROGRESS.md](docs/MIGRATION_PROGRESS.md) for
-task status and the Phase 6 readiness assessment.
+for the target information architecture,
+[docs/SHOPIFY_FOUNDATION.md](docs/SHOPIFY_FOUNDATION.md) for the concrete,
+buildable spec that architecture produces,
+[docs/SHOPIFY_BUILD_GUIDELINES.md](docs/SHOPIFY_BUILD_GUIDELINES.md) /
+[docs/SHOPIFY_CODING_STANDARDS.md](docs/SHOPIFY_CODING_STANDARDS.md) /
+[docs/SHOPIFY_DEPLOYMENT.md](docs/SHOPIFY_DEPLOYMENT.md) for how Phase 7+
+should be built and shipped, [docs/DECISIONS.md](docs/DECISIONS.md) for why
+things were built the way they were, and
+[docs/MIGRATION_PROGRESS.md](docs/MIGRATION_PROGRESS.md) for task status and
+the Phase 6.5 readiness report. Remaining phases (7–13) are tracked as
+[GitHub Milestones and Issues](https://github.com/olaniyimuiz-create/wholesalebeautyhub.co.uk/milestones)
+with explicit acceptance criteria and dependencies.
 
 ## Status
 
@@ -20,14 +28,16 @@ task status and the Phase 6 readiness assessment.
 - **SEO & URL mapping**: built and validated — 875-row redirect matrix plus
   duplicate/orphan/broken-link reports in `reports/`, cross-checked against
   the live site.
-- **Shopify information architecture**: designed — brand architecture,
-  category hierarchy, navigation, metafields/metaobjects, and URL/handle
-  conventions documented in `docs/SHOPIFY_ARCHITECTURE.md`. The slug
-  collision from Phase 5 is resolved (`docs/DECISIONS.md` ADR-007); three
-  items still need a merchant/stakeholder decision before Phase 7 — see
-  `docs/MIGRATION_PROGRESS.md` § Phase 6 Readiness Assessment.
-- Theme development, collection/product import, and Shopify API
-  integration are not started yet.
+- **Shopify information architecture**: approved — brand architecture
+  (ADR-006), category hierarchy cleanup, and the slug collision (ADR-007)
+  are all resolved.
+- **Shopify foundation**: concrete collection (156), metafield, metaobject,
+  and navigation specs compiled in `docs/SHOPIFY_FOUNDATION.md` and
+  `shopify/foundation/`. Build/coding/deployment standards written for
+  Phase 7 onward. 7 new data-quality findings from this pass are gating
+  for Phase 9, not Phase 7 — see `docs/RISK_REGISTER.md` risks #14–20.
+- Theme development (`shopify/theme/`, reserved but empty), collection/
+  product import, and Shopify API integration are not started yet.
 
 ## Prerequisites
 
@@ -64,11 +74,16 @@ task status and the Phase 6 readiness assessment.
 migration/
   sql/        Adminer dump (git-ignored, contains PII)
   data/       Parsed intermediate JSON (git-ignored, contains PII)
-  scripts/    The pipeline itself
+  scripts/    The WooCommerce-side extraction pipeline
 shopify-theme/
   assets/     Generated Shopify import CSVs (git-ignored, contains PII)
+shopify/
+  foundation/ Machine-readable collection/metafield/metaobject/nav specs
+  theme/      Reserved for Phase 7 (empty)
+  scripts/    Reserved for Phase 9 Admin API setup (empty)
 reports/      SEO/URL analysis reports (safe to commit - no PII)
-docs/         Architecture, SEO strategy, decisions, progress, risk register
+docs/         Architecture, foundation, build/coding/deployment standards,
+              SEO strategy, decisions, progress, risk register
 ```
 
 Folders are added as tasks need them rather than scaffolded up front.

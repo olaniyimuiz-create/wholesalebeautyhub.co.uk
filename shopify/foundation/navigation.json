@@ -1,0 +1,33 @@
+{
+  "$schema_note": "Planned Shopify navigation menus for Phase 9 setup. See docs/SHOPIFY_FOUNDATION.md § Navigation structure.",
+  "generated_for_phase": "6.5",
+  "menus": [
+    {
+      "handle": "main-menu",
+      "title": "Header",
+      "items": [
+        { "title": "Home", "url": "/" },
+        { "title": "Makeup", "url": "/collections/face", "children": ["face", "eyes", "lips", "brushes-beauty-blenders"] },
+        { "title": "Skin Care", "url": "/collections/serums-treatment", "children": ["serums-treatment", "moisturizers", "face-cleansers-wash", "face-toners-mist-essence", "sunscreen", "brightening", "hyperpigmentation", "exfoliators-peels-scrubs", "acne-treatment", "face-mask", "face-oil"] },
+        { "title": "Bath & Body Care", "url": "/collections/body-lotion", "children": ["body-lotion", "body-wash", "body-moisturizers", "body-oil", "body-care", "body-scrubs", "body-butter", "baby-wash-lotion", "roll-on", "body-mist"] },
+        { "title": "Beauty Tools", "url": "/collections/tools-accessories", "children": ["tools-accessories"] },
+        { "title": "Brands", "url": "/pages/brands", "note": "Dropdown lists curated top brands by product count; full list on a brand index page. Curation is a merchandising decision, not fixed here.", "children_source": "shopify/foundation/collections.json:brand_collections" },
+        { "title": "Deals", "url": "/collections/combo-deals", "children": ["valentine-combo-deals", "tradefair-combo-deals", "combo-deals"], "note": "Recommended addition - promo collections have no natural home in the taxonomy dropdowns above. Needs merchant confirmation." }
+      ]
+    },
+    {
+      "handle": "footer",
+      "title": "Footer",
+      "note": "Rebuilt as a real Shopify menu - the WooCommerce footer was theme-hardcoded, not menu-driven (Phase 5/6 finding). Contact and Cookie Policy had no discoverable link anywhere on the live site; included here regardless as the fix, not carried forward as a gap.",
+      "items": [
+        { "title": "About", "url": "/pages/about" },
+        { "title": "Contact", "url": "/pages/contact" },
+        { "title": "Privacy Policy", "url": "/pages/privacy-policy" },
+        { "title": "Terms & Conditions", "url": "/pages/wholesalebeautyhub-2" },
+        { "title": "Shipping Policy", "url": "/pages/shipping-policy" },
+        { "title": "Refund & Returns Policy", "url": "/pages/refund_returns" },
+        { "title": "Cookie Policy", "url": "/pages/cookie-policy" }
+      ]
+    }
+  ]
+}

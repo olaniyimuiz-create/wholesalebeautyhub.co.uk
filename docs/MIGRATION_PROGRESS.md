@@ -5,14 +5,14 @@
 | # | Task | Status | Notes |
 |---|---|---|---|
 | 1 | SQL dump → products/customers CSV pipeline | Done | 611 products / 497 variations / 12,096 customers, validated end-to-end |
-| 2 | Theme migration (Shopify Liquid theme) | Not started | |
-| 3 | Collections / navigation menus | Architecture designed | Slug collision resolved (ADR-007); implementation waits for Phase 9. See `docs/SHOPIFY_ARCHITECTURE.md` |
-| 4 | Blog + static pages | Not started | 9 pages have existing Rank Math SEO copy worth preserving — see `docs/SEO_STRATEGY.md` |
+| 2 | Theme migration (Shopify Liquid theme) | Not started | Tracked as GitHub Milestone "Phase 7: Theme Development" (5 issues) |
+| 3 | Collections / navigation menus | Foundation ready | Concrete 156-collection list + navigation spec in `docs/SHOPIFY_FOUNDATION.md` and `shopify/foundation/`; implementation tracked in Milestone "Phase 9" |
+| 4 | Blog + static pages | Foundation ready | 9 pages have existing Rank Math SEO copy worth preserving — see `docs/SEO_STRATEGY.md`; tracked as issue "Migrate blog posts and static pages" |
 | 5 | SEO: URL redirect map (WooCommerce → Shopify slugs) | Done | 875-row redirect matrix + orphan/duplicate/broken-link reports in `reports/`; see `docs/SEO_STRATEGY.md` |
-| 6 | Metafields / metaobjects for attributes not covered by variants | Architecture designed | `brand` metaobject + `custom.brand`/`custom.included_items` metafields scoped as a fast-follow — see `docs/SHOPIFY_ARCHITECTURE.md` |
-| 7 | Shopify Admin/GraphQL API integration (automated import vs. CSV) | Not started | CSV import is the current path |
-| 8 | Order history migration | Not started | Shopify's CSV import doesn't support historical orders; needs an app or Admin API approach |
-| 9 | Cutover plan (DNS, final sync, WooCommerce freeze) | Not started | |
+| 6 | Metafields / metaobjects for attributes not covered by variants | Foundation ready | Concrete schema in `docs/SHOPIFY_FOUNDATION.md` and `shopify/foundation/{metafields,metaobjects}.json`; tracked as issue "Create metafield and metaobject definitions" |
+| 7 | Shopify Admin/GraphQL API integration (automated import vs. CSV) | Not started | Still undecided — blocks the exact acceptance criteria for the "Import products" issue in Milestone "Phase 9" |
+| 8 | Order history migration | Not started | Tracked as GitHub Milestone "Phase 11: Historical Order Strategy" (2 issues, ADR required before implementation) |
+| 9 | Cutover plan (DNS, final sync, WooCommerce freeze) | Foundation ready | Import sequence, rollback strategy, and deployment checklist written in `docs/SHOPIFY_DEPLOYMENT.md`; implementation tracked in Milestone "Phase 13: Production Go-Live" |
 
 ## Change log
 
@@ -85,6 +85,81 @@
 - No import scripts, theme code, or production data were touched — this
   phase was architecture and documentation only, per the explicit scope
   given for it.
+
+### 2026-08-07 — Task 6.5: Shopify Foundation
+
+- Re-read all six architecture docs and cross-checked their claims against
+  `reports/*.csv` before starting — no drift found (see Phase 6.5
+  Readiness Report below for what was specifically checked).
+- Compiled the approved architecture into concrete, buildable specs:
+  `docs/SHOPIFY_FOUNDATION.md` (information model, 156-collection list
+  with real product counts, navigation structure, metafield/metaobject
+  schema, Product Type strategy, Search & Discovery filter design, media
+  asset inventory, WooCommerce→Shopify app replacement matrix built from
+  the site's actual active-plugin list) plus machine-readable versions
+  under `shopify/foundation/` (`collections.json`, `metafields.json`,
+  `metaobjects.json`, `navigation.json`) for Phase 9 tooling to consume.
+- Found 7 new data-quality issues while compiling the concrete lists
+  (added as risks #14–20): a brand term with a garbage name/slug, 3
+  near-duplicate misspelled brand entries for what's almost certainly one
+  brand, 14 AVIF images needing format conversion, unreviewed custom code
+  snippets, two simultaneously-active email marketing plugins, an
+  unconfirmed POS plugin status, and two AI-integration plugins with
+  unclear purpose.
+- Wrote `docs/SHOPIFY_BUILD_GUIDELINES.md` (how Phase 7 should proceed),
+  `docs/SHOPIFY_CODING_STANDARDS.md` (Liquid/JS/CSS conventions, Theme
+  Check requirement), and `docs/SHOPIFY_DEPLOYMENT.md` (import sequence,
+  rollback strategy, deployment checklist, Shopify CLI workflow).
+- Created the `/shopify/` directory (`foundation/`, `theme/`, `scripts/`
+  — the latter two intentionally empty/reserved, per this phase's
+  explicit no-theme-code scope).
+- Converted the remaining roadmap (Phases 7–13) into 7 GitHub Milestones
+  and 30 Issues, each with explicit acceptance criteria and a "Depends
+  on" section reflecting the real dependency chain in
+  `docs/SHOPIFY_DEPLOYMENT.md`'s import sequence — not just a flat task
+  list.
+- No theme code, imports, or production data were touched — architecture
+  compilation and repository governance only, per this phase's explicit
+  scope.
+
+## Phase 6.5 Readiness Report
+
+**Consistency check performed**: re-read `docs/ARCHITECTURE.md`,
+`docs/SEO_STRATEGY.md`, `docs/SHOPIFY_ARCHITECTURE.md`, `docs/DECISIONS.md`,
+and `docs/RISK_REGISTER.md` in full; cross-checked every number they cite
+(875 redirects, 156 planned collections, 129/127 brand counts, 23/28
+category collections, product/customer totals) against the underlying
+`reports/*.csv` and a fresh query of `migration/sql/dump.sql` rather than
+trusting the documents' own prior claims. Everything traced correctly; no
+contradictions found between what was approved (ADR-006, ADR-007, the
+category cleanup mapping) and what's written down.
+
+**Blockers resolved this phase**: the three items listed as open in the
+Phase 6 Readiness Assessment are now closed — ADR-006, ADR-007, and the
+category cleanup mapping are all approved and reflected in
+`docs/SHOPIFY_FOUNDATION.md`'s concrete lists.
+
+**New items found while making the architecture concrete** (none block
+Phase 7 starting, all are gating for Phase 9 — see risks #14–20 and
+`docs/RISK_REGISTER.md` for the full list): a garbage-data brand term, a
+3-way duplicate brand spelling, 14 images in an unsupported format, and
+four "needs a conversation with the client" items (unreviewed code
+snippets, two competing email tools, POS plugin status, two AI plugins of
+unclear purpose).
+
+**Ready to proceed to Phase 7 (theme development)?** Yes, with one caveat:
+`docs/SHOPIFY_FOUNDATION.md`'s metafield/metaobject schema and collection
+template plan are stable enough to build theme code against now. Nothing
+in Phase 7's scope (issues #1–5, Milestone "Phase 7") depends on the
+Phase 9-gating data-quality fixes (risks #14–20) — those affect what data
+gets imported, not how the theme renders it. The one thing worth doing
+before or alongside starting Phase 7: issue #5 (review `wp_snippets`
+content), since it could surface storefront behavior that changes what
+Phase 7 needs to build, and it's cheap to check now rather than mid-build.
+
+**Not yet decided, tracked, not blocking**: the CSV-vs-Admin-API question
+(task 7) and the order history strategy (Milestone "Phase 11") — both
+have dedicated issues and don't gate Phase 7.
 
 ## Phase 6 Readiness Assessment
 
