@@ -6,9 +6,11 @@ brands, and customers, exported as Shopify-importable CSVs.
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the pipeline works
 internally, [docs/SEO_STRATEGY.md](docs/SEO_STRATEGY.md) for the URL
-migration plan, [docs/DECISIONS.md](docs/DECISIONS.md) for why things were
-built the way they were, and
-[docs/MIGRATION_PROGRESS.md](docs/MIGRATION_PROGRESS.md) for task status.
+migration plan, [docs/SHOPIFY_ARCHITECTURE.md](docs/SHOPIFY_ARCHITECTURE.md)
+for the target Shopify information architecture,
+[docs/DECISIONS.md](docs/DECISIONS.md) for why things were built the way
+they were, and [docs/MIGRATION_PROGRESS.md](docs/MIGRATION_PROGRESS.md) for
+task status and the Phase 6 readiness assessment.
 
 ## Status
 
@@ -17,9 +19,15 @@ built the way they were, and
   customers, parsed in ~19s with zero malformed CSV rows.
 - **SEO & URL mapping**: built and validated — 875-row redirect matrix plus
   duplicate/orphan/broken-link reports in `reports/`, cross-checked against
-  the live site. One real slug collision and a few smaller findings are
-  documented in `docs/SEO_STRATEGY.md` and need a decision before Phase 6.
-- Theme, collections, and Shopify API integration are not started yet.
+  the live site.
+- **Shopify information architecture**: designed — brand architecture,
+  category hierarchy, navigation, metafields/metaobjects, and URL/handle
+  conventions documented in `docs/SHOPIFY_ARCHITECTURE.md`. The slug
+  collision from Phase 5 is resolved (`docs/DECISIONS.md` ADR-007); three
+  items still need a merchant/stakeholder decision before Phase 7 — see
+  `docs/MIGRATION_PROGRESS.md` § Phase 6 Readiness Assessment.
+- Theme development, collection/product import, and Shopify API
+  integration are not started yet.
 
 ## Prerequisites
 
