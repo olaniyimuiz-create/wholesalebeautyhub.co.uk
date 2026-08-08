@@ -215,3 +215,71 @@ scripts. Also requires a one-time content cleanup: ~12 categories WooCommerce
 has sitting at top level that are actually Level 2/3 content miscategorized
 as Level 1 (e.g. "Eye cream", "Body Butter", "sponge") — mapping table in
 `docs/SHOPIFY_ARCHITECTURE.md`.
+
+## ADR-010: Markets / multi-currency / B2B — Business Decision Required
+
+**Status: OPEN. This is not a decision — it is a formal record that one is
+needed, raised during the Phase 7 acceptance review because it was
+previously resolved informally in `docs/THEME_ARCHITECTURE.md` prose
+without being escalated as a tracked decision.**
+
+**Context**: Phase 7's instructions require the theme architecture to
+support Shopify Markets, multi-currency, and "future B2B support." No prior
+phase — not the original migration scope, not any ADR, not a conversation
+with the store owner — has actually specified:
+- Which countries/regions the store should sell into as distinct Markets
+- Which currencies should be offered, and whether pricing should vary by
+  market or convert automatically
+- Whether B2B (company accounts, net payment terms, quantity-break
+  pricing, a separate wholesale catalog/price list) is actually wanted, or
+  whether "Wholesale Beauty Hub" is a consumer-facing brand name only
+
+That last point matters most: the store's name is the only signal
+suggesting B2B might be relevant, and a name is not a requirement.
+
+**What functionality is affected**: Company account switcher UI, net-terms
+display and invoicing language, quantity-break/tiered pricing display,
+market-specific pricing or currency-conversion behavior, and any
+market-specific content (language, legal pages, shipping messaging) that
+would differ by region.
+
+**Which theme components depend on it**: None *require* it to function
+today — `snippets/price.liquid` uses Shopify's `money` filter (currency-
+format-agnostic by construction), and no component assumes a single
+market or consumer-only audience (see `docs/THEME_ARCHITECTURE.md` §
+Markets & B2B readiness). But several components would need real
+(non-speculative) rework once this is decided: the account area
+(`templates/customers/*`, `snippets/account-nav.liquid`) would need a
+company/location switcher for B2B; `snippets/price.liquid` would need
+tiered-pricing display logic; navigation and footer content might need
+market-specific variants.
+
+**Does it block theme development (Phase 7)?** No. Phase 7 is complete
+without it — see above, nothing built assumes an answer either way.
+
+**Does it affect Phase 8 (Media Migration)?** No. Media migration is
+market/audience-agnostic.
+
+**Does it affect Phase 9 (Product & Content Import)?** Potentially, but
+not in a way that blocks starting Phase 9. If B2B is confirmed *wanted*,
+Phase 9's product import may need wholesale-specific price lists or
+customer tagging set up alongside the standard import. If Markets/multi-
+currency is confirmed, Phase 9's collection/product setup is unaffected
+(Markets configuration is a separate Admin settings layer on top of
+existing products, not a re-import). Recommend deciding before Phase 9
+product import begins so pricing setup only happens once, not deciding
+before Phase 9 can start.
+
+**Can it safely be deferred?** Yes, through Phase 8 and the start of
+Phase 9. It becomes a real blocker only if Phase 9's pricing/customer
+import needs a wholesale price-list structure that isn't yet decided, or
+if Phase 12 testing is expected to cover B2B checkout flows that don't
+exist. Recommend forcing the decision no later than before Phase 9's
+"Import products" issue begins, not before Phase 8.
+
+**Decision**: None made. Do not implement Markets configuration, currency
+conversion, or B2B account/pricing UI without an explicit answer from
+whoever owns this business call. When answered, replace this entry's
+"Status: OPEN" with the actual decision and update
+`docs/THEME_ARCHITECTURE.md` § Markets & B2B readiness to match — don't
+leave two documents disagreeing about what was decided.

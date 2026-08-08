@@ -3,7 +3,9 @@
     "name": "theme_info",
     "theme_name": "Wholesale Beauty Hub",
     "theme_version": "0.1.0",
-    "theme_author": "Migration project — see docs/SHOPIFY_BUILD_GUIDELINES.md"
+    "theme_author": "Migration project — see docs/SHOPIFY_BUILD_GUIDELINES.md",
+    "theme_documentation_url": "https://github.com/olaniyimuiz-create/wholesalebeautyhub.co.uk/blob/main/docs/THEME_ARCHITECTURE.md",
+    "theme_support_email": "olaniyimuiz@gmail.com"
   },
   {
     "name": "Colors",

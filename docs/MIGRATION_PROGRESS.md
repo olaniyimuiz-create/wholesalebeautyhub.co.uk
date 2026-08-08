@@ -5,7 +5,7 @@
 | # | Task | Status | Notes |
 |---|---|---|---|
 | 1 | SQL dump → products/customers CSV pipeline | Done | 611 products / 497 variations / 12,096 customers, validated end-to-end |
-| 2 | Theme migration (Shopify Liquid theme) | Foundation built | `shopify/theme/` — 72 files, full commerce path built and reviewed. See `docs/PHASE7_REPORT.md`. Product/collection/customer import not started |
+| 2 | Theme migration (Shopify Liquid theme) | Foundation built and accepted | `shopify/theme/` — 72 files, full commerce path, independently re-verified including a real Theme Check pass (0 offenses). See `docs/PHASE7_ACCEPTANCE.md`. Product/collection/customer import not started |
 | 3 | Collections / navigation menus | Foundation ready | Concrete 156-collection list + navigation spec in `docs/SHOPIFY_FOUNDATION.md` and `shopify/foundation/`; theme templates built (`collection.json`/`.brand`/`.promo`), Admin API creation tracked in Milestone "Phase 9" |
 | 4 | Blog + static pages | Foundation ready | 9 pages have existing Rank Math SEO copy worth preserving — see `docs/SEO_STRATEGY.md`; theme templates built (`blog.json`, `article.json`, `page.json`), content migration tracked as issue "Migrate blog posts and static pages" |
 | 5 | SEO: URL redirect map (WooCommerce → Shopify slugs) | Done | 875-row redirect matrix + orphan/duplicate/broken-link reports in `reports/`; see `docs/SEO_STRATEGY.md` |
@@ -219,6 +219,47 @@ blocks it, and `snippets/product-media.liquid`/`product-card.liquid` will
 render whatever Phase 8 produces without changes. One recommendation, not
 a blocker: run real Shopify Theme Check (risk #21) before more theme work
 accumulates, once Node.js can be installed with proper elevation.
+
+**Superseded by the formal acceptance review below** — that recommendation
+about Theme Check has since been acted on (it now runs cleanly), and the
+Phase 8 gate decision was revisited with a real, non-rubber-stamp
+condition attached. This section is kept as the historical record of what
+Phase 7 itself concluded; it isn't rewritten.
+
+### 2026-08-08 — Phase 7 acceptance review
+
+Independent re-verification, not a rerun of Phase 7 itself — see
+`docs/PHASE7_ACCEPTANCE.md` for full detail.
+
+- Re-ran every structural check from scratch (JSON, schema blocks, locale
+  keys, snippet/section/asset/block-type references) rather than trusting
+  the Phase 7 report's claims — all passed, confirming the prior report
+  was accurate, not just re-asserted.
+- Unblocked risk #21 (Theme Check tooling) using Node.js's portable zip
+  distribution, which needs no admin elevation. Real `shopify theme check`
+  now runs: found and fixed 2 genuine errors (missing required fields in
+  `config/settings_schema.json`), then confirmed 68 files / 0 offenses.
+- Formalized the Markets/B2B/multi-currency question as `docs/DECISIONS.md`
+  ADR-010 — an explicit open "Business Decision Required" record instead
+  of informal prose in `docs/THEME_ARCHITECTURE.md`.
+- Actually read `wp_snippets`' real code (not just row metadata) for the
+  first time — all 24 real snippets classified KEEP/REPLACE/RETIRE/
+  INVESTIGATE. Surfaced two genuine new findings: brand logo images live
+  in `wp_termmeta` (`pwb_brand_image`), not previously in Phase 6.5's
+  asset inventory and now required input to Phase 8; and 24 specific
+  product IDs the site owner had already flagged for price-data-integrity
+  issues before migration, worth spot-checking before Phase 9 import.
+- Added risks #24–26 and updated the status of #17, #21, #22 in
+  `docs/RISK_REGISTER.md` to reflect what was actually resolved this
+  review vs. what remains genuinely open.
+- **Phase 8 gate: CONDITIONAL GO**, not a clean GO — see
+  `docs/PHASE7_ACCEPTANCE.md` for the full reasoning. The condition:
+  Phase 8's image inventory must include the `wp_termmeta` brand-logo
+  source alongside `wp_posts` attachments, since that source wasn't
+  identified until this review and missing it would mean re-scanning
+  later rather than including it up front.
+- No Phase 8 work was performed — inventory, conversion, and migration
+  are explicitly still Phase 8's job, not this review's.
 
 ## Phase 6 Readiness Assessment
 
