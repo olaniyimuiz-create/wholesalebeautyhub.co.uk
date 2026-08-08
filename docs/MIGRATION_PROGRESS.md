@@ -14,6 +14,7 @@
 | 8 | Order history migration | Not started | Tracked as GitHub Milestone "Phase 11: Historical Order Strategy" (2 issues, ADR required before implementation) |
 | 9 | Cutover plan (DNS, final sync, WooCommerce freeze) | Foundation ready | Import sequence, rollback strategy, and deployment checklist written in `docs/SHOPIFY_DEPLOYMENT.md`; implementation tracked in Milestone "Phase 13: Production Go-Live" |
 | 10 | Media migration inventory (WooCommerce → Shopify) | Inventory built | 1,929-record canonical manifest, 8 CSV reports, idempotent and spot-checked — see `docs/MEDIA_MIGRATION.md`. Actual file conversion/upload not started — that's Phase 9 |
+| 11 | Product import dry run (mapping, validation, data quality) | Dry run complete | 0 blocking issues (after 4 real pipeline fixes), idempotent, 7 reports — see `docs/PHASE9_PRODUCT_IMPORT.md`. No Shopify contacted; test/production import not started, blocked on store/credential provisioning |
 
 ## Change log
 
@@ -301,6 +302,51 @@ WooCommerce data modified. Full detail: `docs/MEDIA_MIGRATION.md`.
 - Added risks #27–29 to `docs/RISK_REGISTER.md`; corrected #25.
 - No Phase 9 work performed — no products, customers, or orders imported;
   no DNS/production changes; no WooCommerce data deleted.
+
+### 2026-08-08 — Task 9: Product Import dry run
+
+No Shopify store or API credentials exist anywhere in this project — this
+phase is analysis, transformation, and validation only. Full detail:
+`docs/PHASE9_PRODUCT_IMPORT.md`, `docs/PHASE9_IMPORT_STRATEGY.md`.
+
+- Recommended Admin API (GraphQL) over CSV for the real import — deterministic
+  upsert by ID, metaobject-reference support, structured error handling —
+  conditional on a store/credentials existing, which they don't yet.
+- Fixed 3 real, previously-known, already-approved pipeline bugs at the
+  source rather than working around them in the dry run: Product Type
+  (risk #9, now uses true category depth), ADR-007 brand exclusion
+  (Valentine/Tradefair), and the Topicrem brand-name correction —
+  investigating the last one properly found it was 2 products, not 4, as
+  previously estimated.
+- Found and fixed a new bug via the dry run's own duplicate-handle check:
+  12 draft products had a completely empty handle (normal WordPress
+  behavior for unpublished drafts) that would have silently merged into
+  one product on import. Also fixed an HTML-entity/case bug in the dry
+  run's own collection-name matching (not a source-data problem).
+- Investigated GitHub issue #34 (price integrity) for real: confirmed all
+  24 flagged IDs, found the pattern is actually broader (96 of 611
+  products), and assessed the actual import impact (none — compare-at
+  price is correctly left blank, not fabricated).
+- Investigated the colour/shade data behind issue #37 with real numbers:
+  132 of 326 variation-level shade assignments have real hex color data,
+  184 reference a term with no color, 10 are orphaned. Documented as a
+  proposed mapping, not implemented - needs approval.
+- Ran the full dry run: 611 products, 519 published, 497 variants, 382
+  data-quality issues found (0 blocking after the fixes above), 151
+  collections/brands resolved, 31 genuinely unmapped (mostly Level 3
+  categories that correctly become Product Type instead, not a bug).
+  Verified idempotent - two full runs produced byte-identical output
+  across all 7 reports.
+- 5 products quarantined (not guessed) for an unresolvable "unnamed"
+  placeholder vendor - a real ambiguous business classification, exactly
+  the kind of decision this phase's governance says not to make silently.
+- Pre-import reconciliation (source vs. this dry run's transformed
+  payload - explicitly not vs. a live Shopify store, since none exists):
+  100% match on every counted category.
+- **Did not proceed to Steps 16/18** (test/production import) - both
+  require a Shopify store and Admin API credentials that don't exist in
+  this project. This is a real, external prerequisite, not a decision
+  this phase could make or work around.
 
 ## Phase 6 Readiness Assessment
 

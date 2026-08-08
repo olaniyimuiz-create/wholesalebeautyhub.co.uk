@@ -1,0 +1,2243 @@
+woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_status
+17,Face,face,RESOLVED
+17,Foundation,,UNMAPPED
+17,Vee Beauty,vee-beauty,RESOLVED
+18,Face,face,RESOLVED
+18,Foundation,,UNMAPPED
+18,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18,Vee Beauty,vee-beauty,RESOLVED
+19,Lips,lips,RESOLVED
+19,Lip Gloss,,UNMAPPED
+19,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+19,Vee Beauty,vee-beauty,RESOLVED
+20,Face,face,RESOLVED
+20,Concealer,,UNMAPPED
+20,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+20,Vee Beauty,vee-beauty,RESOLVED
+22,Face,face,RESOLVED
+22,Blushes,,UNMAPPED
+22,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+22,Tehila,tehila,RESOLVED
+23,Face,face,RESOLVED
+23,Highlight &amp; Contour,,UNMAPPED
+23,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+23,Tehila,tehila,RESOLVED
+24,Face,face,RESOLVED
+24,Blushes,,UNMAPPED
+24,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+24,Tehila,tehila,RESOLVED
+25,Face,face,RESOLVED
+25,Foundation,,UNMAPPED
+25,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+25,Sylvimak,sylvimak,RESOLVED
+28,Face,face,RESOLVED
+28,Bronzers &amp; Highlighters,,UNMAPPED
+28,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+28,TM Essentials,tm-essential,RESOLVED
+34,Lips,lips,RESOLVED
+34,Lip Gloss,,UNMAPPED
+34,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+34,Beauty by AD,beauty-by-ad,RESOLVED
+35,Lips,lips,RESOLVED
+35,Lipstain,,UNMAPPED
+35,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+35,Beauty by AD,beauty-by-ad,RESOLVED
+49,Face,face,RESOLVED
+49,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+49,Powder,,UNMAPPED
+49,Merak,merak,RESOLVED
+50,Eyes,eyes,RESOLVED
+50,Eyeliner,,UNMAPPED
+50,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+50,Merak,merak,RESOLVED
+51,Face,face,RESOLVED
+51,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+51,Powder,,UNMAPPED
+51,Yanga Beauty,yanga-beauty,RESOLVED
+52,Face,face,RESOLVED
+52,Concealer,,UNMAPPED
+52,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+52,Yanga Beauty,yanga-beauty,RESOLVED
+53,Face,face,RESOLVED
+53,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+53,Powder,,UNMAPPED
+53,Nuban,nuban,RESOLVED
+54,Face,face,RESOLVED
+54,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+54,Powder,,UNMAPPED
+54,Setting &amp; Finishing Spray,,UNMAPPED
+54,Nuban,nuban,RESOLVED
+55,Face,face,RESOLVED
+55,Bronzers &amp; Highlighters,,UNMAPPED
+55,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+55,Nuban,nuban,RESOLVED
+60,Face,face,RESOLVED
+60,Concealer,,UNMAPPED
+60,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+60,Nuban,nuban,RESOLVED
+61,Face,face,RESOLVED
+61,Foundation,,UNMAPPED
+61,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+62,Eyes,eyes,RESOLVED
+62,Eyebrow Products,,UNMAPPED
+62,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+62,Hegai &amp; Esther,hegai-esther,RESOLVED
+63,Lips,lips,RESOLVED
+63,Lip Gloss,,UNMAPPED
+63,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+63,Hegai &amp; Esther,hegai-esther,RESOLVED
+65,Lips,lips,RESOLVED
+65,Lipstick,,UNMAPPED
+65,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+65,Hegai &amp; Esther,hegai-esther,RESOLVED
+66,Face,face,RESOLVED
+66,Blushes,,UNMAPPED
+66,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+66,Msmetics,msmetics,RESOLVED
+67,Face,face,RESOLVED
+67,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+67,Setting &amp; Finishing Spray,,UNMAPPED
+67,Msmetics,msmetics,RESOLVED
+68,Face,face,RESOLVED
+68,Primers,,UNMAPPED
+68,Msmetics,msmetics,RESOLVED
+69,Eyes,eyes,RESOLVED
+69,Eyelash Extensions &amp; Glue,,UNMAPPED
+69,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+69,Msmetics,msmetics,RESOLVED
+70,Eyes,eyes,RESOLVED
+70,Eyelash Extensions &amp; Glue,,UNMAPPED
+70,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+70,Msmetics,msmetics,RESOLVED
+76,Face,face,RESOLVED
+76,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+76,Powder,,UNMAPPED
+76,Sephora,sephora,RESOLVED
+82,Face,face,RESOLVED
+82,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+82,Powder,,UNMAPPED
+82,Milani,milani,RESOLVED
+84,Face,face,RESOLVED
+84,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+84,Setting &amp; Finishing Spray,,UNMAPPED
+84,Sooo Pro,sooo-pro,RESOLVED
+85,Face,face,RESOLVED
+85,Highlight &amp; Contour,,UNMAPPED
+85,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+85,Sooo Pro,sooo-pro,RESOLVED
+86,Lips,lips,RESOLVED
+86,Lipstain,,UNMAPPED
+86,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+86,Sooo Pro,sooo-pro,RESOLVED
+87,Lips,lips,RESOLVED
+87,Lip Gloss,,UNMAPPED
+87,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+87,Sooo Pro,sooo-pro,RESOLVED
+90,Uncategorized,,UNMAPPED
+90,Omaricode,omaricode,RESOLVED
+91,Face,face,RESOLVED
+91,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+91,Primers,,UNMAPPED
+91,Omaricode,omaricode,RESOLVED
+92,Lips,lips,RESOLVED
+92,Lip Gloss,,UNMAPPED
+92,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+92,Omaricode,omaricode,RESOLVED
+106,Eyes,eyes,RESOLVED
+106,Eyelash Extensions &amp; Glue,,UNMAPPED
+106,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+106,Wynkk Beauty,wynkk-beauty,RESOLVED
+107,Eyes,eyes,RESOLVED
+107,Eyelash Extensions &amp; Glue,,UNMAPPED
+107,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+107,Wynkk Beauty,wynkk-beauty,RESOLVED
+108,Eyes,eyes,RESOLVED
+108,Eyelash Extensions &amp; Glue,,UNMAPPED
+108,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+108,Wynkk Beauty,wynkk-beauty,RESOLVED
+109,Eyes,eyes,RESOLVED
+109,"Pigment, Glitter &amp; Base",,UNMAPPED
+109,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+109,Yglam,yglam,RESOLVED
+112,Face,face,RESOLVED
+112,Concealer,,UNMAPPED
+112,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+112,Becharm,becharm,RESOLVED
+113,Lips,lips,RESOLVED
+113,Lip Gloss,,UNMAPPED
+113,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+113,Classic Makeup,classic-makeup,RESOLVED
+117,Eyes,eyes,RESOLVED
+117,Eyeliner,,UNMAPPED
+117,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+117,Paula Beauty,paula-beauty,RESOLVED
+118,Eyes,eyes,RESOLVED
+118,Eyeshadow,,UNMAPPED
+118,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+118,Luzta,luzta,RESOLVED
+120,Eyes,eyes,RESOLVED
+120,Eyebrow Products,,UNMAPPED
+120,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+120,Dammel,dammel,RESOLVED
+123,Eyes,eyes,RESOLVED
+123,Eyeshadow,,UNMAPPED
+123,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+123,Vee Beauty,vee-beauty,RESOLVED
+124,Face,face,RESOLVED
+124,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+124,Powder,,UNMAPPED
+124,Vee Beauty,vee-beauty,RESOLVED
+125,Face,face,RESOLVED
+125,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+125,Powder,,UNMAPPED
+125,Vee Beauty,vee-beauty,RESOLVED
+126,Eyes,eyes,RESOLVED
+126,Eyeshadow,,UNMAPPED
+126,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+126,Blossom,blossom,RESOLVED
+127,Uncategorized,,UNMAPPED
+127,Blossom,blossom,RESOLVED
+128,Eyes,eyes,RESOLVED
+128,Eyeshadow,,UNMAPPED
+128,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+128,Blossom,blossom,RESOLVED
+129,Lips,lips,RESOLVED
+129,Lip Pallet,,UNMAPPED
+129,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+129,Blossom,blossom,RESOLVED
+131,Eyes,eyes,RESOLVED
+131,Eyeliner,,UNMAPPED
+131,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+131,Tehila,tehila,RESOLVED
+132,Eyes,eyes,RESOLVED
+132,Eyeshadow,,UNMAPPED
+132,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+132,Sylvimak,sylvimak,RESOLVED
+136,Face,face,RESOLVED
+136,Blushes,,UNMAPPED
+136,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+136,TM Essentials,tm-essential,RESOLVED
+146,Face,face,RESOLVED
+146,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+146,Powder,,UNMAPPED
+146,Beauty by AD,beauty-by-ad,RESOLVED
+153,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+153,Merak,merak,RESOLVED
+154,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+154,Merak,merak,RESOLVED
+155,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+155,Yanga Beauty,yanga-beauty,RESOLVED
+156,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+156,Yanga Beauty,yanga-beauty,RESOLVED
+159,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+159,Tools &amp; Accessories,tools-accessories,RESOLVED
+159,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+159,Nuban,nuban,RESOLVED
+160,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+160,Tools &amp; Accessories,tools-accessories,RESOLVED
+160,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+160,Nuban,nuban,RESOLVED
+161,Face,face,RESOLVED
+161,Highlight &amp; Contour,,UNMAPPED
+161,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+161,Hegai &amp; Esther,hegai-esther,RESOLVED
+162,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+162,Tools &amp; Accessories,tools-accessories,RESOLVED
+162,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+162,Hegai &amp; Esther,hegai-esther,RESOLVED
+164,Face,face,RESOLVED
+164,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+164,Primers,,UNMAPPED
+164,Msmetics,msmetics,RESOLVED
+165,Face,face,RESOLVED
+165,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+165,Primers,,UNMAPPED
+165,Msmetics,msmetics,RESOLVED
+166,Face,face,RESOLVED
+166,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+166,Primers,,UNMAPPED
+166,Msmetics,msmetics,RESOLVED
+178,Face,face,RESOLVED
+178,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+178,Setting &amp; Finishing Spray,,UNMAPPED
+178,Ferrarucci,ferrarucci,RESOLVED
+180,Face,face,RESOLVED
+180,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+180,Setting &amp; Finishing Spray,,UNMAPPED
+180,Sooo Pro,sooo-pro,RESOLVED
+182,Face,face,RESOLVED
+182,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+182,Setting &amp; Finishing Spray,,UNMAPPED
+182,Juba Cosmetics,juba-cosmetics,RESOLVED
+183,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+183,Serums &amp; Treatment,serums-treatment,RESOLVED
+183,Omaricode,omaricode,RESOLVED
+184,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+184,Moisturizers &amp; Cream,moisturizers,RESOLVED
+184,Omaricode,omaricode,RESOLVED
+186,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+186,Tools &amp; Accessories,tools-accessories,RESOLVED
+186,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+186,O'Cosmetics,ocosmetics,RESOLVED
+187,Face,face,RESOLVED
+187,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+187,Setting &amp; Finishing Spray,,UNMAPPED
+187,Rimmel,rimmel,RESOLVED
+188,Face,face,RESOLVED
+188,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+188,Primers,,UNMAPPED
+188,Rimmel,rimmel,RESOLVED
+189,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+189,Body Wash,body-wash,RESOLVED
+189,Zaron,zaron,RESOLVED
+190,Face,face,RESOLVED
+190,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+190,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+190,Zaron,zaron,RESOLVED
+191,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+191,Body Wash,body-wash,RESOLVED
+191,Zaron,zaron,RESOLVED
+192,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+192,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+192,Zaron,zaron,RESOLVED
+193,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+193,Body Lotion,body-lotion,RESOLVED
+193,Zaron,zaron,RESOLVED
+194,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+194,Serums &amp; Treatment,serums-treatment,RESOLVED
+194,Zaron,zaron,RESOLVED
+195,Face,face,RESOLVED
+195,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+195,Serums &amp; Treatment,serums-treatment,RESOLVED
+195,Zaron,zaron,RESOLVED
+196,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+196,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+196,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+196,Zaron,zaron,RESOLVED
+197,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+197,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+197,Zaron,zaron,RESOLVED
+199,Eyes,eyes,RESOLVED
+199,Eyeliner,,UNMAPPED
+199,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+199,Zaron,zaron,RESOLVED
+200,Face,face,RESOLVED
+200,Serums &amp; Treatment,serums-treatment,RESOLVED
+200,Zaron,zaron,RESOLVED
+201,Eyes,eyes,RESOLVED
+201,Face,face,RESOLVED
+201,Mascara,,UNMAPPED
+201,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+201,Zaron,zaron,RESOLVED
+202,Eyes,eyes,RESOLVED
+202,Face,face,RESOLVED
+202,Mascara,,UNMAPPED
+202,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+202,Zaron,zaron,RESOLVED
+203,Eyes,eyes,RESOLVED
+203,Eyeliner,,UNMAPPED
+203,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+203,Zaron,zaron,RESOLVED
+204,Face,face,RESOLVED
+204,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+204,Tools &amp; Accessories,tools-accessories,RESOLVED
+204,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+204,Zaron,zaron,RESOLVED
+207,Eyes,eyes,RESOLVED
+207,Eyelash Extensions &amp; Glue,,UNMAPPED
+207,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+207,Wynkk Beauty,wynkk-beauty,RESOLVED
+208,Eyes,eyes,RESOLVED
+208,Eyelash Extensions &amp; Glue,,UNMAPPED
+208,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+208,Wynkk Beauty,wynkk-beauty,RESOLVED
+209,Eyes,eyes,RESOLVED
+209,Eyelash Extensions &amp; Glue,,UNMAPPED
+209,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+209,Wynkk Beauty,wynkk-beauty,RESOLVED
+213,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+213,Tools &amp; Accessories,tools-accessories,RESOLVED
+213,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+214,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+214,Tools &amp; Accessories,tools-accessories,RESOLVED
+214,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+218,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+218,Tools &amp; Accessories,tools-accessories,RESOLVED
+218,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+220,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+220,Body Wash,body-wash,RESOLVED
+220,Olay,olay,RESOLVED
+223,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+223,Body Wash,body-wash,RESOLVED
+223,Olay,olay,RESOLVED
+224,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+224,Body Wash,body-wash,RESOLVED
+224,Olay,olay,RESOLVED
+226,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+226,Body Wash,body-wash,RESOLVED
+226,Olay,olay,RESOLVED
+227,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+227,Body Lotion,body-lotion,RESOLVED
+227,Olay,olay,RESOLVED
+231,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+231,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+231,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+231,Touch,touch,RESOLVED
+232,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+232,Moisturizers &amp; Cream,moisturizers,RESOLVED
+232,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+232,Touch,touch,RESOLVED
+233,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+233,Moisturizers &amp; Cream,moisturizers,RESOLVED
+233,Touch,touch,RESOLVED
+234,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+234,Moisturizers &amp; Cream,moisturizers,RESOLVED
+234,Dark spots &amp; Discoloration serums,,UNMAPPED
+234,Touch,touch,RESOLVED
+235,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+235,Roll On,roll-on,RESOLVED
+235,Touch,touch,RESOLVED
+236,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+236,Body Lotion,body-lotion,RESOLVED
+236,Dr Teal's,dr-teals,RESOLVED
+237,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+237,Body Wash,body-wash,RESOLVED
+237,Dr Teal's,dr-teals,RESOLVED
+239,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+239,Body Scrubs,body-scrubs,RESOLVED
+239,Dr Teal's,dr-teals,RESOLVED
+240,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+240,Body Scrubs,body-scrubs,RESOLVED
+240,Dr Teal's,dr-teals,RESOLVED
+242,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+242,Body Oil,body-oil,RESOLVED
+242,Dr Teal's,dr-teals,RESOLVED
+243,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+243,Body Lotion,body-lotion,RESOLVED
+243,Medi Peel,medi-peel,RESOLVED
+244,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+244,Body Lotion,body-lotion,RESOLVED
+244,Amlactin,amlactin,RESOLVED
+246,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+246,Body Lotion,body-lotion,RESOLVED
+246,Amlactin,amlactin,RESOLVED
+247,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+247,Body Lotion,body-lotion,RESOLVED
+247,Amlactin,amlactin,RESOLVED
+248,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+248,Body Lotion,body-lotion,RESOLVED
+248,Medix 5.5,medix-5-5,RESOLVED
+249,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+249,Serums &amp; Treatment,serums-treatment,RESOLVED
+249,Medix 5.5,medix-5-5,RESOLVED
+250,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+250,Body Lotion,body-lotion,RESOLVED
+250,Medix 5.5,medix-5-5,RESOLVED
+251,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+251,Sunscreen,sunscreen,RESOLVED
+251,Hatomugi,hatomugi,RESOLVED
+252,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+252,Sunscreen,sunscreen,RESOLVED
+252,Nivea,nivea,RESOLVED
+253,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+253,Serums &amp; Treatment,serums-treatment,RESOLVED
+253,Good Molecules,good-molecules,RESOLVED
+254,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+254,Serums &amp; Treatment,serums-treatment,RESOLVED
+254,Good Molecules,good-molecules,RESOLVED
+255,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+255,Serums &amp; Treatment,serums-treatment,RESOLVED
+255,Good Molecules,good-molecules,RESOLVED
+256,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+256,Moisturizers &amp; Cream,moisturizers,RESOLVED
+256,Good Molecules,good-molecules,RESOLVED
+257,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+257,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+257,Good Molecules,good-molecules,RESOLVED
+258,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+258,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+258,Good Molecules,good-molecules,RESOLVED
+259,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+259,Serums &amp; Treatment,serums-treatment,RESOLVED
+259,Good Molecules,good-molecules,RESOLVED
+260,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+260,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+260,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+260,Cosrx,cosrx,RESOLVED
+261,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+261,Serums &amp; Treatment,serums-treatment,RESOLVED
+261,Cosrx,cosrx,RESOLVED
+262,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+262,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+262,Cosrx,cosrx,RESOLVED
+263,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+263,Moisturizers &amp; Cream,moisturizers,RESOLVED
+263,Cosrx,cosrx,RESOLVED
+265,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+265,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+265,Cosrx,cosrx,RESOLVED
+268,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+268,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+268,Cosrx,cosrx,RESOLVED
+269,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+269,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+269,Cosrx,cosrx,RESOLVED
+271,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+271,Moisturizers &amp; Cream,moisturizers,RESOLVED
+271,Cosrx,cosrx,RESOLVED
+277,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+277,Sunscreen,sunscreen,RESOLVED
+277,Skin Aqua,skin-aqua,RESOLVED
+278,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+278,Sunscreen,sunscreen,RESOLVED
+278,Skin Aqua,skin-aqua,RESOLVED
+280,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+280,Sunscreen,sunscreen,RESOLVED
+280,Isntree,isntree,RESOLVED
+281,Face,face,RESOLVED
+281,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+281,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+281,Isntree,isntree,RESOLVED
+282,Face,face,RESOLVED
+282,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+282,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+282,Isntree,isntree,RESOLVED
+283,Face,face,RESOLVED
+283,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+283,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+283,Isntree,isntree,RESOLVED
+284,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+284,Sunscreen,sunscreen,RESOLVED
+284,Isntree,isntree,RESOLVED
+285,Face,face,RESOLVED
+285,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+285,Moisturizers &amp; Cream,moisturizers,RESOLVED
+285,Isntree,isntree,RESOLVED
+286,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+286,Serums &amp; Treatment,serums-treatment,RESOLVED
+286,Dark spots &amp; Discoloration serums,,UNMAPPED
+286,Axis-y,axis-y,RESOLVED
+287,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+287,Serums &amp; Treatment,serums-treatment,RESOLVED
+287,Dark spots &amp; Discoloration serums,,UNMAPPED
+287,Axis-y,axis-y,RESOLVED
+288,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+288,Sunscreen,sunscreen,RESOLVED
+288,Missha,missha,RESOLVED
+289,Face,face,RESOLVED
+289,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+289,Sunscreen,sunscreen,RESOLVED
+289,Missha,missha,RESOLVED
+290,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+290,Serums &amp; Treatment,serums-treatment,RESOLVED
+290,Beauty of Joseon,beauty-of-joseon,RESOLVED
+291,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+291,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+291,Beauty of Joseon,beauty-of-joseon,RESOLVED
+292,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+292,Sunscreen,sunscreen,RESOLVED
+292,Beauty of Joseon,beauty-of-joseon,RESOLVED
+293,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+293,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+293,Beauty of Joseon,beauty-of-joseon,RESOLVED
+294,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+294,Serums &amp; Treatment,serums-treatment,RESOLVED
+294,Beauty of Joseon,beauty-of-joseon,RESOLVED
+295,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+295,Sunscreen,sunscreen,RESOLVED
+295,Blackgirl,blackgirl,RESOLVED
+296,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+296,Sunscreen,sunscreen,RESOLVED
+296,Blackgirl,blackgirl,RESOLVED
+297,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+297,Sunscreen,sunscreen,RESOLVED
+297,Blackgirl,blackgirl,RESOLVED
+298,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+298,Sunscreen,sunscreen,RESOLVED
+298,Blackgirl,blackgirl,RESOLVED
+303,Face,face,RESOLVED
+303,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+303,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+303,Body Wash,body-wash,RESOLVED
+303,Koji San,koji-san,RESOLVED
+306,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+306,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+306,Body Wash,body-wash,RESOLVED
+306,Koji San,koji-san,RESOLVED
+307,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+307,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+307,Body Wash,body-wash,RESOLVED
+307,Koji San,koji-san,RESOLVED
+315,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+315,Moisturizers &amp; Cream,moisturizers,RESOLVED
+315,Hadalabo,hadalabo,RESOLVED
+316,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+316,Moisturizers &amp; Cream,moisturizers,RESOLVED
+316,Hadalabo,hadalabo,RESOLVED
+317,Face,face,RESOLVED
+317,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+317,Serums &amp; Treatment,serums-treatment,RESOLVED
+317,Timeless,timeless,RESOLVED
+318,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+318,Body Lotion,body-lotion,RESOLVED
+318,E45,e45,RESOLVED
+319,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+319,Body Lotion,body-lotion,RESOLVED
+319,E45,e45,RESOLVED
+320,Face,face,RESOLVED
+320,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+320,Face Oil,face-oil,RESOLVED
+320,Heimish,heimish,RESOLVED
+321,Face,face,RESOLVED
+321,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+321,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+321,Heimish,heimish,RESOLVED
+322,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+322,Body Wash,body-wash,RESOLVED
+322,Some by Mi,some-by-mi,RESOLVED
+323,Face,face,RESOLVED
+323,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+323,Body Moisturizers,body-moisturizers,RESOLVED
+323,Some by Mi,some-by-mi,RESOLVED
+324,Face,face,RESOLVED
+324,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+324,Serums &amp; Treatment,serums-treatment,RESOLVED
+324,Some by Mi,some-by-mi,RESOLVED
+327,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+327,Serums &amp; Treatment,serums-treatment,RESOLVED
+327,The Ordinary,the-ordinary,RESOLVED
+329,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+329,Serums &amp; Treatment,serums-treatment,RESOLVED
+329,The Ordinary,the-ordinary,RESOLVED
+331,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+331,Serums &amp; Treatment,serums-treatment,RESOLVED
+331,The Ordinary,the-ordinary,RESOLVED
+332,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+332,Serums &amp; Treatment,serums-treatment,RESOLVED
+332,The Ordinary,the-ordinary,RESOLVED
+333,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+333,Mask,face-mask,RESOLVED
+333,Dr Jart,dr-jart,RESOLVED
+334,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+334,Mask,face-mask,RESOLVED
+334,Dr Jart,dr-jart,RESOLVED
+335,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+335,Body Moisturizers,body-moisturizers,RESOLVED
+335,Body Oil,body-oil,RESOLVED
+335,Neutrogena,neutrogena,RESOLVED
+336,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+336,Tools &amp; Accessories,tools-accessories,RESOLVED
+336,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+336,Yglam,yglam,RESOLVED
+337,Face,face,RESOLVED
+337,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+337,Tools &amp; Accessories,tools-accessories,RESOLVED
+337,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+337,Yglam,yglam,RESOLVED
+338,Eyes,eyes,RESOLVED
+338,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+338,Tools &amp; Accessories,tools-accessories,RESOLVED
+338,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+338,Yglam,yglam,RESOLVED
+341,Face,face,RESOLVED
+341,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+341,Tools &amp; Accessories,tools-accessories,RESOLVED
+341,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+341,Viccabel,viccabel,RESOLVED
+349,Eyes,eyes,RESOLVED
+349,Eye Pencil,,UNMAPPED
+349,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+349,Beauty Line by Didi,beauty-line-by-didi,RESOLVED
+351,Eyes,eyes,RESOLVED
+351,Eyeliner,,UNMAPPED
+351,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+351,Beauty Line by Didi,beauty-line-by-didi,RESOLVED
+352,Eyes,eyes,RESOLVED
+352,Eyeliner,,UNMAPPED
+352,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+352,Beauty Line by Didi,beauty-line-by-didi,RESOLVED
+354,Eyes,eyes,RESOLVED
+354,Eyebrow Products,,UNMAPPED
+354,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+354,Beauty Line by Didi,beauty-line-by-didi,RESOLVED
+355,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+355,Tools &amp; Accessories,tools-accessories,RESOLVED
+355,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+355,Beauty Line by Didi,beauty-line-by-didi,RESOLVED
+356,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+356,Tools &amp; Accessories,tools-accessories,RESOLVED
+356,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+356,Beauty Line by Didi,beauty-line-by-didi,RESOLVED
+357,Face,face,RESOLVED
+357,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+357,Primers,,UNMAPPED
+357,Becharm,becharm,RESOLVED
+359,Eyes,eyes,RESOLVED
+359,Eyebrow Products,,UNMAPPED
+359,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+359,Mabrook,mabrook,RESOLVED
+360,Eyes,eyes,RESOLVED
+360,Eyeliner,,UNMAPPED
+360,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+360,Paula Beauty,paula-beauty,RESOLVED
+362,Eyes,eyes,RESOLVED
+362,Eyeshadow,,UNMAPPED
+362,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+362,Luzta,luzta,RESOLVED
+365,Eyes,eyes,RESOLVED
+365,Eyebrow Products,,UNMAPPED
+365,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+365,Tiger,tiger,RESOLVED
+1424,Face,face,RESOLVED
+1424,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1424,Primers,,UNMAPPED
+1424,Omaricode,omaricode,RESOLVED
+1682,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1682,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+1682,Acwell,acwell,RESOLVED
+1683,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1683,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+1683,Acwell,acwell,RESOLVED
+1684,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1684,Serums &amp; Treatment,serums-treatment,RESOLVED
+1684,Advanced Clinicals,advanced-clinicals,RESOLVED
+1685,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1685,Body Lotion,body-lotion,RESOLVED
+1685,Advanced Clinicals,advanced-clinicals,RESOLVED
+1686,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1686,Body Lotion,body-lotion,RESOLVED
+1686,Advanced Clinicals,advanced-clinicals,RESOLVED
+1687,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1687,Body Lotion,body-lotion,RESOLVED
+1687,Advanced Clinicals,advanced-clinicals,RESOLVED
+1688,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1688,Moisturizers &amp; Cream,moisturizers,RESOLVED
+1688,Advanced Clinicals,advanced-clinicals,RESOLVED
+1689,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1689,Body Oil,body-oil,RESOLVED
+1689,Advanced Clinicals,advanced-clinicals,RESOLVED
+1690,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1690,Body Lotion,body-lotion,RESOLVED
+1690,Advanced Clinicals,advanced-clinicals,RESOLVED
+1691,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1691,Body Moisturizers,body-moisturizers,RESOLVED
+1691,Amlactin,amlactin,RESOLVED
+1692,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1692,Body Moisturizers,body-moisturizers,RESOLVED
+1692,Baby wash &amp; lotion,baby-wash-lotion,RESOLVED
+1692,Aveeno,aveeno,RESOLVED
+1693,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1693,Serums &amp; Treatment,serums-treatment,RESOLVED
+1693,Balance,balance,RESOLVED
+1694,Lips,lips,RESOLVED
+1694,Lip Gloss,,UNMAPPED
+1694,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1694,Beauty Line by Didi,beauty-line-by-didi,RESOLVED
+1695,Lips,lips,RESOLVED
+1695,Lip Pencil,,UNMAPPED
+1695,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1695,Beauty Line by Didi,beauty-line-by-didi,RESOLVED
+1696,Lips,lips,RESOLVED
+1696,Lipstain,,UNMAPPED
+1696,Beauty Line by Didi,beauty-line-by-didi,RESOLVED
+1697,Lips,lips,RESOLVED
+1697,Lipstain,,UNMAPPED
+1697,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1697,Beauty by AD,beauty-by-ad,RESOLVED
+1698,Face,face,RESOLVED
+1698,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1698,Powder,,UNMAPPED
+1698,Beauty by AD,beauty-by-ad,RESOLVED
+1699,Face,face,RESOLVED
+1699,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1699,Powder,,UNMAPPED
+1699,Becharm,becharm,RESOLVED
+1700,Lips,lips,RESOLVED
+1700,Lip Pallet,,UNMAPPED
+1700,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1700,Becharm,becharm,RESOLVED
+1702,Face,face,RESOLVED
+1702,Concealer,,UNMAPPED
+1702,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1702,Becharm,becharm,RESOLVED
+1703,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1703,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+1703,BOJ Cosmetics,boj-cosmetics,RESOLVED
+1704,Eyes,eyes,RESOLVED
+1704,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1704,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+1704,BOJ Cosmetics,boj-cosmetics,RESOLVED
+1707,"Pigment, Glitter &amp; Base",,UNMAPPED
+1707,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1707,Candybeauty,candybeauty,RESOLVED
+1708,"Pigment, Glitter &amp; Base",,UNMAPPED
+1708,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1708,Candybeauty,candybeauty,RESOLVED
+1709,Eyes,eyes,RESOLVED
+1709,Eyelash Extensions &amp; Glue,,UNMAPPED
+1709,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1709,Classic Makeup,classic-makeup,RESOLVED
+1711,Face,face,RESOLVED
+1711,Blushes,,UNMAPPED
+1711,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1711,Cpd,cpd,RESOLVED
+1712,Face,face,RESOLVED
+1712,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1712,Setting &amp; Finishing Spray,,UNMAPPED
+1712,D'Alba,dalba,RESOLVED
+1713,Eyes,eyes,RESOLVED
+1713,Eye Pencil,,UNMAPPED
+1713,Eyebrow Products,,UNMAPPED
+1713,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1713,Davies,davies,RESOLVED
+1714,Eyes,eyes,RESOLVED
+1714,Eye Pencil,,UNMAPPED
+1714,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1714,Davies,davies,RESOLVED
+1715,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1715,Moisturizers &amp; Cream,moisturizers,RESOLVED
+1715,Elastalift,elastalift,RESOLVED
+1716,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1716,Serums &amp; Treatment,serums-treatment,RESOLVED
+1716,Elastalift,elastalift,RESOLVED
+1717,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1717,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1717,Body Moisturizers,body-moisturizers,RESOLVED
+1717,Elastalift,elastalift,RESOLVED
+1718,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1718,Body Lotion,body-lotion,RESOLVED
+1718,Eos,eos,RESOLVED
+1719,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1719,Body Lotion,body-lotion,RESOLVED
+1719,Eos,eos,RESOLVED
+1720,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1720,Body Moisturizers,body-moisturizers,RESOLVED
+1720,Body Lotion,body-lotion,RESOLVED
+1720,Eos,eos,RESOLVED
+1721,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1721,Moisturizers &amp; Cream,moisturizers,RESOLVED
+1721,Ezanic,ezanic,RESOLVED
+1722,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1722,Serums &amp; Treatment,serums-treatment,RESOLVED
+1722,Dark spots &amp; Discoloration serums,,UNMAPPED
+1722,Faded,faded,RESOLVED
+1723,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1723,Serums &amp; Treatment,serums-treatment,RESOLVED
+1723,Dark spots &amp; Discoloration serums,,UNMAPPED
+1723,Faded,faded,RESOLVED
+1724,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1724,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+1725,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1725,Sunscreen,sunscreen,RESOLVED
+1725,Frudia,frudia,RESOLVED
+1726,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1726,Tools &amp; Accessories,tools-accessories,RESOLVED
+1726,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1726,Accessories _make_up,unnamed,RESOLVED
+1727,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1727,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1727,Body Moisturizers,body-moisturizers,RESOLVED
+1727,Good Molecules,good-molecules,RESOLVED
+1728,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1728,Serums &amp; Treatment,serums-treatment,RESOLVED
+1728,Good Molecules,good-molecules,RESOLVED
+1729,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1729,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+1729,Good Molecules,good-molecules,RESOLVED
+1730,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1730,Moisturizers &amp; Cream,moisturizers,RESOLVED
+1730,Good Molecules,good-molecules,RESOLVED
+1731,Eyes,eyes,RESOLVED
+1731,Eyebrow Products,,UNMAPPED
+1731,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1731,Good Molecules,good-molecules,RESOLVED
+1732,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1732,Serums &amp; Treatment,serums-treatment,RESOLVED
+1732,Haruharu,haruharu,RESOLVED
+1733,Face,face,RESOLVED
+1733,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1733,Moisturizers &amp; Cream,moisturizers,RESOLVED
+1733,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+1733,Heimish,heimish,RESOLVED
+1734,Face,face,RESOLVED
+1734,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1734,Setting &amp; Finishing Spray,,UNMAPPED
+1734,Kiss Beauty,kiss-beauty,RESOLVED
+1735,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1735,Sunscreen,sunscreen,RESOLVED
+1735,La Roche-Posay,la-roche-posay,RESOLVED
+1736,Eyes,eyes,RESOLVED
+1736,Eyeliner,,UNMAPPED
+1736,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1736,Mabrook,mabrook,RESOLVED
+1737,Face,face,RESOLVED
+1737,Setting &amp; Finishing Spray,,UNMAPPED
+1737,Mario Badescu,mario-badescu,RESOLVED
+1738,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1738,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1738,Body Wash,body-wash,RESOLVED
+1738,Medix 5.5,medix-5-5,RESOLVED
+1739,Face,face,RESOLVED
+1739,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1739,Setting &amp; Finishing Spray,,UNMAPPED
+1739,Mehron,mehron,RESOLVED
+1745,Eyes,eyes,RESOLVED
+1745,Eyeliner,,UNMAPPED
+1745,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1745,Merak,merak,RESOLVED
+1746,Eyes,eyes,RESOLVED
+1746,Eyeliner,,UNMAPPED
+1746,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1746,Merak,merak,RESOLVED
+1750,Face,face,RESOLVED
+1750,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1750,Primers,,UNMAPPED
+1750,Msmetics,msmetics,RESOLVED
+1752,Face,face,RESOLVED
+1752,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1752,Setting &amp; Finishing Spray,,UNMAPPED
+1752,Msmetics,msmetics,RESOLVED
+1753,Face,face,RESOLVED
+1753,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1753,Setting &amp; Finishing Spray,,UNMAPPED
+1753,Msmetics,msmetics,RESOLVED
+1754,Face,face,RESOLVED
+1754,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1754,Setting &amp; Finishing Spray,,UNMAPPED
+1754,Msmetics,msmetics,RESOLVED
+1755,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1755,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1755,Body Lotion,body-lotion,RESOLVED
+1755,Naturium,naturium,RESOLVED
+1756,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1756,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1756,Body Moisturizers,body-moisturizers,RESOLVED
+1756,Naturium,naturium,RESOLVED
+1757,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1757,Body Wash,body-wash,RESOLVED
+1757,Naturium,naturium,RESOLVED
+1758,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1758,Body Wash,body-wash,RESOLVED
+1758,Naturium,naturium,RESOLVED
+1759,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1759,Body Wash,body-wash,RESOLVED
+1759,Naturium,naturium,RESOLVED
+1760,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1760,Body Lotion,body-lotion,RESOLVED
+1760,Naturium,naturium,RESOLVED
+1761,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1761,Body Wash,body-wash,RESOLVED
+1761,Naturium,naturium,RESOLVED
+1762,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1762,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+1762,Naturium,naturium,RESOLVED
+1763,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1763,Serums &amp; Treatment,serums-treatment,RESOLVED
+1763,Naturium,naturium,RESOLVED
+1770,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1770,Body Lotion,body-lotion,RESOLVED
+1770,Olay,olay,RESOLVED
+1771,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1771,Body Wash,body-wash,RESOLVED
+1771,Olay,olay,RESOLVED
+1772,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1772,Body Lotion,body-lotion,RESOLVED
+1772,Olay,olay,RESOLVED
+1773,Face,face,RESOLVED
+1773,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1773,Setting &amp; Finishing Spray,,UNMAPPED
+1773,Omaricode,omaricode,RESOLVED
+1774,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1774,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+1774,Panoxyl,panoxyl,RESOLVED
+1775,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1775,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+1775,Panoxyl,panoxyl,RESOLVED
+1776,Eyes,eyes,RESOLVED
+1776,Eyeliner,,UNMAPPED
+1776,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1776,Paula Beauty,paula-beauty,RESOLVED
+1777,Eyes,eyes,RESOLVED
+1777,Eyeliner,,UNMAPPED
+1777,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1777,Paula Beauty,paula-beauty,RESOLVED
+1778,Eyes,eyes,RESOLVED
+1778,Eyeliner,,UNMAPPED
+1778,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1778,Paula Beauty,paula-beauty,RESOLVED
+1780,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1780,Body Moisturizers,body-moisturizers,RESOLVED
+1780,Simple,simple,RESOLVED
+1793,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1793,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+1793,The Ordinary,the-ordinary,RESOLVED
+1794,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1794,Serums &amp; Treatment,serums-treatment,RESOLVED
+1794,The Ordinary,the-ordinary,RESOLVED
+1795,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1795,Serums &amp; Treatment,serums-treatment,RESOLVED
+1795,The Ordinary,the-ordinary,RESOLVED
+1796,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1796,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+1796,Tiam,tiam,RESOLVED
+1797,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1797,Serums &amp; Treatment,serums-treatment,RESOLVED
+1797,Tiam,tiam,RESOLVED
+1798,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1798,Tools &amp; Accessories,tools-accessories,RESOLVED
+1798,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+1798,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1799,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1799,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1799,Body Lotion,body-lotion,RESOLVED
+1799,Vaseline,vaseline,RESOLVED
+1800,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1800,Body Lotion,body-lotion,RESOLVED
+1800,Vaseline,vaseline,RESOLVED
+1801,Face,face,RESOLVED
+1801,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1801,Powder,,UNMAPPED
+1801,Vee Beauty,vee-beauty,RESOLVED
+1802,Face,face,RESOLVED
+1802,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1802,Powder,,UNMAPPED
+1802,Vee Beauty,vee-beauty,RESOLVED
+1803,Face,face,RESOLVED
+1803,Blushes,,UNMAPPED
+1803,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1803,Vee Beauty,vee-beauty,RESOLVED
+1804,Lips,lips,RESOLVED
+1804,Lip Pallet,,UNMAPPED
+1804,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1804,Vee Beauty,vee-beauty,RESOLVED
+1805,Face,face,RESOLVED
+1805,Concealer,,UNMAPPED
+1805,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1805,Vee Beauty,vee-beauty,RESOLVED
+1806,"Pigment, Glitter &amp; Base",,UNMAPPED
+1806,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1806,Viange,viange,RESOLVED
+1809,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1809,Tools &amp; Accessories,tools-accessories,RESOLVED
+1809,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1809,Yglam,yglam,RESOLVED
+1813,Lips,lips,RESOLVED
+1813,Lip Gloss,,UNMAPPED
+1813,Zaron,zaron,RESOLVED
+1814,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1814,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+1814,Zaron,zaron,RESOLVED
+1819,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1819,Body Oil,body-oil,RESOLVED
+1819,Dr Teal's,dr-teals,RESOLVED
+1820,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1820,Body Oil,body-oil,RESOLVED
+1820,Dr Teal's,dr-teals,RESOLVED
+1821,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+1821,Body Oil,body-oil,RESOLVED
+1821,Dr Teal's,dr-teals,RESOLVED
+2317,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2317,Body Lotion,body-lotion,RESOLVED
+2317,Alpha Skin Care,alpha-skin-care,RESOLVED
+2318,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2318,Body Wash,body-wash,RESOLVED
+2318,Alpha Skin Care,alpha-skin-care,RESOLVED
+2319,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2319,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+2319,Anua,anua,RESOLVED
+2320,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2320,Moisturizers &amp; Cream,moisturizers,RESOLVED
+2320,Anua,anua,RESOLVED
+2321,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2321,Serums &amp; Treatment,serums-treatment,RESOLVED
+2321,Anua,anua,RESOLVED
+2322,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2322,Body Oil,body-oil,RESOLVED
+2322,Aveeno,aveeno,RESOLVED
+2323,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2323,Moisturizers &amp; Cream,moisturizers,RESOLVED
+2323,Beauty of Joseon,beauty-of-joseon,RESOLVED
+2324,Lips,lips,RESOLVED
+2324,Becharm,becharm,RESOLVED
+2325,Eyes,eyes,RESOLVED
+2325,Eyelash Extensions &amp; Glue,,UNMAPPED
+2325,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2325,BOJ Cosmetics,boj-cosmetics,RESOLVED
+2326,Eyes,eyes,RESOLVED
+2326,Eyelash Extensions &amp; Glue,,UNMAPPED
+2326,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2326,BOJ Cosmetics,boj-cosmetics,RESOLVED
+2327,Eyes,eyes,RESOLVED
+2327,Eyelash Extensions &amp; Glue,,UNMAPPED
+2327,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2327,BOJ Cosmetics,boj-cosmetics,RESOLVED
+2328,Eyes,eyes,RESOLVED
+2328,Eyelash Extensions &amp; Glue,,UNMAPPED
+2328,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2328,BOJ Cosmetics,boj-cosmetics,RESOLVED
+2329,Eyes,eyes,RESOLVED
+2329,Eyelash Extensions &amp; Glue,,UNMAPPED
+2329,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2329,BOJ Cosmetics,boj-cosmetics,RESOLVED
+2332,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2332,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+2332,Cosrx,cosrx,RESOLVED
+2334,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2334,Body Wash,body-wash,RESOLVED
+2334,Dr Teal's,dr-teals,RESOLVED
+2335,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2335,Body Wash,body-wash,RESOLVED
+2335,Dr Teal's,dr-teals,RESOLVED
+2336,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2336,Body Wash,body-wash,RESOLVED
+2336,Dr Teal's,dr-teals,RESOLVED
+2337,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2337,Body Lotion,body-lotion,RESOLVED
+2337,Dr Teal's,dr-teals,RESOLVED
+2338,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2338,Moisturizers &amp; Cream,moisturizers,RESOLVED
+2338,Embryolisse,embryolisse,RESOLVED
+2339,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2339,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+2339,Good Molecules,good-molecules,RESOLVED
+2340,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2340,Serums &amp; Treatment,serums-treatment,RESOLVED
+2340,Good Molecules,good-molecules,RESOLVED
+2341,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2341,Serums &amp; Treatment,serums-treatment,RESOLVED
+2341,Good Molecules,good-molecules,RESOLVED
+2343,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2343,Serums &amp; Treatment,serums-treatment,RESOLVED
+2343,Kojivit,kojivit,RESOLVED
+2345,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2345,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+2345,Merak,merak,RESOLVED
+2346,Face,face,RESOLVED
+2346,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2346,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+2346,Merak,merak,RESOLVED
+2347,Face,face,RESOLVED
+2347,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2347,Msmetics,msmetics,RESOLVED
+2348,Face,face,RESOLVED
+2348,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2348,Merak,merak,RESOLVED
+2349,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2349,Body Scrubs,body-scrubs,RESOLVED
+2349,Naturium,naturium,RESOLVED
+2350,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2350,Body Oil,body-oil,RESOLVED
+2350,Naturium,naturium,RESOLVED
+2352,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2352,Serums &amp; Treatment,serums-treatment,RESOLVED
+2352,Naturium,naturium,RESOLVED
+2353,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2353,Sunscreen,sunscreen,RESOLVED
+2353,Naturium,naturium,RESOLVED
+2354,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2354,Serums &amp; Treatment,serums-treatment,RESOLVED
+2354,Naturium,naturium,RESOLVED
+2355,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2355,Serums &amp; Treatment,serums-treatment,RESOLVED
+2355,Naturium,naturium,RESOLVED
+2357,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2357,Serums &amp; Treatment,serums-treatment,RESOLVED
+2357,Dark spots &amp; Discoloration serums,,UNMAPPED
+2357,Nip + Fab,nip-fab,RESOLVED
+2358,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2358,Moisturizers &amp; Cream,moisturizers,RESOLVED
+2358,Panoxyl,panoxyl,RESOLVED
+2359,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2359,Serums &amp; Treatment,serums-treatment,RESOLVED
+2359,Panoxyl,panoxyl,RESOLVED
+2360,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2360,Serums &amp; Treatment,serums-treatment,RESOLVED
+2360,acne treatment,acne-treatment,RESOLVED
+2360,Panoxyl,panoxyl,RESOLVED
+2361,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2361,Serums &amp; Treatment,serums-treatment,RESOLVED
+2361,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+2361,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+2361,acne treatment,acne-treatment,RESOLVED
+2361,Panoxyl,panoxyl,RESOLVED
+2362,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2362,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2362,Serums &amp; Treatment,serums-treatment,RESOLVED
+2362,Body Lotion,body-lotion,RESOLVED
+2362,Palmer's,palmers,RESOLVED
+2363,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2363,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+2363,I’m From,im-from,RESOLVED
+2364,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2364,Moisturizers &amp; Cream,moisturizers,RESOLVED
+2364,Elf,elf,RESOLVED
+2366,Lips,lips,RESOLVED
+2366,Zaron,zaron,RESOLVED
+2367,Lips,lips,RESOLVED
+2367,Lip Gloss,,UNMAPPED
+2367,Absolute,absolute,RESOLVED
+2368,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2368,Tools &amp; Accessories,tools-accessories,RESOLVED
+2368,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+2368,B-Small,b-small,RESOLVED
+2369,Tools &amp; Accessories,tools-accessories,RESOLVED
+2369,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2369,Accessories _make_up,unnamed,RESOLVED
+2370,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2370,Tools &amp; Accessories,tools-accessories,RESOLVED
+2370,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2370,Accessories _make_up,unnamed,RESOLVED
+2371,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2371,Accessories _make_up,unnamed,RESOLVED
+2372,Tools &amp; Accessories,tools-accessories,RESOLVED
+2372,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2372,Accessories _make_up,unnamed,RESOLVED
+2376,Eyes,eyes,RESOLVED
+2376,Eyeshadow,,UNMAPPED
+2376,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2376,Ben Nye,ben-nye,RESOLVED
+2740,Lips,lips,RESOLVED
+2740,Lipbalm,,UNMAPPED
+2740,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2740,Laneige,laneige,RESOLVED
+2746,Eyes,eyes,RESOLVED
+2746,Eyeshadow,,UNMAPPED
+2746,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2746,Yglam,yglam,RESOLVED
+2751,Eyes,eyes,RESOLVED
+2751,Eyeshadow,,UNMAPPED
+2751,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+2751,Yglam,yglam,RESOLVED
+3571,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3571,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+3571,Tony Moly,tony-moly,RESOLVED
+3608,Lips,lips,RESOLVED
+3608,Lipbalm,,UNMAPPED
+3608,Frudia,frudia,RESOLVED
+3610,Moisturizers &amp; Cream,moisturizers,RESOLVED
+3610,Hand cream,,UNMAPPED
+3610,Frudia,frudia,RESOLVED
+3614,Moisturizers &amp; Cream,moisturizers,RESOLVED
+3614,Hand cream,,UNMAPPED
+3614,Frudia,frudia,RESOLVED
+3619,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3619,Moisturizers &amp; Cream,moisturizers,RESOLVED
+3619,illiyoon,illiyoon,RESOLVED
+3629,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3629,acne treatment,acne-treatment,RESOLVED
+3629,Cosrx,cosrx,RESOLVED
+3631,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3631,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+3631,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+3631,Cosrx,cosrx,RESOLVED
+3635,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3635,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3635,Body Moisturizers,body-moisturizers,RESOLVED
+3635,Body Oil,body-oil,RESOLVED
+3635,Vaseline,vaseline,RESOLVED
+3639,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3639,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3639,Body Wash,body-wash,RESOLVED
+3639,Olay,olay,RESOLVED
+3648,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3648,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3648,Body Moisturizers,body-moisturizers,RESOLVED
+3648,Body Lotion,body-lotion,RESOLVED
+3648,Olay,olay,RESOLVED
+3652,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3652,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3652,Body Wash,body-wash,RESOLVED
+3652,Olay,olay,RESOLVED
+3656,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3656,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3656,Body Moisturizers,body-moisturizers,RESOLVED
+3656,Body Lotion,body-lotion,RESOLVED
+3656,Olay,olay,RESOLVED
+3659,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3659,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3659,Moisturizers &amp; Cream,moisturizers,RESOLVED
+3659,Body Moisturizers,body-moisturizers,RESOLVED
+3659,Body Lotion,body-lotion,RESOLVED
+3659,Olay,olay,RESOLVED
+3661,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3661,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+3661,Body Scrubs,body-scrubs,RESOLVED
+3661,Body Wash,body-wash,RESOLVED
+3661,sponge,,UNMAPPED
+3661,Glove sponge,glove-sponge,RESOLVED
+3663,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3663,Sunscreen,sunscreen,RESOLVED
+3663,Biore,biore,RESOLVED
+3666,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3666,Sunscreen,sunscreen,RESOLVED
+3666,Kose Suncut,kose-suncut,RESOLVED
+3689,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3689,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3689,Serums &amp; Treatment,serums-treatment,RESOLVED
+3689,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+3689,Body Wash,body-wash,RESOLVED
+3689,Dark spots &amp; Discoloration serums,,UNMAPPED
+3689,Faded,faded,RESOLVED
+3693,Eyes,eyes,RESOLVED
+3693,Face,face,RESOLVED
+3693,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3693,Serums &amp; Treatment,serums-treatment,RESOLVED
+3693,Mask,face-mask,RESOLVED
+3693,Faded,faded,RESOLVED
+3698,Lips,lips,RESOLVED
+3698,Lipbalm,,UNMAPPED
+3698,Eos,eos,RESOLVED
+3840,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3840,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3840,Body Wash,body-wash,RESOLVED
+3840,Naturium,naturium,RESOLVED
+3843,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3843,Serums &amp; Treatment,serums-treatment,RESOLVED
+3843,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+3843,Naturium,naturium,RESOLVED
+3845,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3845,Serums &amp; Treatment,serums-treatment,RESOLVED
+3845,Naturium,naturium,RESOLVED
+3848,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3848,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+3848,Anua,anua,RESOLVED
+3851,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3851,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+3851,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+3851,Anua,anua,RESOLVED
+3853,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3853,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+3853,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+3853,Anua,anua,RESOLVED
+3856,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3856,Serums &amp; Treatment,serums-treatment,RESOLVED
+3856,Glow serum,,UNMAPPED
+3856,Dark spots &amp; Discoloration serums,,UNMAPPED
+3856,Anua,anua,RESOLVED
+3867,Moisturizers &amp; Cream,moisturizers,RESOLVED
+3867,Body Moisturizers,body-moisturizers,RESOLVED
+3867,Body Lotion,body-lotion,RESOLVED
+3867,Eos,eos,RESOLVED
+3869,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3869,Body Moisturizers,body-moisturizers,RESOLVED
+3869,Body Lotion,body-lotion,RESOLVED
+3869,Eos,eos,RESOLVED
+3871,Serums &amp; Treatment,serums-treatment,RESOLVED
+3871,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+3871,Roll On,roll-on,RESOLVED
+3871,Dark spots &amp; Discoloration serums,,UNMAPPED
+3871,Faded,faded,RESOLVED
+3876,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3876,Serums &amp; Treatment,serums-treatment,RESOLVED
+3876,Eye cream,,UNMAPPED
+3876,Advanced Clinicals,advanced-clinicals,RESOLVED
+3878,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3878,Moisturizers &amp; Cream,moisturizers,RESOLVED
+3878,Glow serum,,UNMAPPED
+3878,Dark spots &amp; Discoloration serums,,UNMAPPED
+3878,Advanced Clinicals,advanced-clinicals,RESOLVED
+3885,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3885,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+3885,Glow serum,,UNMAPPED
+3885,Dark spots &amp; Discoloration serums,,UNMAPPED
+3885,Advanced Clinicals,advanced-clinicals,RESOLVED
+3887,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+3887,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+3887,Dark spots &amp; Discoloration serums,,UNMAPPED
+3887,Glow spray,,UNMAPPED
+3887,Advanced Clinicals,advanced-clinicals,RESOLVED
+4013,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4013,Serums &amp; Treatment,serums-treatment,RESOLVED
+4013,Moisturizers &amp; Cream,moisturizers,RESOLVED
+4013,Facefacts,facefacts,RESOLVED
+4015,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4015,Serums &amp; Treatment,serums-treatment,RESOLVED
+4015,Glow serum,,UNMAPPED
+4015,Facefacts,facefacts,RESOLVED
+4020,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4020,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+4020,Facefacts,facefacts,RESOLVED
+4022,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4022,Serums &amp; Treatment,serums-treatment,RESOLVED
+4022,Facefacts,facefacts,RESOLVED
+4025,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4025,Body Lotion,body-lotion,RESOLVED
+4025,Baby wash &amp; lotion,baby-wash-lotion,RESOLVED
+4025,Dove,dove,RESOLVED
+4027,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4027,Body Wash,body-wash,RESOLVED
+4027,Dove,dove,RESOLVED
+4030,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4030,Body Wash,body-wash,RESOLVED
+4030,Dove,dove,RESOLVED
+4032,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4032,Body Wash,body-wash,RESOLVED
+4032,Dove,dove,RESOLVED
+4034,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4034,Body Wash,body-wash,RESOLVED
+4034,Dove,dove,RESOLVED
+4036,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4036,Body Wash,body-wash,RESOLVED
+4036,Dove,dove,RESOLVED
+4038,Face,face,RESOLVED
+4038,Bronzers &amp; Highlighters,,UNMAPPED
+4038,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4038,Sooo Pro,sooo-pro,RESOLVED
+4673,Eyeshadow,,UNMAPPED
+4673,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4673,Annies Beauty,annies-beauty,RESOLVED
+4680,Eyeshadow,,UNMAPPED
+4680,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4680,Annies Beauty,annies-beauty,RESOLVED
+4681,Blushes,,UNMAPPED
+4681,Highlight &amp; Contour,,UNMAPPED
+4681,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4681,Annies Beauty,annies-beauty,RESOLVED
+4682,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4682,Body Wash,body-wash,RESOLVED
+4682,Tree Hut,tree-hut,RESOLVED
+4697,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4697,Moisturizers &amp; Cream,moisturizers,RESOLVED
+4697,Body Lotion,body-lotion,RESOLVED
+4697,Body Butter,body-butter,RESOLVED
+4697,Tree Hut,tree-hut,RESOLVED
+4702,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4702,Body Lotion,body-lotion,RESOLVED
+4702,Baby wash &amp; lotion,baby-wash-lotion,RESOLVED
+4702,Aveeno,aveeno,RESOLVED
+4706,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4706,Moisturizers &amp; Cream,moisturizers,RESOLVED
+4706,Body Moisturizers,body-moisturizers,RESOLVED
+4706,Body Wash,body-wash,RESOLVED
+4706,Body Lotion,body-lotion,RESOLVED
+4706,Baby wash &amp; lotion,baby-wash-lotion,RESOLVED
+4706,Aveeno,aveeno,RESOLVED
+4711,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+4711,Serums &amp; Treatment,serums-treatment,RESOLVED
+4711,Glow serum,,UNMAPPED
+4711,Dark spots &amp; Discoloration serums,,UNMAPPED
+4711,Timeless,timeless,RESOLVED
+5103,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5103,Body Oil,body-oil,RESOLVED
+5103,Vaseline,vaseline,RESOLVED
+5110,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5110,Body Wash,body-wash,RESOLVED
+5110,Vaseline,vaseline,RESOLVED
+5111,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5111,Moisturizers &amp; Cream,moisturizers,RESOLVED
+5111,Cosrx,cosrx,RESOLVED
+5112,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5112,Serums &amp; Treatment,serums-treatment,RESOLVED
+5112,acne treatment,acne-treatment,RESOLVED
+5112,Zapzyt,zapzyt,RESOLVED
+5115,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5115,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+5115,Dark spots &amp; Discoloration serums,,UNMAPPED
+5115,Missha,missha,RESOLVED
+5119,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5119,Serums &amp; Treatment,serums-treatment,RESOLVED
+5119,Dark spots &amp; Discoloration serums,,UNMAPPED
+5119,Eye cream,,UNMAPPED
+5119,Mary &amp; May,mary-may,RESOLVED
+5355,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5355,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+5355,Tola Banks,tola-banks,RESOLVED
+5362,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5362,Setting &amp; Finishing Spray,,UNMAPPED
+5362,Flawless Ivy cosmetics,flawless-ivy-cosmetics,RESOLVED
+5911,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5911,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+5911,Dark spots &amp; Discoloration serums,,UNMAPPED
+5911,Good Molecules,good-molecules,RESOLVED
+5915,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5915,Serums &amp; Treatment,serums-treatment,RESOLVED
+5915,Nip + Fab,nip-fab,RESOLVED
+5918,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5918,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+5918,Dark spots &amp; Discoloration serums,,UNMAPPED
+5918,Nip + Fab,nip-fab,RESOLVED
+5921,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5921,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+5921,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+5921,Tiam,tiam,RESOLVED
+5935,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5935,Serums &amp; Treatment,serums-treatment,RESOLVED
+5935,Naturium,naturium,RESOLVED
+5940,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5940,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+5940,Naturium,naturium,RESOLVED
+5945,Concealer,,UNMAPPED
+5945,Highlight &amp; Contour,,UNMAPPED
+5945,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+5945,Sylvimak,sylvimak,RESOLVED
+5989,Body Scrubs,body-scrubs,RESOLVED
+5989,Tree Hut,tree-hut,RESOLVED
+6565,Moisturizers &amp; Cream,moisturizers,RESOLVED
+6565,Body Moisturizers,body-moisturizers,RESOLVED
+6565,Body Lotion,body-lotion,RESOLVED
+6565,Baby wash &amp; lotion,baby-wash-lotion,RESOLVED
+6565,Olay,olay,RESOLVED
+7309,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7309,Body Moisturizers,body-moisturizers,RESOLVED
+7309,Body Lotion,body-lotion,RESOLVED
+7309,Baby wash &amp; lotion,baby-wash-lotion,RESOLVED
+7309,Body Body,,UNMAPPED
+7309,Body Butter,body-butter,RESOLVED
+7309,Eos,eos,RESOLVED
+7323,Body Scrubs,body-scrubs,RESOLVED
+7323,Dr Teal's,dr-teals,RESOLVED
+7328,Bronzers &amp; Highlighters,,UNMAPPED
+7328,Highlight &amp; Contour,,UNMAPPED
+7328,Yglam,yglam,RESOLVED
+7515,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7515,Moisturizers &amp; Cream,moisturizers,RESOLVED
+7515,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+7515,Sunscreen,sunscreen,RESOLVED
+7515,VALENTINE COMBO DEALS,valentine-combo-deals,RESOLVED
+7515,Combo Deals,combo-deals,RESOLVED
+7534,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7534,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+7534,Sunscreen,sunscreen,RESOLVED
+7534,VALENTINE COMBO DEALS,valentine-combo-deals,RESOLVED
+7534,Combo Deals,combo-deals,RESOLVED
+7535,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7535,acne treatment,acne-treatment,RESOLVED
+7535,VALENTINE COMBO DEALS,valentine-combo-deals,RESOLVED
+7535,Combo Deals,combo-deals,RESOLVED
+7537,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7537,VALENTINE COMBO DEALS,valentine-combo-deals,RESOLVED
+7537,Combo Deals,combo-deals,RESOLVED
+7539,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7539,Body Lotion,body-lotion,RESOLVED
+7539,VALENTINE COMBO DEALS,valentine-combo-deals,RESOLVED
+7539,Combo Deals,combo-deals,RESOLVED
+7542,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7542,Moisturizers &amp; Cream,moisturizers,RESOLVED
+7542,Body Wash,body-wash,RESOLVED
+7542,Body Lotion,body-lotion,RESOLVED
+7542,Body Oil,body-oil,RESOLVED
+7542,VALENTINE COMBO DEALS,valentine-combo-deals,RESOLVED
+7542,Combo Deals,combo-deals,RESOLVED
+7543,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7543,Body Wash,body-wash,RESOLVED
+7543,Body Lotion,body-lotion,RESOLVED
+7543,Body Oil,body-oil,RESOLVED
+7543,VALENTINE COMBO DEALS,valentine-combo-deals,RESOLVED
+7543,BRIGHTENING,brightening,RESOLVED
+7543,Combo Deals,combo-deals,RESOLVED
+7544,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7544,Glow serum,,UNMAPPED
+7544,Dark spots &amp; Discoloration serums,,UNMAPPED
+7544,VALENTINE COMBO DEALS,valentine-combo-deals,RESOLVED
+7544,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+7544,BRIGHTENING,brightening,RESOLVED
+7544,Combo Deals,combo-deals,RESOLVED
+7880,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7880,Body Wash,body-wash,RESOLVED
+7880,Eos,eos,RESOLVED
+7885,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7885,Serums &amp; Treatment,serums-treatment,RESOLVED
+7885,Dark spots &amp; Discoloration serums,,UNMAPPED
+7885,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+7885,BRIGHTENING,brightening,RESOLVED
+7885,Naturium,naturium,RESOLVED
+7890,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7890,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+7890,Glow spray,,UNMAPPED
+7890,Tiam,tiam,RESOLVED
+7895,Eyes,eyes,RESOLVED
+7895,Eyeshadow,,UNMAPPED
+7895,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7895,Vee Beauty,vee-beauty,RESOLVED
+7899,Eyeshadow,,UNMAPPED
+7899,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7899,Vee Beauty,vee-beauty,RESOLVED
+7902,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7902,Body Wash,body-wash,RESOLVED
+7902,Eos,eos,RESOLVED
+7911,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+7911,Body Wash,body-wash,RESOLVED
+7911,Eos,eos,RESOLVED
+7912,Moisturizers &amp; Cream,moisturizers,RESOLVED
+7912,Hand cream,,UNMAPPED
+7912,Eos,eos,RESOLVED
+7920,Moisturizers &amp; Cream,moisturizers,RESOLVED
+7920,Body Moisturizers,body-moisturizers,RESOLVED
+7920,Body Lotion,body-lotion,RESOLVED
+7920,Body Butter,body-butter,RESOLVED
+7920,Eos,eos,RESOLVED
+7924,Body Scrubs,body-scrubs,RESOLVED
+7924,Tree Hut,tree-hut,RESOLVED
+8533,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+8533,Moisturizers &amp; Cream,moisturizers,RESOLVED
+8533,Dark spots &amp; Discoloration serums,,UNMAPPED
+8533,Eye cream,,UNMAPPED
+8533,BRIGHTENING,brightening,RESOLVED
+8533,Elastalift,elastalift,RESOLVED
+8618,Foundation,,UNMAPPED
+8618,Concealer,,UNMAPPED
+8618,Highlight &amp; Contour,,UNMAPPED
+8618,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+8618,Vee Beauty,vee-beauty,RESOLVED
+8628,Baby wash &amp; lotion,baby-wash-lotion,RESOLVED
+8628,Eucerin,eucerin,RESOLVED
+8634,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+8634,Body Wash,body-wash,RESOLVED
+8634,Olay,olay,RESOLVED
+8647,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+8647,Moisturizers &amp; Cream,moisturizers,RESOLVED
+8647,Body Moisturizers,body-moisturizers,RESOLVED
+8647,Body Lotion,body-lotion,RESOLVED
+8647,La Roche-Posay,la-roche-posay,RESOLVED
+8648,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+8648,Body Wash,body-wash,RESOLVED
+8648,Eos,eos,RESOLVED
+8653,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+8653,Body Oil,body-oil,RESOLVED
+8653,Eos,eos,RESOLVED
+8659,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+8659,Moisturizers &amp; Cream,moisturizers,RESOLVED
+8659,Body Moisturizers,body-moisturizers,RESOLVED
+8659,Body Lotion,body-lotion,RESOLVED
+8659,Body Butter,body-butter,RESOLVED
+8659,Eos,eos,RESOLVED
+8981,Face,face,RESOLVED
+8981,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+8981,Setting &amp; Finishing Spray,,UNMAPPED
+8981,Kiss Beauty,kiss-beauty,RESOLVED
+9187,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+9187,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+9187,Body Wash,body-wash,RESOLVED
+9187,Body Body,,UNMAPPED
+9187,BRIGHTENING,brightening,RESOLVED
+9187,Olay,olay,RESOLVED
+9678,Face,face,RESOLVED
+9678,Foundation,,UNMAPPED
+9678,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+9678,BM PRO,bm-pro,RESOLVED
+10216,Face,face,RESOLVED
+10216,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10216,Powder,,UNMAPPED
+10216,BM PRO,bm-pro,RESOLVED
+10415,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10415,Serums &amp; Treatment,serums-treatment,RESOLVED
+10415,acne treatment,acne-treatment,RESOLVED
+10415,Dark spots &amp; Discoloration serums,,UNMAPPED
+10415,Anua,anua,RESOLVED
+10419,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10419,Serums &amp; Treatment,serums-treatment,RESOLVED
+10419,Glow serum,,UNMAPPED
+10419,Dark spots &amp; Discoloration serums,,UNMAPPED
+10419,BRIGHTENING,brightening,RESOLVED
+10419,Jumiso,jumiso,RESOLVED
+10476,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10476,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10476,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+10476,Body Wash,body-wash,RESOLVED
+10476,Olay,olay,RESOLVED
+10500,Face,face,RESOLVED
+10500,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10500,Primers,,UNMAPPED
+10500,BM PRO,bm-pro,RESOLVED
+10504,Eyes,eyes,RESOLVED
+10504,Eyeliner,,UNMAPPED
+10504,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10504,BM PRO,bm-pro,RESOLVED
+10515,Eyes,eyes,RESOLVED
+10515,Mascara,,UNMAPPED
+10515,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10515,BM PRO,bm-pro,RESOLVED
+10518,Eyes,eyes,RESOLVED
+10518,Mascara,,UNMAPPED
+10518,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10518,BM PRO,bm-pro,RESOLVED
+10522,Eyes,eyes,RESOLVED
+10522,Eyebrow Products,,UNMAPPED
+10522,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10522,BM PRO,bm-pro,RESOLVED
+10524,Eyes,eyes,RESOLVED
+10524,Eyeliner,,UNMAPPED
+10524,Eye Pencil,,UNMAPPED
+10524,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10524,BM PRO,bm-pro,RESOLVED
+10532,Lips,lips,RESOLVED
+10532,Lipstick,,UNMAPPED
+10532,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10532,BM PRO,bm-pro,RESOLVED
+10559,Face,face,RESOLVED
+10559,Lips,lips,RESOLVED
+10559,Lip Gloss,,UNMAPPED
+10559,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10559,BM PRO,bm-pro,RESOLVED
+10581,Face,face,RESOLVED
+10581,Lips,lips,RESOLVED
+10581,Lip Gloss,,UNMAPPED
+10581,Lipstain,,UNMAPPED
+10581,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10581,BM PRO,bm-pro,RESOLVED
+10888,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+10888,Body Wash,body-wash,RESOLVED
+10888,Body Body,,UNMAPPED
+10888,Medix 5.5,medix-5-5,RESOLVED
+11227,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+11227,Body Wash,body-wash,RESOLVED
+11227,Olay,olay,RESOLVED
+11341,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+11341,Serums &amp; Treatment,serums-treatment,RESOLVED
+11341,Glow serum,,UNMAPPED
+11341,Dark spots &amp; Discoloration serums,,UNMAPPED
+11341,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+11341,BRIGHTENING,brightening,RESOLVED
+11341,NINELESS,nineless,RESOLVED
+11348,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+11348,Serums &amp; Treatment,serums-treatment,RESOLVED
+11348,acne treatment,acne-treatment,RESOLVED
+11348,Dark spots &amp; Discoloration serums,,UNMAPPED
+11348,NINELESS,nineless,RESOLVED
+11698,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+11698,Body Moisturizers,body-moisturizers,RESOLVED
+11698,Body Lotion,body-lotion,RESOLVED
+11698,Body Body,,UNMAPPED
+11698,BRIGHTENING,brightening,RESOLVED
+11698,Olay,olay,RESOLVED
+11897,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+11897,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+11897,Viccabel,viccabel,RESOLVED
+11901,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+11901,Serums &amp; Treatment,serums-treatment,RESOLVED
+11901,Glow serum,,UNMAPPED
+11901,Dark spots &amp; Discoloration serums,,UNMAPPED
+11901,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+11901,BRIGHTENING,brightening,RESOLVED
+11901,NINELESS,nineless,RESOLVED
+12980,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+12980,Body Moisturizers,body-moisturizers,RESOLVED
+12980,Body Lotion,body-lotion,RESOLVED
+12980,Body Body,,UNMAPPED
+12980,Body Butter,body-butter,RESOLVED
+12980,Eos,eos,RESOLVED
+13301,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13301,Sunscreen,sunscreen,RESOLVED
+13301,Body Wash,body-wash,RESOLVED
+13301,Body Lotion,body-lotion,RESOLVED
+13301,Dark spots &amp; Discoloration serums,,UNMAPPED
+13301,Body Body,,UNMAPPED
+13301,TRADEFAIR COMBO DEAL,,UNMAPPED
+13301,Combo Deals,combo-deals,RESOLVED
+13301,Zaron,zaron,RESOLVED
+13314,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13314,Serums &amp; Treatment,serums-treatment,RESOLVED
+13314,Moisturizers &amp; Cream,moisturizers,RESOLVED
+13314,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+13314,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+13314,Sunscreen,sunscreen,RESOLVED
+13314,Glow serum,,UNMAPPED
+13314,Dark spots &amp; Discoloration serums,,UNMAPPED
+13314,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+13314,BRIGHTENING,brightening,RESOLVED
+13314,TRADEFAIR COMBO DEAL,,UNMAPPED
+13314,Combo Deals,combo-deals,RESOLVED
+13314,NINELESS,nineless,RESOLVED
+13317,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13317,Body Wash,body-wash,RESOLVED
+13317,Body Lotion,body-lotion,RESOLVED
+13317,Body Body,,UNMAPPED
+13317,BRIGHTENING,brightening,RESOLVED
+13317,TRADEFAIR COMBO DEAL,,UNMAPPED
+13317,Combo Deals,combo-deals,RESOLVED
+13317,Medix 5.5,medix-5-5,RESOLVED
+13318,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13318,Serums &amp; Treatment,serums-treatment,RESOLVED
+13318,Sunscreen,sunscreen,RESOLVED
+13318,acne treatment,acne-treatment,RESOLVED
+13318,TRADEFAIR COMBO DEAL,,UNMAPPED
+13318,Combo Deals,combo-deals,RESOLVED
+13318,Panoxyl,panoxyl,RESOLVED
+13319,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13319,Serums &amp; Treatment,serums-treatment,RESOLVED
+13319,Sunscreen,sunscreen,RESOLVED
+13319,acne treatment,acne-treatment,RESOLVED
+13319,TRADEFAIR COMBO DEAL,,UNMAPPED
+13319,Combo Deals,combo-deals,RESOLVED
+13319,Panoxyl,panoxyl,RESOLVED
+13321,Body Moisturizers,body-moisturizers,RESOLVED
+13321,Body Lotion,body-lotion,RESOLVED
+13321,Body Body,,UNMAPPED
+13321,TRADEFAIR COMBO DEAL,,UNMAPPED
+13321,Eos,eos,RESOLVED
+13323,Serums &amp; Treatment,serums-treatment,RESOLVED
+13323,Dark spots &amp; Discoloration serums,,UNMAPPED
+13323,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+13323,BRIGHTENING,brightening,RESOLVED
+13323,TRADEFAIR COMBO DEAL,,UNMAPPED
+13323,Combo Deals,combo-deals,RESOLVED
+13323,Good Molecules,good-molecules,RESOLVED
+13324,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13324,Serums &amp; Treatment,serums-treatment,RESOLVED
+13324,Moisturizers &amp; Cream,moisturizers,RESOLVED
+13324,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+13324,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+13324,Sunscreen,sunscreen,RESOLVED
+13324,Glow serum,,UNMAPPED
+13324,Dark spots &amp; Discoloration serums,,UNMAPPED
+13324,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+13324,BRIGHTENING,brightening,RESOLVED
+13324,TRADEFAIR COMBO DEAL,,UNMAPPED
+13324,Combo Deals,combo-deals,RESOLVED
+13324,Acwell,acwell,RESOLVED
+13326,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13326,Serums &amp; Treatment,serums-treatment,RESOLVED
+13326,Moisturizers &amp; Cream,moisturizers,RESOLVED
+13326,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+13326,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+13326,Sunscreen,sunscreen,RESOLVED
+13326,Glow serum,,UNMAPPED
+13326,Dark spots &amp; Discoloration serums,,UNMAPPED
+13326,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+13326,BRIGHTENING,brightening,RESOLVED
+13326,TRADEFAIR COMBO DEAL,,UNMAPPED
+13326,Combo Deals,combo-deals,RESOLVED
+13326,Touch,touch,RESOLVED
+13327,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13327,Body Moisturizers,body-moisturizers,RESOLVED
+13327,Body Wash,body-wash,RESOLVED
+13327,Body Lotion,body-lotion,RESOLVED
+13327,Body Body,,UNMAPPED
+13327,TRADEFAIR COMBO DEAL,,UNMAPPED
+13327,Olay,olay,RESOLVED
+13887,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13887,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+13887,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+13887,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+13887,BRIGHTENING,brightening,RESOLVED
+13887,Olay,olay,RESOLVED
+13895,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13895,Moisturizers &amp; Cream,moisturizers,RESOLVED
+13895,BRIGHTENING,brightening,RESOLVED
+13895,Zaron,zaron,RESOLVED
+13901,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13901,Serums &amp; Treatment,serums-treatment,RESOLVED
+13901,Glow serum,,UNMAPPED
+13901,Dark spots &amp; Discoloration serums,,UNMAPPED
+13901,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+13901,BRIGHTENING,brightening,RESOLVED
+13901,Zaron,zaron,RESOLVED
+13903,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13903,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+13903,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+13903,Dark spots &amp; Discoloration serums,,UNMAPPED
+13903,Zaron,zaron,RESOLVED
+13908,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13908,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+13908,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+13908,acne treatment,acne-treatment,RESOLVED
+13908,Zaron,zaron,RESOLVED
+13917,Eyes,eyes,RESOLVED
+13917,Face,face,RESOLVED
+13917,Eyeshadow,,UNMAPPED
+13917,"Pigment, Glitter &amp; Base",,UNMAPPED
+13917,Blushes,,UNMAPPED
+13917,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+13917,Annies Beauty,annies-beauty,RESOLVED
+14352,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+14352,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+14352,Dark spots &amp; Discoloration serums,,UNMAPPED
+14352,Glow spray,,UNMAPPED
+14352,BRIGHTENING,brightening,RESOLVED
+14352,SKIN1004,skin1004,RESOLVED
+15129,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+15129,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+15129,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+15129,Body Lotion,body-lotion,RESOLVED
+15129,Dark spots &amp; Discoloration serums,,UNMAPPED
+15129,Body Body,,UNMAPPED
+15129,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+15129,BRIGHTENING,brightening,RESOLVED
+15129,Olay,olay,RESOLVED
+15249,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+15249,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+15249,Body Wash,body-wash,RESOLVED
+15249,acne treatment,acne-treatment,RESOLVED
+15249,La Roche-Posay,la-roche-posay,RESOLVED
+15253,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+15253,Body Wash,body-wash,RESOLVED
+15253,Baby wash &amp; lotion,baby-wash-lotion,RESOLVED
+15253,Body Body,,UNMAPPED
+15253,La Roche-Posay,la-roche-posay,RESOLVED
+15466,Uncategorized,,UNMAPPED
+15466,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+15466,Serums &amp; Treatment,serums-treatment,RESOLVED
+15466,Glow serum,,UNMAPPED
+15466,Dark spots &amp; Discoloration serums,,UNMAPPED
+15466,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+15466,BRIGHTENING,brightening,RESOLVED
+15466,25 Pskyn,25-pskyn,RESOLVED
+15467,Body Mist,body-mist,RESOLVED
+15467,Eos,eos,RESOLVED
+15752,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+15752,Serums &amp; Treatment,serums-treatment,RESOLVED
+15752,acne treatment,acne-treatment,RESOLVED
+15752,25 Pskyn,25-pskyn,RESOLVED
+15865,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+15865,Moisturizers &amp; Cream,moisturizers,RESOLVED
+15865,Embryolisse,embryolisse,RESOLVED
+16331,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+16331,Serums &amp; Treatment,serums-treatment,RESOLVED
+16331,Dark spots &amp; Discoloration serums,,UNMAPPED
+16331,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+16331,BRIGHTENING,brightening,RESOLVED
+16331,Bolden,bolden,RESOLVED
+16438,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+16438,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+16438,Bolden,bolden,RESOLVED
+16441,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+16441,Moisturizers &amp; Cream,moisturizers,RESOLVED
+16441,Sunscreen,sunscreen,RESOLVED
+16441,BRIGHTENING,brightening,RESOLVED
+16441,Bolden,bolden,RESOLVED
+16443,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+16443,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+16443,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+16443,BRIGHTENING,brightening,RESOLVED
+16443,Bolden,bolden,RESOLVED
+16445,Face,face,RESOLVED
+16445,Foundation,,UNMAPPED
+16445,Highlight &amp; Contour,,UNMAPPED
+16445,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+16445,Powder,,UNMAPPED
+16445,Sylvimak,sylvimak,RESOLVED
+16460,Powder,,UNMAPPED
+16460,Hegai &amp; Esther,hegai-esther,RESOLVED
+16464,Lip Gloss,,UNMAPPED
+16464,Hegai &amp; Esther,hegai-esther,RESOLVED
+16467,Lipstick,,UNMAPPED
+16467,Hegai &amp; Esther,hegai-esther,RESOLVED
+16482,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+16482,Moisturizers &amp; Cream,moisturizers,RESOLVED
+16482,Body Moisturizers,body-moisturizers,RESOLVED
+16482,Body Lotion,body-lotion,RESOLVED
+16482,Body Body,,UNMAPPED
+16482,Body Butter,body-butter,RESOLVED
+16482,Body Mist,body-mist,RESOLVED
+16482,Eos,eos,RESOLVED
+16519,Powder,,UNMAPPED
+16519,Hegai &amp; Esther,hegai-esther,RESOLVED
+16529,Foundation,,UNMAPPED
+16529,Hegai &amp; Esther,hegai-esther,RESOLVED
+16532,Lipstick,,UNMAPPED
+16532,Hegai &amp; Esther,hegai-esther,RESOLVED
+16543,Concealer,,UNMAPPED
+16543,Hegai &amp; Esther,hegai-esther,RESOLVED
+16555,Lip Pencil,,UNMAPPED
+16555,Hegai &amp; Esther,hegai-esther,RESOLVED
+16557,Highlight &amp; Contour,,UNMAPPED
+16557,Hegai &amp; Esther,hegai-esther,RESOLVED
+16820,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+16820,Moisturizers &amp; Cream,moisturizers,RESOLVED
+16820,Body Moisturizers,body-moisturizers,RESOLVED
+16820,Body Lotion,body-lotion,RESOLVED
+16820,Body Body,,UNMAPPED
+16820,Eucerin,eucerin,RESOLVED
+16821,Body Lotion,body-lotion,RESOLVED
+16821,Eucerin,eucerin,RESOLVED
+16825,Moisturizers &amp; Cream,moisturizers,RESOLVED
+16825,Body Moisturizers,body-moisturizers,RESOLVED
+16825,Body Lotion,body-lotion,RESOLVED
+16825,Eucerin,eucerin,RESOLVED
+16966,Sunscreen,sunscreen,RESOLVED
+16966,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+16966,25 Pskyn,25-pskyn,RESOLVED
+16969,Blushes,,UNMAPPED
+16969,Yglam,yglam,RESOLVED
+16971,Blushes,,UNMAPPED
+16971,Yglam,yglam,RESOLVED
+17476,Moisturizers &amp; Cream,moisturizers,RESOLVED
+17476,Hand cream,,UNMAPPED
+17476,Vaseline,vaseline,RESOLVED
+17478,Body Oil,body-oil,RESOLVED
+17478,Vaseline,vaseline,RESOLVED
+17487,Body Moisturizers,body-moisturizers,RESOLVED
+17487,Body Lotion,body-lotion,RESOLVED
+17487,Body Body,,UNMAPPED
+17487,Olay,olay,RESOLVED
+17491,Lipbalm,,UNMAPPED
+17491,Aquaphor,aquaphor,RESOLVED
+17494,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+17494,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+17494,acne treatment,acne-treatment,RESOLVED
+17494,Neutrogena,neutrogena,RESOLVED
+17496,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+17496,Neutrogena,neutrogena,RESOLVED
+17503,Body Oil,body-oil,RESOLVED
+17503,Eos,eos,RESOLVED
+17510,Mask,face-mask,RESOLVED
+17510,Good Molecules,good-molecules,RESOLVED
+17601,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+17601,Neutrogena,neutrogena,RESOLVED
+17663,Sunscreen,sunscreen,RESOLVED
+17663,Sun bum,sun-bum,RESOLVED
+17665,Uncategorized,,UNMAPPED
+17860,Face,face,RESOLVED
+17860,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+17860,Tools &amp; Accessories,tools-accessories,RESOLVED
+17860,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
+17860,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+17860,Tola Banks,tola-banks,RESOLVED
+18359,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18359,Serums &amp; Treatment,serums-treatment,RESOLVED
+18359,BRIGHTENING,brightening,RESOLVED
+18359,SKIN1004,skin1004,RESOLVED
+18407,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18407,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18407,Body Wash,body-wash,RESOLVED
+18407,acne treatment,acne-treatment,RESOLVED
+18407,Body Body,,UNMAPPED
+18407,Olay,olay,RESOLVED
+18477,acne treatment,acne-treatment,RESOLVED
+18477,Panoxyl,panoxyl,RESOLVED
+18482,acne treatment,acne-treatment,RESOLVED
+18482,Panoxyl,panoxyl,RESOLVED
+18488,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+18488,Cosrx,cosrx,RESOLVED
+18632,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18632,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+18632,Dark spots &amp; Discoloration serums,,UNMAPPED
+18632,Glow spray,,UNMAPPED
+18632,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+18632,BRIGHTENING,brightening,RESOLVED
+18632,Tiam,tiam,RESOLVED
+18636,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18636,Serums &amp; Treatment,serums-treatment,RESOLVED
+18636,Moisturizers &amp; Cream,moisturizers,RESOLVED
+18636,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+18636,BRIGHTENING,brightening,RESOLVED
+18636,Tiam,tiam,RESOLVED
+18638,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+18638,Tiam,tiam,RESOLVED
+18642,Moisturizers &amp; Cream,moisturizers,RESOLVED
+18642,Dr Althea,dr-althea,RESOLVED
+18645,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18645,Serums &amp; Treatment,serums-treatment,RESOLVED
+18645,Glow serum,,UNMAPPED
+18645,Dark spots &amp; Discoloration serums,,UNMAPPED
+18645,BRIGHTENING,brightening,RESOLVED
+18645,Dr Althea,dr-althea,RESOLVED
+18649,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18649,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+18649,25 Pskyn,25-pskyn,RESOLVED
+18735,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+18735,acne treatment,acne-treatment,RESOLVED
+18735,Cerave,cerave,RESOLVED
+18738,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+18738,Cerave,cerave,RESOLVED
+18742,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+18742,Cerave,cerave,RESOLVED
+18748,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18748,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18748,Moisturizers &amp; Cream,moisturizers,RESOLVED
+18748,Body Moisturizers,body-moisturizers,RESOLVED
+18748,Body Lotion,body-lotion,RESOLVED
+18748,Palmer's,palmers,RESOLVED
+18752,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18752,Serums &amp; Treatment,serums-treatment,RESOLVED
+18752,ROC,roc,RESOLVED
+18756,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18756,Serums &amp; Treatment,serums-treatment,RESOLVED
+18756,acne treatment,acne-treatment,RESOLVED
+18756,Differin,differin,RESOLVED
+18834,Serums &amp; Treatment,serums-treatment,RESOLVED
+18834,acne treatment,acne-treatment,RESOLVED
+18834,Cerave,cerave,RESOLVED
+18838,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+18838,acne treatment,acne-treatment,RESOLVED
+18838,Cerave,cerave,RESOLVED
+18843,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18843,Body Moisturizers,body-moisturizers,RESOLVED
+18843,Body Lotion,body-lotion,RESOLVED
+18843,Body Body,,UNMAPPED
+18843,Body Butter,body-butter,RESOLVED
+18843,Olay,olay,RESOLVED
+18893,Eyeshadow,,UNMAPPED
+18893,Hegai &amp; Esther,hegai-esther,RESOLVED
+18897,Eyes,eyes,RESOLVED
+18897,Eyeshadow,,UNMAPPED
+18897,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+18897,Hegai &amp; Esther,hegai-esther,RESOLVED
+19224,Moisturizers &amp; Cream,moisturizers,RESOLVED
+19224,Isntree,isntree,RESOLVED
+19572,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+19572,Serums &amp; Treatment,serums-treatment,RESOLVED
+19572,Glow serum,,UNMAPPED
+19572,Dark spots &amp; Discoloration serums,,UNMAPPED
+19572,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+19572,BRIGHTENING,brightening,RESOLVED
+19572,25 Pskyn,25-pskyn,RESOLVED
+19575,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+19575,Serums &amp; Treatment,serums-treatment,RESOLVED
+19575,Glow serum,,UNMAPPED
+19575,Dark spots &amp; Discoloration serums,,UNMAPPED
+19575,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+19575,BRIGHTENING,brightening,RESOLVED
+19575,25 Pskyn,25-pskyn,RESOLVED
+19579,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+19579,acne treatment,acne-treatment,RESOLVED
+19579,25 Pskyn,25-pskyn,RESOLVED
+19653,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+19653,Olay,olay,RESOLVED
+19656,Body Wash,body-wash,RESOLVED
+19656,Olay,olay,RESOLVED
+19658,Blushes,,UNMAPPED
+19658,Annies Beauty,annies-beauty,RESOLVED
+19738,Eyeliner,,UNMAPPED
+19738,Zaron,zaron,RESOLVED
+19754,Eyelash Extensions &amp; Glue,,UNMAPPED
+19754,Msmetics,msmetics,RESOLVED
+19756,Eyelash Extensions &amp; Glue,,UNMAPPED
+19756,Msmetics,msmetics,RESOLVED
+19858,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+19858,La Roche-Posay,la-roche-posay,RESOLVED
+19860,Body Oil,body-oil,RESOLVED
+19860,Palmer's,palmers,RESOLVED
+19863,Body Oil,body-oil,RESOLVED
+19863,Palmer's,palmers,RESOLVED
+20187,acne treatment,acne-treatment,RESOLVED
+20187,Panoxyl,panoxyl,RESOLVED
+20525,Foundation,,UNMAPPED
+20525,Beauty by AD,beauty-by-ad,RESOLVED
+20539,Lip oil,,UNMAPPED
+20539,Beauty by AD,beauty-by-ad,RESOLVED
+20546,Lip Gloss,,UNMAPPED
+20546,Beauty by AD,beauty-by-ad,RESOLVED
+20568,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+20568,Setting &amp; Finishing Spray,,UNMAPPED
+20568,Primers,,UNMAPPED
+20568,Tehila,tehila,RESOLVED
+20595,Lips,lips,RESOLVED
+20595,Lip Gloss,,UNMAPPED
+20595,Tola Banks,tola-banks,RESOLVED
+20616,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+20616,Moisturizers &amp; Cream,moisturizers,RESOLVED
+20616,Blossom,blossom,RESOLVED
+20622,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+20622,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+20622,Uncover,uncover,RESOLVED
+20625,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+20625,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+20625,Uncover,uncover,RESOLVED
+20627,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
+20627,Uncover,uncover,RESOLVED
+20632,Moisturizers &amp; Cream,moisturizers,RESOLVED
+20632,Uncover,uncover,RESOLVED
+20634,Sunscreen,sunscreen,RESOLVED
+20634,Uncover,uncover,RESOLVED
+20637,Sunscreen,sunscreen,RESOLVED
+20647,Beauty Tools,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+20770,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+20770,Classic Makeup,classic-makeup,RESOLVED
+20773,Lip Pallet,,UNMAPPED
+20773,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+21659,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+21659,Body Oil,body-oil,RESOLVED
+21659,Body Body,,UNMAPPED
+21659,Zaron,zaron,RESOLVED
+21820,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+21820,Body Wash,body-wash,RESOLVED
+21820,Eos,eos,RESOLVED
+21822,Moisturizers &amp; Cream,moisturizers,RESOLVED
+21822,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+21822,Alpha Skin Care,alpha-skin-care,RESOLVED
+21824,Serums &amp; Treatment,serums-treatment,RESOLVED
+21824,Alpha Skin Care,alpha-skin-care,RESOLVED
+21827,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+21827,Moisturizers &amp; Cream,moisturizers,RESOLVED
+21827,Body Moisturizers,body-moisturizers,RESOLVED
+21827,Body Lotion,body-lotion,RESOLVED
+21827,BRIGHTENING,brightening,RESOLVED
+21827,Topicrem,topicrem,RESOLVED
+21830,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+21830,Serums &amp; Treatment,serums-treatment,RESOLVED
+21830,Body Lotion,body-lotion,RESOLVED
+21830,Naturium,naturium,RESOLVED
+21854,Serums &amp; Treatment,serums-treatment,RESOLVED
+21854,Anua,anua,RESOLVED
+21856,Moisturizers &amp; Cream,moisturizers,RESOLVED
+21856,Good Molecules,good-molecules,RESOLVED
+21858,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+21858,Acwell,acwell,RESOLVED
+21860,Moisturizers &amp; Cream,moisturizers,RESOLVED
+21860,Body Moisturizers,body-moisturizers,RESOLVED
+21860,Topicrem,topicrem,RESOLVED
+21973,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
+21973,Paula’s choice,paulas-choice,RESOLVED
+21976,Serums &amp; Treatment,serums-treatment,RESOLVED
+21976,Moisturizers &amp; Cream,moisturizers,RESOLVED
+21976,acne treatment,acne-treatment,RESOLVED
+21976,Good Molecules,good-molecules,RESOLVED
+23464,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+23464,Moisturizers &amp; Cream,moisturizers,RESOLVED
+23464,Body Moisturizers,body-moisturizers,RESOLVED
+23464,La Roche-Posay,la-roche-posay,RESOLVED
+23521,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+23521,Serums &amp; Treatment,serums-treatment,RESOLVED
+23521,BRIGHTENING,brightening,RESOLVED
+23521,Uncover,uncover,RESOLVED
+23868,Moisturizers &amp; Cream,moisturizers,RESOLVED
+23868,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
+23868,Anua,anua,RESOLVED
+23957,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+23957,Body Wash,body-wash,RESOLVED
+23957,Body Lotion,body-lotion,RESOLVED
+23957,Body Body,,UNMAPPED
+23957,BRIGHTENING,brightening,RESOLVED
+23957,TRADEFAIR COMBO DEAL,,UNMAPPED
+23957,Combo Deals,combo-deals,RESOLVED
+23957,Medix 5.5,medix-5-5,RESOLVED
+24052,Moisturizers &amp; Cream,moisturizers,RESOLVED
+24052,25 Pskyn,25-pskyn,RESOLVED
+24654,Moisturizers &amp; Cream,moisturizers,RESOLVED
+24654,Acwell,acwell,RESOLVED
+25089,TRADEFAIR COMBO DEAL,,UNMAPPED
+25092,TRADEFAIR COMBO DEAL,,UNMAPPED
+25092,Eos,eos,RESOLVED
+25095,TRADEFAIR COMBO DEAL,,UNMAPPED
+25095,Skin by Zaron,skin-by-zaron,RESOLVED
+25099,TRADEFAIR COMBO DEAL,,UNMAPPED
+25099,Olay,olay,RESOLVED
+25109,TRADEFAIR COMBO DEAL,,UNMAPPED
+25109,25 Pskyn,25-pskyn,RESOLVED
+25111,TRADEFAIR COMBO DEAL,,UNMAPPED
+25111,25 Pskyn,25-pskyn,RESOLVED
+25113,TRADEFAIR COMBO DEAL,,UNMAPPED
+25113,25 Pskyn,25-pskyn,RESOLVED
+25115,TRADEFAIR COMBO DEAL,,UNMAPPED
+25115,25 Pskyn,25-pskyn,RESOLVED
+25117,TRADEFAIR COMBO DEAL,,UNMAPPED
+25117,25 Pskyn,25-pskyn,RESOLVED
+25119,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+25119,Sunscreen,sunscreen,RESOLVED
+25119,Skin by Zaron,skin-by-zaron,RESOLVED
+25122,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+25122,Serums &amp; Treatment,serums-treatment,RESOLVED
+25122,acne treatment,acne-treatment,RESOLVED
+25122,Dark spots &amp; Discoloration serums,,UNMAPPED
+25122,Differin,differin,RESOLVED
+25129,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+25129,Serums &amp; Treatment,serums-treatment,RESOLVED
+25129,acne treatment,acne-treatment,RESOLVED
+25129,Dark spots &amp; Discoloration serums,,UNMAPPED
+25129,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
+25129,Differin,differin,RESOLVED
+25217,Mascara,,UNMAPPED
+25217,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+25217,Beauty Line by Didi,beauty-line-by-didi,RESOLVED
+25219,Eyeshadow,,UNMAPPED
+25219,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
+25219,Sylvimak,sylvimak,RESOLVED
+25366,Body Lotion,body-lotion,RESOLVED
+25366,Eos,eos,RESOLVED
+25371,Body Lotion,body-lotion,RESOLVED
+25371,Eos,eos,RESOLVED
+25372,Body Butter,body-butter,RESOLVED
+25372,Eos,eos,RESOLVED
+25374,Body Butter,body-butter,RESOLVED
+25374,Eos,eos,RESOLVED

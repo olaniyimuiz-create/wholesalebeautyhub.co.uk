@@ -1,0 +1,12 @@
+metric,value
+total_products_in_source,611
+published_products,519
+draft_or_other_status_products,92
+total_variants,497
+products_quarantined_blocking,0
+data_quality_issues_total,382
+data_quality_issues_blocking,0
+distinct_collections_referenced_and_resolved,151
+distinct_categories_or_brands_unmapped,31
+products_with_zero_images,4
+products_with_avif_featured_image,9

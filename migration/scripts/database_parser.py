@@ -35,6 +35,22 @@ PRODUCT_META_KEYS = {
 
 CUSTOMER_META_KEYS = {'wp_capabilities'}
 
+# ADR-007 (approved): these two `pwb-brand` terms are mislabeled seasonal
+# promo bundles, not real brands - excluded from Vendor entirely. Their
+# products keep whatever other real brand data they have (none, in this
+# catalog); reclassifying them as manual Shopify collections is Phase 9's
+# job, not this parser's.
+EXCLUDED_BRAND_NAMES = {'VALENTINE COMBO DEALS', 'TRADEFAIR COMBO DEALS'}
+
+# Same brand, three misspellings in the source data (risk #15) - not an
+# ambiguous business call, "Topicrem" is the real, verifiable brand name.
+# Unlike EXCLUDED_BRAND_NAMES this doesn't remove a vendor, it normalizes
+# one, so it can't accidentally leave a product with no vendor at all.
+BRAND_NAME_CORRECTIONS = {
+    'Tropicrem': 'Topicrem',
+    'Topicream': 'Topicrem',
+}
+
 TARGET_TABLES = {
     'wp_posts', 'wp_postmeta', 'wp_terms', 'wp_term_taxonomy',
     'wp_term_relationships', 'wp_wc_product_meta_lookup',
@@ -103,6 +119,7 @@ def load_dump(path):
             term_taxonomy[int(row['term_taxonomy_id'])] = {
                 'term_id': int(row['term_id']),
                 'taxonomy': row['taxonomy'],
+                'parent': int(row['parent']),
             }
 
         elif table == 'wp_term_relationships':
@@ -186,6 +203,36 @@ def build_products(data):
                     names.append(term['name'])
         return names
 
+    # term_id -> parent term_id, scoped to product_cat, for computing category
+    # depth (ADR-009: Product Type = the most specific assigned category).
+    cat_parent_by_term_id = {
+        tt['term_id']: tt['parent'] for tt in term_taxonomy.values() if tt['taxonomy'] == 'product_cat'
+    }
+
+    def category_depth(term_id):
+        depth = 0
+        seen = {term_id}
+        parent = cat_parent_by_term_id.get(term_id, 0)
+        while parent and parent not in seen:
+            depth += 1
+            seen.add(parent)
+            parent = cat_parent_by_term_id.get(parent, 0)
+        return depth
+
+    def most_specific_category_for(post_id):
+        best_name, best_depth = '', -1
+        for ttid in term_relationships.get(post_id, []):
+            tt = term_taxonomy.get(ttid)
+            if not tt or tt['taxonomy'] != 'product_cat':
+                continue
+            term = terms.get(tt['term_id'])
+            if not term:
+                continue
+            depth = category_depth(tt['term_id'])
+            if depth > best_depth:
+                best_name, best_depth = term['name'], depth
+        return best_name
+
     variations_by_parent = {}
     for post in posts.values():
         if post['post_type'] == 'product_variation':
@@ -201,6 +248,27 @@ def build_products(data):
         except (TypeError, ValueError):
             return None
 
+    def slugify(text):
+        import re
+        text = re.sub(r'[^a-z0-9]+', '-', (text or '').lower()).strip('-')
+        return text or 'product'
+
+    used_handles = set()
+
+    def unique_handle(post_name, title):
+        # Draft products can have an empty post_name (WordPress never
+        # generates a slug until first publish) - found via Phase 9's
+        # dry-run duplicate-handle check (12 products, all drafts). Falls
+        # back to a slugified title, deterministic and unique.
+        base = post_name or slugify(title)
+        candidate = base
+        n = 2
+        while candidate in used_handles:
+            candidate = f'{base}-{n}'
+            n += 1
+        used_handles.add(candidate)
+        return candidate
+
     products = []
     for pid, post in posts.items():
         if post['post_type'] != 'product' or post['post_status'] == 'trash':
@@ -211,7 +279,10 @@ def build_products(data):
 
         categories = terms_for(pid, 'product_cat')
         tags = terms_for(pid, 'product_tag')
-        brands = terms_for(pid, 'pwb-brand') or terms_for(pid, 'product-brands')
+        raw_brands = terms_for(pid, 'pwb-brand') or terms_for(pid, 'product-brands')
+        brands = [
+            BRAND_NAME_CORRECTIONS.get(b, b) for b in raw_brands if b not in EXCLUDED_BRAND_NAMES
+        ]
         type_terms = terms_for(pid, 'product_type')
         wc_type = type_terms[0] if type_terms else 'simple'
 
@@ -269,7 +340,7 @@ def build_products(data):
 
         products.append({
             'id': pid,
-            'handle': post['post_name'],
+            'handle': unique_handle(post['post_name'], post['post_title']),
             'title': post['post_title'],
             'body_html': post['post_content'],
             'status': post['post_status'],
@@ -285,6 +356,7 @@ def build_products(data):
             'virtual': meta.get('_virtual') == 'yes',
             'wc_type': wc_type,
             'categories': categories,
+            'product_type': most_specific_category_for(pid) or (categories[0] if categories else ''),
             'tags': tags,
             'vendor': brands[0] if brands else '',
             'images': images,

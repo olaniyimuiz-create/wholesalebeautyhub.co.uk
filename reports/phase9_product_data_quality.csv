@@ -1,0 +1,383 @@
+woo_id,entity_type,severity,code,detail,recommended_action
+333,product,HIGH,avif_primary_image,featured image https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Dr-Jart-Hyaluronic-Face-Mask.avif is AVIF,Convert to WebP/JPEG before import (Phase 8 risk #16)
+334,product,HIGH,avif_primary_image,featured image https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Dr-Jart-Vitamin-C-Face-Mask.avif is AVIF,Convert to WebP/JPEG before import (Phase 8 risk #16)
+1692,product,HIGH,avif_primary_image,featured image https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/05/Aveeno-Baby-Daily-Moisture-Cream.avif is AVIF,Convert to WebP/JPEG before import (Phase 8 risk #16)
+1725,product,HIGH,avif_primary_image,featured image https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/05/Frudia-Ultra-Uv-Shield-Essence-50.avif is AVIF,Convert to WebP/JPEG before import (Phase 8 risk #16)
+1795,product,HIGH,avif_primary_image,featured image https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/05/The-Ordinary-Retinol-Serum-1-30Ml.avif is AVIF,Convert to WebP/JPEG before import (Phase 8 risk #16)
+3635,product,HIGH,avif_primary_image,featured image https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/Vaseline-Cocoa-Radiant-Oil-Gel-200ml-309900.avif is AVIF,Convert to WebP/JPEG before import (Phase 8 risk #16)
+10500,product,HIGH,avif_primary_image,featured image https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/BASE_MATTIFIANT.avif is AVIF,Convert to WebP/JPEG before import (Phase 8 risk #16)
+17491,product,HIGH,avif_primary_image,featured image https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/aquaphor-lip-repair.avif is AVIF,Convert to WebP/JPEG before import (Phase 8 risk #16)
+25371,product,HIGH,avif_primary_image,featured image https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/07/eos-toasted-marshmellow.avif is AVIF,Convert to WebP/JPEG before import (Phase 8 risk #16)
+17,product,LOW,empty_regular_price,price=20 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+18,product,LOW,empty_regular_price,price=15 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+19,product,LOW,empty_regular_price,price=5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+20,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+22,product,LOW,empty_regular_price,price=20 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+23,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+25,product,LOW,empty_regular_price,price=18 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+28,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+34,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+35,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+49,product,LOW,empty_regular_price,price=25 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+50,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+51,product,LOW,empty_regular_price,price=15.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+52,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+53,product,LOW,empty_regular_price,price=15.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+54,product,LOW,empty_regular_price,price=16 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+55,product,LOW,empty_regular_price,price=15 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+60,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+61,product,LOW,empty_regular_price,price=20 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+62,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+63,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+65,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+66,product,LOW,empty_regular_price,price=12.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+67,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+68,product,LOW,empty_regular_price,price=18 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+69,product,LOW,empty_regular_price,price=35 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+70,product,LOW,empty_regular_price,price=5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+76,product,LOW,empty_regular_price,price=25 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+82,product,LOW,empty_regular_price,price=15 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+84,product,LOW,empty_regular_price,price=22 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+85,product,LOW,empty_regular_price,price=16 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+86,product,LOW,empty_regular_price,price=6.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+87,product,LOW,empty_regular_price,price=10 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+90,product,LOW,empty_regular_price,price=16 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+92,product,LOW,empty_regular_price,price=10 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+106,product,LOW,empty_regular_price,price=25 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+107,product,LOW,empty_regular_price,price=15 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+108,product,LOW,empty_regular_price,price=25 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+109,product,LOW,empty_regular_price,price=5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+113,product,LOW,empty_regular_price,price=5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+118,product,LOW,empty_regular_price,price=23 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+120,product,LOW,empty_regular_price,price=6 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+146,product,LOW,empty_regular_price,price=25 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+244,product,LOW,empty_regular_price,price=38 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+246,product,LOW,empty_regular_price,price=40 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+1699,product,LOW,empty_regular_price,price=25 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+1720,product,LOW,empty_regular_price,price=18 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+1721,product,LOW,empty_regular_price,price=16 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+1723,product,LOW,empty_regular_price,price=45 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+1763,product,LOW,empty_regular_price,price=40 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+1813,product,LOW,empty_regular_price,price=6 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+2376,product,LOW,empty_regular_price,price=12 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+4038,product,LOW,empty_regular_price,price=25 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+4673,product,LOW,empty_regular_price,price=25 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+4682,product,LOW,empty_regular_price,price=12 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+4697,product,LOW,empty_regular_price,price=13 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+5945,product,LOW,empty_regular_price,price=12 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+7912,product,LOW,empty_regular_price,price=7 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+8634,product,LOW,empty_regular_price,price=22 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+9678,product,LOW,empty_regular_price,price=8.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+10216,product,LOW,empty_regular_price,price=8.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+10504,product,LOW,empty_regular_price,price=3 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+10532,product,LOW,empty_regular_price,price=3.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+10559,product,LOW,empty_regular_price,price=3.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+10581,product,LOW,empty_regular_price,price=12 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+13917,product,LOW,empty_regular_price,price=20 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+15467,product,LOW,empty_regular_price,price=19 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+16445,product,LOW,empty_regular_price,price=20 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+16460,product,LOW,empty_regular_price,price=8.5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+16464,product,LOW,empty_regular_price,price=8.5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+16467,product,LOW,empty_regular_price,price=8.5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+16482,product,LOW,empty_regular_price,price=19 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+16519,product,LOW,empty_regular_price,price=11.5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+16529,product,LOW,empty_regular_price,price=14 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+16532,product,LOW,empty_regular_price,price=4.5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+16543,product,LOW,empty_regular_price,price=4.5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+16555,product,LOW,empty_regular_price,price=4.5 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+16557,product,LOW,empty_regular_price,price=7 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+17478,product,LOW,empty_regular_price,price=12 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+17503,product,LOW,empty_regular_price,price=13 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+18756,product,LOW,empty_regular_price,price=40 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+20525,product,LOW,empty_regular_price,price=30 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+20539,product,LOW,empty_regular_price,price=8.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+20546,product,LOW,empty_regular_price,price=10.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+20595,product,LOW,empty_regular_price,price=6.99 but regular_price is empty,Safe to import (no fake compare-at price generated) - informational
+25122,product,LOW,empty_regular_price,price=49.99 but regular_price is empty (flagged by site owner's own price-integrity diagnostic before migration),Safe to import (no fake compare-at price generated) - informational
+17,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+22,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+23,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+28,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+34,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+35,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+49,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+50,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+51,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+52,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+53,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+54,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+55,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+60,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+61,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+62,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+63,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+65,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+66,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+67,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+68,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+69,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+70,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+76,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+82,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+84,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+85,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+86,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+87,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+90,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+91,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+92,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+106,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+107,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+108,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+112,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+113,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+118,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+120,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+126,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+128,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+129,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+131,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+136,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+146,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+160,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+161,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+187,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+190,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+191,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+195,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+207,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+209,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+220,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+243,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+247,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+258,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+263,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+281,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+282,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+283,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+285,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+289,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+306,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+316,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+317,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+320,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+321,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+322,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+323,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+324,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+327,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+337,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1682,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1685,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1686,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1693,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1750,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1752,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1773,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1801,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1806,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1813,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+2376,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+4038,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+4682,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+4697,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+5945,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+8533,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+8618,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+8628,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+8634,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+8647,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+8648,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+8653,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+8659,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+9187,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+9678,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10216,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10415,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10419,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10476,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10500,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10504,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10515,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10518,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10522,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10524,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10532,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10559,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10581,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+10888,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+11227,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+11341,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+11348,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+11698,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+11897,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+11901,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+12980,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13301,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13314,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13317,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13318,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13319,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13321,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13323,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13324,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13326,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13327,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13887,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13895,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13901,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13903,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13908,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+13917,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+14352,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+15129,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+15249,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+15253,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+15466,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+15467,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+15752,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16331,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16438,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16441,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16443,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16445,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16460,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16464,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16467,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16482,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16519,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16529,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16532,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16543,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16555,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16557,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16820,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16821,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16825,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16966,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16969,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+16971,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17476,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17478,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17487,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17491,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17494,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17496,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17503,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17510,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17601,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17663,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17665,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+17860,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18359,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18407,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18477,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18482,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18488,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18632,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18636,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18638,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18642,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18645,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18649,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18735,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18738,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18742,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18748,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18752,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18756,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18834,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18838,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18843,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18893,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+18897,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19224,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19572,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19575,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19579,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19653,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19656,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19658,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19738,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19754,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19756,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19858,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19860,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+19863,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20187,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20525,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20539,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20546,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20568,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20595,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20616,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20622,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20625,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20627,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20632,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20634,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20637,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20647,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20770,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+20773,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21659,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21820,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21822,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21824,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21827,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21830,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21854,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21856,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21858,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21860,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21973,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+21976,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+23464,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+23521,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+23868,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+23957,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+24052,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+24654,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25089,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25092,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25095,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25099,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25109,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25111,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25113,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25115,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25117,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25119,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25122,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25129,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25217,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25219,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25366,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25369,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25371,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25372,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+25374,product,LOW,missing_sku,No SKU set at product level,Import without SKU (Shopify allows this) or backfill before import
+1726,product,MEDIUM,ambiguous_vendor,"vendor='Accessories _make_up' is a data-entry placeholder, not a real brand","STOP - needs human input on the real vendor per product, not automatable"
+2369,product,MEDIUM,ambiguous_vendor,"vendor='Accessories _make_up' is a data-entry placeholder, not a real brand","STOP - needs human input on the real vendor per product, not automatable"
+2370,product,MEDIUM,ambiguous_vendor,"vendor='Accessories _make_up' is a data-entry placeholder, not a real brand","STOP - needs human input on the real vendor per product, not automatable"
+2371,product,MEDIUM,ambiguous_vendor,"vendor='Accessories _make_up' is a data-entry placeholder, not a real brand","STOP - needs human input on the real vendor per product, not automatable"
+2372,product,MEDIUM,ambiguous_vendor,"vendor='Accessories _make_up' is a data-entry placeholder, not a real brand","STOP - needs human input on the real vendor per product, not automatable"
+25369,product,MEDIUM,missing_category,No product_cat assigned,Import without a collection assignment; assign manually post-import
+25089,product,MEDIUM,missing_price,status=draft,Quarantine - cannot set a Shopify price from empty source data
+25092,product,MEDIUM,missing_price,status=draft,Quarantine - cannot set a Shopify price from empty source data
+25109,product,MEDIUM,missing_price,status=draft,Quarantine - cannot set a Shopify price from empty source data
+25111,product,MEDIUM,missing_price,status=draft,Quarantine - cannot set a Shopify price from empty source data
+25113,product,MEDIUM,missing_price,status=draft,Quarantine - cannot set a Shopify price from empty source data
+25115,product,MEDIUM,missing_price,status=draft,Quarantine - cannot set a Shopify price from empty source data
+25117,product,MEDIUM,missing_price,status=draft,Quarantine - cannot set a Shopify price from empty source data
+25217,product,MEDIUM,missing_price,status=draft,Quarantine - cannot set a Shopify price from empty source data
+25219,product,MEDIUM,missing_price,status=draft,Quarantine - cannot set a Shopify price from empty source data
+25369,product,MEDIUM,missing_price,status=draft,Quarantine - cannot set a Shopify price from empty source data
+70,product,MEDIUM,zero_images,No product images,Import without media; source an image before or after
+1704,product,MEDIUM,zero_images,No product images,Import without media; source an image before or after
+21973,product,MEDIUM,zero_images,No product images,Import without media; source an image before or after
+25369,product,MEDIUM,zero_images,No product images,Import without media; source an image before or after

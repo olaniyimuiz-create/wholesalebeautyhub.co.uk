@@ -1,0 +1,498 @@
+woo_product_id,woo_variation_id,sku,price,compare_at_price,option_values,shade_slug,shade_hex_proposed,colour_mapping_status,image_url
+17,3994,464-1-item,20.0,,Dubai-04,dubai-04,,TERM_EXISTS_NO_COLOR_DATA,
+17,368,465-1-item,20.0,,Cape Town-05,cape-town-05,#e0a270,PROPOSED_MATCH_FOUND,
+17,369,466-1-item,20.0,,Doha-02,doha-02,#f6c592,PROPOSED_MATCH_FOUND,
+17,370,467-1-item,20.0,,Ethiopia-08,ethiopia-08,#804e3d,PROPOSED_MATCH_FOUND,
+17,371,468-1-item,20.0,,Florida-01,florida-01,#f0ca9e,PROPOSED_MATCH_FOUND,
+17,372,469-1-item,20.0,,Ghana-09,ghana-09,#5b3831,PROPOSED_MATCH_FOUND,
+17,373,470-1-item,20.0,,Kenya-10,kenya-10,#71433d,PROPOSED_MATCH_FOUND,
+17,374,471-1-item,20.0,,Mauritius-03,mauritius-03,#e6ac6f,PROPOSED_MATCH_FOUND,
+17,375,472-1-item,20.0,,Nigeria-07,nigeria-07,#a2664e,PROPOSED_MATCH_FOUND,
+18,10965,,15.0,,Custard,custard,#f7cd8f,PROPOSED_MATCH_FOUND,
+18,10966,,,,,,,TERM_EXISTS_NO_COLOR_DATA,
+18,403,474-1-item,15.0,,Angel Food,angel-food,#845739,PROPOSED_MATCH_FOUND,
+18,404,475-1-item,15.0,,Chocolate Pie,chocolate-pie,#6d4426,PROPOSED_MATCH_FOUND,
+18,405,476-1-item,15.0,,Ebony,ebony,#432c1f,PROPOSED_MATCH_FOUND,
+18,406,477-1-item,15.0,,Ginger Bread,ginger-bread,#956a35,PROPOSED_MATCH_FOUND,
+18,407,478-1-item,15.0,,Maroon,maroon,#5e412d,PROPOSED_MATCH_FOUND,
+18,408,479-1-item,15.0,,Milk Shake,milk-shake,#f6bb91,PROPOSED_MATCH_FOUND,
+18,409,480-1-item,15.0,,Vee Chestnut,vee-chestnut,#784d35,PROPOSED_MATCH_FOUND,
+18,410,481-1-item,15.0,,Vee Cloud,vee-cloud,#fdc495,PROPOSED_MATCH_FOUND,
+19,423,482-1-item,5.0,,Catnip,lip-gloss-catnip,#933d2a,PROPOSED_MATCH_FOUND,
+19,424,483-1-item,5.0,,Kathryn,lip-gloss-kathryn,#6d0003,PROPOSED_MATCH_FOUND,
+19,425,484-1-item,5.0,,Rid,lip-gloss-rid,#af704a,PROPOSED_MATCH_FOUND,
+20,509,485-1-item,10.0,,Concealer 01,concealer-01,#ad723d,PROPOSED_MATCH_FOUND,
+20,510,546-1-item,10.0,,Concealer 02,concealer-02,#de9e69,PROPOSED_MATCH_FOUND,
+20,511,486-1-item,10.0,,Concealer 04,concealer-04,#c18754,PROPOSED_MATCH_FOUND,
+20,512,547-1-item,10.0,,Concealer 07,concealer-07,#b6714b,PROPOSED_MATCH_FOUND,
+20,513,548-1-item,10.0,,Concealer 08,concealer-08,#945025,PROPOSED_MATCH_FOUND,
+20,514,549-1-item,10.0,,Concealer 09,concealer-09,#834b37,PROPOSED_MATCH_FOUND,
+22,926,487-1-item,20.0,,Eden,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Tehila-Rosy-Cheek-Blush-Palette1.jpg
+22,927,499-1-item,20.0,,Original,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Tehila-Rosy-Cheek-Blush-Palatte-original-1.jpg
+23,922,550-1-item,10.0,,Big Size,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Tehila-Blush-And-Highlighter-Palette-Big-12-IN-1.jpeg
+23,923,551-1-item,10.0,,Small Size,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Tehila-Blush-And-Highlighter-Palette-Small-6-IN-1.webp
+25,909,488-1-item,18.0,,Bamboo,bamboo,#c28838,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/C270E189-B9F4-487F-A6EA-4AF2FADF59DC.jpeg
+25,910,489-1-item,18.0,,Butternut,butternut,#7b4528,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/C270E189-B9F4-487F-A6EA-4AF2FADF59DC.jpeg
+25,911,490-1-item,18.0,,Cream Ivory,cream-ivory,#e4c08e,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/C270E189-B9F4-487F-A6EA-4AF2FADF59DC.jpeg
+25,912,491-1-item,18.0,,Honey Comb,honey-comb,#d19c4e,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/C270E189-B9F4-487F-A6EA-4AF2FADF59DC.jpeg
+25,913,492-1-item,18.0,,Linen,linen,#e5b64c,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/C270E189-B9F4-487F-A6EA-4AF2FADF59DC.jpeg
+25,914,493-1-item,18.0,,Olive,olive,#ebc057,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/C270E189-B9F4-487F-A6EA-4AF2FADF59DC.jpeg
+25,915,494-1-item,18.0,,Rich Truffle,rich-truffle,#6b4531,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/C270E189-B9F4-487F-A6EA-4AF2FADF59DC.jpeg
+25,916,495-1-item,18.0,,White Rose,white-rose,#e8c698,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/C270E189-B9F4-487F-A6EA-4AF2FADF59DC.jpeg
+28,847,496-1-item,10.0,,Bebe,bebe,#715443,PROPOSED_MATCH_FOUND,
+28,848,552-1-item,10.0,,Chillz,chillz,#7c423e,PROPOSED_MATCH_FOUND,
+28,849,497-1-item,10.0,,Tan,tan,#ad594a,PROPOSED_MATCH_FOUND,
+28,850,498-1-item,10.0,,That Girl,that-girl,#561703,PROPOSED_MATCH_FOUND,
+34,763,540-1-item,10.0,,Crimson,crimson,#cd3f4c,PROPOSED_MATCH_FOUND,
+34,764,541-1-item,10.0,,Khaki,khaki,#692c1b,PROPOSED_MATCH_FOUND,
+34,765,542-1-item,10.0,,Win,win,#ef7c39,PROPOSED_MATCH_FOUND,
+35,757,543-1-item,10.0,,Belle,belle,#c7111f,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/belle.jpg
+35,758,544-1-item,10.0,,Buff,buff,#5d3220,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/buff.jpg
+35,759,545-1-item,10.0,,Khaki,khaki,#692c1b,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/khaki.jpg
+49,619,437-1-item,25.0,,Shade Cinnamon,shade-cinnamon,#f0c27d,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Cinnamon.jpg
+49,620,438-1-item,25.0,,Shade Curry,shade-curry,#ffecb4,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/curry.jpg
+49,621,439-1-item,25.0,,Shade Ginger,shade-ginger,#f8e8d2,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Ginger.jpg
+49,622,440-1-item,25.0,,Shade Nutmeg,shade-nutmeg,#e49951,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/nutmeg.jpg
+50,613,441-1-item,10.0,,Black,black-2,#151515,PROPOSED_MATCH_FOUND,
+50,614,442-1-item,10.0,,Blue,blue,#0a33c7,PROPOSED_MATCH_FOUND,
+50,615,443-1-item,10.0,,Green,green-2,#43653d,PROPOSED_MATCH_FOUND,
+51,605,444-1-item,15.99,,Cinnamon,cinnamon,#cf7d47,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Cinammon1.jpg
+51,606,445-1-item,15.99,,Custard,custard,#f7cd8f,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Custard1.jpg
+51,607,446-1-item,15.99,,Milky,milky,#e3caa9,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Milky1.jpg
+52,591,447-1-item,10.0,,SMC 1,smc-1,#fad69a,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Yanga-Beauty-Smooth-Match-Concealer1-1.webp
+52,592,448-1-item,10.0,,SMC 2,smc-2,#fad69a,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/smc-2.webp
+52,593,449-1-item,10.0,,SMC 3,smc-3,#eba850,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/smc-3.webp
+52,594,450-1-item,10.0,,SMC 4,smc-4,#eea654,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/smc-4.webp
+52,595,451-1-item,10.0,,SMC 5,smc-5,#b85a26,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/smc-51.webp
+52,596,452-1-item,10.0,,SMC 6,smc-6,#88361f,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/smc-61.webp
+53,20560,,15.99,,Sienna,sienna,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5532.webp
+53,583,453-1-item,15.99,,Alabaster,alabaster,#f9e5c9,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Alabaster.webp
+53,584,454-1-item,15.99,,Caramel,caramel,#f9cc85,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/caramel.webp
+53,585,455-1-item,15.99,,Mustard,mustard,#ebbd6b,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/mustard.webp
+54,558,537-1-item,16.0,,1,1,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-Finishing-Powder-01.webp
+54,559,456-1-item,16.0,,2,2,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-Finishing-Powder-02.webp
+54,560,457-1-item,16.0,,3,3,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-Finishing-Powder-03.webp
+54,561,538-1-item,16.0,,4,4,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-Finishing-Powder-04.webp
+54,562,458-1-item,16.0,,5,5,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-Finishing-Powder-05.webp
+54,563,539-1-item,16.0,,6,6,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-Finishing-Powder-06.webp
+54,564,459-1-item,16.0,,7,7,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-Finishing-Powder-07.webp
+54,565,460-1-item,15.0,,8,8,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-Finishing-Powder-08.webp
+54,566,461-1-item,15.0,,9,9,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-Finishing-Powder-09.webp
+54,567,462-1-item,15.0,,10,10,#a76a4f,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-Finishing-Powder-10.webp
+55,551,524-1-item,10.0,,Accolade,accolade,#aa5942,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/accolade.webp
+55,552,396-1-item,15.0,,Mehn,mehn,#eab988,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/mehn.webp
+60,17281,,10.0,,042.5,042-5,#eea855,PROPOSED_MATCH_FOUND,
+60,17282,,10.0,,046.5,046-5,#d07338,PROPOSED_MATCH_FOUND,
+60,488,397-1-item,10.0,,041,041,#fbe3c5,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/041.webp
+60,489,527-1-item,10.0,,042,042,#f6cb9c,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/042.webp
+60,490,398-1-item,10.0,,043,043,#e0a667,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/043.webp
+60,491,399-1-item,10.0,,044,044,#dda66f,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/044.webp
+60,492,400-1-item,10.0,,045,045,#dca06c,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/045.webp
+60,493,401-1-item,10.0,,046,046,#c58851,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/046.webp
+60,494,528-1-item,10.0,,047,047,#914f26,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/047.webp
+60,495,402-1-item,10.0,,048,048,#8d4d33,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/048.webp
+60,496,403-1-item,10.0,,049,049,#843d21,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/049.webp
+60,497,529-1-item,10.0,,050,050,#ea8062,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/050.webp
+61,2375,404-1-item,20.0,,W6 Oprah,w6-oprah,,TERM_EXISTS_NO_COLOR_DATA,
+61,468,405-1-item,20.0,,D12 [S.Adadevoh],d12-s-adadevoh,#b66032,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-In-My-Skin-Foundation-D12.webp
+61,469,530-1-item,20.0,,D13[Q.Amina],d13q-amina,#b45a2d,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-In-My-Skin-Foundation-D13.webp
+61,470,531-1-item,20.0,,L1[M.Slessor],l1m-slessor,#cea076,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-In-My-Skin-Foundation-L1.webp
+61,471,406-1-item,20.0,,L2[Q.Luwoo],l2q-luwoo,#dd9d67,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-In-My-Skin-Foundation-L2.webp
+61,472,407-1-item,20.0,,L4[F.Alakija],l4f-alakija,#d5894c,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-In-My-Skin-Foundation-L4.webp
+61,473,408-1-item,20.0,,W5.5 [G. Nnaji],w5-5-g-nnaji,#d69152,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-In-My-Skin-Foundation-W5.5.webp
+61,474,532-1-item,20.0,,W5[M.Abudu],w5m-abudu,#db9962,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nuban-Beauty-In-My-Skin-Foundation-W5.webp
+62,461,409-1-item,10.0,,Ebony,ebony,#77645e,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Ebony.jpeg
+62,462,410-1-item,10.0,,Nubia,nubia,#8b6b5e,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Nubia.jpeg
+62,463,411-1-item,10.0,,Toffee,toffee,#966d5b,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/toffee.jpeg
+63,451,412-1-item,10.0,,Drama Queen,drama-queen,#b8b5c4,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/drama-queen-1.jpg
+63,452,413-1-item,10.0,,Like a Girl,like-a-girl,#f42a62,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Like-a-girl.jpeg
+63,453,533-1-item,10.0,,Mirror Mirror,mirror,#c8bec1,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/mirror-mirroe-1.jpg
+63,454,534-1-item,10.0,,Naive,naive,#cd6c66,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/naive.jpeg
+65,448,414-1-item,10.0,,Church Girl,church-girl,#f4dbb6,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Church-girl.jpeg
+65,440,415-1-item,10.0,,Butter Scotch,butter-scotch,#f6b58b,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/butter-scotch.jpeg
+65,441,535-1-item,10.0,,First Kiss,first-kiss,#dd7b6c,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/first-kiss.jpeg
+65,442,416-1-item,10.0,,Malty,malty,#4f2e29,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/malty.jpeg
+65,443,417-1-item,10.0,,Pick A Boo,pick-a-boo,#fdc2ac,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Peek-a-boo.jpeg
+66,3972,418-1-item,12.99,,Scarlet,scarlet,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/93262868-AC01-4345-B3E2-DFF4332D59C1.jpeg
+66,1618,419-1-item,12.99,,Coral Hues,coral-hues,#c74828,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-glazed-dew-highlighting-balm-coral-hues.jpg
+66,1619,420-1-item,12.99,,Ethereal,ethereal,#dad3cb,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-glazed-dew-highlighting-balm-etheral.jpg
+66,1620,421-1-item,12.99,,Flushed,flushed,#ac7265,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-glazed-dew-highlighting-balm-flused.jpg
+66,1621,422-1-item,12.99,,Glossed,glossed,#77867e,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-glazed-dew-highlighting-balm-glossed.jpg
+66,1622,423-1-item,12.99,,Rich Cocoa,rich-cocoa,#b57f5b,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-glazed-dew-highlighting-balm-rich-cocoa.jpg
+67,1614,424-1-item,10.0,,Matte,,,no_shade_attribute,
+67,1615,425-1-item,10.0,,Velvet,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-Sealowatt-velvet.jpg
+68,1510,426-1-item,18.0,,150 ML,,,no_shade_attribute,
+68,1511,427-1-item,10.0,,60 ML,,,no_shade_attribute,
+69,19742,,,,Phoenix,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_3858.jpeg
+69,19743,,,,Enchanted,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_3857.jpeg
+69,19744,,,,Dynamite,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_3855.jpeg
+69,19745,,,,Unfeigned,,,no_shade_attribute,
+69,14142,,30.0,,GLAMOUR 16IN1,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/09/IMG_3860.jpeg
+69,14143,,30.0,,MYSTIQUE 16IN1,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/09/IMG_3859.jpeg
+69,1505,428-1-item,35.0,,Betrothed,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-14In1-Lash-Set-Betrothed.jpg
+69,1506,429-1-item,35.0,,Bridal,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-14In1-Lash-Set-Bridal.jpg
+69,1508,430-1-item,25.0,,Nyla,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-14In1-Lash-Set-Nyla.jpg
+69,1507,536-1-item,25.0,,Elle,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-14In1-Lash-Set-Elle.jpg
+69,1509,431-1-item,35.0,,The Vow,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Msmetics-14In1-Lash-Set-The-Vow.jpg
+70,1500,432-1-item,5.0,,1,,,no_shade_attribute,
+70,1501,433-1-item,5.0,,2,,,no_shade_attribute,
+70,1502,434-1-item,5.0,,3,,,no_shade_attribute,
+70,1503,435-1-item,5.0,,4,,,no_shade_attribute,
+70,1504,436-1-item,5.0,,5,,,no_shade_attribute,
+76,3969,384-1-item,25.0,,70 Mocha,70-mocha,,TERM_EXISTS_NO_COLOR_DATA,
+76,3970,385-1-item,25.0,,85 Expresso,85-expresso,,TERM_EXISTS_NO_COLOR_DATA,
+76,3971,386-1-item,25.0,,56 Mahogany,56-mahogany,,TERM_EXISTS_NO_COLOR_DATA,
+76,2374,387-1-item,25.0,,40 Tan,40-tan,,TERM_EXISTS_NO_COLOR_DATA,
+76,1479,388-1-item,25.0,,25 Beige,25-beige,#eeba94,PROPOSED_MATCH_FOUND,
+76,1480,389-1-item,25.0,,30 Sand,30-sand,#e3ae8c,PROPOSED_MATCH_FOUND,
+76,1481,390-1-item,25.0,,33 Honey,33-honey,#e3a17b,PROPOSED_MATCH_FOUND,
+76,1482,391-1-item,25.0,,35 Bronze,35-bronze,#edc19d,PROPOSED_MATCH_FOUND,
+76,1483,392-1-item,25.0,,60 Ebony,60-ebony,#cb895d,PROPOSED_MATCH_FOUND,
+76,1484,393-1-item,25.0,,65 Toffee,65-toffee,#e79a6c,PROPOSED_MATCH_FOUND,
+76,1485,394-1-item,25.0,,75 Hazelnut,75-hazelnut,#cd8462,PROPOSED_MATCH_FOUND,
+76,1486,395-1-item,25.0,,80 Sienna,80-sienna,#ca7a61,PROPOSED_MATCH_FOUND,
+82,1463,353-1-item,15.0,,108,108,#eeac72,PROPOSED_MATCH_FOUND,
+82,1464,354-1-item,15.0,,109,109,#d28f5b,PROPOSED_MATCH_FOUND,
+82,1465,355-1-item,15.0,,110,110,#b67555,PROPOSED_MATCH_FOUND,
+84,1816,356-1-item,9.0,14.0,75 ML,,,no_shade_attribute,
+84,1458,357-1-item,22.0,,150 ML,,,no_shade_attribute,
+84,1459,358-1-item,20.0,30.0,350ML,,,no_shade_attribute,
+85,3669,359-1-item,16.0,,Lola|Lola,lola,,TERM_EXISTS_NO_COLOR_DATA,
+85,1454,360-1-item,16.0,,Evie,,,no_shade_attribute,
+85,1455,361-1-item,16.0,,Fairy,,,no_shade_attribute,
+85,1456,362-1-item,16.0,,Jara,,,no_shade_attribute,
+85,1457,363-1-item,16.0,,Kai,,,no_shade_attribute,
+86,15907,,6.99,,Omo,omo,,TERM_EXISTS_NO_COLOR_DATA,
+86,15908,,6.99,,Osho,osho,,TERM_EXISTS_NO_COLOR_DATA,
+86,5928,364-1-item,6.99,,Esther,esther,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/42B52F6B-F2E8-4DA2-B6B4-CF6D4838D08D.jpeg
+86,5930,365-1-item,6.99,,Zara,zara,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/42B52F6B-F2E8-4DA2-B6B4-CF6D4838D08D.jpeg
+86,5931,366-1-item,6.99,,Sele,sele,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/42B52F6B-F2E8-4DA2-B6B4-CF6D4838D08D.jpeg
+86,5932,367-1-item,6.99,,Lydia,lydia,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/42B52F6B-F2E8-4DA2-B6B4-CF6D4838D08D.jpeg
+86,5933,368-1-item,6.99,,Nora,nora,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/42B52F6B-F2E8-4DA2-B6B4-CF6D4838D08D.jpeg
+86,5934,369-1-item,6.99,,NayNay,naynay,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/42B52F6B-F2E8-4DA2-B6B4-CF6D4838D08D.jpeg
+86,1450,370-1-item,6.99,,Gidi,gidi,#8d0327,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lipstain-Gidi.jpg
+86,1448,371-1-item,6.99,,Bimpe,bimpe,#cc756c,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lipstain-Bimpe.jpg
+86,1449,372-1-item,6.99,,Dera,dera,#cf8882,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lipstain-Dera.jpg
+86,1451,373-1-item,6.99,,Nose,nose,#d37d86,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lipstain-Nose.jpg
+86,1452,374-1-item,6.99,,Ola,ola,#be0a09,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lipstain-Ola.jpg
+86,1453,375-1-item,6.99,,Shalewa,shalewa,#d9987a,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lipstain-Shalewa-1.jpg
+87,1443,376-1-item,10.0,,Clearr,clearr,#f0edee,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lip-Gloss-Clear.jpg
+87,1444,377-1-item,10.0,,Flossy,flossy,#df8787,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lip-Gloss-Flossy.jpg
+87,1445,378-1-item,10.0,,Peachy,peachy,#c54f63,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lip-Gloss-Peachy.jpg
+87,1446,379-1-item,6.0,,Vain,vain,#cd8b71,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lip-Gloss-Vain.jpg
+87,1447,380-1-item,10.0,,Zuwa,zuwa,#b85b48,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Soo-Pro-Lip-Gloss-Zuwa.jpg
+90,1430,381-1-item,16.0,,Matte,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Omaricode-Skin-Mist-100Ml-matte.jpg
+90,1431,523-1-item,10.0,,Regular,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Omaricode-Skin-Mist-100Ml.jpg
+92,1419,382-1-item,10.0,,01 Pine Berry,01-pine-berry,#fb84a5,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Omaricode-Lip-Moisturizing-Oil-011.webp
+92,1420,383-1-item,10.0,,02 Arils,02-arils,#f94771,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Omaricode-Lip-Moisturizing-Oil-021.webp
+106,19752,,23.0,25.0,Snatched,,,no_shade_attribute,
+106,4001,348-1-item,25.0,,Hey Besty,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/2E78945A-6C5F-4496-9C79-E33D60031191.jpeg
+106,4002,349-1-item,25.0,,Miss fiesty,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/1F6F60F9-B280-4AB2-BD83-25AFAA14276D.jpeg
+106,4003,350-1-item,25.0,,Self made,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/1254B820-2CBA-4F90-8A3D-81BF3CE5E1D7.jpeg
+106,1141,351-1-item,25.0,,Fusion,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/DC725D9D-F532-4D9D-AE68-36AE454F4B0C.jpeg
+106,1142,352-1-item,25.0,,Bad Bitch,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/ABC6A242-04F0-4C7D-8CA5-DBC12B0B6FB6.jpeg
+107,3995,344-1-item,15.0,,Bad N Boujee,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/60F77F0D-25ED-42C0-AD73-F657C52A487F.jpeg
+107,3999,345-1-item,15.0,,Baddie Alert,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/BE8EC5D5-6F54-4571-8CE0-33B10F93B27B.jpeg
+108,1131,346-1-item,20.0,,Good Girl Gone Badt,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Wynkkk-Beauty-16-In-1-PURRRFECT-SET-1.jpg
+108,1132,347-1-item,25.0,,Purrrfect,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Wynkkk-Beauty-16-In-1-Good-Girl-Gone-Badt.jpg
+109,22869,,5.0,,Heat,,,no_shade_attribute,
+109,20867,,5.0,,Sunset,,,no_shade_attribute,
+109,20854,,5.0,,Fantasy,,,no_shade_attribute,
+109,20855,,5.0,,Phoenix,,,no_shade_attribute,
+109,20856,,5.0,,Sequin,,,no_shade_attribute,
+109,20857,,5.0,,Posy,,,no_shade_attribute,
+109,20858,,5.0,,Blaze,,,no_shade_attribute,
+109,20859,,5.0,,Wink,,,no_shade_attribute,
+109,20860,,5.0,,Vino,,,no_shade_attribute,
+109,20861,,5.0,,Nova,,,no_shade_attribute,
+109,20862,,5.0,,Sauce,,,no_shade_attribute,
+109,20863,,5.0,,Taffy,,,no_shade_attribute,
+109,20864,,5.0,,Pitch,,,no_shade_attribute,
+109,20865,,5.0,,Butta,,,no_shade_attribute,
+109,20866,,5.0,,Siren,,,no_shade_attribute,
+113,1109,338-1-item,5.0,,Clear,clear,#f0f0f1,PROPOSED_MATCH_FOUND,
+118,1067,339-1-item,23.0,,Mint,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Luzta-Eye-Shadow-mint1.jpg
+118,1068,340-1-item,23.0,,Sugar,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Luzta-Eye-Shadow-sugar1.jpg
+120,1064,341-1-item,6.0,,Brown,,,no_shade_attribute,
+120,1065,342-1-item,6.0,,Clear,,,no_shade_attribute,
+146,1822,516-1-item,25.0,,Amber,amber,,TERM_EXISTS_NO_COLOR_DATA,
+146,1823,517-1-item,10.0,,Lucent,lucent,,TERM_EXISTS_NO_COLOR_DATA,
+146,1532,323-1-item,10.0,,Tawny,tawny,#ad6c42,PROPOSED_MATCH_FOUND,
+244,15236,,28.0,,7.9oz (225g),,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/amlactin.webp
+244,15237,,38.0,,14.1oz (400g),,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-22-at-13.50.24.jpeg
+246,15240,,26.0,,225g,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-22-at-14.05.41.jpeg
+246,13744,,40.0,,567g,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-22-at-14.05.43.jpeg
+246,13742,,35.0,,400g,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-22-at-14.05.42.jpeg
+1699,13935,,25.0,,12 in 1,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/08/IMG_5533.jpeg
+1699,13936,,16.0,,6 in 1,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/05/WhatsApp-Image-2025-08-26-at-22.50.56.jpeg
+1720,14780,,7.0,,TRAVEL SIZE,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/10/eos-Travel-Body-Lotion-Vanilla-Cashmere-1.webp
+1720,14346,,18.0,,16 FL. OZ (473ML),,,no_shade_attribute,
+1721,14518,,16.0,,20%,,,no_shade_attribute,
+1721,14519,,15.0,,10%,,,no_shade_attribute,
+1723,19768,,28.0,,15ml,,,no_shade_attribute,
+1723,14516,,38.0,,30ml,,,no_shade_attribute,
+1723,14517,,45.0,,50ml,,,no_shade_attribute,
+1763,21943,,27.0,,30ML,,,no_shade_attribute,
+1763,21944,,40.0,,60ML,,,no_shade_attribute,
+1813,15906,,6.0,,Vamped,vamped,,TERM_EXISTS_NO_COLOR_DATA,
+1813,4669,144-1-item,6.0,,Sugar plum,sugar-plum,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/04/Zaron-Luxurious-Gloss-24-Karat.jpg
+1813,4668,145-1-item,6.0,,24 karat,24-karat,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/06/Zaron-Lip-Gloss-edit.jpg
+2376,2377,86-1-item,8.0,,CW1,cw1,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/08/Ben-Nye-Clown-White-cw1.jpg
+2376,2378,87-1-item,12.0,,CW2,cw2,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/08/Ben-Nye-Clown-White-cw2.jpg
+4038,4040,37-1-item,25.0,,Energer chic,energer-chic,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/8AE7EA31-2177-4D7D-82C2-FCF02211E7EC.jpeg
+4038,4041,38-1-item,25.0,,Cacao power,cacao-power,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/09/8597D6C6-FE8F-422E-972F-6B3BECEF9920.jpeg
+4673,13914,,25.0,,Big Size,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/08/214DB40E-AB50-4B3F-8B70-00E3C1F8BD67.webp
+4673,13915,,15.0,,Small Size,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/08/214DB40E-AB50-4B3F-8B70-00E3C1F8BD67.webp
+4682,4694,30-1-item,12.0,,Vanilla,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/10/7A5F282B-A2E4-43BE-9EDD-077317D4F794.jpeg
+4682,4695,31-1-item,12.0,,Watermelon,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/10/49EE211D-63CF-4EA1-943A-3EC21C7E90E0.jpeg
+4682,4696,32-1-item,12.0,,Pineapple,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/10/B5E99038-2FD3-45E6-92A8-E3DE7A8C2829.jpeg
+4682,4693,33-1-item,12.0,,Vitamin C,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/10/7879EA43-FF01-49AB-AAB2-772D9F6BC8F5.jpeg
+4697,4698,28-1-item,13.0,,Vanilla,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/10/FDFCB2ED-6AD0-4A63-A9AD-5907E746F13E.jpeg
+4697,4699,29-1-item,13.0,,Vitamin C,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/10/A3EE647A-74C1-4BF2-BE15-FA2845E445AB.jpeg
+5945,5946,3-1-item,12.0,,Apricot,apricot,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/AE67A433-1491-4BAE-BDB4-2D6BDB4D0F83.jpeg
+5945,5949,4-1-item,12.0,,Clove,clove,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/AE67A433-1491-4BAE-BDB4-2D6BDB4D0F83.jpeg
+5945,5950,5-1-item,12.0,,Coated almond,coated-almond,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/AE67A433-1491-4BAE-BDB4-2D6BDB4D0F83.jpeg
+5945,5951,6-1-item,12.0,,Hazel,hazel,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/AE67A433-1491-4BAE-BDB4-2D6BDB4D0F83.jpeg
+5945,5952,7-1-item,12.0,,Natural buff,natural-buff,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/AE67A433-1491-4BAE-BDB4-2D6BDB4D0F83.jpeg
+5945,5953,8-1-item,12.0,,Soft light,soft-light,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/AE67A433-1491-4BAE-BDB4-2D6BDB4D0F83.jpeg
+5945,5954,9-1-item,12.0,,Spice Ginger,spice-ginger,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/AE67A433-1491-4BAE-BDB4-2D6BDB4D0F83.jpeg
+5945,5955,10-1-item,12.0,,Tinted silk,tinted-silk,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2024/11/AE67A433-1491-4BAE-BDB4-2D6BDB4D0F83.jpeg
+7912,17761,,7.0,,Fresh&Cozy,,,no_shade_attribute,
+7912,15246,,7.0,,Vanilla Cashmere,,,no_shade_attribute,
+7912,15247,,7.0,,Coconut waters,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-22-at-14.16.48.jpeg
+8634,11229,,22.0,,Normal Skin,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-13-at-00.05.11-1.jpeg
+8634,11230,,22.0,,Rough and Bumpy skin,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-13-at-00.05.12.jpeg
+8634,11231,,22.0,,Extra Dry Skin,,,no_shade_attribute,
+9678,10193,,8.99,15.0,Accra,accra,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/e51f9873-0220-49bc-b068-14b996278ffb.jpeg
+9678,10197,,8.99,15.0,Cairo,cairo,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/4b219c07-65bc-4dd1-be85-6c5eb95c1b04.jpeg
+9678,10199,,8.99,15.0,Eritrea,eritrea,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/a0192a17-d4fd-4141-b22b-4f840b8ecf6c.jpeg
+9678,10201,,8.99,15.0,Havana,havana,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/4fc45945-164a-4e21-b490-1859e63e4f5f.jpeg
+9678,10203,,8.99,15.0,Helsinki,helsinki,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/6eeee9b8-127e-4a86-9d99-77cef6600afa.jpeg
+9678,10205,,8.99,15.0,Lisbon,lisbon,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/c3f43c16-f9de-4744-9c30-f41ccba58e5d.jpeg
+9678,10207,,8.99,15.0,Melt It,melt-it,,TERM_EXISTS_NO_COLOR_DATA,
+9678,10208,,8.99,15.0,Monaco,monaco,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/f2c2079c-0516-42a5-9b5f-1ae1845cbfb8.jpeg
+9678,10210,,8.99,15.0,Panama,panama,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/3651c71c-5a1c-4d5c-9f8c-5fa76653dcec.jpeg
+9678,10212,,8.99,15.0,Tokyo,tokyo,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/31c7831c-e43b-45b1-981a-d5b31a9fd9f1.jpeg
+9678,10214,,8.99,15.0,Tripoli,tripoli,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/86ab6414-7a91-4f42-8b1b-4bcd43ec98fe.jpeg
+9678,10195,,8.99,15.0,Amman,amman,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/4ab0cd42-2e0e-4baf-b255-e6d04a92883d.jpeg
+10216,10218,,8.99,16.0,Accra,accra,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/4241e801-61af-44df-9e45-ffc4440a9d55.jpeg
+10216,10219,,8.99,16.0,Amman,amman,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/7e35120b-59ac-4d30-990f-7720bd705cd2.jpeg
+10216,10220,,8.99,16.0,Cairo,cairo,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/ff99c622-972f-4799-9fb2-7285dd02bcaa.jpeg
+10216,10221,,8.99,16.0,Caramel,caramel,#bb7249,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-14-at-16.49.26.jpeg
+10216,10222,,8.99,16.0,Dark Chocolate,dark-chocolate,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-14-at-16.51.14.jpeg
+10216,10223,,8.99,16.0,Eritrea,eritrea,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/3150ccd8-f5f6-4b56-90d8-d27931c0ef5d.jpeg
+10216,10225,,8.99,16.0,Helsinki,helsinki,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/802df8c1-40ba-4765-9fdb-af8f60a2fb9a.jpeg
+10216,10224,,8.99,16.0,Havana,havana,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/79b46b1b-b3fe-4c26-9bbe-e486bba940ab.jpeg
+10216,10226,,8.99,16.0,Lisbon,lisbon,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-14-at-16.50.49.jpeg
+10216,10229,,8.99,16.0,Nepal,nepal,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/7a6cde92-7720-4d5e-b355-77d864ecc2a7.jpeg
+10216,10227,,8.99,16.0,Malta,malta,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/b42fc62e-4f63-4d4b-abba-818d5cd4c790.jpeg
+10216,10228,,8.99,16.0,Monaco,monaco,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/e4ad19fa-9a15-440c-b8a4-39a514919a9d.jpeg
+10216,10230,,8.99,16.0,Niger,niger,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/ff99c622-972f-4799-9fb2-7285dd02bcaa-1.jpeg
+10216,10231,,8.99,16.0,Panama,panama,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/8ee4d10d-402c-453f-9ea6-489bb91e83db.jpeg
+10216,10232,,8.99,16.0,Soft Clay,soft-clay,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-14-at-16.50.31.jpeg
+10216,10233,,8.99,20.0,Tawny Glow,tawny-glow,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/ae0a2459-0a28-442d-85f3-b89dc0e6fed1.jpeg
+10216,10234,,8.99,16.0,Tokyo,tokyo,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-14-at-16.50.10.jpeg
+10216,10235,,8.99,16.0,Tripoli,tripoli,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/b5758afe-2758-46f1-9f4d-88f746330e24.jpeg
+10216,10236,,8.99,16.0,Warm Caramel,warm-caramel,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-14-at-16.49.45.jpeg
+10504,10505,,3.0,6.0,BLACK KANDAHAR,black-kandahar,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.58.19.jpeg
+10504,10506,,3.0,6.0,BLUE COBALT,blue-cobalt,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.55.20.jpeg
+10504,10507,,3.0,6.0,GREEN LAWN,green-lawn,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.56.11.jpeg
+10504,10508,,3.0,6.0,PORT WINE,port-wine,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.57.54.jpeg
+10504,10509,,3.0,6.0,ROYALTY PURPLE,royalty-purple,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.57.17.jpeg
+10532,10543,,3.99,5.0,AS-IN,as-in,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.15.04.jpeg
+10532,10544,,3.99,5.0,BLANK D,blank-d,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.15.34.jpeg
+10532,10545,,3.99,5.0,CHOCOLATE MOUSSE,chocolate-mousse,,TERM_EXISTS_NO_COLOR_DATA,
+10532,10546,,3.99,5.0,FLAPPER GIRL,flapper-girl,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.16.54.jpeg
+10532,10547,,3.99,5.0,GEISHA GIRL,geisha-girl,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.17.17.jpeg
+10532,10548,,3.99,5.0,GIGGLE,giggle,,TERM_EXISTS_NO_COLOR_DATA,
+10532,10549,,3.99,5.0,GOTH,goth,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.17.39.jpeg
+10532,10552,,3.99,5.0,ME,me,,TERM_EXISTS_NO_COLOR_DATA,
+10532,10550,,3.99,5.0,HEATROSE,heatrose,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.18.09.jpeg
+10532,10551,,3.99,5.0,MAUVISCIOUS,mauviscious,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.18.38.jpeg
+10532,10553,,3.99,5.0,MISS DAISY,miss-daisy,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.19.02.jpeg
+10532,10554,,3.99,5.0,NOTICE ME,notice-me,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.19.45.jpeg
+10532,10555,,3.99,5.0,NUDITY,nudity,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.20.10.jpeg
+10532,10556,,3.99,5.0,PINUP,pinup,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.20.31.jpeg
+10532,10557,,3.99,5.0,SKETCH,sketch,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.20.56.jpeg
+10532,10558,,3.99,5.0,TURNUP,turnup,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.21.20.jpeg
+10559,10562,,3.99,6.99,BLUSH,blush,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.54.57.jpeg
+10559,10561,,3.99,6.99,BARELY THERE,barely-there,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.43.52.jpeg
+10559,10563,,3.99,6.99,Brown sugar,brown-sugar,,TERM_EXISTS_NO_COLOR_DATA,
+10559,10564,,3.99,6.99,CALLA,calla,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.44.25.jpeg
+10559,10565,,3.99,6.99,CANDY TUFT,candy-tuft,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.44.53.jpeg
+10559,10566,,3.99,6.99,CHERRY,cherry,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.45.19.jpeg
+10559,10567,,3.99,6.99,CLEAR SHINE,clear-shine,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.45.49.jpeg
+10559,10568,,3.99,6.99,COLUMBINE,columbine,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.46.20.jpeg
+10559,10569,,3.99,6.99,DAHLIA,dahlia,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.46.46.jpeg
+10559,10570,,3.99,6.99,EXPOSE,expose,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.48.31.jpeg
+10559,10571,,3.99,6.99,FRESSIA,fressia,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.48.59.jpeg
+10559,10572,,3.99,6.99,GOLD SPARKLE,gold-sparkle,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.49.33.jpeg
+10559,10573,,3.99,6.99,HOLLY HOCK,holly-hock,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.50.03.jpeg
+10559,10574,,3.99,6.99,HONEY SUCKLE,honey-suckle,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.50.28.jpeg
+10559,10575,,3.99,6.99,LAVENDER,lavender,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.50.53.jpeg
+10559,10576,,3.99,6.99,MONALISA,monalisa,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.51.32.jpeg
+10559,10577,,3.99,6.99,NUDE KISS,nude-kiss,,TERM_EXISTS_NO_COLOR_DATA,
+10559,10578,,3.99,6.99,PINK AZALEA,pink-azalea,,TERM_EXISTS_NO_COLOR_DATA,
+10559,10579,,3.99,6.99,SILVER SPARKLE,silver-sparkle,,TERM_EXISTS_NO_COLOR_DATA,
+10559,10580,,3.99,6.99,WIND FLOWER,wind-flower,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.53.13.jpeg
+10581,10583,,12.0,15.99,Addicted,addicted,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.22.18.jpeg
+10581,10584,,12.0,15.99,Be Bare,be-bare,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.22.45.jpeg
+10581,10585,,12.0,15.99,Cash,cash,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.23.15.jpeg
+10581,10586,,12.0,15.99,Cemented,cemented,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.23.42.jpeg
+10581,10587,,12.0,15.99,Chai,chai,,TERM_EXISTS_NO_COLOR_DATA,
+10581,10588,,12.0,15.99,Coded,coded,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.24.08.jpeg
+10581,10589,,12.0,15.99,Con-Lee,con-lee,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.29.33.jpeg
+10581,10590,,12.0,15.99,Cupcakes,cupcakes,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.29.53.jpeg
+10581,10591,,12.0,15.99,Dirty South,dirty-south,,TERM_EXISTS_NO_COLOR_DATA,
+10581,10592,,12.0,15.99,Emo,emo,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.30.15.jpeg
+10581,10593,,12.0,15.99,Exxx,exxx,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.30.38.jpeg
+10581,10594,,12.0,15.99,Loverna,loverna,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.32.32.jpeg
+10581,10595,,12.0,15.99,Marilyn Red,marilyn-red,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.33.09.jpeg
+10581,10596,,12.0,15.99,Melondrama,melondrama,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.33.41.jpeg
+10581,10597,,12.0,15.99,Nude,nude,,TERM_EXISTS_NO_COLOR_DATA,
+10581,10598,,12.0,15.99,Orgasm,orgasm,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.34.31.jpeg
+10581,10599,,12.0,15.99,Peony,peony,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.34.55.jpeg
+10581,10600,,12.0,15.99,Pumpkin Kiss,pumpkin-kiss,,TERM_EXISTS_NO_COLOR_DATA,
+10581,10601,,12.0,15.99,Redd,redd,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.35.20.jpeg
+10581,10602,,12.0,15.99,Shett,shett,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.36.05.jpeg
+10581,10603,,12.0,15.99,Toast,toast,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.37.09.jpeg
+10581,10604,,12.0,15.99,Tomatoe,tomatoe,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.37.32.jpeg
+10581,10605,,12.0,15.99,Trap,trap,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.37.50.jpeg
+10581,10606,,12.0,15.99,Tribal,tribal,,TERM_EXISTS_NO_COLOR_DATA,
+10581,10607,,12.0,15.99,Vanilla,vanilla,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-10-at-14.38.14.jpeg
+10581,10608,,12.0,15.99,Venus,venus,,TERM_EXISTS_NO_COLOR_DATA,
+13917,16999,,20.0,,Twilight,,,no_shade_attribute,
+13917,13918,,20.0,,Nude Happy BRIDE,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-26-at-22.20.01.jpeg
+13917,13919,,20.0,,Ashy Smokey,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-26-at-22.20.00-1.jpeg
+13917,13920,,20.0,,Purple Dazzling,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-26-at-22.20.00.jpeg
+15467,20705,,19.0,,Jasmine Peach,,,no_shade_attribute,
+15467,20704,,19.0,,coconut,,,no_shade_attribute,
+15467,19793,,19.0,,pomegranate raspberry,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_3926.jpeg
+15467,19794,,19.0,,pink champagne,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_3927.jpeg
+15467,19795,,19.0,,fresh & cozy,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_3925.jpeg
+15467,19796,,19.0,,strawberry dream,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_3928.jpeg
+15467,17559,,19.0,,creme de pistachio,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_3929.jpeg
+15467,16500,,19.0,,peppermint cashmere,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/PEPPERMINT-BODY-MIST-EOS.webp
+15467,15468,,19.0,,vanilla cashmere,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/10/AdobeExpress-file-2025-09-22T145945.146.webp
+15467,15469,,19.0,,cocoa cashmere,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/10/AdobeExpress-file-2025-09-22T153948.869.webp
+15467,15470,,19.0,,caramel cashmere,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/10/AdobeExpress-file-2025-09-22T154737.569.webp
+16445,16850,,20.0,,6 in 1,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/Sylvimak-Smooth-Affair-6-in-1-Powder-Palette_3.jpg.webp
+16445,16851,,18.0,,12 in 1,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/sylvimak-12-in-1-powder-palete.jpg
+16460,16463,,8.5,,Hc 24,hc-24,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0776.jpeg
+16464,19990,,,,,,,no_shade_attribute,
+16464,19991,,8.5,,Bougie,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_4733.png
+16464,19992,,8.5,,Commotion,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_4735.jpeg
+16464,19993,,8.5,,Peach,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_4737.jpeg
+16464,19994,,8.5,,Spotlight,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_4736.jpeg
+16464,19995,,8.5,,Sweet tooth,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_4738.jpeg
+16464,19723,,8.5,,Roots,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_9887-1.png
+16464,19724,,8.5,,Coral skies,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_9888.png
+16464,19725,,8.5,,Nectar,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_9889-1.png
+16464,19726,,8.5,,Honeycomb,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_9890.png
+16464,19727,,8.5,,Berry rush,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/03/IMG_9891-2.png
+16464,16983,,8.5,,Claire,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_3872.jpeg
+16464,16984,,8.5,,Crush,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_3873.jpeg
+16464,16985,,8.5,,Date nite,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_3874.jpeg
+16464,16986,,8.5,,Drama queen,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9808.jpeg
+16464,16987,,8.5,,Dreamy,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9807.jpeg
+16464,16988,,8.5,,Free spirit,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9811.jpeg
+16464,16989,,8.5,,Light out,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9810.jpeg
+16464,16990,,8.5,,Like a girl,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9809.jpeg
+16464,16991,,8.5,,Mirror mirror,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9812.jpeg
+16464,16992,,8.5,,Pulp culture,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9813.jpeg
+16464,16993,,8.5,,Soul sister,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9814.jpeg
+16464,16994,,8.5,,Twist,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9815.jpeg
+16467,22705,,8.5,,Butter scotch,,,no_shade_attribute,
+16467,22706,,8.5,,Church Girl,,,no_shade_attribute,
+16467,22707,,8.5,,Runway,,,no_shade_attribute,
+16467,16974,,8.5,,Bamboo,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9817.jpeg
+16467,16975,,8.5,,Cuddle,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9820.jpeg
+16467,16976,,8.5,,Grapeyard,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9818.jpeg
+16467,16977,,8.5,,Morning after,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9819.jpeg
+16467,16978,,8.5,,Pink unusual,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9822.jpeg
+16467,16979,,8.5,,Snack,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9823.jpeg
+16467,16980,,8.5,,Spring,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9825.jpeg
+16467,16981,,8.5,,Till Dawn,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9826.jpeg
+16467,16982,,8.5,,Untamed,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9816.jpeg
+16482,16497,,7.0,,MINI PEPPERMINT CASHMERE,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/PeppermintCashmereMiniBL-EOS.webp
+16482,16484,,19.0,,COCOA CASHMERE,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/COCOA-CASHMERE-EOS.webp
+16482,16485,,19.0,,CARAMEL CASHMERE,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/CARAMEL-CASHMERE-EOS.webp
+16482,16486,,19.0,,PEPPERMINT CASHMERE,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/PEPPERMINT-CASHMERE-EOS.webp
+16482,16487,,19.0,,SPARKLING AMBER,,,no_shade_attribute,
+16519,16522,,11.5,,Dark 01,dark-01,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0768.jpeg
+16519,16523,,11.5,,Dark 02,dark-02,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0769.jpeg
+16519,16524,,11.5,,Dark 03,dark-03,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0770.jpeg
+16519,16525,,11.5,,Light 02,light-02,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0771.jpeg
+16519,16526,,11.5,,Light 03,light-03,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0772.jpeg
+16519,16527,,11.5,,Medium 01,medium-01,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0773.jpeg
+16519,16528,,11.5,,Medium 03,medium-03,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0774.jpeg
+16529,16934,,14.0,,Biiscuit,biiscuit,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0760.jpeg
+16529,16935,,14.0,,Bronze,bronze,,TERM_EXISTS_NO_COLOR_DATA,
+16529,16936,,14.0,,Brownie,brownie,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0759.jpeg
+16529,16937,,14.0,,Butter,butter,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0758.jpeg
+16529,16938,,14.0,,Cocoa,cocoa,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0757.jpeg
+16529,16939,,14.0,,Cola,cola,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0756.jpeg
+16529,16940,,14.0,,Cookie,cookie,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0755.jpeg
+16529,16941,,14.0,,Cupcake,cupcake,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0754.jpeg
+16529,16942,,14.0,,Fudge,fudge,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0753.jpeg
+16529,16943,,14.0,,Mango,mango,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0752.jpeg
+16529,16944,,14.0,,Toastt,toastt,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0751.jpeg
+16529,16945,,14.0,,Wafer,wafer,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0749.jpeg
+16532,17580,,4.5,,Barehug,barehug,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_1006.jpeg
+16532,17581,,4.5,,Brew,brew,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_1007.jpeg
+16532,17582,,4.5,,Calvary,calvary,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_1008.jpeg
+16532,17583,,4.5,,Jade,jade,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_1009.jpeg
+16532,17584,,4.5,,Kwin,kwin,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_1010.jpeg
+16532,17585,,4.5,,Melanin,melanin,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_1011.jpeg
+16532,17586,,4.5,,Shell,shell,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_1012.jpeg
+16532,17587,,4.5,,Trinity,trinity,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_1013.jpeg
+16532,17588,,4.5,,Void,void,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_1014.jpeg
+16543,16546,,4.5,,Bussin,bussin,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0761.jpeg
+16543,16547,,4.5,,Fierce,fierce,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0762.jpeg
+16543,16548,,4.5,,Girl Next Door,girl-next-door,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0763.jpeg
+16543,16549,,4.5,,Here to Slay,here-to-slay,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0764.jpeg
+16543,16550,,4.5,,Mama Gave Me,mama-gave-me,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0765.jpeg
+16543,16551,,4.5,,Snatched,snatched,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0766.jpeg
+16543,16552,,4.5,,So Bourgeois,so-bourgeois,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_0767.jpeg
+16555,18340,,4.5,,Pouted,pouted,,TERM_EXISTS_NO_COLOR_DATA,
+16555,16757,,4.5,,Bite me,bite-me,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9827.jpeg
+16555,16758,,4.5,,Brown sugar,brown-sugar,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9828.jpeg
+16555,16759,,4.5,,Heated,heated,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9829.jpeg
+16555,16760,,4.5,,Mood,mood,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9830.jpeg
+16555,16761,,4.5,,Pillow talk,pillow-talk,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9831.jpeg
+16555,16762,,4.5,,Snap,snap,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9832.jpeg
+16557,16559,,7.0,,Beam,beam,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9833.jpeg
+16557,16560,,7.0,,Blaze,blaze,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9834.jpeg
+16557,16561,,7.0,,Friray,friray,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9835.jpeg
+16557,16562,,7.0,,Showtime,showtime,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9836.jpeg
+16557,16563,,7.0,,Starlight,starlight,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2025/12/IMG_9837.jpeg
+17478,22711,,5.0,,50ml Sunlit Glow body shimmer gel oil,50ml-sunlit-glow-body-shimmer-gel-oil,,TERM_EXISTS_NO_COLOR_DATA,
+17478,17484,,12.0,,Golden Hour Glow Bronze Body Shimmer Oil,golden-hour-glow-bronze-body-shimmer-oil,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_0905.jpeg
+17478,17485,,12.0,,Sunlit Glow Body Shimmer Gel Oil,sunlit-glow-body-shimmer-gel-oil,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_0903.jpeg
+17503,22674,,13.0,,Coconut waters,,,no_shade_attribute,
+17503,17507,,13.0,,Fresh &amp; cozy,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_0919.jpeg
+17503,17508,,13.0,,Pink Champagne,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_0920.jpeg
+17503,17509,,13.0,,Vanilla cashmere,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/01/IMG_0918.jpeg
+18756,23369,,18.0,,15g,,,no_shade_attribute,
+18756,23370,,40.0,,45g,,,no_shade_attribute,
+20525,20533,,30.0,,Bad 06,bad-06,#e78c56,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5517.jpeg
+20525,20534,,30.0,,Bad 08,bad-08,#c78f52,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5518.jpeg
+20525,20535,,30.0,,Bad 09,bad-09,#955138,PROPOSED_MATCH_FOUND,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5519.jpeg
+20525,20536,,30.0,,Bad 10,bad-10,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5520.jpeg
+20525,20537,,30.0,,Bad 12,bad-12,,TERM_EXISTS_NO_COLOR_DATA,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5521.jpeg
+20539,20542,,8.99,,Sixty Nine,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5523.jpeg
+20539,20543,,8.99,,It Girl,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5524.jpeg
+20546,20548,,10.99,,Creamy Caramel,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5527.jpeg
+20546,20549,,10.99,,Sweet seduction,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5528.jpeg
+20546,20550,,10.99,,Hazel,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5529.jpeg
+20546,20551,,10.99,,Icon,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5530.jpeg
+20546,20552,,10.99,,Divine delight,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5531.jpeg
+20595,20604,,6.99,,Love,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5547.webp
+20595,20603,,6.99,,Grace,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5546.webp
+20595,20602,,6.99,,Wealth,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5544.webp
+20595,20601,,6.99,,Reign,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5543.webp
+20595,20600,,6.99,,Halo,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5542.webp
+20595,20599,,6.99,,Glory,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5541.webp
+20595,20598,,6.99,,Fire,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/04/IMG_5540.webp
+25122,25124,,28.0,,15g,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/07/IMG_9934.png
+25122,25125,,49.99,,45g,,,no_shade_attribute,https://wholesalebeautyhub.co.uk/wp-content/uploads/2026/07/IMG_9933.webp

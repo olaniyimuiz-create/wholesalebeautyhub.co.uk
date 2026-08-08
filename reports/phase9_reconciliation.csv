@@ -1,0 +1,8 @@
+category,woocommerce_source_count,dry_run_transformed_count,difference,pct_difference,status
+NOTE,"This compares source data to this dry run's payload, NOT to a live Shopify store - none exists",,,,
+"products (all statuses, source)",611,611,0,0%,PASS
+"products (published, source)",519,519,0,0%,PASS
+products (importable after quarantine),519,519,0,0.0%,PASS
+"variants (all statuses, source)",497,497,0,0%,PASS
+variants (published products only),455,455,0,0%,PASS
+distinct SKUs (source),554,554,0,0%,PASS

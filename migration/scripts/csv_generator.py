@@ -104,7 +104,7 @@ def product_to_rows(product):
             row['Title'] = product['title']
             row['Body (HTML)'] = product['body_html']
             row['Vendor'] = product['vendor']
-            row['Type'] = product['categories'][0] if product['categories'] else ''
+            row['Type'] = product.get('product_type') or (product['categories'][0] if product['categories'] else '')
             row['Tags'] = tags
             row['Published'] = published
             row['Status'] = status

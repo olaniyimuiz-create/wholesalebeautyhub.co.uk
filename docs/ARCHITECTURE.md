@@ -68,8 +68,13 @@ Maps the JSON into Shopify's documented CSV import columns (verified against
 
 ## Known limitations
 
-- Product `Type` is taken from the product's first WooCommerce category —
-  there's no separate free-text "type" field in WooCommerce to map from.
+- ~~Product `Type` is taken from the product's first WooCommerce category~~
+  **Fixed in Phase 9**: `Type` is now the *most specific* assigned category
+  (deepest in the `product_cat` parent chain — e.g. "Foundation" rather
+  than "Face" or "Makeup"), computed in `database_parser.py` via
+  `most_specific_category_for()` and stored as `product_type`, per
+  ADR-009. `csv_generator.py` falls back to the first category only if a
+  product has no `product_type` computed at all.
 - `Default Address Province Code` is passed through as WooCommerce's raw
   billing state/county (e.g. "England", "Wales") since GB addresses don't
   have Shopify-recognized province codes; harmless but not normalized.
