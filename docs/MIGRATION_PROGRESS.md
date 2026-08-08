@@ -13,6 +13,7 @@
 | 7 | Shopify Admin/GraphQL API integration (automated import vs. CSV) | Not started | Still undecided — blocks the exact acceptance criteria for the "Import products" issue in Milestone "Phase 9" |
 | 8 | Order history migration | Not started | Tracked as GitHub Milestone "Phase 11: Historical Order Strategy" (2 issues, ADR required before implementation) |
 | 9 | Cutover plan (DNS, final sync, WooCommerce freeze) | Foundation ready | Import sequence, rollback strategy, and deployment checklist written in `docs/SHOPIFY_DEPLOYMENT.md`; implementation tracked in Milestone "Phase 13: Production Go-Live" |
+| 10 | Media migration inventory (WooCommerce → Shopify) | Inventory built | 1,929-record canonical manifest, 8 CSV reports, idempotent and spot-checked — see `docs/MEDIA_MIGRATION.md`. Actual file conversion/upload not started — that's Phase 9 |
 
 ## Change log
 
@@ -260,6 +261,46 @@ Independent re-verification, not a rerun of Phase 7 itself — see
   later rather than including it up front.
 - No Phase 8 work was performed — inventory, conversion, and migration
   are explicitly still Phase 8's job, not this review's.
+
+### 2026-08-08 — Task 8: Media Migration inventory
+
+Analysis and reporting only — no files uploaded to Shopify, no
+WooCommerce data modified. Full detail: `docs/MEDIA_MIGRATION.md`.
+
+- Regenerated `migration/data/products.json` fresh (not reused) before
+  building the inventory, per this phase's explicit instruction not to
+  copy forward old figures.
+- Built `migration/scripts/media_inventory.py`, reusing `sql_utils.py`
+  like every other pipeline script. Independently recounted everything
+  Phase 6.5 had estimated: 1,719 attachments and the mime-type/AVIF
+  breakdown matched exactly (a consistency check passing, not an
+  unverified assumption); the "1,123 used" figure is superseded by a
+  more granular 1,929-usage-record manifest (one record per source+usage
+  pair, not one per physical file).
+- **Corrected, not just resolved, a Phase 7 finding**: real-data
+  investigation (not code-reading) found `wp_termmeta` has zero rows for
+  any of the 166 `pwb-brand` terms — brand logos were never actually
+  populated. Risk #25 updated to reflect this is a correction, not new
+  information layered on top of the old claim.
+- Found a related, real, previously-unknown fact in the same
+  investigation: category thumbnails (`product_cat` terms) are also 0-for-46
+  populated. And a genuinely useful bonus finding: real hex color data
+  exists for all 332 shade/color attribute terms that Phase 7's theme
+  build didn't know about and used text-pill swatches instead of.
+- Caught and fixed a real bug mid-build: WordPress's `'0'` = "not set"
+  convention was initially mishandled as a literal attachment ID,
+  producing 148 false "missing" variant images before the fix (194 fewer
+  false positives after correcting it — final missing/broken count: 9,
+  all genuine).
+- Verified idempotency by running the full pipeline twice — all 8 CSV
+  reports and the JSON manifest were byte-for-byte identical.
+- Spot-checked 6 randomly sampled files against the live site: 5/6 exact
+  filesize match, 1/6 revealed a real discrepancy (likely a file replaced
+  outside the WordPress Media Library UI) — reported as a new risk, not
+  hidden.
+- Added risks #27–29 to `docs/RISK_REGISTER.md`; corrected #25.
+- No Phase 9 work performed — no products, customers, or orders imported;
+  no DNS/production changes; no WooCommerce data deleted.
 
 ## Phase 6 Readiness Assessment
 

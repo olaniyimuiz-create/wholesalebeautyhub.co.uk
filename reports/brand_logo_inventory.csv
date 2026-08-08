@@ -1,0 +1,10 @@
+metric,value
+pwb-brand terms total,166
+pwb-brand terms with any termmeta row,0
+total termmeta rows across all pwb-brand terms,0
+brand terms with a logo image,0
+brand terms without a logo image,166
+valid logo references,0
+broken logo references,0
+duplicate logos,0
+conclusion,"No brand logo data exists anywhere in wp_termmeta for any pwb-brand term. The wp_snippets ""Brand Logos Shortcode"" code path that reads meta_key=pwb_brand_image was verified against real data and never had anything to read - its own text-only fallback is what always rendered live. See docs/MEDIA_MIGRATION.md for full method."
