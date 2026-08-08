@@ -12,3 +12,10 @@ shopify-theme/assets/shopify_customers_import.csv
 __pycache__/
 *.pyc
 
+# Shopify Admin API credentials - never commit real values. .env.example
+# (placeholders only) is tracked; .env and any environment-specific variant
+# are not. See docs/PHASE9_ENVIRONMENT_READINESS.md.
+.env
+.env.*
+!.env.example
+

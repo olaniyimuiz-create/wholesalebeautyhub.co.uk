@@ -1,0 +1,10 @@
+woo_product_id,title,criterion_covered,wc_type,status,variant_count,image_count,vendor,sku,price,regular_price,sale_price,notes
+124,Vee Beauty 9 In 1 Powder Palette,simple product with SKU and single image,simple,publish,0,1,Vee Beauty,328-1-item,16,16,,Baseline simple-product case
+17,Vee Beauty Second Skin Foundation,variable product with multiple variants + multiple images,variable,publish,9,3,Vee Beauty,,20,,,"9 variants, empty regular_price (risk #24 pattern present)"
+7535,ACNE & BLEMISH FIGHTER SET - VALENTINE COMBO DEALS,sale price + metafield candidate (bundle/combo),simple,publish,0,2,,568-1-item,82,89.99,82,"Real sale price (regular>sale); combo product - custom.included_items metafield candidate; maps to product.combo-deal.json template; also tests blank-vendor handling since ADR-007 dropped its brand tag"
+1687,Advanced Clinicals 16Oz Vit C Brightening Body Wash,multiple images (3),simple,publish,0,3,Advanced Clinicals,223-1-item,20,20,,Distinct multi-image case from product 17
+70,Msmetics Diy Lashes,missing images (zero) + variable product,variable,publish,5,0,Msmetics,,5,,,"One of the 4 known zero-image products; also variable, so tests variant handling with no media"
+22,Tehila Rosy Cheek Blush Palette,vendor + category + tags,variable,publish,2,1,Tehila,,20,,,Straightforward vendor/category/tag case
+1721,Ezanic Azelaic Acid Gel W/W 15G,known price-integrity flagged ID (risk #24 / issue #34),variable,publish,2,1,Ezanic,202-1-item,16,,,"One of the 24 IDs the site owner's own diagnostic flagged before migration - see docs/PHASE9_PRODUCT_IMPORT.md"
+2371,Telescopic Makeup Chair Foldable,problematic/edge-case data (ambiguous vendor + sale price),simple,publish,0,1,Accessories _make_up,98-1-item,130,140,130,"Vendor is a known data-entry placeholder (risk #14/#31, GitHub issue #38) - deliberately included to prove the test import correctly surfaces/rejects this rather than silently assigning a vendor"
+333,Dr Jart Hyaluronic Face Mask,AVIF featured image + draft status,simple,draft,0,1,Dr Jart,242-1-item,10,10,,"Featured image is AVIF (needs Phase 8 conversion before use) and product is draft status - tests both together"

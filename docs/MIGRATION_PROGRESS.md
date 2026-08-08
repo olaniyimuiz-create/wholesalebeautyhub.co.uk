@@ -10,7 +10,7 @@
 | 4 | Blog + static pages | Foundation ready | 9 pages have existing Rank Math SEO copy worth preserving — see `docs/SEO_STRATEGY.md`; theme templates built (`blog.json`, `article.json`, `page.json`), content migration tracked as issue "Migrate blog posts and static pages" |
 | 5 | SEO: URL redirect map (WooCommerce → Shopify slugs) | Done | 875-row redirect matrix + orphan/duplicate/broken-link reports in `reports/`; see `docs/SEO_STRATEGY.md` |
 | 6 | Metafields / metaobjects for attributes not covered by variants | Foundation ready | Concrete schema in `docs/SHOPIFY_FOUNDATION.md` and `shopify/foundation/{metafields,metaobjects}.json`; theme reads `custom.brand`/`custom.included_items` already (graceful if unset); Admin API creation tracked as issue "Create metafield and metaobject definitions" |
-| 7 | Shopify Admin/GraphQL API integration (automated import vs. CSV) | Not started | Still undecided — blocks the exact acceptance criteria for the "Import products" issue in Milestone "Phase 9" |
+| 7 | Shopify Admin/GraphQL API integration (automated import vs. CSV) | Recommendation made, not yet approved | Admin API (GraphQL) recommended over CSV — `docs/PHASE9_IMPORT_STRATEGY.md`. Conditional on store/credential provisioning, which hasn't happened — see `docs/PHASE9_ENVIRONMENT_READINESS.md` |
 | 8 | Order history migration | Not started | Tracked as GitHub Milestone "Phase 11: Historical Order Strategy" (2 issues, ADR required before implementation) |
 | 9 | Cutover plan (DNS, final sync, WooCommerce freeze) | Foundation ready | Import sequence, rollback strategy, and deployment checklist written in `docs/SHOPIFY_DEPLOYMENT.md`; implementation tracked in Milestone "Phase 13: Production Go-Live" |
 | 10 | Media migration inventory (WooCommerce → Shopify) | Inventory built | 1,929-record canonical manifest, 8 CSV reports, idempotent and spot-checked — see `docs/MEDIA_MIGRATION.md`. Actual file conversion/upload not started — that's Phase 9 |
@@ -347,6 +347,46 @@ phase is analysis, transformation, and validation only. Full detail:
   require a Shopify store and Admin API credentials that don't exist in
   this project. This is a real, external prerequisite, not a decision
   this phase could make or work around.
+
+### 2026-08-08 — Pre-import environment readiness (supporting Phase 9, not Phase 10)
+
+No Shopify store or credentials exist in this project, unchanged from the
+dry run above. This step builds the readiness tooling/documentation for
+when they do, without pretending they exist now. Full detail:
+`docs/PHASE9_ENVIRONMENT_READINESS.md`.
+
+- Independently re-verified every Phase 9 dry-run number against
+  `migration/data/products.json` from scratch (not trusted from the prior
+  report) — all matched exactly. Re-ran the idempotency check in a
+  separate temp copy of the environment — byte-identical to committed
+  reports. No discrepancies found.
+- Built the credential security design: `.env.example` (placeholders
+  only, tracked) and `.gitignore` rules (`.env`, `.env.*`,
+  `!.env.example`) so real credentials can never be committed by accident.
+- Built `migration/scripts/phase9_preflight.py` — a read-only Admin API
+  pre-flight check (auth, store identity, scopes, read access to
+  products/collections/metaobjects). Performs zero mutations, ever. Ran it
+  for real in this environment: it correctly reported `NOT_CONFIGURED`
+  (exit code 2) rather than fabricating a pass, since no credentials
+  exist here.
+- Selected a 9-product test-import set from real `products.json` data
+  (`reports/phase9_test_import_set.csv`), covering every required test
+  criterion including the known ambiguous-vendor and price-integrity edge
+  cases — no invented test products.
+- Designed (not built — no import client exists yet) the import safety
+  mechanics: idempotent matching by `custom.legacy_woo_id`, checkpointing,
+  structured logging, bounded retry, duplicate detection, rollback.
+- Designed the reconciliation report schema
+  (`reports/phase9_reconciliation_template.csv`) — header only, zero data
+  rows, since no test import has run. Explicitly not the same thing as
+  `reports/phase9_reconciliation.csv` (Phase 9 dry run), which compares
+  source data against itself, not against a live store.
+- Human approval gate checked against reality: 0 of 8 required items are
+  met (no dev/test store, no credentials, no plan-tier decision, no
+  Markets/B2B decision, test set not yet approved by the store owner).
+- **Status: BLOCKED.** Did not create a Shopify store, request an Admin
+  API token, perform any write against Shopify, import any product,
+  customer, or order, or touch WooCommerce/DNS/production in any way.
 
 ## Phase 6 Readiness Assessment
 

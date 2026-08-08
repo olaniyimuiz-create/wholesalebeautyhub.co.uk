@@ -6,7 +6,9 @@ import either way — no Shopify store or API credentials have existed at
 any point in this project (verified: no `shopify.app.toml`, no API
 token, no store domain referenced anywhere in the repository or prior
 session history). That absence is itself load-bearing for this decision,
-not a detail to gloss over.
+not a detail to gloss over. For the full environment/credential
+readiness checklist and current BLOCKED status, see
+`docs/PHASE9_ENVIRONMENT_READINESS.md`.
 
 ## Evaluation
 
