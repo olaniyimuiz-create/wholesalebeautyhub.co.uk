@@ -1,0 +1,32 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_accent": "#b8874f",
+      "color_accent_contrast": "#ffffff",
+      "color_bg": "#ffffff",
+      "color_bg_secondary": "#f7f5f3",
+      "color_text": "#1a1a1a",
+      "color_text_secondary": "#5c5c5c",
+      "color_border": "#e2ddd8",
+      "color_success": "#2f6f4e",
+      "color_error": "#b3261e",
+      "color_warning": "#9a6700",
+      "font_heading": "assistant_n4",
+      "font_body": "inter_n4",
+      "font_size_base": 16,
+      "container_max_width": 1440,
+      "grid_gap": 24,
+      "radius_scale": "soft",
+      "grid_cols_desktop": 4,
+      "grid_cols_tablet": 3,
+      "show_vendor_on_card": true,
+      "show_quick_add": true,
+      "enable_swatch_preview": true,
+      "cart_type": "drawer",
+      "enable_sticky_add_to_cart": true,
+      "enable_predictive_search": true,
+      "predictive_search_show_vendor": true
+    }
+  }
+}

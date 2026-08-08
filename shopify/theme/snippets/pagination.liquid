@@ -1,0 +1,39 @@
+{%- comment -%}
+  Params: paginate
+{%- endcomment -%}
+
+{%- if paginate.pages > 1 -%}
+<nav class="pagination" aria-label="Pagination">
+  <ul class="pagination__list" role="list">
+    {%- if paginate.previous -%}
+      <li>
+        <a href="{{ paginate.previous.url }}" class="pagination__link pagination__link--prev" rel="prev">
+          {%- render 'icon', name: 'chevron-left', size: 14 -%}
+          <span class="visually-hidden">Previous page</span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      <li>
+        {%- if part.is_link -%}
+          <a href="{{ part.url }}" class="pagination__link" aria-label="Page {{ part.title }}">{{ part.title }}</a>
+        {%- elsif part.title == paginate.current_page -%}
+          <span class="pagination__link is-current" aria-current="page">{{ part.title }}</span>
+        {%- else -%}
+          <span class="pagination__ellipsis">{{ part.title }}</span>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <li>
+        <a href="{{ paginate.next.url }}" class="pagination__link pagination__link--next" rel="next">
+          <span class="visually-hidden">Next page</span>
+          {%- render 'icon', name: 'chevron-right', size: 14 -%}
+        </a>
+      </li>
+    {%- endif -%}
+  </ul>
+</nav>
+{%- endif -%}

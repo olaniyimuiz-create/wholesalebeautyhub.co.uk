@@ -1,0 +1,44 @@
+{%- if section.blocks.size > 0 -%}
+<div class="announcement-bar" data-section-id="{{ section.id }}" data-section-type="announcement-bar">
+  <div class="announcement-bar__track" role="list" {% if section.blocks.size > 1 %}data-announcement-rotate{% endif %}>
+    {%- for block in section.blocks -%}
+      <div class="announcement-bar__item" role="listitem" {{ block.shopify_attributes }} {% if forloop.index > 1 %}hidden{% endif %}>
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+        {%- else -%}
+          <span>{{ block.settings.text }}</span>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.settings.dismissible -%}
+    <button type="button" class="announcement-bar__dismiss" data-announcement-dismiss>
+      <span class="visually-hidden">{{ 'sections.announcement-bar.dismiss' | t }}</span>
+      {%- render 'icon', name: 'close', size: 14 -%}
+    </button>
+  {%- endif -%}
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.name",
+  "settings": [
+    { "type": "checkbox", "id": "dismissible", "label": "t:sections.announcement-bar.settings.dismissible.label", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "t:sections.announcement-bar.blocks.announcement.name",
+      "settings": [
+        { "type": "text", "id": "text", "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label", "default": "Free UK shipping over £50" },
+        { "type": "url", "id": "link", "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    { "name": "t:sections.announcement-bar.name", "blocks": [{ "type": "announcement" }] }
+  ]
+}
+{% endschema %}

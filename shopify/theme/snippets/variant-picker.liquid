@@ -1,0 +1,50 @@
+{%- comment -%}
+  Variant option picker. This catalog is at most single-option (Shade/
+  Size) per docs/SHOPIFY_FOUNDATION.md, but built generically for up to
+  Shopify's 3-option limit rather than hardcoding for one.
+
+  Behavior (selecting an option, updating price/media/availability) is
+  handled by assets/theme.js listening for `change` on
+  [data-variant-picker] — no inline event handlers, per
+  docs/SHOPIFY_CODING_STANDARDS.md.
+{%- endcomment -%}
+
+{%- if product.has_only_default_variant == false -%}
+<div class="variant-picker" data-variant-picker data-product-handle="{{ product.handle }}">
+  <script type="application/json" data-variant-picker-data>
+    {{ product.variants | json }}
+  </script>
+
+  {%- for option in product.options_with_values -%}
+    <fieldset class="variant-picker__option">
+      <legend class="variant-picker__option-name">
+        {{ option.name }}: <span data-selected-option-value>{{ option.selected_value }}</span>
+      </legend>
+      <div class="variant-picker__values" role="radiogroup" aria-label="{{ option.name }}">
+        {%- for value in option.values -%}
+          {%- liquid
+            assign is_shade_style = false
+            if option.name == 'Shades' or option.name == 'Color' or option.name == 'Shade'
+              assign is_shade_style = true
+            endif
+          -%}
+          <label class="variant-picker__value{% if is_shade_style %} variant-picker__value--pill{% endif %}">
+            <input
+              type="radio"
+              name="option-{{ option.position }}"
+              value="{{ value | escape }}"
+              {% if option.selected_value == value %}checked{% endif %}
+              class="visually-hidden"
+            >
+            <span class="variant-picker__value-label">{{ value }}</span>
+          </label>
+        {%- endfor -%}
+      </div>
+    </fieldset>
+  {%- endfor -%}
+
+  <p class="variant-picker__unavailable-note" data-variant-unavailable-note hidden>
+    {{ 'products.product.unavailable' | t }}
+  </p>
+</div>
+{%- endif -%}

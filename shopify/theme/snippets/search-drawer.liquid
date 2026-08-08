@@ -1,0 +1,43 @@
+{%- comment -%}
+  Predictive search drawer. Results are fetched from Shopify's native
+  Predictive Search API (/search/suggest.json?...&section_id=predictive-search,
+  rendered server-side by sections/predictive-search.liquid) — no app
+  required. assets/theme.js debounces input and injects the fetched HTML
+  into [data-search-results]. Handles synonyms/misspellings/autocomplete
+  natively since that's Shopify Search & Discovery's own ranking, not
+  something the theme implements.
+{%- endcomment -%}
+
+<div class="search-drawer" data-search-drawer role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+  <div class="search-drawer__header">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-drawer__form" data-search-form>
+      <input type="hidden" name="type" value="product">
+      <label class="visually-hidden" for="SearchInput">{{ 'general.search.search' | t }}</label>
+      {%- render 'icon', name: 'search' -%}
+      <input
+        type="search"
+        id="SearchInput"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="{{ 'general.search.placeholder' | t }}"
+        autocomplete="off"
+        data-search-input
+      >
+      <button type="button" class="search-drawer__clear" data-search-clear hidden>
+        <span class="visually-hidden">{{ 'general.search.clear' | t }}</span>
+        {%- render 'icon', name: 'close', size: 14 -%}
+      </button>
+    </form>
+    <button type="button" class="search-drawer__close" data-search-drawer-close>
+      <span class="visually-hidden">{{ 'general.accessibility.close' | t }}</span>
+      {%- render 'icon', name: 'close' -%}
+    </button>
+  </div>
+
+  <div
+    class="search-drawer__results"
+    data-search-results
+    data-url-template="{{ routes.predictive_search_url }}?q={q}&resources[type]=product,collection,page,article&resources[limit]=6&resources[options][unavailable_products]=last&section_id=predictive-search"
+    aria-live="polite"
+  ></div>
+</div>

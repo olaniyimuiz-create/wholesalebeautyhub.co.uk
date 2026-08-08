@@ -1,0 +1,27 @@
+<div class="error-404" data-section-id="{{ section.id }}" data-section-type="404">
+  <div class="container empty-state">
+    <h1>{{ 'templates.404.title' | t }}</h1>
+    <p>{{ 'templates.404.subtext' | t }}</p>
+    <a href="{{ routes.root_url }}" class="btn btn--primary">{{ 'templates.404.back_to_home' | t }}</a>
+
+    {%- if section.settings.show_search -%}
+      <div class="error-404__search">
+        <form action="{{ routes.search_url }}" method="get" role="search">
+          <input type="hidden" name="type" value="product">
+          <label class="visually-hidden" for="Error404Search">{{ 'general.search.search' | t }}</label>
+          <input type="search" id="Error404Search" name="q" placeholder="{{ 'general.search.placeholder' | t }}">
+          <button type="submit" class="btn btn--secondary">{{ 'general.search.search' | t }}</button>
+        </form>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.404.name",
+  "settings": [
+    { "type": "checkbox", "id": "show_search", "label": "t:sections.404.settings.show_search.label", "default": true }
+  ]
+}
+{% endschema %}

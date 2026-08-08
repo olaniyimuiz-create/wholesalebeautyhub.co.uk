@@ -1,0 +1,32 @@
+{%- comment -%}
+  Sticky add-to-cart bar. Shown/hidden by an IntersectionObserver on the
+  main buy-buttons block (assets/theme.js) once that block scrolls out of
+  view — decorative until then, so it's built as always-present-but-hidden
+  rather than injected dynamically (avoids a layout-shift on first paint).
+{%- endcomment -%}
+
+{%- if settings.enable_sticky_add_to_cart -%}
+<div class="sticky-atc" data-sticky-atc hidden>
+  <div class="container sticky-atc__inner">
+    <div class="sticky-atc__product">
+      {{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', width: 48 }}
+      <div>
+        <p class="sticky-atc__title">{{ product.title }}</p>
+        {%- render 'price', target: product.selected_or_first_available_variant -%}
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn--primary"
+      data-sticky-add-to-cart
+      {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+    >
+      {%- if product.selected_or_first_available_variant.available -%}
+        {{ 'products.product.add_to_cart' | t }}
+      {%- else -%}
+        {{ 'products.product.sold_out' | t }}
+      {%- endif -%}
+    </button>
+  </div>
+</div>
+{%- endif -%}

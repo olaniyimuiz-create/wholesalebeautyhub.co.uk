@@ -1,0 +1,32 @@
+<div class="featured-collection" data-section-id="{{ section.id }}" data-section-type="featured-collection">
+  <div class="container">
+    <div class="featured-collection__header">
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.collection -%}
+        <a href="{{ section.settings.collection.url }}" class="featured-collection__view-all">View all</a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.collection -%}
+      <div class="featured-collection__grid grid" style="--grid-cols-desktop: {{ section.settings.products_to_show }};">
+        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+          {%- render 'product-card', product: product, loading: 'lazy' -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.featured-collection.name",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Best sellers" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 4, "max": 12, "step": 1, "default": 8 }
+  ],
+  "presets": [{ "name": "t:sections.featured-collection.name" }]
+}
+{% endschema %}

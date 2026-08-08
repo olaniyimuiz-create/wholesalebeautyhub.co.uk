@@ -1,0 +1,100 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Wholesale Beauty Hub",
+    "theme_version": "0.1.0",
+    "theme_author": "Migration project — see docs/SHOPIFY_BUILD_GUIDELINES.md"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "header", "content": "Brand" },
+      { "type": "color", "id": "color_accent", "label": "Accent", "default": "#b8874f" },
+      { "type": "color", "id": "color_accent_contrast", "label": "Accent contrast (text on accent)", "default": "#ffffff" },
+      { "type": "header", "content": "Base" },
+      { "type": "color", "id": "color_bg", "label": "Background", "default": "#ffffff" },
+      { "type": "color", "id": "color_bg_secondary", "label": "Secondary background", "default": "#f7f5f3" },
+      { "type": "color", "id": "color_text", "label": "Text", "default": "#1a1a1a" },
+      { "type": "color", "id": "color_text_secondary", "label": "Secondary text", "default": "#5c5c5c" },
+      { "type": "color", "id": "color_border", "label": "Border", "default": "#e2ddd8" },
+      { "type": "header", "content": "Feedback" },
+      { "type": "color", "id": "color_success", "label": "Success", "default": "#2f6f4e" },
+      { "type": "color", "id": "color_error", "label": "Error / sale", "default": "#b3261e" },
+      { "type": "color", "id": "color_warning", "label": "Warning", "default": "#9a6700" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "header", "content": "Headings" },
+      { "type": "font_picker", "id": "font_heading", "label": "Heading font", "default": "assistant_n4" },
+      { "type": "header", "content": "Body" },
+      { "type": "font_picker", "id": "font_body", "label": "Body font", "default": "inter_n4" },
+      { "type": "range", "id": "font_size_base", "label": "Base font size", "min": 14, "max": 18, "step": 1, "unit": "px", "default": 16 }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      { "type": "range", "id": "container_max_width", "label": "Max content width", "min": 1200, "max": 1600, "step": 20, "unit": "px", "default": 1440 },
+      { "type": "range", "id": "grid_gap", "label": "Grid gap", "min": 8, "max": 32, "step": 4, "unit": "px", "default": 24 },
+      {
+        "type": "select",
+        "id": "radius_scale",
+        "label": "Corner radius",
+        "options": [
+          { "value": "sharp", "label": "Sharp" },
+          { "value": "soft", "label": "Soft (default)" },
+          { "value": "round", "label": "Round" }
+        ],
+        "default": "soft"
+      }
+    ]
+  },
+  {
+    "name": "Product grid",
+    "settings": [
+      { "type": "range", "id": "grid_cols_desktop", "label": "Products per row (desktop)", "min": 2, "max": 5, "step": 1, "default": 4 },
+      { "type": "range", "id": "grid_cols_tablet", "label": "Products per row (tablet)", "min": 2, "max": 4, "step": 1, "default": 3 },
+      { "type": "checkbox", "id": "show_vendor_on_card", "label": "Show vendor on product cards", "default": true },
+      { "type": "checkbox", "id": "show_quick_add", "label": "Enable Quick Add on product cards", "default": true },
+      { "type": "checkbox", "id": "enable_swatch_preview", "label": "Show color/shade swatches on product cards", "default": true }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart behavior",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" },
+          { "value": "notification", "label": "Notification popup" }
+        ],
+        "default": "drawer"
+      },
+      { "type": "checkbox", "id": "enable_sticky_add_to_cart", "label": "Enable sticky add-to-cart bar on product pages", "default": true }
+    ]
+  },
+  {
+    "name": "Search",
+    "settings": [
+      { "type": "checkbox", "id": "enable_predictive_search", "label": "Enable predictive search", "default": true },
+      { "type": "checkbox", "id": "predictive_search_show_vendor", "label": "Show vendor in predictive search results", "default": true }
+    ]
+  },
+  {
+    "name": "Social & SEO",
+    "settings": [
+      { "type": "header", "content": "Social sharing image fallback" },
+      { "type": "image_picker", "id": "social_sharing_image", "label": "Default social sharing image" },
+      { "type": "header", "content": "Social accounts" },
+      { "type": "text", "id": "social_instagram_url", "label": "Instagram URL" },
+      { "type": "text", "id": "social_tiktok_url", "label": "TikTok URL" },
+      { "type": "text", "id": "social_facebook_url", "label": "Facebook URL" },
+      { "type": "text", "id": "social_twitter_url", "label": "X / Twitter URL" }
+    ]
+  }
+]

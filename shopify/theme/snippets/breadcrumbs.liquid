@@ -1,0 +1,53 @@
+{%- comment -%}
+  Breadcrumb trail + BreadcrumbList JSON-LD in one component (visual and
+  schema data come from the same list, so building them together avoids
+  the two ever drifting apart). Each field goes through the `json` filter
+  individually rather than hand-built as a string, so titles containing
+  quotes/special characters can't produce broken JSON-LD.
+{%- endcomment -%}
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="breadcrumbs__list" role="list">
+    <li><a href="{{ routes.root_url }}">{{ shop.name }}</a></li>
+    {%- case template.name -%}
+      {%- when 'product' -%}
+        {%- if product.collections.size > 0 -%}
+          <li><a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a></li>
+        {%- endif -%}
+        <li aria-current="page">{{ product.title }}</li>
+      {%- when 'collection' -%}
+        <li aria-current="page">{{ collection.title }}</li>
+      {%- when 'article' -%}
+        <li><a href="{{ blog.url }}">{{ blog.title }}</a></li>
+        <li aria-current="page">{{ article.title }}</li>
+      {%- when 'page' -%}
+        <li aria-current="page">{{ page.title }}</li>
+    {%- endcase -%}
+  </ol>
+</nav>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":{{ shop.name | json }},"item":{{ shop.url | append: '/' | json }}}
+    {%- case template.name -%}
+      {%- when 'product' -%}
+        {%- if product.collections.size > 0 -%}
+        ,{"@type":"ListItem","position":2,"name":{{ product.collections.first.title | json }},"item":{{ product.collections.first.url | prepend: shop.url | json }}}
+        ,{"@type":"ListItem","position":3,"name":{{ product.title | json }},"item":{{ product.url | prepend: shop.url | json }}}
+        {%- else -%}
+        ,{"@type":"ListItem","position":2,"name":{{ product.title | json }},"item":{{ product.url | prepend: shop.url | json }}}
+        {%- endif -%}
+      {%- when 'collection' -%}
+        ,{"@type":"ListItem","position":2,"name":{{ collection.title | json }},"item":{{ collection.url | prepend: shop.url | json }}}
+      {%- when 'article' -%}
+        ,{"@type":"ListItem","position":2,"name":{{ blog.title | json }},"item":{{ blog.url | prepend: shop.url | json }}}
+        ,{"@type":"ListItem","position":3,"name":{{ article.title | json }},"item":{{ article.url | prepend: shop.url | json }}}
+      {%- when 'page' -%}
+        ,{"@type":"ListItem","position":2,"name":{{ page.title | json }},"item":{{ page.url | prepend: shop.url | json }}}
+    {%- endcase -%}
+  ]
+}
+</script>

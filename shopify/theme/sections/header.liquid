@@ -1,0 +1,99 @@
+<header class="header{% if section.settings.sticky %} header--sticky{% endif %}" data-section-id="{{ section.id }}" data-section-type="header">
+  <div class="container header__inner">
+    <button
+      type="button"
+      class="header__menu-toggle btn btn--secondary"
+      aria-expanded="false"
+      aria-controls="mobile-nav-{{ section.id }}"
+      data-mobile-nav-toggle
+    >
+      <span class="visually-hidden">{{ 'sections.header.menu' | t }}</span>
+      {%- render 'icon', name: 'menu' -%}
+    </button>
+
+    <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo -%}
+        {{ section.settings.logo | image_url: width: section.settings.logo_width | image_tag: loading: 'eager', fetchpriority: 'high', width: section.settings.logo_width }}
+      {%- else -%}
+        <span class="header__logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="header__nav" aria-label="{{ 'sections.header.menu' | t }}">
+      <ul class="header__nav-list" role="list">
+        {%- for link in linklists[section.settings.main_menu].links -%}
+          <li class="header__nav-item{% if link.links.size > 0 %} has-dropdown{% endif %}">
+            {%- if link.links.size > 0 -%}
+              <button
+                type="button"
+                class="header__nav-link header__nav-link--parent"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="mega-menu-{{ forloop.index }}-{{ section.id }}"
+                data-mega-menu-trigger
+              >
+                {{ link.title }}
+                {%- render 'icon', name: 'chevron-down' -%}
+              </button>
+              <div class="header__mega-menu" id="mega-menu-{{ forloop.index }}-{{ section.id }}" data-mega-menu hidden>
+                <ul class="header__mega-menu-list" role="list">
+                  {%- for child_link in link.links -%}
+                    <li>
+                      <a href="{{ child_link.url }}" class="header__mega-menu-link">
+                        {{ child_link.title }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+                {%- if link.title == 'Brands' -%}
+                  <a href="{{ routes.root_url }}pages/brands" class="header__mega-menu-view-all">
+                    {{ 'collections.general.view_all_brands' | t }}
+                  </a>
+                {%- endif -%}
+              </div>
+            {%- else -%}
+              <a href="{{ link.url }}" class="header__nav-link">{{ link.title }}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <button type="button" class="header__action-btn" data-search-drawer-toggle aria-haspopup="dialog">
+        <span class="visually-hidden">{{ 'general.search.search' | t }}</span>
+        {%- render 'icon', name: 'search' -%}
+      </button>
+
+      <a href="{{ routes.account_url }}" class="header__action-btn">
+        <span class="visually-hidden">{{ 'sections.header.account' | t }}</span>
+        {%- render 'icon', name: 'account' -%}
+      </a>
+
+      <button type="button" class="header__action-btn header__cart-btn" data-cart-drawer-toggle aria-haspopup="dialog">
+        <span class="visually-hidden">
+          {{ 'sections.header.cart_count' | t: count: cart.item_count }}
+        </span>
+        {%- render 'icon', name: 'cart' -%}
+        <span class="header__cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>
+          {{ cart.item_count }}
+        </span>
+      </button>
+    </div>
+  </div>
+
+  {%- render 'mobile-nav', section_id: section.id, menu: section.settings.main_menu -%}
+</header>
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "t:sections.header.settings.logo.label" },
+    { "type": "range", "id": "logo_width", "label": "t:sections.header.settings.logo_width.label", "min": 80, "max": 260, "step": 10, "unit": "px", "default": 150 },
+    { "type": "link_list", "id": "main_menu", "label": "Main menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "sticky", "label": "t:sections.header.settings.sticky.label", "default": true }
+  ]
+}
+{% endschema %}
+

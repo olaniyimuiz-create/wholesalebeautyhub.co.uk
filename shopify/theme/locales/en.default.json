@@ -1,0 +1,117 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close",
+      "open_menu": "Open menu",
+      "close_menu": "Close menu",
+      "loading": "Loading",
+      "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars"
+    },
+    "search": {
+      "search": "Search",
+      "placeholder": "Search products, brands, collections...",
+      "clear": "Clear search",
+      "no_results": "No results for \"{{ terms }}\"",
+      "results_count": {
+        "one": "{{ count }} result",
+        "other": "{{ count }} results"
+      },
+      "view_all_results": "View all results for \"{{ terms }}\""
+    },
+    "cart": {
+      "title": "Cart",
+      "empty": "Your cart is empty",
+      "view_cart": "View cart",
+      "checkout": "Check out",
+      "remove": "Remove",
+      "quantity": "Quantity",
+      "subtotal": "Subtotal",
+      "shipping_at_checkout": "Shipping and taxes calculated at checkout",
+      "item_added": "Added to your cart",
+      "update_error": "There was an error updating your cart"
+    },
+    "social": {
+      "follow_on": "Follow us on {{ platform }}"
+    }
+  },
+  "products": {
+    "product": {
+      "vendor": "Vendor",
+      "sku": "SKU",
+      "quantity": "Quantity",
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "select_option": "Select {{ option }}",
+      "in_stock": "In stock",
+      "low_stock": "Only {{ count }} left",
+      "out_of_stock": "Out of stock",
+      "view_details": "View details",
+      "quick_add": "Quick add",
+      "quick_view": "Quick view",
+      "related_products": "You may also like",
+      "recently_viewed": "Recently viewed",
+      "included_in_bundle": "What's included",
+      "description": "Description",
+      "shipping_info": "Shipping information",
+      "returns_info": "Returns & exchanges"
+    },
+    "media": {
+      "open_gallery": "Open image {{ index }} of {{ count }}",
+      "next": "Next image",
+      "previous": "Previous image",
+      "play_video": "Play video"
+    }
+  },
+  "collections": {
+    "general": {
+      "no_products": "No products found in this collection",
+      "clear_filters": "Clear all filters",
+      "filter_and_sort": "Filter and sort",
+      "sort_by": "Sort by",
+      "filters": "Filters",
+      "showing_count": "Showing {{ count }} of {{ total }} products",
+      "apply_filters": "Apply",
+      "view_all_brands": "View all brands"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "account": "Account",
+      "log_in": "Log in",
+      "cart_count": {
+        "one": "{{ count }} item in cart",
+        "other": "{{ count }} items in cart"
+      }
+    },
+    "footer": {
+      "newsletter_heading": "Stay in the loop",
+      "newsletter_subheading": "New arrivals, restocks, and offers — no spam.",
+      "newsletter_email_placeholder": "Your email",
+      "newsletter_submit": "Subscribe",
+      "newsletter_success": "Thanks for subscribing",
+      "newsletter_error": "Please enter a valid email"
+    },
+    "announcement-bar": {
+      "dismiss": "Dismiss announcement"
+    }
+  },
+  "templates": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you're looking for doesn't exist or has moved.",
+      "back_to_home": "Back to homepage"
+    }
+  },
+  "blogs": {
+    "article": {
+      "read_more": "Read more",
+      "posted_by": "Posted by {{ author }} on {{ date }}"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{%- comment -%}
+  Params: article
+{%- endcomment -%}
+
+<article class="article-card card">
+  <a href="{{ article.url }}" class="article-card__media">
+    {%- if article.image -%}
+      {{ article.image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,450,600', alt: article.image.alt | default: article.title }}
+    {%- else -%}
+      {{ 'article' | placeholder_svg_tag }}
+    {%- endif -%}
+  </a>
+  <div class="article-card__info">
+    <h3 class="article-card__title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+    <p class="article-card__meta">
+      {{ 'blogs.article.posted_by' | t: author: article.author, date: article.published_at | date: '%B %d, %Y' }}
+    </p>
+    <p class="article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
+    <a href="{{ article.url }}" class="article-card__link">{{ 'blogs.article.read_more' | t }}</a>
+  </div>
+</article>

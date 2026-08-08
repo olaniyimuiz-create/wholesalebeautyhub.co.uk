@@ -1,0 +1,31 @@
+{%- comment -%}
+  Theme Block — reusable single trust signal (icon + text). Nestable in
+  any section that accepts "@theme" blocks: product info, footer, or a
+  dedicated trust-badges row section.
+{%- endcomment -%}
+
+<div class="trust-badge" {{ block.shopify_attributes }}>
+  {%- render 'icon', name: block.settings.icon, size: 22 -%}
+  <span>{{ block.settings.text }}</span>
+</div>
+
+{% schema %}
+{
+  "name": "t:blocks.trust-badge.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:blocks.trust-badge.settings.icon.label",
+      "options": [
+        { "value": "truck", "label": "Shipping" },
+        { "value": "shield-check", "label": "Security" },
+        { "value": "check", "label": "Checkmark" },
+        { "value": "star", "label": "Star" }
+      ],
+      "default": "shield-check"
+    },
+    { "type": "text", "id": "text", "label": "t:blocks.trust-badge.settings.text.label", "default": "Secure checkout" }
+  ]
+}
+{% endschema %}

@@ -10,8 +10,8 @@ Migration artifacts and future theme development, kept separate from
   collections/products are actually created in Shopify. See
   `docs/SHOPIFY_FOUNDATION.md` for the human-readable version and the
   reasoning behind each list.
-- **`theme/`** — reserved for the Shopify theme itself (Phase 7). Empty
-  until then; no Liquid/theme code is written before Phase 7 is approved.
+- **`theme/`** — the Shopify theme (Online Store 2.0), built in Phase 7.
+  See `docs/THEME_ARCHITECTURE.md` and `docs/COMPONENT_LIBRARY.md`.
 - **`scripts/`** — reserved for future Admin/GraphQL API setup scripts
   (collection creation, metafield/metaobject definition, redirect import —
   Phase 9). Empty until then.

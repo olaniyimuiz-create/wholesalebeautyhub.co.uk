@@ -1,0 +1,7 @@
+{%- comment -%}
+  Renders a single product-card for AJAX fetches — used by
+  snippets/recently-viewed.liquid via /products/{handle}?section_id=product-card-fragment.
+  Not added directly to any template.
+{%- endcomment -%}
+
+{%- render 'product-card', product: product, loading: 'lazy' -%}

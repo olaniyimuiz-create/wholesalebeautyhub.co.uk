@@ -1,0 +1,140 @@
+{
+  "sections": {
+    "header": {
+      "name": "Header",
+      "settings": {
+        "logo": { "label": "Logo" },
+        "logo_width": { "label": "Logo width" },
+        "sticky": { "label": "Sticky header" }
+      },
+      "blocks": {
+        "menu_item": { "name": "Menu item" }
+      }
+    },
+    "footer": {
+      "name": "Footer",
+      "settings": {
+        "show_newsletter": { "label": "Show newsletter signup" },
+        "show_social": { "label": "Show social icons" }
+      },
+      "blocks": {
+        "link_list": { "name": "Menu column" },
+        "text": { "name": "Text block" }
+      }
+    },
+    "main-product": {
+      "name": "Product information",
+      "blocks": {
+        "title": { "name": "Title" },
+        "price": { "name": "Price" },
+        "vendor": { "name": "Vendor" },
+        "variant_picker": { "name": "Variant picker" },
+        "quantity_selector": { "name": "Quantity selector" },
+        "buy_buttons": { "name": "Buy buttons" },
+        "description": { "name": "Description" },
+        "brand_block": { "name": "Brand info (metaobject)" },
+        "included_items": { "name": "Included items (bundles)" },
+        "trust_badges": { "name": "Trust badges" },
+        "shipping_returns": { "name": "Shipping & returns" }
+      }
+    },
+    "main-collection": {
+      "name": "Collection pages",
+      "settings": {
+        "enable_filtering": { "label": "Enable filtering" },
+        "enable_sorting": { "label": "Enable sorting" },
+        "products_per_page": { "label": "Products per page" }
+      }
+    },
+    "collection-banner": {
+      "name": "Collection banner",
+      "settings": {
+        "show_description": { "label": "Show collection description" },
+        "show_image": { "label": "Show collection image" }
+      }
+    },
+    "brand-banner": {
+      "name": "Brand banner",
+      "settings": {
+        "source": { "label": "Content source" },
+        "logo": { "label": "Brand logo (fallback if no metaobject linked)" }
+      }
+    },
+    "hero-banner": {
+      "name": "Hero banner",
+      "settings": {
+        "heading": { "label": "Heading" },
+        "subheading": { "label": "Subheading" },
+        "image": { "label": "Image" },
+        "button_label": { "label": "Button label" },
+        "button_link": { "label": "Button link" }
+      }
+    },
+    "promo-banner": {
+      "name": "Promo banner"
+    },
+    "collection-list": {
+      "name": "Collection list"
+    },
+    "featured-collection": {
+      "name": "Featured collection"
+    },
+    "announcement-bar": {
+      "name": "Announcement bar",
+      "settings": {
+        "dismissible": { "label": "Allow customers to dismiss" }
+      },
+      "blocks": {
+        "announcement": { "name": "Announcement", "settings": { "text": { "label": "Text" }, "link": { "label": "Link" } } }
+      }
+    },
+    "faq": {
+      "name": "FAQ",
+      "settings": {
+        "heading": { "label": "Heading" }
+      },
+      "blocks": {
+        "question": {
+          "name": "Question",
+          "settings": {
+            "question": { "label": "Question" },
+            "answer": { "label": "Answer" }
+          }
+        }
+      }
+    },
+    "newsletter": {
+      "name": "Newsletter signup"
+    },
+    "404": {
+      "name": "404 page",
+      "settings": {
+        "show_search": { "label": "Show search bar" }
+      }
+    },
+    "main-blog": {
+      "name": "Blog list"
+    },
+    "main-article": {
+      "name": "Blog post"
+    },
+    "main-page": {
+      "name": "Page"
+    },
+    "main-search": {
+      "name": "Search results"
+    },
+    "main-cart": {
+      "name": "Cart page"
+    }
+  },
+  "blocks": {
+    "trust-badge": {
+      "name": "Trust badge",
+      "settings": {
+        "icon": { "label": "Icon" },
+        "text": { "label": "Text" }
+      }
+    }
+  }
+}

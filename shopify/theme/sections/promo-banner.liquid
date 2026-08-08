@@ -1,0 +1,35 @@
+{%- comment -%}
+  Campaign-style hero for manual promo collections (Valentine Combo Deals,
+  Tradefair Combo Deals, Combo Deals — ADR-007). Simpler than
+  collection-banner.liquid: no Product Type/Vendor filter context, just a
+  campaign image + message, since promo collections are hand-curated
+  bundles rather than a taxonomy browse page.
+{%- endcomment -%}
+
+<div class="promo-banner" data-section-id="{{ section.id }}" data-section-type="promo-banner">
+  {%- if section.settings.image -%}
+    {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'eager', fetchpriority: 'high', alt: collection.title }}
+  {%- elsif collection.image -%}
+    {{ collection.image | image_url: width: 1600 | image_tag: loading: 'eager', fetchpriority: 'high', alt: collection.title }}
+  {%- endif -%}
+
+  <div class="container promo-banner__content">
+    <h1 class="promo-banner__title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="promo-banner__description">{{ collection.description }}</div>
+    {%- endif -%}
+    {%- if section.settings.end_date != blank -%}
+      <p class="promo-banner__end-date">{{ section.settings.end_date }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.promo-banner.name",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Campaign image (overrides collection image)" },
+    { "type": "text", "id": "end_date", "label": "Offer end date (display text)" }
+  ]
+}
+{% endschema %}

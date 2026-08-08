@@ -1,0 +1,14 @@
+{%- comment -%}
+  Params: section_id
+{%- endcomment -%}
+
+<div class="sort-control">
+  <label for="SortBy-{{ section_id }}" class="visually-hidden">{{ 'collections.general.sort_by' | t }}</label>
+  <select id="SortBy-{{ section_id }}" name="sort_by" data-sort-select>
+    {%- for option in collection.sort_options -%}
+      <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>
+        {{ option.name }}
+      </option>
+    {%- endfor -%}
+  </select>
+</div>

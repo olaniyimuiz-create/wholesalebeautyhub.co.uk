@@ -1,0 +1,67 @@
+{%- comment -%}
+  Rendered by Shopify's Predictive Search API via section_id=predictive-search
+  (see snippets/search-drawer.liquid). Not added directly to any template.
+{%- endcomment -%}
+
+{%- if predictive_search.resources.results.products.size == 0
+  and predictive_search.resources.results.collections.size == 0
+  and predictive_search.resources.results.pages.size == 0
+  and predictive_search.resources.results.articles.size == 0
+-%}
+  <div class="empty-state">
+    <p>{{ 'general.search.no_results' | t: terms: predictive_search.terms }}</p>
+  </div>
+{%- else -%}
+
+  {%- if predictive_search.resources.results.collections.size > 0 -%}
+    <div class="search-results__group">
+      <h3 class="search-results__group-heading">Collections</h3>
+      <ul role="list">
+        {%- for collection in predictive_search.resources.results.collections -%}
+          <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+
+  {%- if predictive_search.resources.results.products.size > 0 -%}
+    <div class="search-results__group">
+      <h3 class="search-results__group-heading">Products</h3>
+      <div class="search-results__products grid">
+        {%- for product in predictive_search.resources.results.products -%}
+          <div class="search-result-card">
+            <a href="{{ product.url }}" class="search-result-card__media">
+              {{ product.featured_media | image_url: width: 160 | image_tag: loading: 'lazy', alt: product.title, width: 80 }}
+            </a>
+            <div>
+              {%- if settings.predictive_search_show_vendor and product.vendor != blank -%}
+                <p class="search-result-card__vendor">{{ product.vendor }}</p>
+              {%- endif -%}
+              <a href="{{ product.url }}" class="search-result-card__title">{{ product.title }}</a>
+              {%- render 'price', target: product -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if predictive_search.resources.results.pages.size > 0 or predictive_search.resources.results.articles.size > 0 -%}
+    <div class="search-results__group">
+      <h3 class="search-results__group-heading">Pages & articles</h3>
+      <ul role="list">
+        {%- for page in predictive_search.resources.results.pages -%}
+          <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {%- endfor -%}
+        {%- for article in predictive_search.resources.results.articles -%}
+          <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+
+  <a href="{{ routes.search_url }}?q={{ predictive_search.terms | url_param_escape }}&type=product" class="search-results__view-all">
+    {{ 'general.search.view_all_results' | t: terms: predictive_search.terms }}
+  </a>
+
+{%- endif -%}

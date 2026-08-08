@@ -1,0 +1,35 @@
+{%- comment -%}
+  Sitewide Organization JSON-LD. Product/Collection/Breadcrumb schema are
+  separate snippets rendered only on their relevant templates — see
+  snippets/structured-data-product.liquid and structured-data-breadcrumb.liquid.
+{%- endcomment -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": {{ shop.url | append: '/' | json }}
+  {%- if settings.social_sharing_image -%}
+  ,"logo": {{ settings.social_sharing_image | image_url: width: 512 | prepend: 'https:' | json }}
+  {%- endif -%}
+  {%- liquid
+    assign social_urls = ''
+    if settings.social_instagram_url != blank
+      assign social_urls = social_urls | append: settings.social_instagram_url | append: ','
+    endif
+    if settings.social_tiktok_url != blank
+      assign social_urls = social_urls | append: settings.social_tiktok_url | append: ','
+    endif
+    if settings.social_facebook_url != blank
+      assign social_urls = social_urls | append: settings.social_facebook_url | append: ','
+    endif
+    if settings.social_twitter_url != blank
+      assign social_urls = social_urls | append: settings.social_twitter_url | append: ','
+    endif
+  -%}
+  {%- if social_urls != blank -%}
+  ,"sameAs": {{ social_urls | split: ',' | json }}
+  {%- endif -%}
+}
+</script>

@@ -1,0 +1,23 @@
+<div class="collection-banner" data-section-id="{{ section.id }}" data-section-type="collection-banner">
+  {%- if section.settings.show_image and collection.image -%}
+    <div class="collection-banner__image">
+      {{ collection.image | image_url: width: 1600 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '800,1200,1600', sizes: '100vw', alt: collection.image.alt | default: collection.title }}
+    </div>
+  {%- endif -%}
+  <div class="container collection-banner__content">
+    <h1 class="collection-banner__title">{{ collection.title }}</h1>
+    {%- if section.settings.show_description and collection.description != blank -%}
+      <div class="collection-banner__description">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.collection-banner.name",
+  "settings": [
+    { "type": "checkbox", "id": "show_image", "label": "t:sections.collection-banner.settings.show_image.label", "default": true },
+    { "type": "checkbox", "id": "show_description", "label": "t:sections.collection-banner.settings.show_description.label", "default": true }
+  ]
+}
+{% endschema %}

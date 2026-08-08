@@ -1,0 +1,58 @@
+{%- comment -%}
+  Mobile navigation drawer. Rendered by sections/header.liquid.
+  Params: section_id, menu (linklist handle)
+  Focus trap + Escape-to-close handled by assets/theme.js (data-mobile-nav
+  hooks) — see docs/COMPONENT_LIBRARY.md § Mobile Navigation.
+{%- endcomment -%}
+
+<div
+  id="mobile-nav-{{ section_id }}"
+  class="mobile-nav"
+  data-mobile-nav
+  role="dialog"
+  aria-modal="true"
+  aria-label="{{ 'sections.header.menu' | t }}"
+  hidden
+>
+  <div class="mobile-nav__header">
+    <span class="mobile-nav__title">{{ 'sections.header.menu' | t }}</span>
+    <button type="button" class="mobile-nav__close" data-mobile-nav-close>
+      <span class="visually-hidden">{{ 'general.accessibility.close_menu' | t }}</span>
+      {%- render 'icon', name: 'close' -%}
+    </button>
+  </div>
+
+  <nav class="mobile-nav__body">
+    <ul class="mobile-nav__list" role="list">
+      {%- for link in linklists[menu].links -%}
+        <li class="mobile-nav__item">
+          {%- if link.links.size > 0 -%}
+            <button
+              type="button"
+              class="mobile-nav__link mobile-nav__link--parent"
+              aria-expanded="false"
+              data-mobile-submenu-trigger
+            >
+              {{ link.title }}
+              {%- render 'icon', name: 'chevron-down' -%}
+            </button>
+            <ul class="mobile-nav__submenu" role="list" hidden>
+              {%- for child_link in link.links -%}
+                <li><a href="{{ child_link.url }}" class="mobile-nav__sublink">{{ child_link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          {%- else -%}
+            <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+
+  <div class="mobile-nav__footer">
+    <a href="{{ routes.account_url }}" class="mobile-nav__account-link">
+      {%- render 'icon', name: 'account' -%} {{ 'sections.header.account' | t }}
+    </a>
+  </div>
+</div>
+<div class="mobile-nav__backdrop" data-mobile-nav-backdrop hidden></div>

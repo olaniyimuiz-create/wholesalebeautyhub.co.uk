@@ -1,0 +1,80 @@
+{%- render 'breadcrumbs' -%}
+
+<div class="collection" data-section-id="{{ section.id }}" data-section-type="main-collection">
+  <div class="container">
+    {%- paginate collection.products by section.settings.products_per_page -%}
+
+      <div class="collection__toolbar">
+        <p class="collection__count" data-collection-count>
+          {{ 'collections.general.showing_count' | t: count: paginate.items, total: collection.all_products_count }}
+        </p>
+
+        <div class="collection__toolbar-actions">
+          {%- if section.settings.enable_filtering and collection.filters.size > 0 -%}
+            <button type="button" class="btn btn--secondary collection__filter-toggle" data-facets-toggle aria-expanded="false" aria-controls="facets-{{ section.id }}">
+              {%- render 'icon', name: 'filter', size: 16 -%}
+              {{ 'collections.general.filters' | t }}
+            </button>
+          {%- endif -%}
+
+          {%- if section.settings.enable_sorting -%}
+            {%- render 'sort-control', section_id: section.id -%}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="collection__layout">
+        {%- if section.settings.enable_filtering and collection.filters.size > 0 -%}
+          {%- render 'facets', section_id: section.id -%}
+        {%- endif -%}
+
+        <div class="collection__grid-wrap">
+          {%- if collection.products.size > 0 -%}
+            <div
+              class="collection__grid grid"
+              data-collection-grid
+              style="--grid-cols-desktop: {{ settings.grid_cols_desktop }}; --grid-cols-tablet: {{ settings.grid_cols_tablet }};"
+            >
+              {%- for product in collection.products -%}
+                {%- render 'product-card', product: product, loading: forloop.index0 < 8 ? 'eager' : 'lazy' -%}
+              {%- endfor -%}
+            </div>
+
+            {%- render 'pagination', paginate: paginate -%}
+          {%- else -%}
+            <div class="empty-state">
+              <p>{{ 'collections.general.no_products' | t }}</p>
+              {%- if collection.all_products_count > 0 -%}
+                <button type="button" class="btn btn--secondary" data-clear-filters>
+                  {{ 'collections.general.clear_filters' | t }}
+                </button>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+    {%- endpaginate -%}
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ collection.title | json }},
+  "description": {{ collection.description | strip_html | json }},
+  "url": {{ collection.url | prepend: shop.url | json }}
+}
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection.name",
+  "settings": [
+    { "type": "checkbox", "id": "enable_filtering", "label": "t:sections.main-collection.settings.enable_filtering.label", "default": true },
+    { "type": "checkbox", "id": "enable_sorting", "label": "t:sections.main-collection.settings.enable_sorting.label", "default": true },
+    { "type": "range", "id": "products_per_page", "label": "t:sections.main-collection.settings.products_per_page.label", "min": 12, "max": 48, "step": 4, "default": 24 }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,16 @@
+{%- comment -%}
+  Recently viewed products. No server-side concept of this exists in
+  Liquid, so it's entirely client-side: assets/theme.js records the
+  current product handle to localStorage on product pages, and populates
+  this container by fetching each stored handle's card markup from
+  /products/{handle}?section_id=product-card-fragment on page load.
+  Renders empty/hidden if nothing's been viewed yet or the visitor has
+  disabled localStorage.
+{%- endcomment -%}
+
+{%- if template.name == 'product' -%}
+  <div class="recently-viewed" data-recently-viewed data-current-handle="{{ product.handle }}" hidden>
+    <h2 class="recently-viewed__heading">{{ 'products.product.recently_viewed' | t }}</h2>
+    <div class="recently-viewed__grid grid" data-recently-viewed-target></div>
+  </div>
+{%- endif -%}

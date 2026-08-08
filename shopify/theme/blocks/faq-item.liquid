@@ -1,0 +1,26 @@
+{%- comment -%}
+  Theme Block (native /blocks/ directory, not an in-section block) — can
+  be nested inside sections/faq.liquid or any other section that accepts
+  "@theme" blocks, demonstrating the reusable Theme Blocks architecture
+  requirement rather than only using section-scoped blocks.
+{%- endcomment -%}
+
+<details class="faq-item" {{ block.shopify_attributes }}>
+  <summary class="faq-item__question">
+    {{ block.settings.question }}
+    <span class="faq-item__icon" aria-hidden="true">
+      {%- render 'icon', name: 'plus', size: 16 -%}
+    </span>
+  </summary>
+  <div class="faq-item__answer">{{ block.settings.answer }}</div>
+</details>
+
+{% schema %}
+{
+  "name": "t:sections.faq.blocks.question.name",
+  "settings": [
+    { "type": "text", "id": "question", "label": "t:sections.faq.blocks.question.settings.question.label" },
+    { "type": "richtext", "id": "answer", "label": "t:sections.faq.blocks.question.settings.answer.label" }
+  ]
+}
+{% endschema %}

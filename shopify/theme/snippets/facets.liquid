@@ -1,0 +1,87 @@
+{%- comment -%}
+  Native Search & Discovery filtering (collection.filters) — no app
+  required. Works with JS disabled (standard form GET submit updates the
+  URL query string, which Shopify's collection filtering reads natively);
+  assets/theme.js progressively enhances it to filter via fetch without a
+  full page reload. See docs/SHOPIFY_ARCHITECTURE.md § Search & Discovery
+  filter design for which filters are enabled (Vendor, Price, Availability,
+  Product Type, select Tags) and why Vendor is omitted on brand collection
+  pages specifically (sections/main-collection.liquid is reused there too,
+  but a single-vendor collection has nothing to filter by vendor).
+
+  Params: section_id
+{%- endcomment -%}
+
+<aside
+  class="facets"
+  id="facets-{{ section_id }}"
+  data-facets
+  aria-label="{{ 'collections.general.filters' | t }}"
+>
+  <form id="facets-form-{{ section_id }}" data-facets-form>
+    {%- for filter in collection.filters -%}
+      <fieldset class="facets__group">
+        <legend class="facets__group-heading">{{ filter.label }}</legend>
+
+        {%- case filter.type -%}
+
+          {%- when 'list' -%}
+            <ul class="facets__list" role="list">
+              {%- for value in filter.values -%}
+                <li>
+                  <label class="facets__option{% if value.count == 0 and value.active == false %} facets__option--disabled{% endif %}">
+                    <input
+                      type="checkbox"
+                      name="{{ value.param_name }}"
+                      value="{{ value.value }}"
+                      {% if value.active %}checked{% endif %}
+                      {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                    >
+                    {{ value.label }}
+                    <span class="facets__count">({{ value.count }})</span>
+                  </label>
+                </li>
+              {%- endfor -%}
+            </ul>
+
+          {%- when 'price_range' -%}
+            <div class="facets__price-range">
+              <label class="visually-hidden" for="{{ filter.min_value.param_name }}-{{ section_id }}">Min price</label>
+              <input
+                type="number"
+                id="{{ filter.min_value.param_name }}-{{ section_id }}"
+                name="{{ filter.min_value.param_name }}"
+                value="{{ filter.min_value.value }}"
+                placeholder="{{ filter.range_max | money }}"
+                min="0"
+              >
+              <span aria-hidden="true">–</span>
+              <label class="visually-hidden" for="{{ filter.max_value.param_name }}-{{ section_id }}">Max price</label>
+              <input
+                type="number"
+                id="{{ filter.max_value.param_name }}-{{ section_id }}"
+                name="{{ filter.max_value.param_name }}"
+                value="{{ filter.max_value.value }}"
+                placeholder="{{ filter.range_max | money }}"
+                min="0"
+              >
+            </div>
+
+          {%- when 'boolean' -%}
+            <label class="facets__option">
+              <input type="checkbox" name="{{ filter.param_name }}" value="1" {% if filter.active_values.size > 0 %}checked{% endif %}>
+              {{ filter.label }}
+            </label>
+
+        {%- endcase -%}
+      </fieldset>
+    {%- endfor -%}
+
+    <div class="facets__actions">
+      <button type="submit" class="btn btn--primary">{{ 'collections.general.apply_filters' | t }}</button>
+      {%- if collection.current_vendor or collection.current_type or request.page_type == 'collection' -%}
+        <a href="{{ collection.url }}" class="btn btn--secondary" data-clear-filters>{{ 'collections.general.clear_filters' | t }}</a>
+      {%- endif -%}
+    </div>
+  </form>
+</aside>

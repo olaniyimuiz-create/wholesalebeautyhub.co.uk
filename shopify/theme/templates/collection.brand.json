@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "banner": { "type": "brand-banner" },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "enable_filtering": true
+      }
+    }
+  },
+  "order": ["banner", "main"]
+}

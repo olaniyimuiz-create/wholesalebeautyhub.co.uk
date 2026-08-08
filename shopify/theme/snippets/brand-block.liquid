@@ -1,0 +1,29 @@
+{%- comment -%}
+  Renders the custom.brand metaobject reference (ADR-006 fast-follow).
+  The metaobject type/fields exist from Phase 6.5
+  (shopify/foundation/metaobjects.json) but entries aren't populated until
+  after Phase 7, so this renders gracefully with just the Vendor name +
+  link to the brand collection until then — never blocks on data that
+  doesn't exist yet.
+
+  Params: brand (product.metafields.custom.brand.value, may be undefined)
+{%- endcomment -%}
+
+<div class="brand-block">
+  {%- if brand -%}
+    <a href="{{ shop.url }}/collections/{{ brand.handle }}" class="brand-block__link">
+      {%- if brand.logo -%}
+        {{ brand.logo | image_url: width: 120 | image_tag: loading: 'lazy', alt: brand.name }}
+      {%- else -%}
+        <span class="brand-block__name">{{ brand.name }}</span>
+      {%- endif -%}
+    </a>
+    {%- if brand.description != blank -%}
+      <div class="brand-block__description">{{ brand.description }}</div>
+    {%- endif -%}
+  {%- elsif product.vendor != blank -%}
+    <a href="{{ routes.all_products_collection_url }}?q=vendor:{{ product.vendor | url_param_escape }}" class="brand-block__link brand-block__link--fallback">
+      {{ product.vendor }}
+    </a>
+  {%- endif -%}
+</div>

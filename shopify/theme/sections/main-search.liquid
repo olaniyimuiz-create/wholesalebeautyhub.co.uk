@@ -1,0 +1,40 @@
+<div class="main-search" data-section-id="{{ section.id }}" data-section-type="main-search">
+  <div class="container">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="main-search__form">
+      <input type="hidden" name="type" value="product">
+      <label class="visually-hidden" for="MainSearchInput">{{ 'general.search.search' | t }}</label>
+      <input type="search" id="MainSearchInput" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+      <button type="submit" class="btn btn--primary">{{ 'general.search.search' | t }}</button>
+    </form>
+
+    {%- if search.performed -%}
+      <p class="main-search__count">
+        {{ 'general.search.results_count' | t: count: search.results_count }}
+        {%- if search.terms != blank %} — "{{ search.terms }}"{% endif -%}
+      </p>
+
+      {%- if search.results.size > 0 -%}
+        {%- paginate search.results by 24 -%}
+          <div class="main-search__grid grid">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                {%- render 'product-card', product: item, loading: 'lazy' -%}
+              {%- elsif item.object_type == 'article' -%}
+                {%- render 'article-card', article: item -%}
+              {%- else -%}
+                <a href="{{ item.url }}" class="card search-result-generic">{{ item.title }}</a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          {%- render 'pagination', paginate: paginate -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        <div class="empty-state"><p>{{ 'general.search.no_results' | t: terms: search.terms }}</p></div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "t:sections.main-search.name" }
+{% endschema %}

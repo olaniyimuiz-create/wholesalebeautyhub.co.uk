@@ -1,0 +1,57 @@
+{%- comment -%}
+  Collection card grid — homepage/landing use, merchant picks which
+  collections to feature (e.g. the 4 top-level groups from
+  docs/SHOPIFY_FOUNDATION.md § Navigation structure).
+{%- endcomment -%}
+
+<div class="collection-list" data-section-id="{{ section.id }}" data-section-type="collection-list">
+  <div class="container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="collection-list__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="collection-list__grid grid">
+      {%- for block in section.blocks -%}
+        {%- assign col = block.settings.collection -%}
+        {%- if col != blank -%}
+          <a href="{{ col.url }}" class="collection-card card" {{ block.shopify_attributes }}>
+            <div class="collection-card__media">
+              {%- if col.image -%}
+                {{ col.image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,450,600', alt: col.image.alt | default: col.title }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </div>
+            <h3 class="collection-card__title">{{ block.settings.title | default: col.title }}</h3>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.collection-list.name",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by category" }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection card",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Title override" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "t:sections.collection-list.name",
+      "blocks": [{ "type": "collection_card" }, { "type": "collection_card" }, { "type": "collection_card" }, { "type": "collection_card" }]
+    }
+  ]
+}
+{% endschema %}

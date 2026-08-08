@@ -1,0 +1,56 @@
+{%- comment -%}
+  Brand collection hero. Sources content from a linked `brand` metaobject
+  entry when one exists (ADR-006 fast-follow); falls back to the plain
+  collection's own image/description until the metaobject layer is
+  populated, so this section is usable from Phase 9 without waiting on
+  the metaobject work to finish. See docs/SHOPIFY_ARCHITECTURE.md
+  § Brand pages.
+{%- endcomment -%}
+
+{%- liquid
+  assign brand = section.settings.brand
+-%}
+
+<div class="brand-banner" data-section-id="{{ section.id }}" data-section-type="brand-banner">
+  {%- if brand and brand.hero_image -%}
+    <div class="brand-banner__hero">
+      {{ brand.hero_image | image_url: width: 1600 | image_tag: loading: 'eager', fetchpriority: 'high', alt: brand.name }}
+    </div>
+  {%- elsif collection.image -%}
+    <div class="brand-banner__hero">
+      {{ collection.image | image_url: width: 1600 | image_tag: loading: 'eager', fetchpriority: 'high', alt: collection.title }}
+    </div>
+  {%- endif -%}
+
+  <div class="container brand-banner__content">
+    {%- if brand and brand.logo -%}
+      {{ brand.logo | image_url: width: 200 | image_tag: loading: 'eager', alt: brand.name, class: 'brand-banner__logo' }}
+    {%- endif -%}
+
+    <h1 class="brand-banner__title">{{ brand.name | default: collection.title }}</h1>
+
+    {%- if brand and brand.description != blank -%}
+      <div class="brand-banner__description">{{ brand.description }}</div>
+    {%- elsif collection.description != blank -%}
+      <div class="brand-banner__description">{{ collection.description }}</div>
+    {%- endif -%}
+
+    {%- if brand and brand.website != blank -%}
+      <a href="{{ brand.website }}" class="brand-banner__website" rel="noopener">{{ brand.website }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.brand-banner.name",
+  "settings": [
+    {
+      "type": "metaobject",
+      "id": "brand",
+      "label": "t:sections.brand-banner.settings.source.label",
+      "metaobject_type": "brand"
+    }
+  ]
+}
+{% endschema %}

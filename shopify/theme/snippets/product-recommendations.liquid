@@ -1,0 +1,19 @@
+{%- comment -%}
+  Related products / cross-sell, powered by Shopify's native Product
+  Recommendations API (no app needed) — fetched client-side per Shopify's
+  documented pattern since recommendations require a server round-trip
+  that can't happen at initial section render. See assets/theme.js
+  [data-product-recommendations].
+
+  Params: product
+{%- endcomment -%}
+
+<div
+  class="product-recommendations"
+  data-product-recommendations
+  data-url="{{ routes.product_recommendations_url }}?section_id=product-recommendations&product_id={{ product.id }}&limit=8&intent=related"
+  hidden
+>
+  <h2 class="product-recommendations__heading">{{ 'products.product.related_products' | t }}</h2>
+  <div class="product-recommendations__grid grid" data-product-recommendations-target></div>
+</div>

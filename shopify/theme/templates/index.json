@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "heading": "Wholesale beauty, retail-ready prices",
+        "subheading": "Makeup, skincare, and bath & body from the brands your customers already ask for.",
+        "button_label": "Shop all products",
+        "button_link": "/collections/all"
+      }
+    },
+    "categories": {
+      "type": "collection-list",
+      "settings": { "heading": "Shop by category" }
+    },
+    "best-sellers": {
+      "type": "featured-collection",
+      "settings": { "heading": "Best sellers" }
+    },
+    "brands": {
+      "type": "collection-list",
+      "settings": { "heading": "Shop by brand" }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "faq-item", "settings": { "question": "Do I need a trade account to order?", "answer": "<p>No — see the Shop page for details.</p>" } },
+        "q2": { "type": "faq-item", "settings": { "question": "What are your delivery times?", "answer": "<p>See our Shipping Policy page.</p>" } }
+      },
+      "block_order": ["q1", "q2"]
+    },
+    "newsletter": {
+      "type": "newsletter"
+    }
+  },
+  "order": ["hero", "categories", "best-sellers", "brands", "faq", "newsletter"]
+}

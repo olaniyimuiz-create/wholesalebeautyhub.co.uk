@@ -15,8 +15,11 @@ buildable spec that architecture produces,
 [docs/SHOPIFY_DEPLOYMENT.md](docs/SHOPIFY_DEPLOYMENT.md) for how Phase 7+
 should be built and shipped, [docs/DECISIONS.md](docs/DECISIONS.md) for why
 things were built the way they were, and
-[docs/MIGRATION_PROGRESS.md](docs/MIGRATION_PROGRESS.md) for task status and
-the Phase 6.5 readiness report. Remaining phases (7–13) are tracked as
+[docs/MIGRATION_PROGRESS.md](docs/MIGRATION_PROGRESS.md) for task status,
+and [docs/PHASE7_REPORT.md](docs/PHASE7_REPORT.md) /
+[docs/THEME_ARCHITECTURE.md](docs/THEME_ARCHITECTURE.md) /
+[docs/COMPONENT_LIBRARY.md](docs/COMPONENT_LIBRARY.md) for the theme built
+in Phase 7. Remaining phases (8–13) are tracked as
 [GitHub Milestones and Issues](https://github.com/olaniyimuiz-create/wholesalebeautyhub.co.uk/milestones)
 with explicit acceptance criteria and dependencies.
 
@@ -33,11 +36,14 @@ with explicit acceptance criteria and dependencies.
   are all resolved.
 - **Shopify foundation**: concrete collection (156), metafield, metaobject,
   and navigation specs compiled in `docs/SHOPIFY_FOUNDATION.md` and
-  `shopify/foundation/`. Build/coding/deployment standards written for
-  Phase 7 onward. 7 new data-quality findings from this pass are gating
-  for Phase 9, not Phase 7 — see `docs/RISK_REGISTER.md` risks #14–20.
-- Theme development (`shopify/theme/`, reserved but empty), collection/
-  product import, and Shopify API integration are not started yet.
+  `shopify/foundation/`.
+- **Shopify theme** (`shopify/theme/`): foundation built — 72 files, full
+  commerce path (browse, filter, product, variant, cart, checkout handoff,
+  search, navigation, blog, pages). Built to WCAG 2.2 AA and validated for
+  broken references/locale keys — see `docs/PHASE7_REPORT.md` for what was
+  and wasn't verified (no live Theme Check/Lighthouse run yet — tooling
+  install was blocked in this environment, tracked as risk #21).
+- Product/collection/customer import and deployment are not started yet.
 
 ## Prerequisites
 

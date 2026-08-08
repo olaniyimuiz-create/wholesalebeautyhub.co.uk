@@ -1,0 +1,9 @@
+<nav class="account-nav" aria-label="{{ 'sections.header.account' | t }}">
+  <ul role="list">
+    <li><a href="{{ routes.account_url }}" {% if request.page_type == 'customers/account' %}aria-current="page"{% endif %}>Overview</a></li>
+    <li><a href="{{ routes.account_addresses_url }}" {% if request.page_type == 'customers/addresses' %}aria-current="page"{% endif %}>Addresses</a></li>
+    <li>
+      <a href="{{ routes.account_logout_url }}">Log out</a>
+    </li>
+  </ul>
+</nav>

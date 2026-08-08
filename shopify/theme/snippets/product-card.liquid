@@ -1,0 +1,102 @@
+{%- comment -%}
+  Reusable product card. Used by the collection grid, related products,
+  recently viewed, cross-sell, and predictive search — one implementation,
+  no duplicated markup (docs/SHOPIFY_BUILD_GUIDELINES.md).
+
+  Params:
+    product        - required, product object
+    show_vendor     - optional, defaults to settings.show_vendor_on_card
+    show_quick_add  - optional, defaults to settings.show_quick_add
+    loading         - optional, 'lazy' (default) or 'eager' for above-the-fold cards
+{%- endcomment -%}
+
+{%- liquid
+  assign show_vendor = show_vendor | default: settings.show_vendor_on_card
+  assign show_quick_add = show_quick_add | default: settings.show_quick_add
+  assign loading = loading | default: 'lazy'
+  assign featured_media = product.featured_media
+  assign hover_media = product.media[1]
+  assign first_variant = product.selected_or_first_available_variant
+-%}
+
+<div class="product-card card" data-product-card data-product-id="{{ product.id }}">
+  <a href="{{ product.url }}" class="product-card__media-link" aria-hidden="{% if show_quick_add %}true{% else %}false{% endif %}" tabindex="{% if show_quick_add %}-1{% else %}0{% endif %}">
+    <div class="product-card__media">
+      {%- if featured_media -%}
+        {{
+          featured_media
+          | image_url: width: 600
+          | image_tag:
+            loading: loading,
+            widths: '300,450,600,900',
+            sizes: '(min-width: 990px) 25vw, 50vw',
+            class: 'product-card__image product-card__image--primary',
+            alt: featured_media.alt | default: product.title
+        }}
+        {%- if hover_media -%}
+          {{
+            hover_media
+            | image_url: width: 600
+            | image_tag: loading: 'lazy', widths: '300,450,600', class: 'product-card__image product-card__image--hover', alt: ''
+          }}
+        {%- endif -%}
+      {%- else -%}
+        <div class="product-card__image product-card__image--placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+
+      {%- if product.compare_at_price > product.price -%}
+        <span class="badge badge--sale product-card__badge">{{ 'products.product.on_sale' | t }}</span>
+      {%- elsif product.available == false -%}
+        <span class="badge badge--out-of-stock product-card__badge">{{ 'products.product.sold_out' | t }}</span>
+      {%- endif -%}
+    </div>
+  </a>
+
+  <div class="product-card__info">
+    {%- if show_vendor and product.vendor != blank -%}
+      <a href="{{ routes.all_products_collection_url }}?q=vendor:{{ product.vendor | url_param_escape }}" class="product-card__vendor">
+        {{ product.vendor }}
+      </a>
+    {%- endif -%}
+
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+
+    {%- render 'price', target: first_variant -%}
+
+    {%- if settings.enable_swatch_preview -%}
+      {%- for option in product.options_with_values -%}
+        {%- if option.name == 'Shades' or option.name == 'Color' or option.name == 'Shade' -%}
+          {%- comment -%}
+            This catalog's shade/color values are names like "Cape Town 05",
+            not CSS colors or a swatch resource — see risk register on
+            attribute data quality. Rendered as text pills, not color
+            swatches, until a real swatch metafield (color or image) is
+            defined; see docs/COMPONENT_LIBRARY.md § Product Card.
+          {%- endcomment -%}
+          <div class="product-card__swatches" role="list" aria-label="{{ option.name }}">
+            {%- for value in option.values limit: 4 -%}
+              <span class="swatch-pill" role="listitem">{{ value }}</span>
+            {%- endfor -%}
+            {%- if option.values.size > 4 -%}
+              <span class="product-card__swatches-more">+{{ option.values.size | minus: 4 }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if show_quick_add and product.available -%}
+      <button
+        type="button"
+        class="btn btn--secondary product-card__quick-add"
+        data-quick-add-trigger
+        data-product-handle="{{ product.handle }}"
+        aria-haspopup="dialog"
+      >
+        {{ 'products.product.quick_add' | t }}
+      </button>
+    {%- endif -%}
+  </div>
+</div>

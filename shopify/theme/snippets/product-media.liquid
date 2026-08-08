@@ -1,0 +1,71 @@
+{%- comment -%}
+  Product image gallery. Keyboard/screen-reader accessible: thumbnails are
+  a tablist, main image announces position changes via the live region in
+  layout/theme.liquid. Behavior in assets/theme.js under [data-product-media].
+{%- endcomment -%}
+
+<div class="product-media" data-product-media data-product-handle="{{ product.handle }}">
+  <div class="product-media__main" role="tabpanel">
+    {%- for media in product.media -%}
+      <div
+        class="product-media__slide{% if forloop.first %} is-active{% endif %}"
+        data-media-id="{{ media.id }}"
+        {% unless forloop.first %}hidden{% endunless %}
+      >
+        {%- case media.media_type -%}
+          {%- when 'image' -%}
+            {{
+              media
+              | image_url: width: 1200
+              | image_tag:
+                loading: forloop.first ? 'eager' : 'lazy',
+                fetchpriority: forloop.first ? 'high' : 'auto',
+                widths: '400,600,900,1200',
+                sizes: '(min-width: 990px) 50vw, 100vw',
+                alt: media.alt | default: product.title
+            }}
+          {%- when 'video', 'external_video' -%}
+            <div class="product-media__video-wrapper">
+              {{ media | media_tag: controls: true }}
+            </div>
+          {%- when 'model' -%}
+            {{ media | model_viewer_tag }}
+        {%- endcase -%}
+      </div>
+    {%- else -%}
+      <div class="product-media__slide is-active">{{ 'product-1' | placeholder_svg_tag }}</div>
+    {%- endfor -%}
+
+    {%- if product.media.size > 1 -%}
+      <button type="button" class="product-media__nav product-media__nav--prev" data-media-prev>
+        <span class="visually-hidden">{{ 'products.media.previous' | t }}</span>
+        {%- render 'icon', name: 'chevron-left' -%}
+      </button>
+      <button type="button" class="product-media__nav product-media__nav--next" data-media-next>
+        <span class="visually-hidden">{{ 'products.media.next' | t }}</span>
+        {%- render 'icon', name: 'chevron-right' -%}
+      </button>
+    {%- endif -%}
+  </div>
+
+  {%- if product.media.size > 1 -%}
+    <div class="product-media__thumbnails" role="tablist" aria-label="{{ 'products.media.open_gallery' | t: index: '', count: product.media.size }}">
+      {%- for media in product.media -%}
+        <button
+          type="button"
+          class="product-media__thumbnail{% if forloop.first %} is-active{% endif %}"
+          role="tab"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-controls="product-media-slide-{{ media.id }}"
+          data-media-thumbnail
+          data-media-id="{{ media.id }}"
+        >
+          <span class="visually-hidden">
+            {{ 'products.media.open_gallery' | t: index: forloop.index, count: product.media.size }}
+          </span>
+          {{ media.preview_image | image_url: width: 150 | image_tag: loading: 'lazy', alt: '' }}
+        </button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>

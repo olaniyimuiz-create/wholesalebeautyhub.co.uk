@@ -1,0 +1,71 @@
+{%- comment -%}
+  Full cart page — used when settings.cart_type is "page" rather than
+  "drawer" (config/settings_schema.json § Cart). Same line-item markup
+  pattern as snippets/cart-drawer.liquid but laid out for a full page
+  rather than a fixed-width drawer.
+{%- endcomment -%}
+
+<div class="main-cart" data-section-id="{{ section.id }}" data-section-type="main-cart">
+  <div class="container">
+    <h1>{{ 'general.cart.title' | t }}</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="empty-state">
+        <p>{{ 'general.cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">Continue shopping</a>
+      </div>
+    {%- else -%}
+      {%- form 'cart', cart, data-cart-form: '' -%}
+        <table class="main-cart__table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">{{ 'general.cart.quantity' | t }}</th>
+              <th scope="col">Total</th>
+              <th scope="col"><span class="visually-hidden">{{ 'general.cart.remove' | t }}</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for item in cart.items -%}
+              <tr data-cart-item data-line="{{ forloop.index }}" data-variant-id="{{ item.variant_id }}">
+                <td>
+                  <a href="{{ item.url }}">{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.title, width: 80 }}</a>
+                  <div>
+                    <a href="{{ item.url }}">{{ item.product_title }}</a>
+                    {%- if item.variant_title != blank -%}<p>{{ item.variant_title }}</p>{%- endif -%}
+                  </div>
+                </td>
+                <td>
+                  <div class="quantity-input">
+                    <button type="button" class="quantity-input__btn" data-cart-quantity-decrease aria-label="{{ 'general.accessibility.close' | t }}">{%- render 'icon', name: 'minus', size: 12 -%}</button>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" data-cart-quantity-input>
+                    <button type="button" class="quantity-input__btn" data-cart-quantity-increase aria-label="{{ 'products.product.quantity' | t }}">{%- render 'icon', name: 'plus', size: 12 -%}</button>
+                  </div>
+                </td>
+                <td>{{ item.final_line_price | money }}</td>
+                <td>
+                  <button type="button" class="cart-drawer__item-remove" data-cart-remove aria-label="{{ 'general.cart.remove' | t }} {{ item.product_title }}">
+                    {%- render 'icon', name: 'trash', size: 16 -%}
+                  </button>
+                </td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        <div class="main-cart__summary">
+          <div class="cart-drawer__subtotal">
+            <span>{{ 'general.cart.subtotal' | t }}</span>
+            <span data-cart-subtotal>{{ cart.total_price | money }}</span>
+          </div>
+          <p>{{ 'general.cart.shipping_at_checkout' | t }}</p>
+          <button type="submit" name="checkout" class="btn btn--primary">{{ 'general.cart.checkout' | t }}</button>
+        </div>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "t:sections.main-cart.name" }
+{% endschema %}

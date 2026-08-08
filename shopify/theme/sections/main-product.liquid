@@ -1,0 +1,191 @@
+{%- render 'breadcrumbs' -%}
+{%- render 'structured-data-product' -%}
+
+<div class="product" data-section-id="{{ section.id }}" data-section-type="main-product">
+  <div class="container product__layout">
+    <div class="product__media-col">
+      {%- render 'product-media' -%}
+    </div>
+
+    <div class="product__info-col">
+      {%- form 'product', product, id: 'product-form', class: 'product-form', data-product-form: '' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-id-input>
+
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+
+            {%- when 'vendor' -%}
+              {%- if product.vendor != blank -%}
+                <a href="{{ routes.all_products_collection_url }}?q=vendor:{{ product.vendor | url_param_escape }}" class="product__vendor" {{ block.shopify_attributes }}>
+                  {{ product.vendor }}
+                </a>
+              {%- endif -%}
+
+            {%- when 'title' -%}
+              <h1 class="product__title" {{ block.shopify_attributes }}>{{ product.title }}</h1>
+
+            {%- when 'price' -%}
+              <div {{ block.shopify_attributes }}>
+                {%- render 'price', target: product.selected_or_first_available_variant -%}
+              </div>
+
+            {%- when 'variant_picker' -%}
+              <div {{ block.shopify_attributes }}>
+                {%- render 'variant-picker' -%}
+              </div>
+
+            {%- when 'quantity_selector' -%}
+              <div class="product__quantity" {{ block.shopify_attributes }}>
+                <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
+                <div class="quantity-input">
+                  <button type="button" class="quantity-input__btn" data-quantity-decrease aria-label="{{ 'general.accessibility.close' | t }}">
+                    {%- render 'icon', name: 'minus', size: 14 -%}
+                  </button>
+                  <input
+                    type="number"
+                    id="Quantity-{{ section.id }}"
+                    name="quantity"
+                    value="1"
+                    min="1"
+                    inputmode="numeric"
+                    data-quantity-input
+                  >
+                  <button type="button" class="quantity-input__btn" data-quantity-increase aria-label="{{ 'products.product.quantity' | t }}">
+                    {%- render 'icon', name: 'plus', size: 14 -%}
+                  </button>
+                </div>
+              </div>
+
+            {%- when 'buy_buttons' -%}
+              <div class="product__buy-buttons" {{ block.shopify_attributes }}>
+                <button
+                  type="submit"
+                  name="add"
+                  class="btn btn--primary product__add-to-cart"
+                  data-add-to-cart
+                  {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+                >
+                  <span data-add-to-cart-text>
+                    {%- if product.selected_or_first_available_variant.available -%}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {%- else -%}
+                      {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                  </span>
+                </button>
+                {%- if product.selected_or_first_available_variant.available -%}
+                  <p class="product__inventory" data-inventory-status>
+                    {%- assign qty = product.selected_or_first_available_variant.inventory_quantity -%}
+                    {%- if product.selected_or_first_available_variant.inventory_management == blank -%}
+                      {# untracked inventory - always available, no message needed #}
+                    {%- elsif qty > 0 and qty <= 10 -%}
+                      {{ 'products.product.low_stock' | t: count: qty }}
+                    {%- elsif qty > 10 -%}
+                      {{ 'products.product.in_stock' | t }}
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
+              </div>
+
+            {%- when 'brand_block' -%}
+              {%- if product.metafields.custom.brand.value -%}
+                {%- render 'brand-block', brand: product.metafields.custom.brand.value -%}
+              {%- endif -%}
+
+            {%- when 'included_items' -%}
+              {%- if product.metafields.custom.included_items.value.size > 0 -%}
+                <div class="product__included-items" {{ block.shopify_attributes }}>
+                  <h2>{{ 'products.product.included_in_bundle' | t }}</h2>
+                  <ul role="list">
+                    {%- for item in product.metafields.custom.included_items.value -%}
+                      <li>{{ item }}</li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+
+            {%- when 'description' -%}
+              {%- if product.description != blank -%}
+                <div class="product__description" {{ block.shopify_attributes }}>
+                  <h2>{{ 'products.product.description' | t }}</h2>
+                  {{ product.description }}
+                </div>
+              {%- endif -%}
+
+            {%- when 'trust_badges' -%}
+              <div class="product__trust-badges" {{ block.shopify_attributes }}>
+                <span>{%- render 'icon', name: 'truck', size: 18 -%} {{ block.settings.shipping_text | default: 'Fast UK delivery' }}</span>
+                <span>{%- render 'icon', name: 'shield-check', size: 18 -%} {{ block.settings.guarantee_text | default: 'Secure checkout' }}</span>
+              </div>
+
+            {%- when 'shipping_returns' -%}
+              <details class="product__accordion" {{ block.shopify_attributes }}>
+                <summary>{{ 'products.product.shipping_info' | t }}</summary>
+                <div>{{ block.settings.shipping_content }}</div>
+              </details>
+              <details class="product__accordion">
+                <summary>{{ 'products.product.returns_info' | t }}</summary>
+                <div>{{ block.settings.returns_content }}</div>
+              </details>
+
+          {%- endcase -%}
+        {%- endfor -%}
+      {%- endform -%}
+    </div>
+  </div>
+
+  <div class="container">
+    {%- render 'product-recommendations', product: product -%}
+    {%- render 'recently-viewed' -%}
+  </div>
+
+  {%- render 'sticky-add-to-cart' -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-product.name",
+  "blocks": [
+    { "type": "vendor", "name": "t:sections.main-product.blocks.vendor.name" },
+    { "type": "title", "name": "t:sections.main-product.blocks.title.name" },
+    { "type": "price", "name": "t:sections.main-product.blocks.price.name" },
+    { "type": "variant_picker", "name": "t:sections.main-product.blocks.variant_picker.name" },
+    { "type": "quantity_selector", "name": "t:sections.main-product.blocks.quantity_selector.name" },
+    { "type": "buy_buttons", "name": "t:sections.main-product.blocks.buy_buttons.name" },
+    { "type": "brand_block", "name": "t:sections.main-product.blocks.brand_block.name" },
+    { "type": "included_items", "name": "t:sections.main-product.blocks.included_items.name" },
+    { "type": "description", "name": "t:sections.main-product.blocks.description.name" },
+    {
+      "type": "trust_badges",
+      "name": "t:sections.main-product.blocks.trust_badges.name",
+      "settings": [
+        { "type": "text", "id": "shipping_text", "label": "Shipping text", "default": "Fast UK delivery" },
+        { "type": "text", "id": "guarantee_text", "label": "Guarantee text", "default": "Secure checkout" }
+      ]
+    },
+    {
+      "type": "shipping_returns",
+      "name": "t:sections.main-product.blocks.shipping_returns.name",
+      "settings": [
+        { "type": "richtext", "id": "shipping_content", "label": "Shipping content" },
+        { "type": "richtext", "id": "returns_content", "label": "Returns content" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "vendor" },
+      { "type": "title" },
+      { "type": "price" },
+      { "type": "variant_picker" },
+      { "type": "quantity_selector" },
+      { "type": "buy_buttons" },
+      { "type": "brand_block" },
+      { "type": "included_items" },
+      { "type": "description" },
+      { "type": "trust_badges" },
+      { "type": "shipping_returns" }
+    ]
+  }
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+{%- render 'breadcrumbs' -%}
+
+<div class="main-blog" data-section-id="{{ section.id }}" data-section-type="main-blog">
+  <div class="container">
+    <h1 class="main-blog__title">{{ blog.title }}</h1>
+
+    {%- paginate blog.articles by section.settings.articles_per_page -%}
+      {%- if blog.articles.size > 0 -%}
+        <div class="main-blog__grid grid">
+          {%- for article in blog.articles -%}
+            {%- render 'article-card', article: article -%}
+          {%- endfor -%}
+        </div>
+        {%- render 'pagination', paginate: paginate -%}
+      {%- else -%}
+        <div class="empty-state"><p>No articles yet.</p></div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "settings": [
+    { "type": "range", "id": "articles_per_page", "label": "Articles per page", "min": 6, "max": 24, "step": 3, "default": 12 }
+  ]
+}
+{% endschema %}

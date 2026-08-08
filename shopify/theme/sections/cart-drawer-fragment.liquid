@@ -1,0 +1,10 @@
+{%- comment -%}
+  Thin section wrapper so the cart drawer can be re-fetched after an Ajax
+  Cart API call via /?section_id=cart-drawer-fragment (assets/theme.js
+  refreshCartDrawer). The actual markup lives in snippets/cart-drawer.liquid,
+  which is also rendered directly into layout/theme.liquid for the initial
+  page load — one implementation, two entry points, per
+  docs/SHOPIFY_BUILD_GUIDELINES.md.
+{%- endcomment -%}
+
+{%- render 'cart-drawer' -%}

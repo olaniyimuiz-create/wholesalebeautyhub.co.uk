@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction | default: 'ltr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_bg | default: '#ffffff' }}">
+
+  {{ 'theme.css' | asset_url | preload_tag: as: 'style' }}
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'components.css' | asset_url }}">
+
+  {%- render 'meta-tags' -%}
+  {%- render 'structured-data-organization' -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  {{ content_for_header }}
+
+  <script>
+    window.themeStrings = {
+      addToCart: {{ 'products.product.add_to_cart' | t | json }},
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      itemAdded: {{ 'general.cart.item_added' | t | json }},
+      cartUpdateError: {{ 'general.cart.update_error' | t | json }},
+      loading: {{ 'general.accessibility.loading' | t | json }}
+    };
+  </script>
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+</head>
+
+<body class="template-{{ request.page_type }}">
+  <a class="skip-link" href="#main-content">
+    {{ 'general.accessibility.skip_to_content' | t }}
+  </a>
+
+  {%- sections 'header-group' -%}
+
+  <main id="main-content" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {%- sections 'footer-group' -%}
+
+  <div id="cart-drawer-root" hidden>
+    {%- render 'cart-drawer' -%}
+  </div>
+  <div id="search-drawer-root" hidden>
+    {%- render 'search-drawer' -%}
+  </div>
+
+  <div aria-live="polite" role="status" class="visually-hidden" id="a11y-live-region"></div>
+</body>
+</html>

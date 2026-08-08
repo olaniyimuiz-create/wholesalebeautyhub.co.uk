@@ -1,0 +1,12 @@
+{%- comment -%}
+  Server-rendered by Shopify's Product Recommendations API when fetched
+  via ?section_id=product-recommendations (see
+  snippets/product-recommendations.liquid). Not added directly to any
+  template — accessed only through that endpoint.
+{%- endcomment -%}
+
+{%- if recommendations.performed and recommendations.products_count > 0 -%}
+  {%- for product in recommendations.products -%}
+    {%- render 'product-card', product: product, loading: 'lazy' -%}
+  {%- endfor -%}
+{%- endif -%}

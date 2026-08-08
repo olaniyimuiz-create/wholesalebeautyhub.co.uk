@@ -1,0 +1,20 @@
+<div class="container auth-page">
+  <h1>Log in</h1>
+  {%- form 'customer_login' -%}
+    {%- if form.errors -%}
+      <div class="alert alert--error" role="alert">{{ form.errors | default_errors }}</div>
+    {%- endif -%}
+    <label for="CustomerEmail">Email</label>
+    <input type="email" id="CustomerEmail" name="customer[email]" autocomplete="email" required autofocus>
+
+    {%- if form.password_needed -%}
+      <label for="CustomerPassword">Password</label>
+      <input type="password" id="CustomerPassword" name="customer[password]" autocomplete="current-password" required>
+    {%- endif -%}
+
+    <button type="submit" class="btn btn--primary">Log in</button>
+    <a href="{{ routes.account_recover_url }}">Forgot your password?</a>
+  {%- endform -%}
+
+  <p>New here? <a href="{{ routes.account_register_url }}">Create an account</a></p>
+</div>

@@ -1,0 +1,76 @@
+{%- comment -%}
+  Cart drawer. Rendered once into #cart-drawer-root (layout/theme.liquid)
+  by assets/theme.js on first open, using the Ajax Cart API
+  (/cart.js, /cart/change.js, /cart/add.js) so it never requires a full
+  page reload. Initial markup below is also used as the server-rendered
+  fallback content on the /cart page itself when settings.cart_type is
+  not "drawer" — same partial, two entry points, no duplicated cart
+  markup (docs/SHOPIFY_BUILD_GUIDELINES.md).
+{%- endcomment -%}
+
+<div class="cart-drawer" data-cart-drawer role="dialog" aria-modal="true" aria-label="{{ 'general.cart.title' | t }}">
+  <div class="cart-drawer__header">
+    <h2 class="cart-drawer__title">{{ 'general.cart.title' | t }}</h2>
+    <button type="button" class="cart-drawer__close" data-cart-drawer-close>
+      <span class="visually-hidden">{{ 'general.accessibility.close' | t }}</span>
+      {%- render 'icon', name: 'close' -%}
+    </button>
+  </div>
+
+  <div class="cart-drawer__body" data-cart-items>
+    {%- if cart.item_count == 0 -%}
+      <div class="empty-state" data-cart-empty-state>
+        <p>{{ 'general.cart.empty' | t }}</p>
+      </div>
+    {%- else -%}
+      <ul class="cart-drawer__list" role="list">
+        {%- for item in cart.items -%}
+          <li class="cart-drawer__item" data-cart-item data-line="{{ forloop.index }}" data-variant-id="{{ item.variant_id }}">
+            <a href="{{ item.url }}" class="cart-drawer__item-image">
+              {{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.title, width: 80 }}
+            </a>
+            <div class="cart-drawer__item-info">
+              <a href="{{ item.url }}" class="cart-drawer__item-title">{{ item.product_title }}</a>
+              {%- if item.variant_title != blank -%}
+                <p class="cart-drawer__item-variant">{{ item.variant_title }}</p>
+              {%- endif -%}
+              <div class="cart-drawer__item-price">{{ item.final_price | money }}</div>
+
+              <div class="quantity-input quantity-input--sm">
+                <button type="button" class="quantity-input__btn" data-cart-quantity-decrease aria-label="{{ 'general.accessibility.close' | t }}">
+                  {%- render 'icon', name: 'minus', size: 12 -%}
+                </button>
+                <input
+                  type="number"
+                  value="{{ item.quantity }}"
+                  min="0"
+                  inputmode="numeric"
+                  aria-label="{{ 'general.cart.quantity' | t }}"
+                  data-cart-quantity-input
+                >
+                <button type="button" class="quantity-input__btn" data-cart-quantity-increase aria-label="{{ 'products.product.quantity' | t }}">
+                  {%- render 'icon', name: 'plus', size: 12 -%}
+                </button>
+              </div>
+            </div>
+            <button type="button" class="cart-drawer__item-remove" data-cart-remove aria-label="{{ 'general.cart.remove' | t }} {{ item.product_title }}">
+              {%- render 'icon', name: 'trash', size: 16 -%}
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+
+  {%- if cart.item_count > 0 -%}
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__subtotal">
+        <span>{{ 'general.cart.subtotal' | t }}</span>
+        <span data-cart-subtotal>{{ cart.total_price | money }}</span>
+      </div>
+      <p class="cart-drawer__shipping-note">{{ 'general.cart.shipping_at_checkout' | t }}</p>
+      <a href="{{ routes.cart_url }}" class="btn btn--secondary">{{ 'general.cart.view_cart' | t }}</a>
+      <a href="{{ routes.cart_url }}/checkout" class="btn btn--primary">{{ 'general.cart.checkout' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>

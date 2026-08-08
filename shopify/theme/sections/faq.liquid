@@ -1,0 +1,30 @@
+<div class="faq" data-section-id="{{ section.id }}" data-section-type="faq">
+  <div class="container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="faq__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    <div class="faq__list">
+      {%- content_for 'blocks' -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.faq.name",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "t:sections.faq.settings.heading.label", "default": "Frequently asked questions" }
+  ],
+  "blocks": [{ "type": "@theme" }],
+  "presets": [
+    {
+      "name": "t:sections.faq.name",
+      "blocks": [
+        { "type": "faq-item" },
+        { "type": "faq-item" },
+        { "type": "faq-item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -5,11 +5,11 @@
 | # | Task | Status | Notes |
 |---|---|---|---|
 | 1 | SQL dump → products/customers CSV pipeline | Done | 611 products / 497 variations / 12,096 customers, validated end-to-end |
-| 2 | Theme migration (Shopify Liquid theme) | Not started | Tracked as GitHub Milestone "Phase 7: Theme Development" (5 issues) |
-| 3 | Collections / navigation menus | Foundation ready | Concrete 156-collection list + navigation spec in `docs/SHOPIFY_FOUNDATION.md` and `shopify/foundation/`; implementation tracked in Milestone "Phase 9" |
-| 4 | Blog + static pages | Foundation ready | 9 pages have existing Rank Math SEO copy worth preserving — see `docs/SEO_STRATEGY.md`; tracked as issue "Migrate blog posts and static pages" |
+| 2 | Theme migration (Shopify Liquid theme) | Foundation built | `shopify/theme/` — 72 files, full commerce path built and reviewed. See `docs/PHASE7_REPORT.md`. Product/collection/customer import not started |
+| 3 | Collections / navigation menus | Foundation ready | Concrete 156-collection list + navigation spec in `docs/SHOPIFY_FOUNDATION.md` and `shopify/foundation/`; theme templates built (`collection.json`/`.brand`/`.promo`), Admin API creation tracked in Milestone "Phase 9" |
+| 4 | Blog + static pages | Foundation ready | 9 pages have existing Rank Math SEO copy worth preserving — see `docs/SEO_STRATEGY.md`; theme templates built (`blog.json`, `article.json`, `page.json`), content migration tracked as issue "Migrate blog posts and static pages" |
 | 5 | SEO: URL redirect map (WooCommerce → Shopify slugs) | Done | 875-row redirect matrix + orphan/duplicate/broken-link reports in `reports/`; see `docs/SEO_STRATEGY.md` |
-| 6 | Metafields / metaobjects for attributes not covered by variants | Foundation ready | Concrete schema in `docs/SHOPIFY_FOUNDATION.md` and `shopify/foundation/{metafields,metaobjects}.json`; tracked as issue "Create metafield and metaobject definitions" |
+| 6 | Metafields / metaobjects for attributes not covered by variants | Foundation ready | Concrete schema in `docs/SHOPIFY_FOUNDATION.md` and `shopify/foundation/{metafields,metaobjects}.json`; theme reads `custom.brand`/`custom.included_items` already (graceful if unset); Admin API creation tracked as issue "Create metafield and metaobject definitions" |
 | 7 | Shopify Admin/GraphQL API integration (automated import vs. CSV) | Not started | Still undecided — blocks the exact acceptance criteria for the "Import products" issue in Milestone "Phase 9" |
 | 8 | Order history migration | Not started | Tracked as GitHub Milestone "Phase 11: Historical Order Strategy" (2 issues, ADR required before implementation) |
 | 9 | Cutover plan (DNS, final sync, WooCommerce freeze) | Foundation ready | Import sequence, rollback strategy, and deployment checklist written in `docs/SHOPIFY_DEPLOYMENT.md`; implementation tracked in Milestone "Phase 13: Production Go-Live" |
@@ -122,6 +122,54 @@
   compilation and repository governance only, per this phase's explicit
   scope.
 
+### 2026-08-08 — Task 7: Theme Development (foundation)
+
+- Pulled latest `main` and re-verified GitHub Issues/Milestones matched
+  what Phase 6.5 created before starting (governance check for this
+  phase) — no drift found.
+- Found and resolved two real conflicts before building: WCAG 2.1 AA
+  (existing GitHub issue) vs. WCAG 2.2 AA (this phase's instruction) —
+  resolved by building to 2.2 AA, which is a superset; and undecided
+  Markets/multi-currency/B2B business requirements — resolved by building
+  the theme code-ready for them (no hardcoded currency/locale/audience
+  assumptions) without inventing market configuration or B2B UI nobody
+  has actually specified. Full reasoning in `docs/THEME_ARCHITECTURE.md`
+  § Conflicts found and resolved.
+- Built `shopify/theme/`: 72 files — full Online Store 2.0 structure
+  (JSON templates, 2 section groups, 2 native Theme Blocks, 25 sections,
+  21 snippets, design-token CSS + component CSS, a vanilla-JS behavior
+  layer with no framework runtime). Covers the full commerce path plus
+  search, navigation, blog, pages, and a starting account flow.
+- Built directly against Phase 6.5's concrete specs, not generic
+  placeholder content: `collection.brand.json` sources its hero from the
+  `brand` metaobject with a graceful fallback (ADR-006 phasing),
+  `collection.promo.json` omits Vendor/Product Type filters (ADR-007 —
+  promo collections aren't taxonomy-driven), `product.combo-deal.json`
+  surfaces the `custom.included_items` metafield.
+- Ran real validation, not self-assessment: parsed every JSON file and
+  embedded `{% schema %}` block, cross-referenced every locale key and
+  every `render`/section-`type` reference against the files that should
+  satisfy them. Caught and fixed 2 real bugs (hand-built JSON-LD via
+  string concatenation in two structured-data snippets — would have
+  broken on titles/URLs containing quote characters) and ~21 missing
+  locale-key entries introduced while building forward without syncing
+  the locale file. Full detail: `docs/PHASE7_REPORT.md` § Validation
+  Report.
+- Attempted to install Shopify CLI for real Theme Check + local preview;
+  blocked by a Windows admin-elevation prompt this environment can't
+  click through non-interactively. Disclosed as an environment gap in
+  the risk register (#21) rather than silently skipped or faked.
+- Wrote `docs/THEME_ARCHITECTURE.md`, `docs/COMPONENT_LIBRARY.md` (every
+  component's status, usage, dependencies, and known limitations — 2
+  components explicitly deferred with reasoning: Quick View and a full
+  Quick Add flyout, both would duplicate the product page's own logic
+  behind a second, likely shallower implementation), `docs/THEME_CHANGELOG.md`,
+  and `docs/PHASE7_REPORT.md` (the 13-item Phase 7 deliverable set).
+- No product/customer/order import and no deployment — per this phase's
+  explicit scope. GitHub issue "Review wp_snippets custom code" remains
+  open (requires reading live WooCommerce data, separate from theme
+  building) — the other 4 Phase 7 issues closed.
+
 ## Phase 6.5 Readiness Report
 
 **Consistency check performed**: re-read `docs/ARCHITECTURE.md`,
@@ -160,6 +208,17 @@ Phase 7 needs to build, and it's cheap to check now rather than mid-build.
 **Not yet decided, tracked, not blocking**: the CSV-vs-Admin-API question
 (task 7) and the order history strategy (Milestone "Phase 11") — both
 have dedicated issues and don't gate Phase 7.
+
+## Phase 7 → Phase 8 Readiness
+
+Full detail in `docs/PHASE7_REPORT.md` § 13. Summary: **ready to proceed
+to Phase 8 (Media Migration)**. Phase 8's scope (image format conversion,
+CDN migration, resolving zero-image products) operates on the WooCommerce
+media library independently of the theme — nothing built this phase
+blocks it, and `snippets/product-media.liquid`/`product-card.liquid` will
+render whatever Phase 8 produces without changes. One recommendation, not
+a blocker: run real Shopify Theme Check (risk #21) before more theme work
+accumulates, once Node.js can be installed with proper elevation.
 
 ## Phase 6 Readiness Assessment
 

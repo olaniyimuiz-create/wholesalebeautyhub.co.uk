@@ -1,0 +1,58 @@
+{%- render 'breadcrumbs' -%}
+
+<article class="main-article" data-section-id="{{ section.id }}" data-section-type="main-article">
+  <div class="container main-article__inner">
+    <header class="main-article__header">
+      <h1 class="main-article__title">{{ article.title }}</h1>
+      <p class="main-article__meta">
+        {{ 'blogs.article.posted_by' | t: author: article.author, date: article.published_at | date: '%B %d, %Y' }}
+      </p>
+    </header>
+
+    {%- if article.image -%}
+      <div class="main-article__image">
+        {{ article.image | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600,900,1200', alt: article.image.alt | default: article.title }}
+      </div>
+    {%- endif -%}
+
+    <div class="main-article__content">
+      {{ article.content }}
+    </div>
+
+    {%- if blog.comments_enabled? -%}
+      <div class="main-article__comments">
+        {%- comment -%} Native comment form - Shopify's built-in blog comments, no app needed. {%- endcomment -%}
+        {%- form 'new_comment', article -%}
+          <h2>Leave a comment</h2>
+          {%- if form.posted_successfully? -%}
+            <p class="alert alert--success" role="status">Comment posted.</p>
+          {%- endif -%}
+          <label for="CommentAuthor">Name</label>
+          <input type="text" id="CommentAuthor" name="comment[author]" required>
+          <label for="CommentEmail">Email</label>
+          <input type="email" id="CommentEmail" name="comment[email]" required>
+          <label for="CommentBody">Comment</label>
+          <textarea id="CommentBody" name="comment[body]" required></textarea>
+          <button type="submit" class="btn btn--primary">Post comment</button>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ article.title | json }},
+  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+  "author": { "@type": "Person", "name": {{ article.author | json }} }
+  {%- if article.image -%}
+  ,"image": [{{ article.image | image_url: width: 1200 | prepend: 'https:' | json }}]
+  {%- endif -%}
+}
+</script>
+
+{% schema %}
+{ "name": "t:sections.main-article.name" }
+{% endschema %}

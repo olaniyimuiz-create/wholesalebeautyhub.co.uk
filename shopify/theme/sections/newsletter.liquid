@@ -1,0 +1,45 @@
+{%- comment -%}
+  Standalone newsletter section for use on the homepage/landing pages.
+  Same customer-tag form pattern as sections/footer.liquid's inline
+  newsletter block, kept intentionally separate since the footer is
+  always-present sitewide while this is opt-in per page.
+{%- endcomment -%}
+
+<div class="newsletter" data-section-id="{{ section.id }}" data-section-type="newsletter">
+  <div class="container newsletter__inner">
+    <h2 class="newsletter__heading">{{ section.settings.heading | default: 'sections.footer.newsletter_heading' | t }}</h2>
+    <p class="newsletter__subheading">{{ section.settings.subheading }}</p>
+
+    {%- form 'customer', id: 'newsletter-form', class: 'newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label class="visually-hidden" for="NewsletterEmail-{{ section.id }}">
+        {{ 'sections.footer.newsletter_email_placeholder' | t }}
+      </label>
+      <input
+        type="email"
+        id="NewsletterEmail-{{ section.id }}"
+        name="contact[email]"
+        placeholder="{{ 'sections.footer.newsletter_email_placeholder' | t }}"
+        required
+        autocomplete="email"
+      >
+      <button type="submit" class="btn btn--primary">{{ 'sections.footer.newsletter_submit' | t }}</button>
+      {%- if form.posted_successfully? -%}
+        <p class="alert alert--success" role="status">{{ 'sections.footer.newsletter_success' | t }}</p>
+      {%- elsif form.errors -%}
+        <p class="alert alert--error" role="alert">{{ 'sections.footer.newsletter_error' | t }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.newsletter.name",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "text", "id": "subheading", "label": "Subheading" }
+  ],
+  "presets": [{ "name": "t:sections.newsletter.name" }]
+}
+{% endschema %}

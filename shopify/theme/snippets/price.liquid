@@ -1,0 +1,25 @@
+{%- comment -%}
+  Reusable price display. Params: target (product or variant object)
+  Usage: {% render 'price', target: product %} or {% render 'price', target: product.selected_or_first_available_variant %}
+{%- endcomment -%}
+
+{%- liquid
+  assign compare_at = target.compare_at_price
+  assign price = target.price
+  assign on_sale = false
+  if compare_at > price
+    assign on_sale = true
+  endif
+-%}
+
+<div class="price{% if on_sale %} price--on-sale{% endif %}">
+  {%- if on_sale -%}
+    <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+    <span class="price__sale">{{ price | money }}</span>
+    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+    <span class="price__compare-at"><s>{{ compare_at | money }}</s></span>
+    <span class="badge badge--sale">{{ 'products.product.on_sale' | t }}</span>
+  {%- else -%}
+    <span class="price__regular">{{ price | money }}</span>
+  {%- endif -%}
+</div>
