@@ -37,6 +37,7 @@ import json
 import os
 import sys
 import time
+import uuid
 
 sys.path.insert(0, os.path.dirname(__file__))
 from phase9_preflight import get_config, graphql_request, REQUIRED_SCOPES
@@ -220,40 +221,94 @@ def get_default_location(domain, token, api_version):
     return _LOCATION_ID
 
 
+def fetch_current_available_quantities(domain, token, api_version, location_id, inventory_item_ids):
+    """Batched (single request, via `nodes`) rather than one query per item -
+    needed because inventorySetQuantities requires changeFromQuantity per
+    entry (real, live-verified requirement - see set_inventory_quantities).
+
+    Defensive by design, not by afterthought: a nonexistent inventory item
+    ID comes back as a null entry in `nodes` (not an error), and a
+    malformed/error-only response (e.g. an upstream timeout) has no `data`
+    key at all - both were found to crash this function with a bare
+    KeyError/AttributeError before test coverage caught it. Missing/null
+    entries are treated as quantity 0 (an unknown item has no known stock,
+    not a guessed one) rather than raised, since the caller
+    (set_inventory_quantities) already checks the mutation's own userErrors
+    for anything that actually needs surfacing as a failure."""
+    if not inventory_item_ids:
+        return {}
+    ids_literal = ', '.join(f'"{iid}"' for iid in inventory_item_ids)
+    query = '''
+    { nodes(ids: [%s]) {
+        ... on InventoryItem { id inventoryLevel(locationId: "%s") { quantities(names: ["available"]) { quantity } } }
+    } }
+    ''' % (ids_literal, location_id)
+    data = graphql_request(domain, token, api_version, query)
+    nodes = data.get('data', {}).get('nodes') or []
+    result = {}
+    for node in nodes:
+        if not node:
+            continue
+        level = node.get('inventoryLevel')
+        result[node['id']] = level['quantities'][0]['quantity'] if level else 0
+    return result
+
+
 def set_inventory_quantities(domain, token, api_version, location_id, item_quantities):
     """item_quantities: list of (inventoryItemId, quantity). Sets absolute
     'available' quantity - matches WooCommerce's stock_quantity semantics
     (an absolute count), not a relative adjustment.
 
-    KNOWN BROKEN as of this API version (2026-07), discovered by testing
-    directly against the live store rather than assumed working: the
-    server rejects this call with "The @idempotent directive is required
-    for this mutation but was not provided" - a real, current API
-    requirement (a client-supplied Idempotency-Key header plus an
-    @idempotent directive on the mutation) that isn't implemented here.
-    Per this phase's stop condition ("Shopify API behaviour differs from
-    documented expectations"), this was not further reverse-engineered
-    this session - see docs/RISK_REGISTER.md and GitHub issue #41.
+    Verified against the live store directly (not assumed from docs alone)
+    after the first attempt failed - see docs/RISK_REGISTER.md #35 and
+    docs/PHASE9_INVENTORY_FIX_REPORT.md for the full trace. Two real,
+    current API requirements this mutation enforces on this API version:
+    1. `@idempotent(key: $key)` directive is mandatory (a plain `input`
+       argument is not enough) - Shopify made this mandatory for inventory
+       adjustment/refund mutations as of API 2026-04. A fresh UUID per
+       call is correct here: this key protects a single request from being
+       double-applied if retried after a network failure, not meant to be
+       stable across this script's separate runs - the *absolute-set*
+       semantics of this mutation is what makes re-running the whole
+       script safe, not key reuse.
+    2. Each `InventoryQuantityInput` entry requires `changeFromQuantity`
+       (the quantity the caller currently believes is set) - so this
+       function first fetches the real current quantity for every item in
+       one batched query, then sends that as `changeFromQuantity` alongside
+       the real target `quantity`. This is what makes the mutation itself
+       idempotent in effect: calling it again just re-observes the (now
+       correct) current value and re-asserts the same target, which is a
+       verified no-op (tested live: calling twice in a row left the
+       quantity unchanged, not doubled).
 
     Returns (success: bool, response: dict) so callers can accurately
-    report failure instead of assuming success - this function used to
-    return only the raw response, which every caller then ignored,
-    silently swallowing this exact failure. Fixed alongside discovering it.
+    report failure instead of assuming success - the original version of
+    this function returned only the raw response, which every caller then
+    ignored, silently swallowing the very failure this fixes.
     """
     if not item_quantities:
         return True, None
+    current = fetch_current_available_quantities(domain, token, api_version, location_id, [iid for iid, _ in item_quantities])
     mutation = '''
-    mutation($input: InventorySetQuantitiesInput!) {
-      inventorySetQuantities(input: $input) {
+    mutation($input: InventorySetQuantitiesInput!, $key: String!) {
+      inventorySetQuantities(input: $input) @idempotent(key: $key) {
+        inventoryAdjustmentGroup { changes { name delta } }
         userErrors { field message }
       }
     }
     '''
-    variables = {'input': {
-        'name': 'available',
-        'reason': 'correction',
-        'quantities': [{'inventoryItemId': iid, 'locationId': location_id, 'quantity': q} for iid, q in item_quantities],
-    }}
+    variables = {
+        'input': {
+            'name': 'available',
+            'reason': 'correction',
+            'quantities': [
+                {'inventoryItemId': iid, 'locationId': location_id, 'quantity': q,
+                 'changeFromQuantity': current.get(iid, 0)}
+                for iid, q in item_quantities
+            ],
+        },
+        'key': str(uuid.uuid4()),
+    }
     response = graphql_request(domain, token, api_version, mutation, variables)
     errs = response.get('errors') or response.get('data', {}).get('inventorySetQuantities', {}).get('userErrors')
     if errs:

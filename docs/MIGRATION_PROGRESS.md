@@ -487,6 +487,36 @@ rather than treating them as one batch to explain away.
   blocker moved from "outstanding defects" to "business decisions +
   one real API gap," which is real progress, not just relabeling.
 
+### 2026-08-10 — Risk #35 (inventory) resolved and verified live
+
+Full detail: `docs/PHASE9_INVENTORY_FIX_REPORT.md`. Fetched real Shopify
+documentation directly (not from memory) to confirm the root cause rather
+than guessing again: `inventorySetQuantities` requires a mandatory
+`@idempotent(key: $key)` directive as of API 2026-04, plus a
+`changeFromQuantity` value per entry (confirmed by live testing, since
+the fetched docs summary was imprecise on this second point). Fixed in
+`migration/scripts/phase9_test_import.py`.
+
+- Built and ran `migration/scripts/test_phase9_inventory.py` - 9
+  scenarios (8 live-integration, 2 mocked failure modes), all passing for
+  real. Found and fixed 2 related real bugs the test suite itself
+  surfaced: crashes on a missing inventory item and on a malformed API
+  response.
+- Re-ran the full production import: live reconciliation improved from
+  134/148 matched (13 inventory mismatches) to **160/161 matched, 0
+  inventory mismatches** - the only remaining mismatch is the unrelated,
+  already-documented vendor auto-fill.
+- Idempotency re-verified twice more after the fix: no duplicate
+  products, variants, or media at any point, independently re-queried
+  each time, not just trusted from the importer's own log.
+- Product 7535's vendor auto-fill investigated to a confirmed root cause
+  (Shopify platform behavior, not importer or source-data behavior) -
+  left open as a business decision, no vendor invented or changed.
+- **Status: still BLOCKED for bulk import** - the technical inventory gap
+  is closed; what remains is the vendor business decision, collection
+  creation (separate scope), and the human approvals already listed in
+  the prior review. Bulk import was not requested or performed.
+
 ## Phase 6 Readiness Assessment
 
 **Phase 5 consistency check** (before starting Phase 6): re-read
