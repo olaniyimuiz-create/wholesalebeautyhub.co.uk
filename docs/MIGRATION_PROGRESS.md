@@ -411,6 +411,39 @@ output alone. Full detail: `docs/PHASE9_ENVIRONMENT_READINESS.md`.
 - **Status: BLOCKED — on approval, not infrastructure.** No write was
   attempted against Shopify at any point; no test import was performed.
 
+### 2026-08-10 — Business approval (ADR-011) and first controlled test import
+
+The project owner gave five explicit decisions (import method, UK-only
+scope, test store, test set, test-import authorization) — recorded as
+`docs/DECISIONS.md` ADR-011 before any write was attempted, not
+after. Approval gate moved from 3/8 to 7/8 (only production plan tier
+remains, and it doesn't gate this test).
+
+Built `migration/scripts/phase9_test_import.py` (write client) and
+`migration/scripts/phase9_test_reconcile.py` (independent live-verification
+client), both reusing `phase9_dry_run.py`'s product loading/quarantine
+rules and `phase9_preflight.py`'s credential/GraphQL helpers rather than
+duplicating them.
+
+- Ran the real 11-point pre-write preflight: all checks passed.
+- Executed the test import: 8 of 9 products created; 1 quarantined
+  (product 2371, the known ambiguous-vendor placeholder — the safety rule
+  working as designed, not a failure).
+- Independent live reconciliation (`phase9_test_reconcile.py`, fresh
+  Shopify queries, not the import script's own report): 134 field-level
+  comparisons, 131 matched, 3 real mismatches — reported, not hidden.
+  Both root causes are new, real, previously-undiscoverable findings
+  (only surfaced by a real API call): product 1721 has a blank variation
+  attribute name Shopify rejected; blank-vendor products (20 of 611) get
+  the shop name auto-filled as Vendor rather than staying blank. Added as
+  risk register #33/#34 and GitHub issue #41 — not fixed silently.
+- Idempotency verified for real: re-ran the identical import a second
+  time. 0 products created (8 before, 8 after, independently re-queried),
+  0 duplicate variants, 0 duplicate media.
+- **Did not** proceed to the remaining 602 products, any customer, any
+  order, or any production write — ADR-011 Decision 5 authorized exactly
+  these 9 products and no more; that boundary was respected.
+
 ## Phase 6 Readiness Assessment
 
 **Phase 5 consistency check** (before starting Phase 6): re-read

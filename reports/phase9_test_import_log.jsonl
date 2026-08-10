@@ -1,0 +1,19 @@
+{"woo_id": 124, "action": "CREATED", "shopify_gid": "gid://shopify/Product/9599851364608", "ts": "2026-08-10T16:06:58Z"}
+{"woo_id": 17, "action": "CREATED", "shopify_gid": "gid://shopify/Product/9599851561216", "ts": "2026-08-10T16:07:00Z"}
+{"woo_id": 7535, "action": "CREATED", "shopify_gid": "gid://shopify/Product/9599851692288", "ts": "2026-08-10T16:07:04Z"}
+{"woo_id": 1687, "action": "CREATED", "shopify_gid": "gid://shopify/Product/9599851856128", "ts": "2026-08-10T16:07:06Z"}
+{"woo_id": 70, "action": "CREATED", "shopify_gid": "gid://shopify/Product/9599851954432", "ts": "2026-08-10T16:07:08Z"}
+{"woo_id": 22, "action": "CREATED", "shopify_gid": "gid://shopify/Product/9599852085504", "ts": "2026-08-10T16:07:11Z"}
+{"woo_id": 1721, "action": "CREATED", "shopify_gid": "gid://shopify/Product/9599852216576", "ts": "2026-08-10T16:07:14Z"}
+{"woo_id": 1721, "action": "VARIANT_ERROR", "error": "[('productOptionsCreate', [{'field': ['options', '0'], 'message': 'Must specify an option name.'}])]", "ts": "2026-08-10T16:07:15Z"}
+{"woo_id": 2371, "action": "QUARANTINED", "reason": "vendor='Accessories _make_up' is a data-entry placeholder, not a real brand", "ts": "2026-08-10T16:07:15Z"}
+{"woo_id": 333, "action": "CREATED", "shopify_gid": "gid://shopify/Product/9599852314880", "ts": "2026-08-10T16:07:16Z"}
+{"woo_id": 124, "action": "UPDATED", "shopify_gid": "gid://shopify/Product/9599851364608", "ts": "2026-08-10T16:09:45Z"}
+{"woo_id": 17, "action": "UPDATED", "shopify_gid": "gid://shopify/Product/9599851561216", "ts": "2026-08-10T16:09:46Z"}
+{"woo_id": 7535, "action": "UPDATED", "shopify_gid": "gid://shopify/Product/9599851692288", "ts": "2026-08-10T16:09:47Z"}
+{"woo_id": 1687, "action": "UPDATED", "shopify_gid": "gid://shopify/Product/9599851856128", "ts": "2026-08-10T16:09:47Z"}
+{"woo_id": 70, "action": "UPDATED", "shopify_gid": "gid://shopify/Product/9599851954432", "ts": "2026-08-10T16:09:48Z"}
+{"woo_id": 22, "action": "UPDATED", "shopify_gid": "gid://shopify/Product/9599852085504", "ts": "2026-08-10T16:09:49Z"}
+{"woo_id": 1721, "action": "UPDATED", "shopify_gid": "gid://shopify/Product/9599852216576", "ts": "2026-08-10T16:09:49Z"}
+{"woo_id": 2371, "action": "QUARANTINED", "reason": "vendor='Accessories _make_up' is a data-entry placeholder, not a real brand", "ts": "2026-08-10T16:09:49Z"}
+{"woo_id": 333, "action": "UPDATED", "shopify_gid": "gid://shopify/Product/9599852314880", "ts": "2026-08-10T16:09:50Z"}
