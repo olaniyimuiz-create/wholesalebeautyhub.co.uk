@@ -723,7 +723,7 @@ product_tag,726,BRIGHTENING,https://wholesalebeautyhub.co.uk/product-tag/brighte
 product_tag,727,MOISTURIZING,https://wholesalebeautyhub.co.uk/product-tag/moisturizing/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
 product_tag,728,skin repair,https://wholesalebeautyhub.co.uk/product-tag/skin-repair/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
 product_tag,729,shea butter,https://wholesalebeautyhub.co.uk/product-tag/shea-butter/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
-product_cat,730,sponge,https://wholesalebeautyhub.co.uk/product-category/sponge/,/collections/sponge,301,
+product_cat,730,sponge,https://wholesalebeautyhub.co.uk/product-category/sponge/,/collections/tools-accessories,301,"Redirects to the consolidated collection per the approved category cleanup (issue #39), not a same-named collection - that name was never carried forward."
 product_tag,731,sponge,https://wholesalebeautyhub.co.uk/product-tag/sponge/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
 brand,732,Biore,https://wholesalebeautyhub.co.uk/brand/biore/,/collections/biore,301,
 product_tag,733,sunscreen,https://wholesalebeautyhub.co.uk/product-tag/sunscreen/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
@@ -733,11 +733,11 @@ product_tag,736,spf50,https://wholesalebeautyhub.co.uk/product-tag/spf50/,/colle
 product_tag,739,under eye,https://wholesalebeautyhub.co.uk/product-tag/under-eye/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
 product_tag,740,hyperpigmentation,https://wholesalebeautyhub.co.uk/product-tag/hyperpigmentation/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
 product_tag,741,dark spots,https://wholesalebeautyhub.co.uk/product-tag/dark-spots/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
-product_cat,742,Glow serum,https://wholesalebeautyhub.co.uk/product-category/glow-serum/,/collections/glow-serum,301,
-product_cat,743,Dark spots &amp; Discoloration serums,https://wholesalebeautyhub.co.uk/product-category/dark-spots-discoloration-serums/,/collections/dark-spots-discoloration-serums,301,
-product_cat,744,Eye cream,https://wholesalebeautyhub.co.uk/product-category/eye-cream/,/collections/eye-cream,301,
+product_cat,742,Glow serum,https://wholesalebeautyhub.co.uk/product-category/glow-serum/,/collections/serums-treatment,301,"Redirects to the consolidated collection per the approved category cleanup (issue #39), not a same-named collection - that name was never carried forward."
+product_cat,743,Dark spots &amp; Discoloration serums,https://wholesalebeautyhub.co.uk/product-category/dark-spots-discoloration-serums/,/collections/serums-treatment,301,"Redirects to the consolidated collection per the approved category cleanup (issue #39), not a same-named collection - that name was never carried forward."
+product_cat,744,Eye cream,https://wholesalebeautyhub.co.uk/product-category/eye-cream/,/collections/serums-treatment,301,"Redirects to the consolidated collection per the approved category cleanup (issue #39), not a same-named collection - that name was never carried forward."
 product_tag,745,anti aging,https://wholesalebeautyhub.co.uk/product-tag/anti-aging/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
-product_cat,746,Glow spray,https://wholesalebeautyhub.co.uk/product-category/glow-spray/,/collections/glow-spray,301,
+product_cat,746,Glow spray,https://wholesalebeautyhub.co.uk/product-category/glow-spray/,/collections/serums-treatment,301,"Redirects to the consolidated collection per the approved category cleanup (issue #39), not a same-named collection - that name was never carried forward."
 product_tag,747,Glow spray,https://wholesalebeautyhub.co.uk/product-tag/glow-spray/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
 product_tag,748,facial mist,https://wholesalebeautyhub.co.uk/product-tag/facial-mist/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
 product_tag,753,Setting powder,https://wholesalebeautyhub.co.uk/product-tag/setting-powder/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
@@ -748,7 +748,7 @@ brand,765,Dove,https://wholesalebeautyhub.co.uk/brand/dove/,/collections/dove,30
 product_tag,769,Face Highlighter,https://wholesalebeautyhub.co.uk/product-tag/face-highlighter/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
 brand,777,Annies Beauty,https://wholesalebeautyhub.co.uk/brand/annies-beauty/,/collections/annies-beauty,301,
 brand,778,Tree Hut,https://wholesalebeautyhub.co.uk/brand/tree-hut/,/collections/tree-hut,301,
-product_cat,782,Body Body,https://wholesalebeautyhub.co.uk/product-category/body-body/,/collections/body-body,301,
+product_cat,782,Body Body,https://wholesalebeautyhub.co.uk/product-category/body-body/,/collections/body-care,301,"Redirects to the consolidated collection per the approved category cleanup (issue #39), not a same-named collection - that name was never carried forward."
 product_cat,783,Body Butter,https://wholesalebeautyhub.co.uk/product-category/body-butter/,/collections/body-butter,301,
 brand,784,Zapzyt,https://wholesalebeautyhub.co.uk/brand/zapzyt/,/collections/zapzyt,301,
 brand,785,Mary &amp; May,https://wholesalebeautyhub.co.uk/brand/mary-may/,/collections/mary-may,301,
@@ -794,7 +794,7 @@ brand,928,NINELESS,https://wholesalebeautyhub.co.uk/brand/nineless/,/collections
 brand,929,Merak Cosmetics,https://wholesalebeautyhub.co.uk/brand/merak-cosmetics/,/collections/merak-cosmetics,301,
 brand,930,Nuban Beauty,https://wholesalebeautyhub.co.uk/brand/nuban-beauty/,/collections/nuban-beauty,301,
 brand,932,Triangle,https://wholesalebeautyhub.co.uk/brand/triangle/,/collections/triangle,301,
-product_cat,933,TRADEFAIR COMBO DEAL,https://wholesalebeautyhub.co.uk/product-category/tradefair-combo-deal/,/collections/tradefair-combo-deal,301,
+product_cat,933,TRADEFAIR COMBO DEAL,https://wholesalebeautyhub.co.uk/product-category/tradefair-combo-deal/,/collections/tradefair-combo-deals,301,"Redirects to the consolidated collection per the approved category cleanup (issue #39), not a same-named collection - that name was never carried forward."
 brand,934,TRADEFAIR COMBO DEALS,https://wholesalebeautyhub.co.uk/brand/tradefair-combo-deals/,/collections/tradefair-combo-deals,301,
 product_tag,935,TRADEFAIR COMBO DEAL,https://wholesalebeautyhub.co.uk/product-tag/tradefair-combo-deal/,/collections/all,301,No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.
 brand,941,SKIN1004,https://wholesalebeautyhub.co.uk/brand/skin1004/,/collections/skin1004,301,

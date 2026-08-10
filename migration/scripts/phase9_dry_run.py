@@ -136,6 +136,35 @@ def normalize_name(name):
     return html.unescape(name or '').strip().casefold()
 
 
+# GitHub issue #39 - the Phase 6.5-approved category cleanup mapping
+# (docs/SHOPIFY_FOUNDATION.md § Collection architecture), applied
+# mechanically for the first time here. Keys are normalize_name()'d raw
+# WooCommerce category names; values are the real, already-approved
+# target collection name (itself run through normalize_name() again at
+# lookup time - see resolve_collections()). Deliberately does NOT include
+# "Uncategorized": that one was explicitly NOT carried forward by the
+# approved architecture ("needs a manual audit... not a 1:1 collection")
+# - inventing a destination for it here would not be implementing the
+# approved mapping, it would be a new, unapproved one.
+CATEGORY_CLEANUP_MAP = {
+    normalize_name('Body Body'): 'Body Care',
+    normalize_name('TRADEFAIR COMBO DEAL'): 'Tradefair Combo Deals',
+    normalize_name('Glow serum'): 'Serums & Treatment',
+    normalize_name('Dark spots &amp; Discoloration serums'): 'Serums & Treatment',
+    normalize_name('Eye cream'): 'Serums & Treatment',
+    normalize_name('Glow spray'): 'Serums & Treatment',
+    normalize_name('sponge'): 'Tools & Accessories',
+}
+
+
+def resolve_category_name(cat):
+    """Applies the approved cleanup map before collection lookup, so a
+    stray category resolves to its real destination collection's name
+    rather than needing every caller to know about the mapping."""
+    normalized = normalize_name(cat)
+    return CATEGORY_CLEANUP_MAP.get(normalized, cat)
+
+
 def build_collection_lookup(collections_data):
     by_name = {}
     for c in collections_data['category_collections']:
@@ -382,7 +411,7 @@ def write_product_mapping(products, collection_lookup, path):
 def resolve_collections(product, collection_lookup):
     handles = []
     for cat in product['categories']:
-        h = collection_lookup.get(normalize_name(cat))
+        h = collection_lookup.get(normalize_name(resolve_category_name(cat)))
         if h:
             handles.append(h)
     if product['vendor']:
@@ -404,9 +433,9 @@ def write_collection_mapping(products, collection_lookup, path):
         w.writerow(['woo_product_id', 'woo_category_or_brand', 'resolved_collection_handle', 'resolution_status'])
         for p in products:
             for cat in p['categories']:
-                handle = collection_lookup.get(normalize_name(cat))
+                handle = collection_lookup.get(normalize_name(resolve_category_name(cat)))
                 if handle:
-                    status = 'RESOLVED'
+                    status = 'RESOLVED' if normalize_name(cat) not in CATEGORY_CLEANUP_MAP else 'RESOLVED_VIA_CLEANUP_MAP'
                 elif cat in LEVEL_1_NAV_ONLY_GROUPS:
                     status = 'EXPECTED_NAV_ONLY_NOT_A_COLLECTION'
                 else:
@@ -478,7 +507,7 @@ def write_summary(products, dq_issues, collection_lookup, media_lookup, path):
     unmapped = set()
     for p in products:
         for cat in p['categories']:
-            if normalize_name(cat) in collection_lookup:
+            if normalize_name(resolve_category_name(cat)) in collection_lookup:
                 all_collections_referenced.add(cat)
             elif cat not in LEVEL_1_NAV_ONLY_GROUPS:
                 unmapped.add(cat)

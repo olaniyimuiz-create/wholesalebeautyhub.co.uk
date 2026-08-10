@@ -34,10 +34,33 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from sql_utils import iter_insert_rows
+from phase9_dry_run import CATEGORY_CLEANUP_MAP, normalize_name
 
 DUMP_PATH = os.path.join('migration', 'sql', 'dump.sql')
 PRODUCTS_JSON = os.path.join('migration', 'data', 'products.json')
+COLLECTIONS_JSON = os.path.join('shopify', 'foundation', 'collections.json')
 REPORTS_DIR = 'reports'
+
+
+def load_category_handle_overrides():
+    """GitHub issue #39: 7 stray WooCommerce categories are consolidated
+    into a different, already-existing collection (docs/SHOPIFY_FOUNDATION.md
+    § Collection architecture, mechanically applied in phase9_dry_run.py).
+    Their /product-category/ redirect must land on that real destination
+    handle, not the raw WordPress term slug - the raw slug will never
+    become a real collection, so redirecting there would be a 301 to a
+    404. Reuses CATEGORY_CLEANUP_MAP (single source of truth for the
+    mapping) rather than re-deriving it."""
+    with open(COLLECTIONS_JSON, encoding='utf-8') as f:
+        collections_data = json.load(f)
+    handle_by_name = {normalize_name(c['name']): c['handle']
+                       for c in collections_data['category_collections'] + collections_data['manual_promo_collections']}
+    overrides = {}
+    for raw_normalized, target_name in CATEGORY_CLEANUP_MAP.items():
+        handle = handle_by_name.get(normalize_name(target_name))
+        if handle:
+            overrides[raw_normalized] = handle
+    return overrides
 
 OLD_DOMAIN = 'https://wholesalebeautyhub.co.uk'
 BLOG_HANDLE = 'news'  # Shopify default; revisit in Phase 7 if the theme wants a different handle
@@ -131,6 +154,7 @@ def build_inventory():
     with open(PRODUCTS_JSON, 'r', encoding='utf-8') as f:
         products = json.load(f)
 
+    category_handle_overrides = load_category_handle_overrides()
     terms, term_taxonomy, relationships = load_terms_and_relationships()
     pages, posts, menu_items = load_pages_and_posts()
 
@@ -168,8 +192,12 @@ def build_inventory():
         if not term:
             continue
         old_path = f"{taxonomy_old_prefix[taxonomy]}{term['slug']}/"
+        override_handle = category_handle_overrides.get(normalize_name(term['name'])) if taxonomy == 'product_cat' else None
         if taxonomy == 'product_tag':
             new_path = '/collections/all'  # Shopify has no native tag-archive page; see SEO_STRATEGY.md
+        elif override_handle:
+            # issue #39 consolidation - see load_category_handle_overrides()
+            new_path = f"{taxonomy_new_prefix[taxonomy]}{override_handle}"
         else:
             new_path = f"{taxonomy_new_prefix[taxonomy]}{term['slug']}"
         # menu items reference taxonomy terms by term_id, not term_taxonomy_id
@@ -182,6 +210,7 @@ def build_inventory():
             'old_path': old_path,
             'new_path': new_path,
             'content': '',
+            'category_cleanup_override': bool(override_handle),
         })
 
     for pid, page in pages.items():
@@ -273,6 +302,8 @@ def write_redirect_matrix(entities, path):
             notes = ''
             if e['new_path'] == '/collections/all' and e['entity_type'] == 'product_tag':
                 notes = 'No Shopify tag-archive equivalent; falls back to all-products. Consider a matching collection.'
+            elif e.get('category_cleanup_override'):
+                notes = 'Redirects to the consolidated collection per the approved category cleanup (issue #39), not a same-named collection - that name was never carried forward.'
             w.writerow([
                 e['entity_type'], e['id'], e['title'],
                 OLD_DOMAIN + e['old_path'], e['new_path'], '301', notes,

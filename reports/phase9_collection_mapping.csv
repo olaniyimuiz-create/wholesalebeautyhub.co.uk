@@ -392,7 +392,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 233,Touch,touch,RESOLVED
 234,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 234,Moisturizers &amp; Cream,moisturizers,RESOLVED
-234,Dark spots &amp; Discoloration serums,,UNMAPPED
+234,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 234,Touch,touch,RESOLVED
 235,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 235,Roll On,roll-on,RESOLVED
@@ -515,11 +515,11 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 285,Isntree,isntree,RESOLVED
 286,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 286,Serums &amp; Treatment,serums-treatment,RESOLVED
-286,Dark spots &amp; Discoloration serums,,UNMAPPED
+286,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 286,Axis-y,axis-y,RESOLVED
 287,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 287,Serums &amp; Treatment,serums-treatment,RESOLVED
-287,Dark spots &amp; Discoloration serums,,UNMAPPED
+287,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 287,Axis-y,axis-y,RESOLVED
 288,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 288,Sunscreen,sunscreen,RESOLVED
@@ -819,11 +819,11 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 1721,Ezanic,ezanic,RESOLVED
 1722,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 1722,Serums &amp; Treatment,serums-treatment,RESOLVED
-1722,Dark spots &amp; Discoloration serums,,UNMAPPED
+1722,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 1722,Faded,faded,RESOLVED
 1723,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 1723,Serums &amp; Treatment,serums-treatment,RESOLVED
-1723,Dark spots &amp; Discoloration serums,,UNMAPPED
+1723,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 1723,Faded,faded,RESOLVED
 1724,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 1724,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
@@ -1142,7 +1142,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 2355,Naturium,naturium,RESOLVED
 2357,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 2357,Serums &amp; Treatment,serums-treatment,RESOLVED
-2357,Dark spots &amp; Discoloration serums,,UNMAPPED
+2357,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 2357,Nip + Fab,nip-fab,RESOLVED
 2358,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 2358,Moisturizers &amp; Cream,moisturizers,RESOLVED
@@ -1263,7 +1263,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 3661,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
 3661,Body Scrubs,body-scrubs,RESOLVED
 3661,Body Wash,body-wash,RESOLVED
-3661,sponge,,UNMAPPED
+3661,sponge,tools-accessories,RESOLVED_VIA_CLEANUP_MAP
 3661,Glove sponge,glove-sponge,RESOLVED
 3663,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 3663,Sunscreen,sunscreen,RESOLVED
@@ -1276,7 +1276,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 3689,Serums &amp; Treatment,serums-treatment,RESOLVED
 3689,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
 3689,Body Wash,body-wash,RESOLVED
-3689,Dark spots &amp; Discoloration serums,,UNMAPPED
+3689,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 3689,Faded,faded,RESOLVED
 3693,Eyes,eyes,RESOLVED
 3693,Face,face,RESOLVED
@@ -1311,8 +1311,8 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 3853,Anua,anua,RESOLVED
 3856,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 3856,Serums &amp; Treatment,serums-treatment,RESOLVED
-3856,Glow serum,,UNMAPPED
-3856,Dark spots &amp; Discoloration serums,,UNMAPPED
+3856,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+3856,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 3856,Anua,anua,RESOLVED
 3867,Moisturizers &amp; Cream,moisturizers,RESOLVED
 3867,Body Moisturizers,body-moisturizers,RESOLVED
@@ -1325,26 +1325,26 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 3871,Serums &amp; Treatment,serums-treatment,RESOLVED
 3871,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
 3871,Roll On,roll-on,RESOLVED
-3871,Dark spots &amp; Discoloration serums,,UNMAPPED
+3871,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 3871,Faded,faded,RESOLVED
 3876,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 3876,Serums &amp; Treatment,serums-treatment,RESOLVED
-3876,Eye cream,,UNMAPPED
+3876,Eye cream,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 3876,Advanced Clinicals,advanced-clinicals,RESOLVED
 3878,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 3878,Moisturizers &amp; Cream,moisturizers,RESOLVED
-3878,Glow serum,,UNMAPPED
-3878,Dark spots &amp; Discoloration serums,,UNMAPPED
+3878,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+3878,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 3878,Advanced Clinicals,advanced-clinicals,RESOLVED
 3885,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 3885,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
-3885,Glow serum,,UNMAPPED
-3885,Dark spots &amp; Discoloration serums,,UNMAPPED
+3885,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+3885,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 3885,Advanced Clinicals,advanced-clinicals,RESOLVED
 3887,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 3887,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
-3887,Dark spots &amp; Discoloration serums,,UNMAPPED
-3887,Glow spray,,UNMAPPED
+3887,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+3887,Glow spray,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 3887,Advanced Clinicals,advanced-clinicals,RESOLVED
 4013,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 4013,Serums &amp; Treatment,serums-treatment,RESOLVED
@@ -1352,7 +1352,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 4013,Facefacts,facefacts,RESOLVED
 4015,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 4015,Serums &amp; Treatment,serums-treatment,RESOLVED
-4015,Glow serum,,UNMAPPED
+4015,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 4015,Facefacts,facefacts,RESOLVED
 4020,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 4020,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
@@ -1414,8 +1414,8 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 4706,Aveeno,aveeno,RESOLVED
 4711,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 4711,Serums &amp; Treatment,serums-treatment,RESOLVED
-4711,Glow serum,,UNMAPPED
-4711,Dark spots &amp; Discoloration serums,,UNMAPPED
+4711,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+4711,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 4711,Timeless,timeless,RESOLVED
 5103,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 5103,Body Oil,body-oil,RESOLVED
@@ -1432,12 +1432,12 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 5112,Zapzyt,zapzyt,RESOLVED
 5115,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 5115,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
-5115,Dark spots &amp; Discoloration serums,,UNMAPPED
+5115,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 5115,Missha,missha,RESOLVED
 5119,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 5119,Serums &amp; Treatment,serums-treatment,RESOLVED
-5119,Dark spots &amp; Discoloration serums,,UNMAPPED
-5119,Eye cream,,UNMAPPED
+5119,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+5119,Eye cream,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 5119,Mary &amp; May,mary-may,RESOLVED
 5355,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 5355,Brushes &amp; Beauty Blenders,brushes-beauty-blenders,RESOLVED
@@ -1447,14 +1447,14 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 5362,Flawless Ivy cosmetics,flawless-ivy-cosmetics,RESOLVED
 5911,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 5911,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
-5911,Dark spots &amp; Discoloration serums,,UNMAPPED
+5911,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 5911,Good Molecules,good-molecules,RESOLVED
 5915,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 5915,Serums &amp; Treatment,serums-treatment,RESOLVED
 5915,Nip + Fab,nip-fab,RESOLVED
 5918,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 5918,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
-5918,Dark spots &amp; Discoloration serums,,UNMAPPED
+5918,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 5918,Nip + Fab,nip-fab,RESOLVED
 5921,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 5921,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
@@ -1481,7 +1481,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 7309,Body Moisturizers,body-moisturizers,RESOLVED
 7309,Body Lotion,body-lotion,RESOLVED
 7309,Baby wash &amp; lotion,baby-wash-lotion,RESOLVED
-7309,Body Body,,UNMAPPED
+7309,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 7309,Body Butter,body-butter,RESOLVED
 7309,Eos,eos,RESOLVED
 7323,Body Scrubs,body-scrubs,RESOLVED
@@ -1526,8 +1526,8 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 7543,BRIGHTENING,brightening,RESOLVED
 7543,Combo Deals,combo-deals,RESOLVED
 7544,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
-7544,Glow serum,,UNMAPPED
-7544,Dark spots &amp; Discoloration serums,,UNMAPPED
+7544,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+7544,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 7544,VALENTINE COMBO DEALS,valentine-combo-deals,RESOLVED
 7544,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 7544,BRIGHTENING,brightening,RESOLVED
@@ -1537,13 +1537,13 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 7880,Eos,eos,RESOLVED
 7885,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 7885,Serums &amp; Treatment,serums-treatment,RESOLVED
-7885,Dark spots &amp; Discoloration serums,,UNMAPPED
+7885,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 7885,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 7885,BRIGHTENING,brightening,RESOLVED
 7885,Naturium,naturium,RESOLVED
 7890,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 7890,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
-7890,Glow spray,,UNMAPPED
+7890,Glow spray,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 7890,Tiam,tiam,RESOLVED
 7895,Eyes,eyes,RESOLVED
 7895,Eyeshadow,,UNMAPPED
@@ -1570,8 +1570,8 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 7924,Tree Hut,tree-hut,RESOLVED
 8533,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 8533,Moisturizers &amp; Cream,moisturizers,RESOLVED
-8533,Dark spots &amp; Discoloration serums,,UNMAPPED
-8533,Eye cream,,UNMAPPED
+8533,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+8533,Eye cream,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 8533,BRIGHTENING,brightening,RESOLVED
 8533,Elastalift,elastalift,RESOLVED
 8618,Foundation,,UNMAPPED
@@ -1608,7 +1608,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 9187,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 9187,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
 9187,Body Wash,body-wash,RESOLVED
-9187,Body Body,,UNMAPPED
+9187,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 9187,BRIGHTENING,brightening,RESOLVED
 9187,Olay,olay,RESOLVED
 9678,Face,face,RESOLVED
@@ -1622,12 +1622,12 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 10415,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 10415,Serums &amp; Treatment,serums-treatment,RESOLVED
 10415,acne treatment,acne-treatment,RESOLVED
-10415,Dark spots &amp; Discoloration serums,,UNMAPPED
+10415,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 10415,Anua,anua,RESOLVED
 10419,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 10419,Serums &amp; Treatment,serums-treatment,RESOLVED
-10419,Glow serum,,UNMAPPED
-10419,Dark spots &amp; Discoloration serums,,UNMAPPED
+10419,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+10419,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 10419,BRIGHTENING,brightening,RESOLVED
 10419,Jumiso,jumiso,RESOLVED
 10476,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
@@ -1677,27 +1677,27 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 10581,BM PRO,bm-pro,RESOLVED
 10888,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 10888,Body Wash,body-wash,RESOLVED
-10888,Body Body,,UNMAPPED
+10888,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 10888,Medix 5.5,medix-5-5,RESOLVED
 11227,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 11227,Body Wash,body-wash,RESOLVED
 11227,Olay,olay,RESOLVED
 11341,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 11341,Serums &amp; Treatment,serums-treatment,RESOLVED
-11341,Glow serum,,UNMAPPED
-11341,Dark spots &amp; Discoloration serums,,UNMAPPED
+11341,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+11341,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 11341,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 11341,BRIGHTENING,brightening,RESOLVED
 11341,NINELESS,nineless,RESOLVED
 11348,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 11348,Serums &amp; Treatment,serums-treatment,RESOLVED
 11348,acne treatment,acne-treatment,RESOLVED
-11348,Dark spots &amp; Discoloration serums,,UNMAPPED
+11348,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 11348,NINELESS,nineless,RESOLVED
 11698,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 11698,Body Moisturizers,body-moisturizers,RESOLVED
 11698,Body Lotion,body-lotion,RESOLVED
-11698,Body Body,,UNMAPPED
+11698,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 11698,BRIGHTENING,brightening,RESOLVED
 11698,Olay,olay,RESOLVED
 11897,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
@@ -1705,24 +1705,24 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 11897,Viccabel,viccabel,RESOLVED
 11901,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 11901,Serums &amp; Treatment,serums-treatment,RESOLVED
-11901,Glow serum,,UNMAPPED
-11901,Dark spots &amp; Discoloration serums,,UNMAPPED
+11901,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+11901,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 11901,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 11901,BRIGHTENING,brightening,RESOLVED
 11901,NINELESS,nineless,RESOLVED
 12980,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 12980,Body Moisturizers,body-moisturizers,RESOLVED
 12980,Body Lotion,body-lotion,RESOLVED
-12980,Body Body,,UNMAPPED
+12980,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 12980,Body Butter,body-butter,RESOLVED
 12980,Eos,eos,RESOLVED
 13301,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 13301,Sunscreen,sunscreen,RESOLVED
 13301,Body Wash,body-wash,RESOLVED
 13301,Body Lotion,body-lotion,RESOLVED
-13301,Dark spots &amp; Discoloration serums,,UNMAPPED
-13301,Body Body,,UNMAPPED
-13301,TRADEFAIR COMBO DEAL,,UNMAPPED
+13301,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+13301,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
+13301,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 13301,Combo Deals,combo-deals,RESOLVED
 13301,Zaron,zaron,RESOLVED
 13314,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
@@ -1731,45 +1731,45 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 13314,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
 13314,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
 13314,Sunscreen,sunscreen,RESOLVED
-13314,Glow serum,,UNMAPPED
-13314,Dark spots &amp; Discoloration serums,,UNMAPPED
+13314,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+13314,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 13314,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 13314,BRIGHTENING,brightening,RESOLVED
-13314,TRADEFAIR COMBO DEAL,,UNMAPPED
+13314,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 13314,Combo Deals,combo-deals,RESOLVED
 13314,NINELESS,nineless,RESOLVED
 13317,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 13317,Body Wash,body-wash,RESOLVED
 13317,Body Lotion,body-lotion,RESOLVED
-13317,Body Body,,UNMAPPED
+13317,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 13317,BRIGHTENING,brightening,RESOLVED
-13317,TRADEFAIR COMBO DEAL,,UNMAPPED
+13317,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 13317,Combo Deals,combo-deals,RESOLVED
 13317,Medix 5.5,medix-5-5,RESOLVED
 13318,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 13318,Serums &amp; Treatment,serums-treatment,RESOLVED
 13318,Sunscreen,sunscreen,RESOLVED
 13318,acne treatment,acne-treatment,RESOLVED
-13318,TRADEFAIR COMBO DEAL,,UNMAPPED
+13318,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 13318,Combo Deals,combo-deals,RESOLVED
 13318,Panoxyl,panoxyl,RESOLVED
 13319,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 13319,Serums &amp; Treatment,serums-treatment,RESOLVED
 13319,Sunscreen,sunscreen,RESOLVED
 13319,acne treatment,acne-treatment,RESOLVED
-13319,TRADEFAIR COMBO DEAL,,UNMAPPED
+13319,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 13319,Combo Deals,combo-deals,RESOLVED
 13319,Panoxyl,panoxyl,RESOLVED
 13321,Body Moisturizers,body-moisturizers,RESOLVED
 13321,Body Lotion,body-lotion,RESOLVED
-13321,Body Body,,UNMAPPED
-13321,TRADEFAIR COMBO DEAL,,UNMAPPED
+13321,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
+13321,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 13321,Eos,eos,RESOLVED
 13323,Serums &amp; Treatment,serums-treatment,RESOLVED
-13323,Dark spots &amp; Discoloration serums,,UNMAPPED
+13323,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 13323,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 13323,BRIGHTENING,brightening,RESOLVED
-13323,TRADEFAIR COMBO DEAL,,UNMAPPED
+13323,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 13323,Combo Deals,combo-deals,RESOLVED
 13323,Good Molecules,good-molecules,RESOLVED
 13324,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
@@ -1778,11 +1778,11 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 13324,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
 13324,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
 13324,Sunscreen,sunscreen,RESOLVED
-13324,Glow serum,,UNMAPPED
-13324,Dark spots &amp; Discoloration serums,,UNMAPPED
+13324,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+13324,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 13324,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 13324,BRIGHTENING,brightening,RESOLVED
-13324,TRADEFAIR COMBO DEAL,,UNMAPPED
+13324,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 13324,Combo Deals,combo-deals,RESOLVED
 13324,Acwell,acwell,RESOLVED
 13326,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
@@ -1791,19 +1791,19 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 13326,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
 13326,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
 13326,Sunscreen,sunscreen,RESOLVED
-13326,Glow serum,,UNMAPPED
-13326,Dark spots &amp; Discoloration serums,,UNMAPPED
+13326,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+13326,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 13326,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 13326,BRIGHTENING,brightening,RESOLVED
-13326,TRADEFAIR COMBO DEAL,,UNMAPPED
+13326,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 13326,Combo Deals,combo-deals,RESOLVED
 13326,Touch,touch,RESOLVED
 13327,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 13327,Body Moisturizers,body-moisturizers,RESOLVED
 13327,Body Wash,body-wash,RESOLVED
 13327,Body Lotion,body-lotion,RESOLVED
-13327,Body Body,,UNMAPPED
-13327,TRADEFAIR COMBO DEAL,,UNMAPPED
+13327,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
+13327,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 13327,Olay,olay,RESOLVED
 13887,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 13887,Face Cleansers &amp; Wash,face-cleansers-wash,RESOLVED
@@ -1817,15 +1817,15 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 13895,Zaron,zaron,RESOLVED
 13901,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 13901,Serums &amp; Treatment,serums-treatment,RESOLVED
-13901,Glow serum,,UNMAPPED
-13901,Dark spots &amp; Discoloration serums,,UNMAPPED
+13901,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+13901,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 13901,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 13901,BRIGHTENING,brightening,RESOLVED
 13901,Zaron,zaron,RESOLVED
 13903,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 13903,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
 13903,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
-13903,Dark spots &amp; Discoloration serums,,UNMAPPED
+13903,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 13903,Zaron,zaron,RESOLVED
 13908,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 13908,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
@@ -1841,16 +1841,16 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 13917,Annies Beauty,annies-beauty,RESOLVED
 14352,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 14352,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
-14352,Dark spots &amp; Discoloration serums,,UNMAPPED
-14352,Glow spray,,UNMAPPED
+14352,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+14352,Glow spray,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 14352,BRIGHTENING,brightening,RESOLVED
 14352,SKIN1004,skin1004,RESOLVED
 15129,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 15129,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 15129,"Exfoliators, Peels &amp; Scrubs",exfoliators-peels-scrubs,RESOLVED
 15129,Body Lotion,body-lotion,RESOLVED
-15129,Dark spots &amp; Discoloration serums,,UNMAPPED
-15129,Body Body,,UNMAPPED
+15129,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+15129,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 15129,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 15129,BRIGHTENING,brightening,RESOLVED
 15129,Olay,olay,RESOLVED
@@ -1862,13 +1862,13 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 15253,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 15253,Body Wash,body-wash,RESOLVED
 15253,Baby wash &amp; lotion,baby-wash-lotion,RESOLVED
-15253,Body Body,,UNMAPPED
+15253,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 15253,La Roche-Posay,la-roche-posay,RESOLVED
 15466,Uncategorized,,UNMAPPED
 15466,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 15466,Serums &amp; Treatment,serums-treatment,RESOLVED
-15466,Glow serum,,UNMAPPED
-15466,Dark spots &amp; Discoloration serums,,UNMAPPED
+15466,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+15466,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 15466,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 15466,BRIGHTENING,brightening,RESOLVED
 15466,25 Pskyn,25-pskyn,RESOLVED
@@ -1883,7 +1883,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 15865,Embryolisse,embryolisse,RESOLVED
 16331,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 16331,Serums &amp; Treatment,serums-treatment,RESOLVED
-16331,Dark spots &amp; Discoloration serums,,UNMAPPED
+16331,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 16331,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 16331,BRIGHTENING,brightening,RESOLVED
 16331,Bolden,bolden,RESOLVED
@@ -1916,7 +1916,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 16482,Moisturizers &amp; Cream,moisturizers,RESOLVED
 16482,Body Moisturizers,body-moisturizers,RESOLVED
 16482,Body Lotion,body-lotion,RESOLVED
-16482,Body Body,,UNMAPPED
+16482,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 16482,Body Butter,body-butter,RESOLVED
 16482,Body Mist,body-mist,RESOLVED
 16482,Eos,eos,RESOLVED
@@ -1936,7 +1936,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 16820,Moisturizers &amp; Cream,moisturizers,RESOLVED
 16820,Body Moisturizers,body-moisturizers,RESOLVED
 16820,Body Lotion,body-lotion,RESOLVED
-16820,Body Body,,UNMAPPED
+16820,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 16820,Eucerin,eucerin,RESOLVED
 16821,Body Lotion,body-lotion,RESOLVED
 16821,Eucerin,eucerin,RESOLVED
@@ -1958,7 +1958,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 17478,Vaseline,vaseline,RESOLVED
 17487,Body Moisturizers,body-moisturizers,RESOLVED
 17487,Body Lotion,body-lotion,RESOLVED
-17487,Body Body,,UNMAPPED
+17487,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 17487,Olay,olay,RESOLVED
 17491,Lipbalm,,UNMAPPED
 17491,Aquaphor,aquaphor,RESOLVED
@@ -1991,7 +1991,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 18407,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 18407,Body Wash,body-wash,RESOLVED
 18407,acne treatment,acne-treatment,RESOLVED
-18407,Body Body,,UNMAPPED
+18407,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 18407,Olay,olay,RESOLVED
 18477,acne treatment,acne-treatment,RESOLVED
 18477,Panoxyl,panoxyl,RESOLVED
@@ -2001,8 +2001,8 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 18488,Cosrx,cosrx,RESOLVED
 18632,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 18632,"Face Toners, Mist &amp; Essence",face-toners-mist-essence,RESOLVED
-18632,Dark spots &amp; Discoloration serums,,UNMAPPED
-18632,Glow spray,,UNMAPPED
+18632,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+18632,Glow spray,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 18632,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 18632,BRIGHTENING,brightening,RESOLVED
 18632,Tiam,tiam,RESOLVED
@@ -2018,8 +2018,8 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 18642,Dr Althea,dr-althea,RESOLVED
 18645,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 18645,Serums &amp; Treatment,serums-treatment,RESOLVED
-18645,Glow serum,,UNMAPPED
-18645,Dark spots &amp; Discoloration serums,,UNMAPPED
+18645,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+18645,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 18645,BRIGHTENING,brightening,RESOLVED
 18645,Dr Althea,dr-althea,RESOLVED
 18649,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
@@ -2054,7 +2054,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 18843,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 18843,Body Moisturizers,body-moisturizers,RESOLVED
 18843,Body Lotion,body-lotion,RESOLVED
-18843,Body Body,,UNMAPPED
+18843,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 18843,Body Butter,body-butter,RESOLVED
 18843,Olay,olay,RESOLVED
 18893,Eyeshadow,,UNMAPPED
@@ -2067,15 +2067,15 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 19224,Isntree,isntree,RESOLVED
 19572,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 19572,Serums &amp; Treatment,serums-treatment,RESOLVED
-19572,Glow serum,,UNMAPPED
-19572,Dark spots &amp; Discoloration serums,,UNMAPPED
+19572,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+19572,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 19572,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 19572,BRIGHTENING,brightening,RESOLVED
 19572,25 Pskyn,25-pskyn,RESOLVED
 19575,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 19575,Serums &amp; Treatment,serums-treatment,RESOLVED
-19575,Glow serum,,UNMAPPED
-19575,Dark spots &amp; Discoloration serums,,UNMAPPED
+19575,Glow serum,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
+19575,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 19575,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 19575,BRIGHTENING,brightening,RESOLVED
 19575,25 Pskyn,25-pskyn,RESOLVED
@@ -2138,7 +2138,7 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 20773,Makeup,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 21659,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 21659,Body Oil,body-oil,RESOLVED
-21659,Body Body,,UNMAPPED
+21659,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 21659,Zaron,zaron,RESOLVED
 21820,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 21820,Body Wash,body-wash,RESOLVED
@@ -2187,31 +2187,31 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 23957,Bath &amp; Body Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 23957,Body Wash,body-wash,RESOLVED
 23957,Body Lotion,body-lotion,RESOLVED
-23957,Body Body,,UNMAPPED
+23957,Body Body,body-care,RESOLVED_VIA_CLEANUP_MAP
 23957,BRIGHTENING,brightening,RESOLVED
-23957,TRADEFAIR COMBO DEAL,,UNMAPPED
+23957,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 23957,Combo Deals,combo-deals,RESOLVED
 23957,Medix 5.5,medix-5-5,RESOLVED
 24052,Moisturizers &amp; Cream,moisturizers,RESOLVED
 24052,25 Pskyn,25-pskyn,RESOLVED
 24654,Moisturizers &amp; Cream,moisturizers,RESOLVED
 24654,Acwell,acwell,RESOLVED
-25089,TRADEFAIR COMBO DEAL,,UNMAPPED
-25092,TRADEFAIR COMBO DEAL,,UNMAPPED
+25089,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
+25092,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 25092,Eos,eos,RESOLVED
-25095,TRADEFAIR COMBO DEAL,,UNMAPPED
+25095,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 25095,Skin by Zaron,skin-by-zaron,RESOLVED
-25099,TRADEFAIR COMBO DEAL,,UNMAPPED
+25099,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 25099,Olay,olay,RESOLVED
-25109,TRADEFAIR COMBO DEAL,,UNMAPPED
+25109,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 25109,25 Pskyn,25-pskyn,RESOLVED
-25111,TRADEFAIR COMBO DEAL,,UNMAPPED
+25111,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 25111,25 Pskyn,25-pskyn,RESOLVED
-25113,TRADEFAIR COMBO DEAL,,UNMAPPED
+25113,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 25113,25 Pskyn,25-pskyn,RESOLVED
-25115,TRADEFAIR COMBO DEAL,,UNMAPPED
+25115,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 25115,25 Pskyn,25-pskyn,RESOLVED
-25117,TRADEFAIR COMBO DEAL,,UNMAPPED
+25117,TRADEFAIR COMBO DEAL,tradefair-combo-deals,RESOLVED_VIA_CLEANUP_MAP
 25117,25 Pskyn,25-pskyn,RESOLVED
 25119,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 25119,Sunscreen,sunscreen,RESOLVED
@@ -2219,12 +2219,12 @@ woo_product_id,woo_category_or_brand,resolved_collection_handle,resolution_statu
 25122,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 25122,Serums &amp; Treatment,serums-treatment,RESOLVED
 25122,acne treatment,acne-treatment,RESOLVED
-25122,Dark spots &amp; Discoloration serums,,UNMAPPED
+25122,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 25122,Differin,differin,RESOLVED
 25129,Skin Care,,EXPECTED_NAV_ONLY_NOT_A_COLLECTION
 25129,Serums &amp; Treatment,serums-treatment,RESOLVED
 25129,acne treatment,acne-treatment,RESOLVED
-25129,Dark spots &amp; Discoloration serums,,UNMAPPED
+25129,Dark spots &amp; Discoloration serums,serums-treatment,RESOLVED_VIA_CLEANUP_MAP
 25129,HYPERPIGMENTATION,hyperpigmentation,RESOLVED
 25129,Differin,differin,RESOLVED
 25217,Mascara,,UNMAPPED
