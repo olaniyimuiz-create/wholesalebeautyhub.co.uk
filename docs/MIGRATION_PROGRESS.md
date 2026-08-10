@@ -517,6 +517,32 @@ the fetched docs summary was imprecise on this second point). Fixed in
   creation (separate scope), and the human approvals already listed in
   the prior review. Bulk import was not requested or performed.
 
+### 2026-08-10 — Phase 9.5: bulk import readiness prepared, not requested-to-execute
+
+Full detail: `docs/PHASE9_5_BULK_IMPORT_READINESS_REPORT.md`,
+`docs/PHASE9_BULK_IMPORT_READINESS.md`. Consolidates every outstanding
+decision into one place and formally requests them via GitHub issue #14 -
+does not decide any of them, and does not import anything.
+
+- Re-ran `seo_url_mapper.py` fresh (issue #12's own acceptance
+  criterion): 0 duplicate old URLs, 1 known/already-resolved collision
+  (Valentine Combo Deals). Caught and fixed a real, previously-uncaught
+  staleness bug in the process: `reports/redirect_matrix.csv` and
+  `reports/orphan_urls.csv` still had 12 broken `/shop//` redirect
+  targets left over from before the empty-handle fix (risk #30) - the
+  reports had never been regenerated since. Now correct.
+- Found a real, additional collection-creation blocker beyond approval:
+  issue #12 depends on #10, which depends on #39 (category cleanup
+  mapping) - still open. Collections aren't just waiting on a decision.
+- Presented (not decided) the product 2371 vendor choice, the ~20-product
+  blank-vendor policy choice, and the AVIF/zero-image media timing
+  choices as explicit options on their respective GitHub issues
+  (#38, #41, #6, #8).
+- **Status: BLOCKED.** Zero of the six outstanding decisions listed in
+  the readiness report are resolved. No collection was created. No
+  importer code was changed (no evidence required one). Bulk import was
+  not performed and remains a separate, explicit approval action.
+
 ## Phase 6 Readiness Assessment
 
 **Phase 5 consistency check** (before starting Phase 6): re-read
