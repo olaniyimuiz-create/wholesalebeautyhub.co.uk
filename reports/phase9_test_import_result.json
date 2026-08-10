@@ -13,49 +13,56 @@
       "title": "Vee Beauty 9 In 1 Powder Palette",
       "action": "UPDATED",
       "shopify_gid": "gid://shopify/Product/9599851364608",
-      "note": "top-level fields only; variants/media not re-run on idempotent update, by design"
+      "note": "top-level fields, inventory synced; variants/media not re-run, by design",
+      "variant_retry_errors": null
     },
     {
       "woo_id": 17,
       "title": "Vee Beauty Second Skin Foundation",
       "action": "UPDATED",
       "shopify_gid": "gid://shopify/Product/9599851561216",
-      "note": "top-level fields only; variants/media not re-run on idempotent update, by design"
+      "note": "top-level fields, inventory synced; variants/media not re-run, by design",
+      "variant_retry_errors": null
     },
     {
       "woo_id": 7535,
       "title": "ACNE & BLEMISH FIGHTER SET - VALENTINE COMBO DEALS",
       "action": "UPDATED",
       "shopify_gid": "gid://shopify/Product/9599851692288",
-      "note": "top-level fields only; variants/media not re-run on idempotent update, by design"
+      "note": "top-level fields, inventory synced; variants/media not re-run, by design",
+      "variant_retry_errors": null
     },
     {
       "woo_id": 1687,
       "title": "Advanced Clinicals 16Oz Vit C Brightening Body Cream",
       "action": "UPDATED",
       "shopify_gid": "gid://shopify/Product/9599851856128",
-      "note": "top-level fields only; variants/media not re-run on idempotent update, by design"
+      "note": "top-level fields, inventory synced; variants/media not re-run, by design",
+      "variant_retry_errors": null
     },
     {
       "woo_id": 70,
       "title": "Msmetics Diy Lashes",
       "action": "UPDATED",
       "shopify_gid": "gid://shopify/Product/9599851954432",
-      "note": "top-level fields only; variants/media not re-run on idempotent update, by design"
+      "note": "top-level fields, inventory synced; variants/media not re-run, by design",
+      "variant_retry_errors": null
     },
     {
       "woo_id": 22,
       "title": "Tehila Rosy Cheek Blush Palette",
       "action": "UPDATED",
       "shopify_gid": "gid://shopify/Product/9599852085504",
-      "note": "top-level fields only; variants/media not re-run on idempotent update, by design"
+      "note": "top-level fields, inventory synced; variants/media not re-run, by design",
+      "variant_retry_errors": null
     },
     {
       "woo_id": 1721,
       "title": "Ezanic Azelaic Acid Gel W/W 15G",
       "action": "UPDATED",
       "shopify_gid": "gid://shopify/Product/9599852216576",
-      "note": "top-level fields only; variants/media not re-run on idempotent update, by design"
+      "note": "top-level fields, inventory synced; variants/media not re-run, by design",
+      "variant_retry_errors": null
     },
     {
       "woo_id": 2371,
@@ -69,7 +76,8 @@
       "title": "Dr Jart Hyaluronic Face Mask",
       "action": "UPDATED",
       "shopify_gid": "gid://shopify/Product/9599852314880",
-      "note": "top-level fields only; variants/media not re-run on idempotent update, by design"
+      "note": "top-level fields, inventory synced; variants/media not re-run, by design",
+      "variant_retry_errors": null
     }
   ]
 }

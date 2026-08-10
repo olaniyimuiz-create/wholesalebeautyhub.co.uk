@@ -444,6 +444,49 @@ duplicating them.
   order, or any production write — ADR-011 Decision 5 authorized exactly
   these 9 products and no more; that boundary was respected.
 
+### 2026-08-10 — Post-test review: 2 defects fixed, 2 new findings, still blocked
+
+Full detail: `docs/PHASE9_POST_TEST_REVIEW.md`. Investigated all 3 live
+reconciliation mismatches from the initial test import individually
+rather than treating them as one batch to explain away.
+
+- **Product 1721 root-caused for real**: the raw `_product_attributes`
+  serialized data shows the real WooCommerce attribute name is the
+  literal character `%` (matches its `20%`/`10%` values) - the parser was
+  reading the wrong field (the sanitized array key, which is empty for a
+  name of just `%`) instead of the real `name` field. Fixed in
+  `database_parser.py` with a minimal, evidence-scoped fallback; verified
+  against the 9 other custom-attribute products in the catalog to confirm
+  zero regressions, and re-verified the full dry-run pipeline produces
+  identical summary numbers.
+- **Product 2371 investigated exhaustively**, including a fresh raw scan
+  of all 257 `wp_postmeta` rows directly against `dump.sql`: no real
+  vendor signal exists anywhere. Remains correctly quarantined - not
+  guessed.
+- **Vendor auto-fill (product 7535)**: confirmed as a real Shopify
+  platform behavior (shop name fills blank vendor fields), not a defect
+  in this project's code. Left as an open, explicit business decision -
+  not silently worked around.
+- **New defect found while fixing the above**: the importer never set
+  real inventory quantities (all created variants showed `0` regardless
+  of source `stock_quantity`), and untracked-inventory items were being
+  marked `tracked` unconditionally. Fixed the `manage_stock` gating; the
+  quantity-setting fix itself then hit a real, current Shopify API
+  requirement (`inventorySetQuantities` needs an `@idempotent` directive
+  not implemented here) - left honestly failing and logged, not
+  papered over. Also fixed a real bug where this exact kind of failure
+  was being silently swallowed (call site never checked the mutation's
+  return value).
+- Re-ran the full validation cycle after every change: dry-run pipeline
+  (no regressions), test import (0 created, 8 updated, 1 quarantined),
+  live reconciliation (146 of 161 field comparisons now match, up from
+  131 of 134 - more total checks because inventory-quantity comparison
+  was added), and idempotency (re-verified twice more, still no
+  duplicates of any kind).
+- **Status: BLOCKED for bulk import** - unchanged in substance, but the
+  blocker moved from "outstanding defects" to "business decisions +
+  one real API gap," which is real progress, not just relabeling.
+
 ## Phase 6 Readiness Assessment
 
 **Phase 5 consistency check** (before starting Phase 6): re-read

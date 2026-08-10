@@ -12,10 +12,20 @@ Reuses existing logic rather than re-deriving it:
 
 Idempotency: before creating a product, queries the store for an existing
 product carrying the same custom.legacy_woo_id metafield value. If found,
-updates top-level fields only and does NOT re-run variant/media mutations
-(that's what prevents duplicate variants/media on re-run - documented
-explicitly, not assumed). If not found, creates the product, its real
-option/variants, and its non-AVIF media.
+updates top-level fields, and re-runs the variant/option step ONLY if the
+live variant count doesn't match what's expected (i.e. a prior run left it
+incomplete, as happened for product 1721's real productOptionsCreate
+failure) - a completed product's variants/media are never re-touched, so
+this can't create duplicates. If not found, creates the product, its real
+option/variants, inventory, and its non-AVIF media.
+
+Inventory: `manage_stock == 'yes'` (checked at variant level for variable
+products, product level for simple - the same source field
+docs/ARCHITECTURE.md's csv_generator.py already keys off) sets the variant
+tracked and its real stock_quantity via inventorySetQuantities at the
+store's default location. `manage_stock != 'yes'` leaves the variant
+untracked, matching WooCommerce's "always in stock" behaviour - the same
+rule already documented for the CSV path, applied here for consistency.
 
 Does not create collections or metaobject/brand definitions - those are
 separate, not-yet-authorized issues (#12, #13). Collection membership is
@@ -199,14 +209,79 @@ def get_default_variant(domain, token, api_version, gid):
     return data['data']['product']['variants']['edges'][0]['node']['id']
 
 
+_LOCATION_ID = None
+
+
+def get_default_location(domain, token, api_version):
+    global _LOCATION_ID
+    if _LOCATION_ID is None:
+        data = graphql_request(domain, token, api_version, '{ locations(first: 1) { edges { node { id } } } }')
+        _LOCATION_ID = data['data']['locations']['edges'][0]['node']['id']
+    return _LOCATION_ID
+
+
+def set_inventory_quantities(domain, token, api_version, location_id, item_quantities):
+    """item_quantities: list of (inventoryItemId, quantity). Sets absolute
+    'available' quantity - matches WooCommerce's stock_quantity semantics
+    (an absolute count), not a relative adjustment.
+
+    KNOWN BROKEN as of this API version (2026-07), discovered by testing
+    directly against the live store rather than assumed working: the
+    server rejects this call with "The @idempotent directive is required
+    for this mutation but was not provided" - a real, current API
+    requirement (a client-supplied Idempotency-Key header plus an
+    @idempotent directive on the mutation) that isn't implemented here.
+    Per this phase's stop condition ("Shopify API behaviour differs from
+    documented expectations"), this was not further reverse-engineered
+    this session - see docs/RISK_REGISTER.md and GitHub issue #41.
+
+    Returns (success: bool, response: dict) so callers can accurately
+    report failure instead of assuming success - this function used to
+    return only the raw response, which every caller then ignored,
+    silently swallowing this exact failure. Fixed alongside discovering it.
+    """
+    if not item_quantities:
+        return True, None
+    mutation = '''
+    mutation($input: InventorySetQuantitiesInput!) {
+      inventorySetQuantities(input: $input) {
+        userErrors { field message }
+      }
+    }
+    '''
+    variables = {'input': {
+        'name': 'available',
+        'reason': 'correction',
+        'quantities': [{'inventoryItemId': iid, 'locationId': location_id, 'quantity': q} for iid, q in item_quantities],
+    }}
+    response = graphql_request(domain, token, api_version, mutation, variables)
+    errs = response.get('errors') or response.get('data', {}).get('inventorySetQuantities', {}).get('userErrors')
+    if errs:
+        log({'action': 'INVENTORY_SET_FAILED', 'error': str(errs), 'item_count': len(item_quantities)})
+        return False, response
+    return True, response
+
+
+def to_int_quantity(value):
+    n = to_number(value)
+    return int(n) if n is not None else 0
+
+
+def expected_inventory(manage_stock, stock_quantity):
+    if manage_stock != 'yes':
+        return None  # untracked - not applicable
+    return to_int_quantity(stock_quantity)
+
+
 def set_simple_variant(domain, token, api_version, product_gid, variant_gid, product):
     reg = to_number(product['regular_price'])
     price = to_number(product['price']) or reg
     compare = reg if reg and price and reg != price else None
+    tracked = product['manage_stock'] == 'yes'
     mutation = '''
     mutation($productId: ID!, $variants: [ProductVariantsBulkInput!]!) {
       productVariantsBulkUpdate(productId: $productId, variants: $variants) {
-        productVariants { id }
+        productVariants { id inventoryItem { id } }
         userErrors { field message }
       }
     }
@@ -214,10 +289,17 @@ def set_simple_variant(domain, token, api_version, product_gid, variant_gid, pro
     variant_input = {'id': variant_gid, 'price': str(price) if price else '0.00'}
     if compare:
         variant_input['compareAtPrice'] = str(compare)
-    if product['sku']:
-        variant_input['inventoryItem'] = {'sku': product['sku'], 'tracked': True}
+    if product['sku'] or tracked:
+        variant_input['inventoryItem'] = {'sku': product['sku'], 'tracked': tracked}
     variables = {'productId': product_gid, 'variants': [variant_input]}
-    return graphql_request(domain, token, api_version, mutation, variables)
+    data = graphql_request(domain, token, api_version, mutation, variables)
+
+    if tracked and not data.get('data', {}).get('productVariantsBulkUpdate', {}).get('userErrors') and not data.get('errors'):
+        inv_item_id = data['data']['productVariantsBulkUpdate']['productVariants'][0]['inventoryItem']['id']
+        location_id = get_default_location(domain, token, api_version)
+        set_inventory_quantities(domain, token, api_version, location_id,
+                                  [(inv_item_id, to_int_quantity(product['stock_quantity']))])
+    return data
 
 
 def set_variable_variants(domain, token, api_version, product_gid, product):
@@ -246,6 +328,7 @@ def set_variable_variants(domain, token, api_version, product_gid, product):
                 variant_gids_by_value[opt['value']] = edge['node']['id']
 
     bulk_inputs = []
+    tracked_quantities = []  # (index into bulk_inputs, stock_quantity) for variants that will be tracked
     for v in product['variations']:
         value = v['options'][0]
         gid = variant_gids_by_value.get(value)
@@ -254,23 +337,122 @@ def set_variable_variants(domain, token, api_version, product_gid, product):
         reg = to_number(v['regular_price'])
         price = to_number(v['price']) or reg
         compare = reg if reg and price and reg != price else None
+        tracked = v['manage_stock'] == 'yes'
         vi = {'id': gid, 'price': str(price) if price else '0.00'}
         if compare:
             vi['compareAtPrice'] = str(compare)
-        if v['sku']:
-            vi['inventoryItem'] = {'sku': v['sku'], 'tracked': True}
+        if v['sku'] or tracked:
+            vi['inventoryItem'] = {'sku': v['sku'], 'tracked': tracked}
+        if tracked:
+            tracked_quantities.append((len(bulk_inputs), v['stock_quantity']))
         bulk_inputs.append(vi)
 
     mutation2 = '''
     mutation($productId: ID!, $variants: [ProductVariantsBulkInput!]!) {
       productVariantsBulkUpdate(productId: $productId, variants: $variants) {
-        productVariants { id }
+        productVariants { id inventoryItem { id } }
         userErrors { field message }
       }
     }
     '''
     data3 = graphql_request(domain, token, api_version, mutation2, {'productId': product_gid, 'variants': bulk_inputs})
+
+    if tracked_quantities and not data3.get('data', {}).get('productVariantsBulkUpdate', {}).get('userErrors') and not data3.get('errors'):
+        result_variants = data3['data']['productVariantsBulkUpdate']['productVariants']
+        item_quantities = [(result_variants[i]['inventoryItem']['id'], to_int_quantity(qty)) for i, qty in tracked_quantities]
+        location_id = get_default_location(domain, token, api_version)
+        set_inventory_quantities(domain, token, api_version, location_id, item_quantities)
+
     return data, data3
+
+
+def expected_variant_count(product):
+    return len(product['variations']) if (product['wc_type'] == 'variable' and product['variations']) else 1
+
+
+def live_variants_with_inventory(domain, token, api_version, product_gid):
+    data = graphql_request(domain, token, api_version,
+                            '{ product(id: "%s") { variants(first: 50) { edges { node { '
+                            'id selectedOptions { name value } inventoryItem { id tracked } } } } } }' % product_gid)
+    return [e['node'] for e in data['data']['product']['variants']['edges']]
+
+
+def sync_inventory_for_existing(domain, token, api_version, product_gid, product, live_variants):
+    """Applied on the idempotent-update path so already-created products
+    (from before this fix existed) end up correct too, not just newly
+    created ones. Setting the same absolute quantity twice is a no-op, so
+    this is safe to run on every update."""
+    def match_live(option_value):
+        if option_value is None:
+            return live_variants[0] if live_variants else None
+        for lv in live_variants:
+            for opt in lv['selectedOptions']:
+                if opt['value'] == option_value:
+                    return lv
+        return None
+
+    pairs = []  # (live_variant_node, expected_quantity)
+    if product['wc_type'] == 'variable' and product['variations']:
+        for v in product['variations']:
+            lv = match_live(v['options'][0])
+            qty = expected_inventory(v['manage_stock'], v['stock_quantity'])
+            if lv and qty is not None:
+                pairs.append((lv, qty))
+    else:
+        lv = live_variants[0] if live_variants else None
+        qty = expected_inventory(product['manage_stock'], product['stock_quantity'])
+        if lv and qty is not None:
+            pairs.append((lv, qty))
+
+    to_track = []
+    item_quantities = []
+
+    for lv, qty in pairs:
+        if qty is None:
+            continue
+        if not lv['inventoryItem']['tracked']:
+            to_track.append(lv['inventoryItem']['id'])
+        item_quantities.append((lv['inventoryItem']['id'], qty))
+
+    for iid in to_track:
+        graphql_request(domain, token, api_version, '''
+        mutation($id: ID!) { inventoryItemUpdate(id: $id, input: { tracked: true }) { userErrors { field message } } }
+        ''', {'id': iid})
+    if not item_quantities:
+        return 0, True
+    location_id = get_default_location(domain, token, api_version)
+    success, _ = set_inventory_quantities(domain, token, api_version, location_id, item_quantities)
+    return len(item_quantities), success
+
+
+def create_or_fix_variants(domain, token, api_version, product_gid, product):
+    """Runs the full variant/option/inventory setup. Safe to call on a
+    product that still has only Shopify's auto-created default variant
+    (a prior run's variant step never having succeeded) - NOT safe to call
+    on a product whose real variants already exist, since productOptionsCreate
+    would then try to add a second, conflicting option. Callers gate this."""
+    variant_errors = []
+    variants_done = 0
+    if product['wc_type'] == 'variable' and product['variations']:
+        opt_data, bulk_data = set_variable_variants(domain, token, api_version, product_gid, product)
+        opt_errs = opt_data.get('data', {}).get('productOptionsCreate', {}).get('userErrors') or opt_data.get('errors')
+        if opt_errs:
+            variant_errors.append(('productOptionsCreate', opt_errs))
+        elif bulk_data:
+            bulk_errs = bulk_data.get('data', {}).get('productVariantsBulkUpdate', {}).get('userErrors') or bulk_data.get('errors')
+            if bulk_errs:
+                variant_errors.append(('productVariantsBulkUpdate', bulk_errs))
+            else:
+                variants_done = len(product['variations'])
+    else:
+        variant_gid = get_default_variant(domain, token, api_version, product_gid)
+        vdata = set_simple_variant(domain, token, api_version, product_gid, variant_gid, product)
+        verrs = vdata.get('data', {}).get('productVariantsBulkUpdate', {}).get('userErrors') or vdata.get('errors')
+        if verrs:
+            variant_errors.append(('productVariantsBulkUpdate', verrs))
+        else:
+            variants_done = 1
+    return variant_errors, variants_done
 
 
 def upload_media(domain, token, api_version, product_gid, product):
@@ -351,12 +533,46 @@ def main():
                 record.update(action='FAILED', shopify_gid=existing_gid, error=str(errs))
                 result['failed'] += 1
                 log({'woo_id': woo_id, 'action': 'FAILED', 'error': str(errs)})
-            else:
-                record.update(action='UPDATED', shopify_gid=existing_gid,
-                               note='top-level fields only; variants/media not re-run on idempotent update, by design')
-                result['updated'] += 1
-                checkpoint(woo_id, existing_gid, 'UPDATED')
-                log({'woo_id': woo_id, 'action': 'UPDATED', 'shopify_gid': existing_gid})
+                result['records'].append(record)
+                continue
+
+            expected = expected_variant_count(product)
+            live_variants = live_variants_with_inventory(domain, token, api_version, existing_gid)
+            actual = len(live_variants)
+            variant_errors = None
+            if actual < expected:
+                # A prior run's variant/option step never completed (e.g.
+                # product 1721's productOptionsCreate failure) - the product
+                # still has only Shopify's single auto-created default
+                # variant, so it's safe to run variant setup now. Does NOT
+                # trigger when actual == expected (already complete - no
+                # re-run, no duplicate risk) or actual > expected (shouldn't
+                # happen given create_or_fix_variants never runs twice
+                # against a product that already has real options, but
+                # guarded rather than assumed).
+                variant_errors, variants_done = create_or_fix_variants(domain, token, api_version, existing_gid, product)
+                if variant_errors:
+                    log({'woo_id': woo_id, 'action': 'VARIANT_RETRY_FAILED', 'error': str(variant_errors)})
+                else:
+                    result['variants_created_or_updated'] += variants_done
+                    log({'woo_id': woo_id, 'action': 'VARIANT_RETRY_SUCCEEDED', 'variants': variants_done})
+                    live_variants = live_variants_with_inventory(domain, token, api_version, existing_gid)
+            elif not variant_errors:
+                # Already complete - safe to (re-)sync inventory quantities,
+                # since setting the same absolute value twice is a no-op.
+                # This is what brings products created before this fix
+                # existed (e.g. run 1's 8 products) up to date too.
+                attempted, inv_success = sync_inventory_for_existing(domain, token, api_version, existing_gid, product, live_variants)
+                if attempted:
+                    log({'woo_id': woo_id, 'action': 'INVENTORY_SYNCED' if inv_success else 'INVENTORY_SYNC_FAILED', 'variants': attempted})
+
+            record.update(action='UPDATED', shopify_gid=existing_gid,
+                           note='top-level fields only; variants retried only because a prior run left them incomplete' if actual < expected
+                           else 'top-level fields, inventory synced; variants/media not re-run, by design',
+                           variant_retry_errors=variant_errors)
+            result['updated'] += 1
+            checkpoint(woo_id, existing_gid, 'UPDATED')
+            log({'woo_id': woo_id, 'action': 'UPDATED', 'shopify_gid': existing_gid})
             result['records'].append(record)
             continue
 
@@ -373,26 +589,8 @@ def main():
         checkpoint(woo_id, product_gid, 'CREATED')
         log({'woo_id': woo_id, 'action': 'CREATED', 'shopify_gid': product_gid})
 
-        variant_errors = []
-        if product['wc_type'] == 'variable' and product['variations']:
-            opt_data, bulk_data = set_variable_variants(domain, token, api_version, product_gid, product)
-            opt_errs = opt_data.get('data', {}).get('productOptionsCreate', {}).get('userErrors') or opt_data.get('errors')
-            if opt_errs:
-                variant_errors.append(('productOptionsCreate', opt_errs))
-            elif bulk_data:
-                bulk_errs = bulk_data.get('data', {}).get('productVariantsBulkUpdate', {}).get('userErrors') or bulk_data.get('errors')
-                if bulk_errs:
-                    variant_errors.append(('productVariantsBulkUpdate', bulk_errs))
-                else:
-                    result['variants_created_or_updated'] += len(product['variations'])
-        else:
-            variant_gid = get_default_variant(domain, token, api_version, product_gid)
-            vdata = set_simple_variant(domain, token, api_version, product_gid, variant_gid, product)
-            verrs = vdata.get('data', {}).get('productVariantsBulkUpdate', {}).get('userErrors') or vdata.get('errors')
-            if verrs:
-                variant_errors.append(('productVariantsBulkUpdate', verrs))
-            else:
-                result['variants_created_or_updated'] += 1
+        variant_errors, variants_done = create_or_fix_variants(domain, token, api_version, product_gid, product)
+        result['variants_created_or_updated'] += variants_done
 
         media_data, skipped_avif = upload_media(domain, token, api_version, product_gid, product)
         media_errors = []

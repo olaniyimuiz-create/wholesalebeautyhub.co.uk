@@ -299,7 +299,14 @@ def build_products(data):
 
         parsed_attrs = php_unserialize(meta.get('_product_attributes')) or {}
         variation_option_names = [
-            attribute_label(key, attribute_taxonomies)
+            # attribute_label() derives the label from the array key, which is
+            # correct for pa_* taxonomy attributes (key IS the taxonomy slug)
+            # and normally fine for custom attributes too (key is WooCommerce's
+            # own sanitize_title(name)). It can come back empty when the real
+            # name has no sanitizable characters (e.g. a name of just "%") -
+            # in that one case, fall back to the real, human-entered `name`
+            # field from the same record rather than importing a blank option.
+            attribute_label(key, attribute_taxonomies) or (info.get('name') or '').strip() or 'Option'
             for key, info in parsed_attrs.items()
             if isinstance(info, dict) and str(info.get('is_variation')) in ('1', 'True', 'true')
         ]

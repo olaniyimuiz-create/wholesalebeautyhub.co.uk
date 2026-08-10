@@ -36,7 +36,7 @@ def fetch_product(domain, token, api_version, gid):
         metafield(namespace: "custom", key: "legacy_woo_id") { value }
         media(first: 10) { edges { node { id } } }
         variants(first: 50) {
-          edges { node { id sku price compareAtPrice selectedOptions { name value } inventoryItem { sku } } }
+          edges { node { id sku price compareAtPrice selectedOptions { name value } inventoryItem { sku } inventoryQuantity } }
         }
       }
     }
@@ -47,6 +47,13 @@ def fetch_product(domain, token, api_version, gid):
     return data['data']['product']
 
 
+def expected_inventory(manage_stock, stock_quantity):
+    if manage_stock != 'yes':
+        return None  # untracked - Shopify inventoryQuantity is meaningless for an untracked item, not compared
+    n = to_number(stock_quantity)
+    return int(n) if n is not None else 0
+
+
 def expected_variants(product):
     if product['wc_type'] == 'variable' and product['variations']:
         out = []
@@ -54,12 +61,14 @@ def expected_variants(product):
             reg = to_number(v['regular_price'])
             price = to_number(v['price']) or reg
             compare = reg if reg and price and reg != price else None
-            out.append({'sku': v['sku'], 'price': price, 'compare_at_price': compare, 'option': v['options'][0]})
+            out.append({'sku': v['sku'], 'price': price, 'compare_at_price': compare, 'option': v['options'][0],
+                        'inventory': expected_inventory(v['manage_stock'], v['stock_quantity'])})
         return out
     reg = to_number(product['regular_price'])
     price = to_number(product['price']) or reg
     compare = reg if reg and price and reg != price else None
-    return [{'sku': product['sku'], 'price': price, 'compare_at_price': compare, 'option': None}]
+    return [{'sku': product['sku'], 'price': price, 'compare_at_price': compare, 'option': None,
+             'inventory': expected_inventory(product['manage_stock'], product['stock_quantity'])}]
 
 
 def cmp_row(rows, woo_id, gid, handle, field, expected, actual, notes=''):
@@ -116,12 +125,13 @@ def main():
 
         exp_variants = expected_variants(product)
         live_variants = live['variants']['edges']
+        unresolved_errors = record.get('variant_errors') or record.get('variant_retry_errors')
         cmp_row(rows, woo_id, gid, product['handle'], 'variant_count', len(exp_variants), len(live_variants),
-                notes=str(record.get('variant_errors')) if record.get('variant_errors') else '')
+                notes=str(unresolved_errors) if unresolved_errors else '')
 
-        if record.get('variant_errors'):
-            cmp_row(rows, woo_id, gid, product['handle'], 'variant_price_sku', 'set correctly', 'NOT SET - productOptionsCreate failed',
-                    notes=str(record['variant_errors']))
+        if unresolved_errors:
+            cmp_row(rows, woo_id, gid, product['handle'], 'variant_price_sku', 'set correctly', 'NOT SET - variant mutation failed',
+                    notes=str(unresolved_errors))
         else:
             live_by_option = {}
             for edge in live_variants:
@@ -138,6 +148,9 @@ def main():
                         ev['compare_at_price'], to_number(lv['compareAtPrice']) if lv['compareAtPrice'] else None)
                 cmp_row(rows, woo_id, gid, product['handle'], f'variant{suffix}.sku',
                         ev['sku'] or None, lv['inventoryItem']['sku'] or None)
+                if ev['inventory'] is not None:
+                    cmp_row(rows, woo_id, gid, product['handle'], f'variant{suffix}.inventory_quantity',
+                            ev['inventory'], lv['inventoryQuantity'])
 
     os.makedirs(REPORTS_DIR, exist_ok=True)
     with open(OUT_PATH, 'w', newline='', encoding='utf-8') as f:
