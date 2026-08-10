@@ -2,9 +2,29 @@
   "note": "Read-only pre-flight check result. Contains no credentials, tokens, or PII.",
   "checks": [
     {
-      "check": "configuration",
-      "status": "NOT_CONFIGURED",
-      "detail": "Required environment variables not set"
+      "check": "authentication_and_store_identity",
+      "status": "FAIL",
+      "detail": "HTTP Error 401: Unauthorized"
+    },
+    {
+      "check": "required_scopes_granted",
+      "status": "FAIL",
+      "detail": "HTTP Error 401: Unauthorized"
+    },
+    {
+      "check": "read_products",
+      "status": "FAIL",
+      "detail": "HTTP Error 401: Unauthorized"
+    },
+    {
+      "check": "read_collections",
+      "status": "FAIL",
+      "detail": "HTTP Error 401: Unauthorized"
+    },
+    {
+      "check": "read_metaobject_definitions",
+      "status": "FAIL",
+      "detail": "HTTP Error 401: Unauthorized"
     }
   ]
 }
