@@ -3,28 +3,28 @@
   "checks": [
     {
       "check": "authentication_and_store_identity",
-      "status": "FAIL",
-      "detail": "HTTP Error 401: Unauthorized"
+      "status": "PASS",
+      "detail": "authenticated as shop 'Wholesale Beautyhub ' (wholesale-beautyhub.myshopify.com), plan: Grow App Development"
     },
     {
       "check": "required_scopes_granted",
-      "status": "FAIL",
-      "detail": "HTTP Error 401: Unauthorized"
+      "status": "PASS",
+      "detail": "all 9 required scopes granted"
     },
     {
       "check": "read_products",
-      "status": "FAIL",
-      "detail": "HTTP Error 401: Unauthorized"
+      "status": "PASS",
+      "detail": "read succeeded (0 product(s) returned)"
     },
     {
       "check": "read_collections",
-      "status": "FAIL",
-      "detail": "HTTP Error 401: Unauthorized"
+      "status": "PASS",
+      "detail": "read succeeded (1 collection(s) returned)"
     },
     {
       "check": "read_metaobject_definitions",
-      "status": "FAIL",
-      "detail": "HTTP Error 401: Unauthorized"
+      "status": "PASS",
+      "detail": "read succeeded, existing metaobject types: none defined yet"
     }
   ]
 }

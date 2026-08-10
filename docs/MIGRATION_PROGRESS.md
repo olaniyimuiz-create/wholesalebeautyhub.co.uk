@@ -388,6 +388,29 @@ when they do, without pretending they exist now. Full detail:
   API token, perform any write against Shopify, import any product,
   customer, or order, or touch WooCommerce/DNS/production in any way.
 
+### 2026-08-10 — Credential verification: store provisioned, pre-flight passes
+
+The store owner provisioned a real Shopify development store and supplied
+credentials across three attempts. Each was independently verified rather
+than trusted: a placeholder token (`shpat_xxxx...`, wrong variable name)
+was rejected without attempting a request; a real-shaped but invalid
+token failed authentication for real (`401 Unauthorized`, all 5 checks);
+a corrected token passed all 5 read-only pre-flight checks, re-run and
+confirmed independently rather than accepted from the reported terminal
+output alone. Full detail: `docs/PHASE9_ENVIRONMENT_READINESS.md`.
+
+- Verified live: shop "Wholesale Beautyhub"
+  (`wholesale-beautyhub.myshopify.com`), plan "Grow App Development", all
+  9 required scopes granted, read access to products (0 - empty store),
+  collections (1), and metaobject definitions (none yet) all confirmed.
+- Human approval gate: **3 of 8 items now met** (store, credentials,
+  permissions) — up from 0/8. Import method approval, plan-tier decision,
+  Markets/B2B decision, test-set approval, and test-import approval
+  remain undocumented and unmet; a passing connection was explicitly not
+  treated as approval to proceed to a test import.
+- **Status: BLOCKED — on approval, not infrastructure.** No write was
+  attempted against Shopify at any point; no test import was performed.
+
 ## Phase 6 Readiness Assessment
 
 **Phase 5 consistency check** (before starting Phase 6): re-read

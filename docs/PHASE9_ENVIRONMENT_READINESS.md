@@ -1,8 +1,10 @@
 # Phase 9 — Pre-Import Environment Readiness
 
-Status as of 2026-08-08: **BLOCKED**. This document exists because a real
-test import cannot start yet, and says exactly why, in enough detail that
-whoever provisions the store/credentials can act on it directly.
+Status as of 2026-08-10: **BLOCKED — on approval, not infrastructure.**
+A real development store now exists and the Admin API pre-flight passes
+against it (see below). What's still missing is documented human approval
+of the import method and the test import itself — technical readiness is
+no longer the blocker.
 
 This is explicitly **not** Phase 10. Nothing in this document authorizes or
 performs a real import, touches the live WooCommerce site, or creates any
@@ -15,17 +17,13 @@ mechanics that sit underneath that decision.
 
 ## A. Development/test store
 
-**Status: Does not exist.** No `shopify.app.toml`, no store domain, no
-reference to any `*.myshopify.com` address anywhere in this repository or
-in any prior phase's output. A real import — even a test one — needs a
-Shopify development store (free, via the Partner Dashboard) or a paid
-store with a protected password, separate from the live production store.
-
-Required before Step 9's approval gate can be checked off:
-- A Partner Dashboard account (or existing store owner access) creates a
-  development store.
-- The store's `.myshopify.com` domain is recorded (in `.env`, never in
-  Git — see § E).
+**Status: Provisioned and verified (2026-08-10).** A real development
+store exists — confirmed by a live, read-only Admin API call, not
+assumed from the credentials being present. Store identity as returned
+by the API itself: shop name "Wholesale Beautyhub", domain
+`wholesale-beautyhub.myshopify.com`, plan "Grow App Development". The
+store currently has 0 products and 1 collection — a genuinely empty dev
+store, consistent with being newly created.
 
 ## B. Production store
 
@@ -38,11 +36,10 @@ credentials, and different approval gates.
 
 ## C. Admin API access
 
-**Status: Does not exist.** Admin API access requires a custom app
-created in the target store (Settings → Apps and sales channels → Develop
-apps), which issues an Admin API access token scoped to specific
-permissions. This is per-store — a token from one store does not work
-against another. Until § A is done, this step cannot start.
+**Status: Provisioned and verified (2026-08-10).** A custom app's Admin
+API access token authenticates successfully against the store in § A —
+confirmed by a real, live GraphQL call (not the token's format or
+presence alone).
 
 ## D. Required API scopes
 
@@ -61,12 +58,21 @@ generic "grant everything" list:
 Not requested: any customer, order, discount, or Markets/B2B scope — none
 of those are in scope for Phase 9 product import, and requesting broader
 access than needed is itself a risk. `migration/scripts/phase9_preflight.py`
-checks the installed app has exactly this set (§ Admin API pre-flight
-below) and fails loudly if any are missing, rather than assuming.
+checks the installed app has exactly this set and fails loudly if any are
+missing, rather than assuming.
+
+**Status: Verified (2026-08-10).** Real check against the live app
+installation confirmed all 9 required scopes are granted — not inferred
+from the app being installed at all.
 
 ## E. Credentials/secrets
 
-**Design implemented, nothing populated with real values.**
+**Design implemented; real values now populated locally (2026-08-10).**
+A real `SHOPIFY_STORE_DOMAIN` and `SHOPIFY_ADMIN_API_ACCESS_TOKEN` exist in
+a local `.env` file (git-ignored, confirmed via `git check-ignore -v .env`
+and `git status` showing no trace of it). No value from that file has been
+displayed, logged, or committed by any tooling in this project at any
+point — verified by inspecting every report the pre-flight script wrote.
 
 - `.env.example` (tracked in Git) documents every variable a script in
   this project needs, as an empty placeholder — `SHOPIFY_ENVIRONMENT`,
@@ -91,22 +97,26 @@ this repository.
 
 ## F. Store URL/domain
 
-**Status: Unknown — depends on § A.** Not assumed to be
-`wholesalebeautyhub.myshopify.com` or any other specific value; whatever
-store is actually provisioned determines this. Recorded in `.env` only,
-never hardcoded into a script or doc.
+**Status: Known (2026-08-10) — `wholesale-beautyhub.myshopify.com`**, per
+the live API's own `myshopifyDomain` field, not just what was typed into
+`.env`. Recorded in `.env` only, never hardcoded into a script or doc.
 
 ## G. Shopify plan requirements
 
-**Status: Not decided by anyone.** No plan tier (Basic, Grow, Advanced,
-Plus) has been chosen. This matters concretely for this project because:
+**Status: Still not decided for production.** The dev store's plan
+("Grow App Development") is a development-store plan tied to testing, not
+the store owner's chosen tier for the real production store — those are
+separate decisions on separate stores. No production plan tier (Basic,
+Grow, Advanced, Plus) has been chosen. This matters concretely for this
+project because:
 - Bulk operations / GraphQL rate limits differ by plan and affect how a
   519-product import should be throttled (`docs/PHASE9_IMPORT_STRATEGY.md`
   § Rate limits).
 - Multi-currency/Markets features referenced in ADR-010 are plan-gated.
 
-This document does not assume Plus or any other tier. Whoever owns the
-Shopify account decides this; it is not inferable from the migration data.
+This document does not assume Plus or any other tier for production.
+Whoever owns the Shopify account decides this; it is not inferable from
+the migration data or from the dev store's plan.
 
 ## H. Markets/B2B requirements
 
@@ -144,21 +154,28 @@ dependency added). If either is missing, it exits immediately with status
 `reports/phase9_preflight_result.json` — it does not attempt a request, and
 it does not print a fabricated pass.
 
-**Real run performed this session** (2026-08-08, no credentials present in
-this environment):
+**Result history, all real runs, none fabricated:**
+
+| Date | Credentials | Result |
+|---|---|---|
+| 2026-08-08 | None present | `NOT_CONFIGURED`, exit 2 |
+| 2026-08-10 (first attempt) | Placeholder token (`shpat_xxxx...`), wrong variable name | Not run — rejected before attempting, since the token was visibly a placeholder and the variable name didn't match `.env.example` |
+| 2026-08-10 (second attempt) | Real-shaped token, no `shpat_` prefix | All 5 checks `FAIL — HTTP Error 401: Unauthorized` |
+| 2026-08-10 (third attempt) | `shpua_...` token | All 5 checks `PASS` — see below |
+
+Third-attempt result, independently re-run and confirmed (not taken on
+the store owner's report alone):
 
 ```
-NOT_CONFIGURED: SHOPIFY_STORE_DOMAIN and/or SHOPIFY_ADMIN_API_ACCESS_TOKEN
-are not set (checked environment and .env). This is the expected, honest
-result in this environment - no Shopify store or credentials have been
-provisioned for this project yet.
-Wrote reports/phase9_preflight_result.json
+[authentication_and_store_identity] PASS - authenticated as shop 'Wholesale Beautyhub ' (wholesale-beautyhub.myshopify.com), plan: Grow App Development
+[required_scopes_granted] PASS - all 9 required scopes granted
+[read_products] PASS - read succeeded (0 product(s) returned)
+[read_collections] PASS - read succeeded (1 collection(s) returned)
+[read_metaobject_definitions] PASS - read succeeded, existing metaobject types: none defined yet
 ```
-Exit code 2. This is the only pre-flight result this project has ever
-produced — no PASS result has been fabricated or claimed. When real
-credentials exist, running the same script performs the five checks above
-against the real store and reports PASS/FAIL per check; it still performs
-no writes.
+Exit code 0. Store has 0 products, 1 collection — a genuinely empty dev
+store. No write was attempted at any point across any of the four
+attempts above.
 
 Points from the original 15-item pre-flight scope not implemented as
 separate checks, and why:
@@ -257,30 +274,43 @@ response.
 
 ## Human approval gate — test import
 
-All eight required items, current state:
+All eight required items, current state (2026-08-10):
 
-- [ ] Dev/test store provisioned (§ A)
-- [ ] Admin API credentials available securely (§ C, § E)
-- [ ] Admin API permissions verified (§ D — verifiable via
-      `phase9_preflight.py` once credentials exist)
-- [ ] Admin API import method approved (recommendation made —
-      `docs/PHASE9_IMPORT_STRATEGY.md` — but not yet explicitly approved
-      by the store owner)
-- [ ] Shopify plan tier decided (§ G)
-- [ ] Markets/B2B scope decided (§ H, ADR-010)
-- [ ] Test product set approved (candidate set built —
-      `reports/phase9_test_import_set.csv` — not yet approved by the
-      store owner)
+- [x] Dev/test store provisioned (§ A) — verified live, not assumed
+- [x] Admin API credentials available securely (§ C, § E) — verified live,
+      stored only in git-ignored `.env`
+- [x] Admin API permissions verified (§ D) — all 9 required scopes
+      confirmed via a real API call
+- [ ] Admin API import method approved — still only a *recommendation*
+      (`docs/PHASE9_IMPORT_STRATEGY.md`). No ADR, commit, or issue comment
+      from the store owner marks it approved. A working connection is not
+      the same thing as approval to use it for a real import.
+- [ ] Shopify plan tier decided (§ G) — the dev store's plan doesn't
+      answer this; production tier is still undecided
+- [ ] Markets/B2B scope decided (§ H, ADR-010) — unchanged, still open
+- [ ] Test product set approved — candidate set exists
+      (`reports/phase9_test_import_set.csv`), not yet approved by the
+      store owner
 - [ ] Test import explicitly approved
 
-**Zero of eight items are checked.** Per this phase's stop condition: if
-any required item is missing, stop — do not continue automatically, and do
-not attempt to bypass this gate. This document stops here.
+**3 of 8 items are checked.** The blocker has shifted from infrastructure
+to approval: every technical prerequisite that can be verified by a
+read-only API call now passes. What remains is explicit human sign-off,
+which this document cannot supply on anyone's behalf. Per this phase's
+stop condition: if any required item is missing, stop — do not continue
+automatically, and do not attempt to bypass this gate. This document
+stops here; no test import has been performed.
 
 ## What this phase did not do
 
-No Shopify store was created. No Admin API request beyond the read-only
-pre-flight's honest `NOT_CONFIGURED` exit was attempted. No credential was
-fabricated, hardcoded, logged, or committed. No product, customer, or order
-was imported anywhere. No WooCommerce data was modified. No DNS or
-production configuration was touched. Phase 10 was not started.
+Shopify did not create the store — the store owner did, outside this
+project's tooling; this phase only verified it. No Admin API request
+beyond the five read-only pre-flight queries was made, on any of the four
+credential attempts. No credential was fabricated — a placeholder token
+was explicitly rejected rather than used, and a real-looking but invalid
+token was tried for real and honestly reported as a 401, not assumed to
+work. No credential value was ever displayed, logged, or committed. No
+product, customer, or order was imported anywhere. No WooCommerce data was
+modified. No DNS or production configuration was touched. Phase 10 was
+not started, and a passing pre-flight was not treated as approval to
+start a test import.
