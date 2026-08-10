@@ -1,15 +1,16 @@
 # Phase 9 — Pre-Import Environment Readiness
 
-Status as of 2026-08-10: **BLOCKED — on approval, not infrastructure.**
-A real development store now exists and the Admin API pre-flight passes
-against it (see below). What's still missing is documented human approval
-of the import method and the test import itself — technical readiness is
-no longer the blocker.
+Status as of 2026-08-10: **Test import authorized (ADR-011) and executed
+against the development store.** 7 of 8 approval-gate items are met; see
+§ Human approval gate. Real execution results:
+`reports/phase9_test_import_result.json`.
 
-This is explicitly **not** Phase 10. Nothing in this document authorizes or
-performs a real import, touches the live WooCommerce site, or creates any
-Shopify data. It defines what "ready" means, builds the tooling to verify
-it, and records that none of it is true yet. `docs/PHASE9_IMPORT_STRATEGY.md`
+This is explicitly **not** Phase 10 and does not authorize the remaining
+602-product catalog, any customer, or any production write — those need a
+separate, later, explicit decision (ADR-011 Decision 5). This document
+originally recorded why nothing could proceed; most of that history is
+preserved below as-is, since it's still an accurate record of what had to
+be verified before writing anything. `docs/PHASE9_IMPORT_STRATEGY.md`
 already covers the CSV-vs-API decision and the production approval
 requirements — this document doesn't repeat that; it covers the
 environment/credential prerequisites and the test-import-specific
@@ -281,25 +282,25 @@ All eight required items, current state (2026-08-10):
       stored only in git-ignored `.env`
 - [x] Admin API permissions verified (§ D) — all 9 required scopes
       confirmed via a real API call
-- [ ] Admin API import method approved — still only a *recommendation*
-      (`docs/PHASE9_IMPORT_STRATEGY.md`). No ADR, commit, or issue comment
-      from the store owner marks it approved. A working connection is not
-      the same thing as approval to use it for a real import.
-- [ ] Shopify plan tier decided (§ G) — the dev store's plan doesn't
-      answer this; production tier is still undecided
-- [ ] Markets/B2B scope decided (§ H, ADR-010) — unchanged, still open
-- [ ] Test product set approved — candidate set exists
-      (`reports/phase9_test_import_set.csv`), not yet approved by the
-      store owner
-- [ ] Test import explicitly approved
+- [x] Admin API import method approved (2026-08-10) — ADR-011 Decision 1.
+      Explicit project-owner sign-off, not inferred from the credentials
+      working.
+- [ ] Shopify plan tier decided (§ G) — still open, but only for
+      **production**; not required to authorize this test import (the dev
+      store's existing plan is what's being used)
+- [x] Markets/B2B scope decided (2026-08-10) — ADR-010/ADR-011 Decision 2:
+      UK-only, Markets/B2B explicitly deferred, not left ambiguous
+- [x] Test product set approved (2026-08-10) — ADR-011 Decision 4, the
+      existing `reports/phase9_test_import_set.csv`, not a new sample
+- [x] Test import explicitly approved (2026-08-10) — ADR-011 Decision 5,
+      scoped to exactly these 9 products, this store only
 
-**3 of 8 items are checked.** The blocker has shifted from infrastructure
-to approval: every technical prerequisite that can be verified by a
-read-only API call now passes. What remains is explicit human sign-off,
-which this document cannot supply on anyone's behalf. Per this phase's
-stop condition: if any required item is missing, stop — do not continue
-automatically, and do not attempt to bypass this gate. This document
-stops here; no test import has been performed.
+**7 of 8 items are checked.** The one remaining open item (production plan
+tier) gates a future production decision, not this authorized test import.
+Full execution evidence, once the test import runs:
+`reports/phase9_test_import_result.json`,
+`reports/phase9_test_import_log.jsonl`. See ADR-011 in `docs/DECISIONS.md`
+for the full decision record.
 
 ## What this phase did not do
 

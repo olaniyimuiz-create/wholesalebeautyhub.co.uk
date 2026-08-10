@@ -218,10 +218,16 @@ as Level 1 (e.g. "Eye cream", "Body Butter", "sponge") — mapping table in
 
 ## ADR-010: Markets / multi-currency / B2B — Business Decision Required
 
-**Status: OPEN. This is not a decision — it is a formal record that one is
-needed, raised during the Phase 7 acceptance review because it was
-previously resolved informally in `docs/THEME_ARCHITECTURE.md` prose
-without being escalated as a tracked decision.**
+**Status: RESOLVED for Phase 9 scope (2026-08-10), via ADR-011 Decision 2.
+The project owner explicitly deferred Markets/multi-currency/B2B: Phase 9's
+initial migration is scoped to the UK storefront only. This is a real
+decision — "explicitly deferred," not "still undecided" — recorded here
+so this entry stops reading as an open question for Phase 9's purposes.
+The underlying business question (whether Markets/B2B is ever wanted) is
+still not answered and remains genuinely open for any future phase that
+would need it; nothing below should be read as answering it.**
+
+**Original context, preserved as historical record:**
 
 **Context**: Phase 7's instructions require the theme architecture to
 support Shopify Markets, multi-currency, and "future B2B support." No prior
@@ -277,9 +283,59 @@ if Phase 12 testing is expected to cover B2B checkout flows that don't
 exist. Recommend forcing the decision no later than before Phase 9's
 "Import products" issue begins, not before Phase 8.
 
-**Decision**: None made. Do not implement Markets configuration, currency
-conversion, or B2B account/pricing UI without an explicit answer from
-whoever owns this business call. When answered, replace this entry's
-"Status: OPEN" with the actual decision and update
-`docs/THEME_ARCHITECTURE.md` § Markets & B2B readiness to match — don't
-leave two documents disagreeing about what was decided.
+**Decision**: For Phase 9, deferred — UK storefront only, no Markets, no
+multi-currency, no B2B (ADR-011 Decision 2). Do not implement Markets
+configuration, currency conversion, or B2B account/pricing UI without a
+separate, explicit answer from whoever owns this business call — deferring
+is not the same as deciding "no," and this should not be read as
+foreclosing Markets/B2B permanently. `docs/THEME_ARCHITECTURE.md` §
+Markets & B2B readiness remains accurate as-is (theme is config-ready
+without assuming an answer either way) and needs no change for this
+resolution.
+
+---
+
+## ADR-011: Phase 9 test-import approval — Admin API, UK-only scope, approved test set and store
+
+**Status: DECIDED (2026-08-10), by the project owner.**
+
+**Context**: `docs/PHASE9_ENVIRONMENT_READINESS.md`'s human approval gate
+required explicit sign-off on five things beyond technical readiness
+before any real write to Shopify: import method, migration scope
+(Markets/B2B), which store, which test products, and explicit authorization
+to write. All five were provided directly by the project owner, not
+inferred from credentials working or from prior recommendations.
+
+**Decisions**:
+
+1. **Import method**: Admin API/GraphQL, per the existing recommendation
+   in `docs/PHASE9_IMPORT_STRATEGY.md`. Not to be reverted to CSV without
+   a documented technical blocker. The import client must remain
+   deterministic, idempotent, checkpointed, retry-safe, duplicate-safe,
+   auditable, and reversible where technically possible — this document
+   doesn't restate the mechanics, see `docs/PHASE9_ENVIRONMENT_READINESS.md`
+   § Import safety design.
+2. **Initial migration scope**: UK storefront only. Multi-country Markets,
+   multi-currency, B2B, international pricing, and additional storefronts
+   are explicitly out of scope for Phase 9 and deferred as future
+   architecture work (see ADR-010's updated status above).
+3. **Test environment**: `wholesale-beautyhub.myshopify.com`, isolated
+   from production. No production store write is authorized by this
+   decision.
+4. **Test import set**: the existing 9-product set in
+   `reports/phase9_test_import_set.csv`, traceable to real WooCommerce
+   product IDs (`docs/PHASE9_ENVIRONMENT_READINESS.md` § Test import
+   product set). Not to be replaced with a newly invented sample.
+5. **Controlled test import**: authorized for exactly those 9 products,
+   into the store named above only. Does **not** authorize the remaining
+   602 products, any customer, any order, any production write, DNS/domain
+   changes, production redirects, WooCommerce shutdown, or WooCommerce
+   data deletion. A separate, explicit decision is required before any of
+   those.
+
+**Effect on the human approval gate**: 7 of 8 items now met. The one
+remaining open item, production Shopify plan tier (§ G), is not required
+by these decisions — it gates a future production import, not this test
+import, which explicitly targets a development-store plan already in
+place. Full detail and real (not simulated) execution evidence:
+`docs/PHASE9_ENVIRONMENT_READINESS.md`, `reports/phase9_test_import_result.json`.
