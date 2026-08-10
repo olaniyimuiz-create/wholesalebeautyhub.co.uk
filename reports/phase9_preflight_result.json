@@ -14,7 +14,7 @@
     {
       "check": "read_products",
       "status": "PASS",
-      "detail": "read succeeded (0 product(s) returned)"
+      "detail": "read succeeded (1 product(s) returned)"
     },
     {
       "check": "read_collections",
