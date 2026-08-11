@@ -99,6 +99,48 @@ def to_number(value):
         return None
 
 
+def is_valid_variation(v):
+    """A variation is valid only if it carries at least one non-empty
+    option value. Real, live WooCommerce data can contain a
+    'publish'-status variation whose attribute value was never set -
+    confirmed against raw wp_postmeta for variation 10966 (product 18)
+    and 19990 (product 16464): a single row, e.g.
+    attribute_pa_shade = '' - not a parsing artifact, genuinely
+    incomplete source data. Explicit store-owner decision (Phase 9.7
+    Step 5 recovery, Option A): skip only the broken variation, keep the
+    parent product and its remaining valid variations. Never invent a
+    value here. Defined here (not in phase9_test_import.py) so both that
+    module and this one can use it without a circular import."""
+    return bool(v.get('options')) and bool((v['options'][0] or '').strip())
+
+
+def partition_variations(variations):
+    """Returns (valid, skipped) - skipped is exactly the set that
+    is_valid_variation rejects, never silently merged back in."""
+    valid = [v for v in variations if is_valid_variation(v)]
+    skipped = [v for v in variations if not is_valid_variation(v)]
+    return valid, skipped
+
+
+def has_price(entity):
+    """True if a genuine price exists (regular_price or price parses as
+    a real number). An empty WooCommerce price means PRICE UNKNOWN, not
+    zero - explicit store-owner decision, Phase 9.7 pricing-safety
+    recovery, 2026-08-10 (product 69 discovery): missing price must
+    never become '0.00'. Works for both a product dict and a variation
+    dict - both carry regular_price/price fields."""
+    reg = to_number(entity.get('regular_price'))
+    price = to_number(entity.get('price')) or reg
+    return price is not None
+
+
+def partition_by_price(variations):
+    """Returns (priced, unpriced) among already option-valid variations."""
+    priced = [v for v in variations if has_price(v)]
+    unpriced = [v for v in variations if not has_price(v)]
+    return priced, unpriced
+
+
 def basic_html_balance_ok(html):
     """Lightweight heuristic: every opening tag has a matching close tag,
     for the common block/inline tags this catalog's descriptions use.
@@ -292,6 +334,81 @@ def flag_garbage_brand_products(products):
             issues.append(dict(woo_id=p['id'], entity_type='product', severity='MEDIUM',
                                 code='ambiguous_vendor', detail=f"vendor={p['vendor']!r} is a data-entry placeholder, not a real brand",
                                 recommended_action='STOP - needs human input on the real vendor per product, not automatable'))
+    return issues
+
+
+def flag_incomplete_variations(products):
+    """A variable product with >=1 variation whose option value is empty -
+    a genuinely broken/unconfigured WooCommerce variation. Confirmed
+    against raw wp_postmeta for products 18 and 16464 (Phase 9.7 Step 5
+    pilot batch crash, 2026-08-10): the variation post is real and
+    'publish' status, but its attribute_pa_* value is a literal empty
+    string - not a parsing artifact, not recoverable from any other field.
+
+    INFORMATIONAL only - explicit store-owner decision (Option A, same
+    session, superseding an earlier Option B draft that was never
+    committed): the broken variation is skipped and the parent product is
+    still imported with its remaining valid variations - see
+    partition_variations() above for the actual skip logic used at write
+    time. This function does not affect IMPORT/QUARANTINE/EXCLUDE
+    classification; it exists so the dry-run report surfaces the
+    condition for visibility."""
+    issues = []
+    for p in products:
+        if p['wc_type'] != 'variable':
+            continue
+        _valid, broken_v = partition_variations(p['variations'])
+        broken = [v['id'] for v in broken_v]
+        if broken:
+            issues.append(dict(
+                woo_id=p['id'], entity_type='product', severity='LOW',
+                code='incomplete_variation',
+                detail=f'{len(broken)} of {len(p["variations"])} variation(s) have no option value set '
+                       f'(variation id(s) {broken}) - broken in source WooCommerce, not a parsing issue',
+                recommended_action='SKIP the broken variation(s) only; import the parent product with its remaining valid variations (Option A)'))
+    return issues
+
+
+def flag_missing_price(products):
+    """Never fabricate a price: an empty WooCommerce price means PRICE
+    UNKNOWN, not GBP 0.00. Explicit store-owner decision, Phase 9.7
+    pricing-safety recovery, 2026-08-10 (product 69 discovery - one of
+    the site owner's own PRICE_INTEGRITY_FLAGGED_IDS, corroborating this
+    was a real, pre-existing data problem, not new).
+
+    SIMPLE product with no price anywhere, or VARIABLE product where
+    every option-valid variation also has no price: QUARANTINE the whole
+    product (code='no_source_price') - there is nothing sellable to
+    create. VARIABLE product with a MIX of priced/unpriced variations:
+    NOT quarantined (code='partial_missing_price', informational only,
+    same precedent as incomplete_variation) - the unpriced variation(s)
+    are skipped individually at write time instead."""
+    issues = []
+    for p in products:
+        if p['wc_type'] == 'variable' and p['variations']:
+            option_valid, _broken = partition_variations(p['variations'])
+            if not option_valid:
+                continue  # zero-variants-expected / all-broken-options already covered elsewhere
+            priced, unpriced = partition_by_price(option_valid)
+            if not priced:
+                issues.append(dict(
+                    woo_id=p['id'], entity_type='product', severity='MEDIUM',
+                    code='no_source_price',
+                    detail=f'All {len(option_valid)} valid variation(s) have no price data (regular_price and price both empty) - nothing sellable to import',
+                    recommended_action='QUARANTINE - source has no usable price for any variant'))
+            elif unpriced:
+                issues.append(dict(
+                    woo_id=p['id'], entity_type='product', severity='LOW',
+                    code='partial_missing_price',
+                    detail=f'{len(unpriced)} of {len(option_valid)} valid variation(s) have no price data '
+                           f'(variation id(s) {[v["id"] for v in unpriced]}) - will be skipped, never fabricated as 0.00',
+                    recommended_action='SKIP the unpriced variation(s) only; import the rest (Option A, same precedent as broken variations)'))
+        elif not has_price(p):
+            issues.append(dict(
+                woo_id=p['id'], entity_type='product', severity='MEDIUM',
+                code='no_source_price',
+                detail='Simple product has no regular_price and no price - nothing sellable to import',
+                recommended_action='QUARANTINE - source has no usable price'))
     return issues
 
 

@@ -19,11 +19,20 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from phase9_dry_run import (
     load_products, load_collections, run_data_quality,
-    flag_garbage_brand_products, resolve_collections, build_collection_lookup,
-    to_number,
+    flag_garbage_brand_products, flag_incomplete_variations, flag_missing_price,
+    resolve_collections, build_collection_lookup, to_number,
+    partition_variations, partition_by_price,
 )
 from phase9_test_import import build_tags
 from phase9_preflight import get_config, graphql_request
+
+# incomplete_variation/partial_missing_price are informational only
+# (Option A, Phase 9.7 Step 5/pricing-safety recovery): the broken
+# variation/unpriced variation is skipped, the parent product still
+# imports - it does NOT quarantine the product. no_source_price DOES
+# quarantine (a simple product or fully-unpriced variable product has
+# nothing sellable to create at all).
+QUARANTINE_CODES = ('ambiguous_vendor', 'no_source_price')
 
 REPORTS_DIR = 'reports'
 OUT_PATH = os.path.join(REPORTS_DIR, 'phase9_final_import_manifest.csv')
@@ -62,15 +71,18 @@ def main():
 
     products = load_products()
     collection_lookup = build_collection_lookup(load_collections())
-    dq_issues = run_data_quality(products) + flag_garbage_brand_products(products)
+    dq_issues = (run_data_quality(products) + flag_garbage_brand_products(products)
+                 + flag_incomplete_variations(products) + flag_missing_price(products))
 
     blocking_ids = {i['woo_id'] for i in dq_issues if i['severity'] == 'BLOCKING' and i['entity_type'] == 'product'}
-    quarantine_ids = {i['woo_id'] for i in dq_issues if i.get('code') == 'ambiguous_vendor'}
+    quarantine_ids = {i['woo_id'] for i in dq_issues if i.get('code') in QUARANTINE_CODES}
 
     fields = ['woo_product_id', 'shopify_legacy_id', 'title', 'product_type', 'vendor', 'sku',
               'price', 'compare_at_price', 'inventory_manage_stock', 'inventory_stock_quantity',
               'status', 'collections', 'tags', 'variant_count', 'image_count',
-              'quarantine_status', 'import_eligibility']
+              'variation_count_source', 'variation_count_valid', 'variation_count_skipped',
+              'skipped_variation_ids', 'variation_count_missing_price', 'missing_price_variation_ids',
+              'skip_reason', 'quarantine_status', 'import_eligibility']
 
     counts = {'ALREADY_IMPORTED': 0, 'IMPORT': 0, 'QUARANTINE': 0, 'EXCLUDE': 0}
 
@@ -83,6 +95,13 @@ def main():
             compare = reg if reg and price and reg != price else ''
             collections = resolve_collections(p, collection_lookup)
 
+            if p['wc_type'] == 'variable' and p['variations']:
+                option_valid, skipped_variations = partition_variations(p['variations'])
+                priced_variations, missing_price_variations = partition_by_price(option_valid)
+            else:
+                option_valid, skipped_variations = [], []
+                priced_variations, missing_price_variations = [], []
+
             if p['id'] in already_imported:
                 eligibility = 'ALREADY_IMPORTED'
                 quarantine_status = ''
@@ -91,7 +110,7 @@ def main():
                 quarantine_status = '; '.join(i['detail'] for i in dq_issues if i['woo_id'] == p['id'] and i['severity'] == 'BLOCKING')
             elif p['id'] in quarantine_ids:
                 eligibility = 'QUARANTINE'
-                quarantine_status = next(i['detail'] for i in dq_issues if i['woo_id'] == p['id'] and i.get('code') == 'ambiguous_vendor')
+                quarantine_status = '; '.join(i['detail'] for i in dq_issues if i['woo_id'] == p['id'] and i.get('code') in QUARANTINE_CODES)
             else:
                 eligibility = 'IMPORT'
                 quarantine_status = ''
@@ -112,8 +131,18 @@ def main():
                 'status': 'ACTIVE' if p['status'] == 'publish' else 'DRAFT',
                 'collections': '|'.join(collections),
                 'tags': '|'.join(build_tags(p)),
-                'variant_count': len(p['variations']) or 1,
+                'variant_count': (len(priced_variations) or 1) if (p['wc_type'] == 'variable' and p['variations']) else 1,
                 'image_count': len(p['images']),
+                'variation_count_source': len(p['variations']) if (p['wc_type'] == 'variable' and p['variations']) else '',
+                'variation_count_valid': len(option_valid) if (p['wc_type'] == 'variable' and p['variations']) else '',
+                'variation_count_skipped': len(skipped_variations),
+                'skipped_variation_ids': '|'.join(str(v['id']) for v in skipped_variations),
+                'variation_count_missing_price': len(missing_price_variations),
+                'missing_price_variation_ids': '|'.join(str(v['id']) for v in missing_price_variations),
+                'skip_reason': '; '.join(filter(None, [
+                    'BROKEN_VARIATION_SKIPPED - empty option value in source WooCommerce' if skipped_variations else '',
+                    'MISSING_PRICE_SKIPPED - no source price (never fabricated as 0.00)' if missing_price_variations else '',
+                ])),
                 'quarantine_status': quarantine_status,
                 'import_eligibility': eligibility,
             })

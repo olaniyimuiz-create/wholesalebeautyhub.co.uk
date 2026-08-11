@@ -35,6 +35,7 @@ Never logs, prints, or writes a credential value anywhere.
 """
 import json
 import os
+import subprocess
 import sys
 import time
 import uuid
@@ -43,8 +44,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 from phase9_preflight import get_config, graphql_request, REQUIRED_SCOPES
 from phase9_dry_run import (
     load_products, load_collections, run_data_quality,
-    flag_garbage_brand_products, resolve_collections, build_collection_lookup,
-    to_number,
+    flag_garbage_brand_products, flag_missing_price, resolve_collections, build_collection_lookup,
+    to_number, is_valid_variation, partition_variations, has_price, partition_by_price,
 )
 
 REPORTS_DIR = 'reports'
@@ -53,6 +54,56 @@ APPROVED_TEST_DOMAIN = 'wholesale-beautyhub.myshopify.com'
 LOG_PATH = os.path.join(REPORTS_DIR, 'phase9_test_import_log.jsonl')
 CHECKPOINT_PATH = os.path.join(REPORTS_DIR, 'phase9_test_import_checkpoint.jsonl')
 RESULT_PATH = os.path.join(REPORTS_DIR, 'phase9_test_import_result.json')
+SKIPPED_VARIATIONS_PATH = os.path.join(REPORTS_DIR, 'phase9_skipped_variations.jsonl')
+
+
+def get_importer_commit():
+    try:
+        return subprocess.check_output(
+            ['git', 'rev-parse', 'HEAD'], cwd=os.path.dirname(__file__), text=True
+        ).strip()
+    except Exception:
+        return 'unknown'
+
+
+def new_run_id():
+    return str(uuid.uuid4())
+
+
+def build_skipped_variation_record(product, v, run_id, commit, classification='BROKEN_VARIATION_SKIPPED', reason=None):
+    """classification/reason distinguish *why* a variation was skipped:
+    - BROKEN_VARIATION_SKIPPED / empty option value (products 18, 16464)
+    - MISSING_PRICE_SKIPPED / NO_SOURCE_PRICE (product 69's 4 variants) -
+      explicit store-owner decision, Phase 9.7 pricing-safety recovery,
+      2026-08-10: missing price must never become '0.00'."""
+    if reason is None:
+        reason = 'empty option value' if classification == 'BROKEN_VARIATION_SKIPPED' else 'NO_SOURCE_PRICE'
+    return {
+        'woo_product_id': product['id'],
+        'woo_variation_id': v['id'],
+        'product_title': product['title'],
+        'variant_title': v['options'][0] if v.get('options') else None,
+        'classification': classification,
+        'reason': reason,
+        'source_regular_price': v.get('regular_price'),
+        'source_price': v.get('price'),
+        'affected_attribute': product['variation_option_names'][0] if product['variation_option_names'] else None,
+        'source_value': v['options'][0] if v.get('options') else None,
+        'fields_missing': ['options[0]'] if not is_valid_variation(v) else (['price', 'regular_price'] if not has_price(v) else []),
+        'ts': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+        'run_id': run_id,
+        'importer_commit': commit,
+        'action': 'SKIPPED',
+        'parent_product_action': 'IMPORT_VALID_VARIATIONS',
+    }
+
+
+def log_skipped_variations(records):
+    if not records:
+        return
+    with open(SKIPPED_VARIATIONS_PATH, 'a', encoding='utf-8') as f:
+        for r in records:
+            f.write(json.dumps(r) + '\n')
 
 
 def log(entry):
@@ -331,6 +382,13 @@ def expected_inventory(manage_stock, stock_quantity):
 def set_simple_variant(domain, token, api_version, product_gid, variant_gid, product):
     reg = to_number(product['regular_price'])
     price = to_number(product['price']) or reg
+    if price is None:
+        # Should be unreachable: a simple product with no price is
+        # quarantined upstream (flag_missing_price, code='no_source_price')
+        # and never reaches process_product at all. Fail loud rather than
+        # silently fabricate '0.00' if that invariant is ever violated -
+        # explicit store-owner rule, Phase 9.7 pricing-safety recovery.
+        raise RuntimeError(f"set_simple_variant: product {product['id']} has no price - should have been quarantined upstream, refusing to fabricate 0.00")
     compare = reg if reg and price and reg != price else None
     tracked = product['manage_stock'] == 'yes'
     mutation = '''
@@ -341,7 +399,7 @@ def set_simple_variant(domain, token, api_version, product_gid, variant_gid, pro
       }
     }
     '''
-    variant_input = {'id': variant_gid, 'price': str(price) if price else '0.00'}
+    variant_input = {'id': variant_gid, 'price': str(price)}
     if compare:
         variant_input['compareAtPrice'] = str(compare)
     if product['sku'] or tracked:
@@ -358,8 +416,16 @@ def set_simple_variant(domain, token, api_version, product_gid, variant_gid, pro
 
 
 def set_variable_variants(domain, token, api_version, product_gid, product):
+    """Only variations that are BOTH option-valid (is_valid_variation) AND
+    priced (has_price) get a real Shopify variant. Two independent skip
+    reasons are tracked and returned separately so the audit trail names
+    the actual cause per variation - never merged into one generic
+    'skipped' bucket. Never sends '0.00' for a variation with no source
+    price (explicit store-owner rule, Phase 9.7 pricing-safety recovery)."""
     option_name = product['variation_option_names'][0] if product['variation_option_names'] else 'Option'
-    values = [{'name': v['options'][0]} for v in product['variations']]
+    option_valid, skipped_option = partition_variations(product['variations'])
+    priced_variations, skipped_price = partition_by_price(option_valid)
+    values = [{'name': v['options'][0]} for v in priced_variations]
     mutation = '''
     mutation($productId: ID!, $options: [OptionCreateInput!]!) {
       productOptionsCreate(productId: $productId, options: $options, variantStrategy: CREATE) {
@@ -372,7 +438,7 @@ def set_variable_variants(domain, token, api_version, product_gid, product):
     data = graphql_request(domain, token, api_version, mutation, variables)
     errs = data.get('data', {}).get('productOptionsCreate', {}).get('userErrors') or data.get('errors')
     if errs:
-        return data, []
+        return data, [], skipped_option, skipped_price
 
     data2 = graphql_request(domain, token, api_version,
                              '{ product(id: "%s") { variants(first: 50) { edges { node { id selectedOptions { name value } } } } } }' % product_gid)
@@ -384,7 +450,7 @@ def set_variable_variants(domain, token, api_version, product_gid, product):
 
     bulk_inputs = []
     tracked_quantities = []  # (index into bulk_inputs, stock_quantity) for variants that will be tracked
-    for v in product['variations']:
+    for v in priced_variations:
         value = v['options'][0]
         gid = variant_gids_by_value.get(value)
         if not gid:
@@ -393,7 +459,7 @@ def set_variable_variants(domain, token, api_version, product_gid, product):
         price = to_number(v['price']) or reg
         compare = reg if reg and price and reg != price else None
         tracked = v['manage_stock'] == 'yes'
-        vi = {'id': gid, 'price': str(price) if price else '0.00'}
+        vi = {'id': gid, 'price': str(price)}
         if compare:
             vi['compareAtPrice'] = str(compare)
         if v['sku'] or tracked:
@@ -418,11 +484,19 @@ def set_variable_variants(domain, token, api_version, product_gid, product):
         location_id = get_default_location(domain, token, api_version)
         set_inventory_quantities(domain, token, api_version, location_id, item_quantities)
 
-    return data, data3
+    return data, data3, skipped_option, skipped_price
 
 
 def expected_variant_count(product):
-    return len(product['variations']) if (product['wc_type'] == 'variable' and product['variations']) else 1
+    if product['wc_type'] == 'variable' and product['variations']:
+        option_valid, _ = partition_variations(product['variations'])
+        priced, _ = partition_by_price(option_valid)
+        return len(priced)
+    return 1
+
+
+def expected_media_count(product):
+    return len([u for u in product['images'] if not u.lower().endswith('.avif')])
 
 
 def live_variants_with_inventory(domain, token, api_version, product_gid):
@@ -448,7 +522,9 @@ def sync_inventory_for_existing(domain, token, api_version, product_gid, product
 
     pairs = []  # (live_variant_node, expected_quantity)
     if product['wc_type'] == 'variable' and product['variations']:
-        for v in product['variations']:
+        option_valid, _skipped = partition_variations(product['variations'])
+        priced_variations, _skipped_price = partition_by_price(option_valid)
+        for v in priced_variations:
             lv = match_live(v['options'][0])
             qty = expected_inventory(v['manage_stock'], v['stock_quantity'])
             if lv and qty is not None:
@@ -488,8 +564,10 @@ def create_or_fix_variants(domain, token, api_version, product_gid, product):
     would then try to add a second, conflicting option. Callers gate this."""
     variant_errors = []
     variants_done = 0
+    skipped_option = []
+    skipped_price = []
     if product['wc_type'] == 'variable' and product['variations']:
-        opt_data, bulk_data = set_variable_variants(domain, token, api_version, product_gid, product)
+        opt_data, bulk_data, skipped_option, skipped_price = set_variable_variants(domain, token, api_version, product_gid, product)
         opt_errs = opt_data.get('data', {}).get('productOptionsCreate', {}).get('userErrors') or opt_data.get('errors')
         if opt_errs:
             variant_errors.append(('productOptionsCreate', opt_errs))
@@ -498,7 +576,9 @@ def create_or_fix_variants(domain, token, api_version, product_gid, product):
             if bulk_errs:
                 variant_errors.append(('productVariantsBulkUpdate', bulk_errs))
             else:
-                variants_done = len(product['variations'])
+                option_valid, _ = partition_variations(product['variations'])
+                priced, _ = partition_by_price(option_valid)
+                variants_done = len(priced)
     else:
         variant_gid = get_default_variant(domain, token, api_version, product_gid)
         vdata = set_simple_variant(domain, token, api_version, product_gid, variant_gid, product)
@@ -507,7 +587,7 @@ def create_or_fix_variants(domain, token, api_version, product_gid, product):
             variant_errors.append(('productVariantsBulkUpdate', verrs))
         else:
             variants_done = 1
-    return variant_errors, variants_done
+    return variant_errors, variants_done, skipped_option, skipped_price
 
 
 def upload_media(domain, token, api_version, product_gid, product):
@@ -526,6 +606,127 @@ def upload_media(domain, token, api_version, product_gid, product):
     '''
     data = graphql_request(domain, token, api_version, mutation, {'productId': product_gid, 'media': media})
     return data, skipped
+
+
+def process_product(domain, token, api_version, woo_id, product, existing_gid, run_id, commit):
+    """Shared CREATE/UPDATE/variant-retry/inventory-sync/media-retry logic
+    for one non-quarantined product. Used by both this script's own main()
+    (the original 9-product test path) and phase9_bulk_import.py, so a fix
+    made here applies to both instead of two copies silently drifting
+    apart. Returns (record, skipped_variation_records).
+
+    Media-retry addition (Phase 9.7 Step 5 recovery): a product whose
+    earlier run created the base product but crashed before media upload
+    (exactly what happened to products 18/16464 in the pilot batch crash)
+    would otherwise never receive its media, since media was previously
+    only ever uploaded on the CREATE path. Same actual<expected pattern
+    already used for variants, applied here to media too."""
+    record = {'woo_id': woo_id, 'title': product['title']}
+    skipped_records = []
+
+    if existing_gid:
+        data = update_product(domain, token, api_version, existing_gid, product)
+        errs = data.get('data', {}).get('productUpdate', {}).get('userErrors') or data.get('errors')
+        if errs:
+            record.update(action='FAILED', shopify_gid=existing_gid, error=str(errs))
+            log({'woo_id': woo_id, 'action': 'FAILED', 'error': str(errs)})
+            return record, skipped_records
+
+        expected = expected_variant_count(product)
+        live_variants = live_variants_with_inventory(domain, token, api_version, existing_gid)
+        actual = len(live_variants)
+        variant_errors = None
+        if actual < expected:
+            # A prior run's variant/option step never completed (e.g.
+            # product 1721's productOptionsCreate failure, or products
+            # 18/16464's IndexError crash) - the product still has only
+            # Shopify's single auto-created default variant, so it's safe
+            # to run variant setup now. Does NOT trigger when
+            # actual == expected (already complete) or actual > expected.
+            variant_errors, variants_done, skipped_option, skipped_price = create_or_fix_variants(domain, token, api_version, existing_gid, product)
+            skipped_records = (
+                [build_skipped_variation_record(product, v, run_id, commit, 'BROKEN_VARIATION_SKIPPED') for v in skipped_option]
+                + [build_skipped_variation_record(product, v, run_id, commit, 'MISSING_PRICE_SKIPPED', 'NO_SOURCE_PRICE') for v in skipped_price]
+            )
+            if variant_errors:
+                log({'woo_id': woo_id, 'action': 'VARIANT_RETRY_FAILED', 'error': str(variant_errors)})
+            else:
+                log({'woo_id': woo_id, 'action': 'VARIANT_RETRY_SUCCEEDED', 'variants': variants_done})
+                if skipped_option:
+                    log({'woo_id': woo_id, 'action': 'BROKEN_VARIATION_SKIPPED', 'variation_ids': [v['id'] for v in skipped_option]})
+                if skipped_price:
+                    log({'woo_id': woo_id, 'action': 'MISSING_PRICE_SKIPPED', 'variation_ids': [v['id'] for v in skipped_price]})
+                live_variants = live_variants_with_inventory(domain, token, api_version, existing_gid)
+        else:
+            # Already complete - safe to (re-)sync inventory quantities,
+            # since setting the same absolute value twice is a no-op.
+            attempted, inv_success = sync_inventory_for_existing(domain, token, api_version, existing_gid, product, live_variants)
+            if attempted:
+                log({'woo_id': woo_id, 'action': 'INVENTORY_SYNCED' if inv_success else 'INVENTORY_SYNC_FAILED', 'variants': attempted})
+
+        expected_media = expected_media_count(product)
+        if expected_media:
+            live_media = graphql_request(domain, token, api_version,
+                                          '{ product(id: "%s") { media(first: 50) { edges { node { id } } } } }' % existing_gid)
+            actual_media = len(live_media.get('data', {}).get('product', {}).get('media', {}).get('edges', []))
+            if actual_media < expected_media:
+                media_data, _skipped_avif = upload_media(domain, token, api_version, existing_gid, product)
+                merrs = (media_data.get('data', {}).get('productCreateMedia', {}).get('mediaUserErrors') or media_data.get('errors')) if media_data else None
+                log({'woo_id': woo_id, 'action': 'MEDIA_RETRY_FAILED' if merrs else 'MEDIA_RETRY_SUCCEEDED', 'error': str(merrs) if merrs else None})
+
+        record.update(action='UPDATED', shopify_gid=existing_gid,
+                       note='top-level fields only; variants/media retried only because a prior run left them incomplete' if actual < expected
+                       else 'top-level fields, inventory synced; variants/media not re-run unless a gap was detected, by design',
+                       variant_retry_errors=variant_errors,
+                       skipped_variation_ids=[r['woo_variation_id'] for r in skipped_records] or None)
+        checkpoint(woo_id, existing_gid, 'UPDATED')
+        log({'woo_id': woo_id, 'action': 'UPDATED', 'shopify_gid': existing_gid})
+        return record, skipped_records
+
+    data = create_product(domain, token, api_version, product)
+    errs = data.get('data', {}).get('productCreate', {}).get('userErrors') or data.get('errors')
+    if errs or not data.get('data', {}).get('productCreate', {}).get('product'):
+        record.update(action='FAILED', shopify_gid=None, error=str(errs or data))
+        log({'woo_id': woo_id, 'action': 'FAILED', 'error': str(errs or data)})
+        return record, skipped_records
+
+    product_gid = data['data']['productCreate']['product']['id']
+    checkpoint(woo_id, product_gid, 'CREATED')
+    log({'woo_id': woo_id, 'action': 'CREATED', 'shopify_gid': product_gid})
+
+    variant_errors, variants_done, skipped_option, skipped_price = create_or_fix_variants(domain, token, api_version, product_gid, product)
+    skipped_records = (
+        [build_skipped_variation_record(product, v, run_id, commit, 'BROKEN_VARIATION_SKIPPED') for v in skipped_option]
+        + [build_skipped_variation_record(product, v, run_id, commit, 'MISSING_PRICE_SKIPPED', 'NO_SOURCE_PRICE') for v in skipped_price]
+    )
+    if skipped_option:
+        log({'woo_id': woo_id, 'action': 'BROKEN_VARIATION_SKIPPED', 'variation_ids': [v['id'] for v in skipped_option]})
+    if skipped_price:
+        log({'woo_id': woo_id, 'action': 'MISSING_PRICE_SKIPPED', 'variation_ids': [v['id'] for v in skipped_price]})
+
+    media_data, skipped_avif = upload_media(domain, token, api_version, product_gid, product)
+    media_errors = []
+    if media_data:
+        merrs = media_data.get('data', {}).get('productCreateMedia', {}).get('mediaUserErrors') or media_data.get('errors')
+        if merrs:
+            media_errors.append(merrs)
+
+    intended_collections = resolve_collections(product, build_collection_lookup(load_collections()))
+
+    record.update(
+        action='CREATED', shopify_gid=product_gid,
+        variant_errors=variant_errors or None,
+        media_errors=media_errors or None,
+        avif_images_skipped=skipped_avif,
+        skipped_variation_ids=[r['woo_variation_id'] for r in skipped_records] or None,
+        variants_done=variants_done,
+        intended_collections_not_assigned=intended_collections,
+    )
+    if variant_errors:
+        log({'woo_id': woo_id, 'action': 'VARIANT_ERROR', 'error': str(variant_errors)})
+    if media_errors:
+        log({'woo_id': woo_id, 'action': 'MEDIA_ERROR', 'error': str(media_errors)})
+    return record, skipped_records
 
 
 def main():
@@ -548,25 +749,26 @@ def main():
     os.makedirs(REPORTS_DIR, exist_ok=True)
     products = load_products()
     by_id = {p['id']: p for p in products}
-    dq_issues = run_data_quality(products) + flag_garbage_brand_products(products)
+    dq_issues = run_data_quality(products) + flag_garbage_brand_products(products) + flag_missing_price(products)
     blocking_or_stop = {
         i['woo_id'] for i in dq_issues
-        if i['severity'] == 'BLOCKING' or i.get('code') == 'ambiguous_vendor'
+        if i['severity'] == 'BLOCKING' or i.get('code') in ('ambiguous_vendor', 'no_source_price')
     }
 
+    run_id = new_run_id()
+    commit = get_importer_commit()
     ids = read_test_set_ids()
     result = {'attempted': 0, 'created': 0, 'updated': 0, 'quarantined': 0, 'failed': 0,
               'variants_created_or_updated': 0, 'media_created': 0, 'media_skipped_avif': 0,
-              'records': []}
+              'variations_skipped': 0, 'records': []}
 
     for woo_id in ids:
         product = by_id[woo_id]
         result['attempted'] += 1
-        record = {'woo_id': woo_id, 'title': product['title']}
 
         if woo_id in blocking_or_stop:
-            reason = next(i['detail'] for i in dq_issues if i['woo_id'] == woo_id and i.get('code') == 'ambiguous_vendor')
-            record.update(action='QUARANTINED', shopify_gid=None, reason=reason)
+            reason = '; '.join(i['detail'] for i in dq_issues if i['woo_id'] == woo_id and (i['severity'] == 'BLOCKING' or i.get('code') in ('ambiguous_vendor', 'no_source_price')))
+            record = {'woo_id': woo_id, 'title': product['title'], 'action': 'QUARANTINED', 'shopify_gid': None, 'reason': reason}
             result['quarantined'] += 1
             log({'woo_id': woo_id, 'action': 'QUARANTINED', 'reason': reason})
             result['records'].append(record)
@@ -575,103 +777,26 @@ def main():
         try:
             existing_gid = find_existing_by_legacy_id(domain, token, api_version, woo_id)
         except Exception as e:
-            record.update(action='FAILED', shopify_gid=None, error=f'lookup failed: {e}')
+            record = {'woo_id': woo_id, 'title': product['title'], 'action': 'FAILED', 'shopify_gid': None, 'error': f'lookup failed: {e}'}
             result['failed'] += 1
             log({'woo_id': woo_id, 'action': 'FAILED', 'error': str(e)})
             result['records'].append(record)
             continue
 
-        if existing_gid:
-            data = update_product(domain, token, api_version, existing_gid, product)
-            errs = data.get('data', {}).get('productUpdate', {}).get('userErrors') or data.get('errors')
-            if errs:
-                record.update(action='FAILED', shopify_gid=existing_gid, error=str(errs))
-                result['failed'] += 1
-                log({'woo_id': woo_id, 'action': 'FAILED', 'error': str(errs)})
-                result['records'].append(record)
-                continue
-
-            expected = expected_variant_count(product)
-            live_variants = live_variants_with_inventory(domain, token, api_version, existing_gid)
-            actual = len(live_variants)
-            variant_errors = None
-            if actual < expected:
-                # A prior run's variant/option step never completed (e.g.
-                # product 1721's productOptionsCreate failure) - the product
-                # still has only Shopify's single auto-created default
-                # variant, so it's safe to run variant setup now. Does NOT
-                # trigger when actual == expected (already complete - no
-                # re-run, no duplicate risk) or actual > expected (shouldn't
-                # happen given create_or_fix_variants never runs twice
-                # against a product that already has real options, but
-                # guarded rather than assumed).
-                variant_errors, variants_done = create_or_fix_variants(domain, token, api_version, existing_gid, product)
-                if variant_errors:
-                    log({'woo_id': woo_id, 'action': 'VARIANT_RETRY_FAILED', 'error': str(variant_errors)})
-                else:
-                    result['variants_created_or_updated'] += variants_done
-                    log({'woo_id': woo_id, 'action': 'VARIANT_RETRY_SUCCEEDED', 'variants': variants_done})
-                    live_variants = live_variants_with_inventory(domain, token, api_version, existing_gid)
-            elif not variant_errors:
-                # Already complete - safe to (re-)sync inventory quantities,
-                # since setting the same absolute value twice is a no-op.
-                # This is what brings products created before this fix
-                # existed (e.g. run 1's 8 products) up to date too.
-                attempted, inv_success = sync_inventory_for_existing(domain, token, api_version, existing_gid, product, live_variants)
-                if attempted:
-                    log({'woo_id': woo_id, 'action': 'INVENTORY_SYNCED' if inv_success else 'INVENTORY_SYNC_FAILED', 'variants': attempted})
-
-            record.update(action='UPDATED', shopify_gid=existing_gid,
-                           note='top-level fields only; variants retried only because a prior run left them incomplete' if actual < expected
-                           else 'top-level fields, inventory synced; variants/media not re-run, by design',
-                           variant_retry_errors=variant_errors)
+        record, skipped_records = process_product(domain, token, api_version, woo_id, product, existing_gid, run_id, commit)
+        log_skipped_variations(skipped_records)
+        result['variations_skipped'] += len(skipped_records)
+        if record['action'] == 'CREATED':
+            result['created'] += 1
+            result['variants_created_or_updated'] += record.get('variants_done', 0)
+            if not record.get('media_errors'):
+                result['media_created'] += len(product['images']) - len(record.get('avif_images_skipped') or [])
+            result['media_skipped_avif'] += len(record.get('avif_images_skipped') or [])
+        elif record['action'] == 'UPDATED':
             result['updated'] += 1
-            checkpoint(woo_id, existing_gid, 'UPDATED')
-            log({'woo_id': woo_id, 'action': 'UPDATED', 'shopify_gid': existing_gid})
-            result['records'].append(record)
-            continue
-
-        data = create_product(domain, token, api_version, product)
-        errs = data.get('data', {}).get('productCreate', {}).get('userErrors') or data.get('errors')
-        if errs or not data.get('data', {}).get('productCreate', {}).get('product'):
-            record.update(action='FAILED', shopify_gid=None, error=str(errs or data))
+        else:
             result['failed'] += 1
-            log({'woo_id': woo_id, 'action': 'FAILED', 'error': str(errs or data)})
-            result['records'].append(record)
-            continue
-
-        product_gid = data['data']['productCreate']['product']['id']
-        checkpoint(woo_id, product_gid, 'CREATED')
-        log({'woo_id': woo_id, 'action': 'CREATED', 'shopify_gid': product_gid})
-
-        variant_errors, variants_done = create_or_fix_variants(domain, token, api_version, product_gid, product)
-        result['variants_created_or_updated'] += variants_done
-
-        media_data, skipped_avif = upload_media(domain, token, api_version, product_gid, product)
-        media_errors = []
-        if media_data:
-            merrs = media_data.get('data', {}).get('productCreateMedia', {}).get('mediaUserErrors') or media_data.get('errors')
-            if merrs:
-                media_errors.append(merrs)
-            else:
-                result['media_created'] += len(product['images']) - len(skipped_avif)
-        result['media_skipped_avif'] += len(skipped_avif)
-
-        intended_collections = resolve_collections(product, build_collection_lookup(load_collections()))
-
-        record.update(
-            action='CREATED', shopify_gid=product_gid,
-            variant_errors=variant_errors or None,
-            media_errors=media_errors or None,
-            avif_images_skipped=skipped_avif,
-            intended_collections_not_assigned=intended_collections,
-        )
-        result['created'] += 1
         result['records'].append(record)
-        if variant_errors:
-            log({'woo_id': woo_id, 'action': 'VARIANT_ERROR', 'error': str(variant_errors)})
-        if media_errors:
-            log({'woo_id': woo_id, 'action': 'MEDIA_ERROR', 'error': str(media_errors)})
 
     with open(RESULT_PATH, 'w', encoding='utf-8') as f:
         json.dump(result, f, indent=2)

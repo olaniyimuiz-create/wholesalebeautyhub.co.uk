@@ -1,16 +1,11 @@
 """
-Phase 9 test-import reconciliation: compares WooCommerce source data
-(migration/data/products.json) against what the Shopify test store
-actually reports back via a fresh, real, read-only Admin API query - not
-against what the import script claimed to have done. This is the
-distinction reports/phase9_reconciliation.csv (Phase 9 dry run) already
-documents: that file compares source to a locally-transformed payload and
-explicitly never contacted Shopify. This script is the real thing.
+Phase 9.7 Step 5: independent live reconciliation for the bulk import.
 
-Writes reports/phase9_test_import_reconciliation.csv using the schema
-already designed in reports/phase9_reconciliation_template.csv (long
-format: one row per product/field comparison), rather than overwriting
-either of the two pre-existing, differently-scoped reconciliation files.
+Same principle as phase9_test_reconcile.py (fresh Shopify queries, never
+the importer's own report) generalized to cover every record accumulated
+so far in reports/phase9_bulk_import_result.json across all batches, not
+just one fixed 9-row set. Field-comparison logic (expected_variants,
+expected_inventory, cmp_row) is imported unchanged, not re-derived.
 
 Read-only. Performs zero mutations.
 """
@@ -22,60 +17,12 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from phase9_preflight import get_config, graphql_request
 from phase9_dry_run import load_products, to_number
-from phase9_test_import import read_test_set_ids, build_tags, find_existing_by_legacy_id, partition_variations, partition_by_price
+from phase9_test_import import build_tags
+from phase9_test_reconcile import fetch_product, expected_inventory, expected_variants, cmp_row
 
 REPORTS_DIR = 'reports'
-OUT_PATH = os.path.join(REPORTS_DIR, 'phase9_test_import_reconciliation.csv')
-
-
-def fetch_product(domain, token, api_version, gid):
-    query = '''
-    {
-      product(id: "%s") {
-        id handle title status vendor productType tags descriptionHtml
-        metafield(namespace: "custom", key: "legacy_woo_id") { value }
-        media(first: 10) { edges { node { id } } }
-        variants(first: 50) {
-          edges { node { id sku price compareAtPrice selectedOptions { name value } inventoryItem { sku } inventoryQuantity } }
-        }
-      }
-    }
-    ''' % gid
-    data = graphql_request(domain, token, api_version, query)
-    if 'errors' in data:
-        raise RuntimeError(str(data['errors']))
-    return data['data']['product']
-
-
-def expected_inventory(manage_stock, stock_quantity):
-    if manage_stock != 'yes':
-        return None  # untracked - Shopify inventoryQuantity is meaningless for an untracked item, not compared
-    n = to_number(stock_quantity)
-    return int(n) if n is not None else 0
-
-
-def expected_variants(product):
-    if product['wc_type'] == 'variable' and product['variations']:
-        option_valid, _skipped_option = partition_variations(product['variations'])
-        priced_variations, _skipped_price = partition_by_price(option_valid)
-        out = []
-        for v in priced_variations:
-            reg = to_number(v['regular_price'])
-            price = to_number(v['price']) or reg
-            compare = reg if reg and price and reg != price else None
-            out.append({'sku': v['sku'], 'price': price, 'compare_at_price': compare, 'option': v['options'][0],
-                        'inventory': expected_inventory(v['manage_stock'], v['stock_quantity'])})
-        return out
-    reg = to_number(product['regular_price'])
-    price = to_number(product['price']) or reg
-    compare = reg if reg and price and reg != price else None
-    return [{'sku': product['sku'], 'price': price, 'compare_at_price': compare, 'option': None,
-             'inventory': expected_inventory(product['manage_stock'], product['stock_quantity'])}]
-
-
-def cmp_row(rows, woo_id, gid, handle, field, expected, actual, notes=''):
-    match = 'Y' if str(expected) == str(actual) else 'N'
-    rows.append([woo_id, gid or '', handle or '', field, expected, actual, match, notes])
+RESULT_PATH = os.path.join(REPORTS_DIR, 'phase9_bulk_import_result.json')
+OUT_PATH = os.path.join(REPORTS_DIR, 'phase9_bulk_import_reconciliation.csv')
 
 
 def main():
@@ -85,25 +32,38 @@ def main():
         print('NOT_CONFIGURED - cannot reconcile without live credentials.')
         return 2
 
+    if not os.path.exists(RESULT_PATH):
+        print(f'STOP: {RESULT_PATH} does not exist - no batch has been run yet.')
+        return 1
+
+    with open(RESULT_PATH, encoding='utf-8') as f:
+        all_batches = json.load(f)
+
     products = load_products()
     by_id = {p['id']: p for p in products}
-    ids = read_test_set_ids()
 
-    with open(os.path.join(REPORTS_DIR, 'phase9_test_import_result.json'), encoding='utf-8') as f:
-        import_result = json.load(f)
-    action_by_id = {r['woo_id']: r for r in import_result['records']}
+    action_by_id = {}
+    for batch in all_batches:
+        for r in batch['records']:
+            action_by_id[r['woo_id']] = r  # later batch wins if ever re-processed
 
     rows = []
-    for woo_id in ids:
-        product = by_id[woo_id]
-        record = action_by_id.get(woo_id)
+    seen_gids = {}
+    duplicate_gid_ids = []
 
-        if not record or record['action'] == 'QUARANTINED':
-            reason = record['reason'] if record else 'not attempted'
-            cmp_row(rows, woo_id, None, product['handle'], 'import_status', 'QUARANTINED', 'QUARANTINED', notes=reason)
+    for woo_id, record in sorted(action_by_id.items()):
+        product = by_id[woo_id]
+
+        if record['action'] == 'FAILED':
+            cmp_row(rows, woo_id, record.get('shopify_gid'), product['handle'], 'import_status', 'CREATED_or_UPDATED', 'FAILED',
+                    notes=str(record.get('error', '')))
             continue
 
         gid = record['shopify_gid']
+        if gid in seen_gids and seen_gids[gid] != woo_id:
+            duplicate_gid_ids.append((woo_id, seen_gids[gid], gid))
+        seen_gids[gid] = woo_id
+
         try:
             live = fetch_product(domain, token, api_version, gid)
         except Exception as e:
@@ -154,6 +114,10 @@ def main():
                     cmp_row(rows, woo_id, gid, product['handle'], f'variant{suffix}.inventory_quantity',
                             ev['inventory'], lv['inventoryQuantity'])
 
+    if duplicate_gid_ids:
+        for woo_id, other_woo_id, gid in duplicate_gid_ids:
+            cmp_row(rows, woo_id, gid, '', 'DUPLICATE_GID_DETECTED', 'unique', f'shared with woo_id {other_woo_id}')
+
     os.makedirs(REPORTS_DIR, exist_ok=True)
     with open(OUT_PATH, 'w', newline='', encoding='utf-8') as f:
         w = csv.writer(f)
@@ -162,7 +126,8 @@ def main():
 
     total = len(rows)
     mismatches = [r for r in rows if r[6] == 'N']
-    print(f'Reconciliation: {total} field-level comparisons, {len(mismatches)} mismatches, {total - len(mismatches)} matches.')
+    print(f'Reconciliation over {len(action_by_id)} processed product(s) so far: {total} field-level comparisons, '
+          f'{len(mismatches)} mismatches, {total - len(mismatches)} matches, {len(duplicate_gid_ids)} duplicate GID(s).')
     for r in mismatches:
         print('MISMATCH:', r)
     print(f'\nWrote {OUT_PATH}')
