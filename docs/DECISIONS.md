@@ -339,3 +339,80 @@ by these decisions — it gates a future production import, not this test
 import, which explicitly targets a development-store plan already in
 place. Full detail and real (not simulated) execution evidence:
 `docs/PHASE9_ENVIRONMENT_READINESS.md`, `reports/phase9_test_import_result.json`.
+
+## ADR-012: Broken WooCommerce variation handling — skip the variation, not the parent product (Option A)
+
+**Status: DECIDED (2026-08-10), by the project owner, during Phase 9.7
+Step 5 (controlled bulk import) execution.**
+
+**Context**: The pilot batch of the 598-product bulk import crashed with
+`IndexError` on product 18. Root cause, confirmed against raw
+`wp_postmeta`: variation post 10966 (a real, `publish`-status WooCommerce
+variation belonging to product 18) has `attribute_pa_shade = ''` — a
+literal empty string, not a parsing artifact. A full-catalog scan found
+exactly one other case: variation 19990 (product 16464). Both variations
+have no SKU, price, or stock either — genuinely incomplete/broken records,
+not something recoverable from other fields.
+
+**Decision**: **Option A.** Skip only the broken variation; import the
+parent product with its remaining valid variations. Do not quarantine the
+whole product for one broken variation among many valid ones (product 18:
+9 of 10 valid; product 16464: 22 of 23 valid). Do not invent a value for
+the missing attribute. Every skipped variation is logged with an explicit
+audit record (`reports/phase9_skipped_variations.jsonl`): WooCommerce
+product/variation ID, classification `BROKEN_VARIATION_SKIPPED`, run ID,
+importer commit.
+
+**Implementation**: `is_valid_variation()`/`partition_variations()` in
+`migration/scripts/phase9_dry_run.py`, applied before any Shopify
+`productOptionsCreate`/`productVariantsBulkUpdate` mutation in
+`migration/scripts/phase9_test_import.py`. Verified live: product 18 and
+16464 both reconcile with 0 mismatches, correct variant counts (9 and 22),
+and the broken variation is provably absent from the live product (no
+placeholder, no fabricated Shade value).
+
+## ADR-013: Missing-price handling — never fabricate £0.00 (Option A for partial, quarantine for total)
+
+**Status: DECIDED (2026-08-10), by the project owner, during Phase 9.7
+Step 5 (controlled bulk import) execution.**
+
+**Context**: Live reconciliation after a tiered batch found product 69
+("Msmetics 14In1 Lash Set") had 4 of 11 variants created at a fabricated
+Shopify price of £0.00. Root cause: `regular_price` and `price` are both
+genuinely empty for those 4 WooCommerce variations (confirmed against
+`migration/data/products.json`); the importer's pre-existing pricing code
+defaulted to `'0.00'` whenever no price was found
+(`str(price) if price else '0.00'`), silently converting "price unknown"
+into "free." Product 69 is itself one of the site owner's own
+pre-migration `PRICE_INTEGRITY_FLAGGED_IDS` (risk #24) — corroborating
+evidence this was a real, pre-existing data problem, not new. A
+full-catalog scan found the complete scope: product 69 (partial — 4 of 11
+variants unpriced) plus 10 wholly unpriced `draft` simple products
+(25089, 25092, 25109, 25111, 25113, 25115, 25117, 25217, 25219, 25369).
+
+**Decision**:
+1. **Product 69 (partial pricing)**: Option A, same precedent as ADR-012.
+   Import the parent with its 7 genuinely priced variants; skip the 4
+   unpriced ones (classification `MISSING_PRICE_SKIPPED`, reason
+   `NO_SOURCE_PRICE`). Do not fabricate a price. Do not copy another
+   variant's or the parent's price.
+2. **The 10 wholly unpriced products**: **quarantine entirely**
+   (`no_source_price`) — there is nothing sellable to create. Not
+   imported, not created in Shopify, no £0.00 assigned.
+3. **Live correction**: the 4 already-live £0.00 variants on product 69
+   (created before this decision) were removed via the minimal,
+   schema-verified `productVariantsBulkDelete(productId, variantsIds)`
+   mutation — the parent product and its 7 legitimate variants were not
+   touched. Verified independently: product 69 now has exactly 7
+   variants, all with their real source prices, £0.00 nowhere.
+
+**Implementation**: `has_price()`/`partition_by_price()`/
+`flag_missing_price()` in `migration/scripts/phase9_dry_run.py`. The
+importer's price-defaulting fallback (`'0.00'`) was removed entirely;
+`set_simple_variant()` now raises rather than silently fabricating a
+price if this state is ever reached (defense-in-depth — a simple product
+with no price is quarantined upstream and should never reach it).
+Regression-tested: `migration/scripts/test_phase9_pricing.py`, 8
+scenarios / 13 assertions, all passing. Full-catalog verification: 0
+fabricated £0.00 prices remain anywhere in the store; 0 legitimate
+(source-backed) £0.00 prices exist in the catalog at all.

@@ -169,3 +169,17 @@ acknowledgements — is posted as a GitHub comment on issue #14 (see the
 session's commit/PR trail for the exact link). It is not fabricated or
 assumed satisfied by "looks good," "continue," or any prior technical
 PASS.
+
+### Addendum (2026-08-10T22:12:58Z) — approval received, bulk import executed
+
+Explicit approval matching the required form (§ 9's own criteria) was
+posted on issue #14. Re-verified fresh before any write — not inferred
+from this document, from "continue," or from any prior technical PASS.
+Full preflight re-passed (16/16 conditions). Execution proceeded per
+Phase 9.7 Step 5, encountered and resolved two real defects along the way
+(ADR-012, ADR-013 — see `docs/PHASE9_7_PRICING_SAFETY_REPORT.md`), and
+completed. **Collection creation remains a separate, still-unapproved
+gate** — nothing in this addendum authorizes it. Final state: 588
+products imported this session, 596 already-imported total, 15
+quarantined, 0 excluded, 611 accounted for. Production untouched, no
+customers/orders imported.

@@ -569,6 +569,60 @@ Nothing else is blocking. The redirect matrix, tag/vendor mapping, product
 type strategy, and template plan don't depend on those three decisions and
 can move into Phase 7/9 as soon as they're made.
 
+### 2026-08-10/11 — Phase 9.7 Step 5: controlled bulk import executed, two real defects found and fixed live
+
+- **Authorization**: explicit, unambiguous approval posted on GitHub issue
+  #14 (2026-08-10T22:12:58Z), matching the required form exactly (scope,
+  store, write authorization). Verified fresh before any write — every
+  prior comment on the relevant issues was this project's own
+  status/request, never an approval.
+- **Preflight**: all 16 conditions passed (store identity, environment,
+  auth, scopes, live product count, existing legacy IDs, manifest
+  598/5/8/0, idempotency key, inventory fix intact, no credentials
+  exposed).
+- **Pilot batch (15 products) crashed** on product 18 —
+  `IndexError` from a genuinely broken WooCommerce variation (empty
+  attribute value, variation 10966). Paused immediately, root-caused
+  against raw `wp_postmeta`, scanned the full 611-product catalog (found
+  1 more case: product 16464/variation 19990), presented options. Store
+  owner approved **Option A** (ADR-012): skip the broken variation, import
+  the parent with its remaining valid variations.
+- **Recovery batch** (16 products: the unprocessed pilot remainder +
+  products 18/16464) succeeded cleanly; independently reconciled (0
+  mismatches) and idempotency-verified (re-run: 0 duplicates).
+- **Resumed tiered batching** (25 → 75 → 150 → 170 → 152). After the
+  25-product tier, reconciliation found 4 of product 69's 11 variants had
+  been created at a **fabricated £0.00 price** — the importer's pricing
+  code defaulted to `'0.00'` whenever WooCommerce had no price at all.
+  Paused again, root-caused (product 69 is one of the site owner's own
+  pre-migration price-integrity flags, risk #24), scanned the full
+  catalog (10 more wholly-unpriced draft products found). Store owner
+  decided **Option A for the partial case + quarantine for the total
+  case** (ADR-013).
+- **Live correction**: removed product 69's 4 fabricated-price variants
+  via the schema-verified `productVariantsBulkDelete` mutation — parent
+  product and 7 legitimate variants untouched. Independently reconciled
+  (7/7 match) and idempotency-verified.
+- **Regression tests added**: `migration/scripts/test_phase9_pricing.py`
+  (8 scenarios/13 assertions, all pure/local, all pass). Existing
+  `test_phase9_inventory.py` (9 live scenarios) re-run — no regression.
+- **Completed all approved batches.** Final state: 588 products imported
+  this session (598 approved − 10 reclassified to quarantine), 596
+  already-imported total, 15 quarantined (5 ambiguous-vendor + 10
+  no-source-price), 0 excluded, 611 total — accounted for exactly.
+- **Final reconciliation**: 9,143 field-level comparisons across all 588
+  processed products, 106 mismatches — every one falls into 1 of 2
+  pre-existing, non-blocking, already-documented categories (blank-vendor
+  shop-name fallback, risk #34; Shopify's own comma-delimited `tags`
+  field behavior). Zero pricing mismatches. Zero new defect categories in
+  any batch after the fixes.
+- **Idempotency, definitive full-store check**: 596 products = 596
+  distinct `legacy_woo_id` values = 596 distinct product GIDs. Zero
+  duplicates of any kind.
+- Full detail: `docs/PHASE9_7_PRICING_SAFETY_REPORT.md`.
+- **Production was not touched. No customers or orders were imported. No
+  collections were created** (still a separate, unresolved approval gate).
+
 ## Risk register
 
 Moved to [`docs/RISK_REGISTER.md`](RISK_REGISTER.md).
