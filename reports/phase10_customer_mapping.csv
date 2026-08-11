@@ -1,0 +1,16 @@
+woocommerce_source,shopify_target,target_type,notes
+wp_wc_customer_lookup.email,email,customer field,Primary identifier and dedup/match key
+wp_wc_customer_lookup.first_name / billing_first_name,firstName,customer field,"customer_lookup wins, usermeta fallback"
+wp_wc_customer_lookup.last_name / billing_last_name,lastName,customer field,"customer_lookup wins, usermeta fallback"
+billing_phone / order billing phone (guest fallback),phone,customer field,Must be unique in Shopify if set - see quarantine rule for phone conflicts
+"billing_address_1/2, billing_city, billing_state, billing_postcode, billing_country",defaultAddress (CustomerAddressInput),address,"One address only - created via customerCreate's addresses input, not a separate mutation"
+"shipping_address_1/2, shipping_city, shipping_state, shipping_postcode, shipping_country",NOT CURRENTLY MAPPED,unmapped,"Captured in raw usermeta by database_parser.py but never surfaced - Shopify supports multiple addresses per customer; a second CustomerAddressInput could carry this, but no decision has been made to add it"
+user_id (is registered vs guest),"tags: ""imported-from-woocommerce"", ""registered""/""guest""",tag,Already the pattern used in the pre-built CSV
+username,NOT MAPPED,excluded,Shopify customer accounts are email-based; no username field exists
+customer_id (WooCommerce),metafield custom.legacy_woo_customer_id,metafield,"Proposed idempotency key, mirroring the product custom.legacy_woo_id pattern - not yet implemented"
+date_registered,metafield custom.woo_registered_at (proposed),metafield,Informational only; Shopify sets its own createdAt on import
+"WooCommerce customer_note (order-level, not customer-level)",NOT MAPPED,excluded,"customer_note in WooCommerce is per-order, not per-customer profile - no customer-level note field exists in the source data read by this pipeline"
+wp_capabilities (role),exclusion filter only (STAFF_ROLES),deliberately excluded,Staff/admin accounts are never imported as customers
+wp_fc_subscribers.status (FluentCRM),"emailMarketingConsent.marketingState (proposed, NOT YET APPROVED)",consent field,"Real signal exists for 6,545 of 12,096 customers - see docs/PHASE10_GDPR_CONSENT.md; not applied without explicit business/legal sign-off"
+"No consent signal at all (5,551 of 12,096)",emailMarketingConsent omitted entirely (defaults to NOT_SUBSCRIBED),consent field,Unknown consent is never treated as consent
+WooCommerce password hash,NOT MAPPED - technically impossible,unsupported,"This store uses NEW_CUSTOMER_ACCOUNTS (passwordless) - CustomerInput has no password field at all, verified via live schema introspection"

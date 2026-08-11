@@ -8,6 +8,18 @@ migration/data/*.json
 shopify-theme/assets/shopify_products_import.csv
 shopify-theme/assets/shopify_customers_import.csv
 
+# Phase 10 customer dry-run outputs - per-record reports contain real
+# customer PII (name, email, phone, address). Aggregate-only outputs
+# (statistics.json, the schema-mapping trace) have no per-customer data
+# and are safe to track - listed explicitly so a future per-record
+# report added here doesn't get committed by accident.
+reports/phase10_customer_manifest.csv
+reports/phase10_customer_quarantine.csv
+reports/phase10_customer_reconciliation_template.csv
+reports/phase10_test_import_set.csv
+!reports/phase10_customer_statistics.json
+!reports/phase10_customer_mapping.csv
+
 # Python
 __pycache__/
 *.pyc

@@ -1,0 +1,29 @@
+{
+  "total_wp_wc_customer_lookup_rows": 13043,
+  "classification_counts": {
+    "IMPORT": 12096,
+    "UPDATE": 0,
+    "SKIP": 407,
+    "QUARANTINE": 539,
+    "EXCLUDE": 1
+  },
+  "quarantine_reason_counts": {
+    "duplicate_email_conflicting_identity": 247,
+    "missing_email": 292
+  },
+  "staff_accounts_excluded": 3,
+  "distinct_emails_after_dedup": 12096,
+  "registered_count": 6649,
+  "guest_count": 5447,
+  "with_phone": 4450,
+  "without_phone": 7646,
+  "with_billing_address": 4729,
+  "without_billing_address": 7367,
+  "with_shipping_address": 1209,
+  "with_both_billing_and_shipping": 1193,
+  "marketing_consent_subscribed_fluentcrm": 6295,
+  "marketing_consent_unsubscribed_fluentcrm": 229,
+  "marketing_consent_pending_fluentcrm": 21,
+  "marketing_consent_unknown_no_fluentcrm_record": 5551,
+  "live_shopify_customers_checked_against": 0
+}
