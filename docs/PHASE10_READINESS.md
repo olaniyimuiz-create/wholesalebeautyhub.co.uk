@@ -1,106 +1,123 @@
 # Phase 10 — Customer Import Readiness Assessment
 
-**Read-only assessment. No customer was imported, queried against
-Shopify, or written anywhere by this document.**
+**Updated 2026-08-11. Read-only. No Shopify customer write of any kind
+has occurred at any point in this project.**
 
-## 1. Customer source data
+## 1. Customer source data — independently re-verified from raw source
 
-- **Exists**: yes — `migration/data/customers.json` (12,096 records) and
-  a pre-built Shopify-format import CSV,
-  `shopify-theme/assets/shopify_customers_import.csv` (12,096 rows +
-  header, count matches exactly).
-- **Count**: **12,096** total — **6,649 registered**, **5,447 guest**
-  (`is_registered` flag, sourced from `wp_wc_customer_lookup`).
-- **Staff/admin exclusion**: already implemented in
-  `migration/scripts/database_parser.py`'s `build_customers()` —
-  excludes any account whose WordPress capabilities include
-  `administrator`/`shop_manager`/`editor` and not `customer`
-  (`STAFF_ROLES` filter). Verified this audit: 0 remaining accounts with
-  a site-domain (`wholesalebeautyhub.co.uk`) email.
-- **Duplicate emails**: **0** — all 12,096 emails are distinct.
-- **Missing emails**: **0**.
-- **Missing billing address (`address1`)**: 7,367 of 12,096 (61%).
-- **Missing country code**: 5,434 of 12,096 (45%).
-- **Privacy**: both source files confirmed `.gitignore`d
-  (`git check-ignore` passes for both) — real customer PII has never
-  been committed to the repository.
+Recomputed directly from `wp_wc_customer_lookup`/`wp_usermeta` in
+`migration/sql/dump.sql` (not from `migration/data/customers.json`) via
+`migration/scripts/phase10_customer_dry_run.py`:
 
-## 2. Shopify customer schema mapping
+| Metric | Count |
+|---|---:|
+| Raw `wp_wc_customer_lookup` rows | 13,043 |
+| **IMPORT-eligible** | **12,096** |
+| QUARANTINE — missing email | 292 |
+| QUARANTINE — conflicting identity sharing one email | 247 |
+| SKIP — redundant duplicate row (same identity, repeat checkout) | 407 |
+| EXCLUDE — staff/admin account | 1 (3 distinct staff accounts, most with only 1 lookup row) |
+| Registered | 6,649 |
+| Guest | 5,447 |
+| Missing phone | 7,646 (63%) |
+| Missing billing address | 7,367 (61%) |
+| Has a real shipping address (currently unmapped — see risk #40) | 1,209 (10%) |
 
-Already built and matches Shopify's CSV customer-import column format
-exactly (First Name, Last Name, Email, Accepts Email Marketing, Default
-Address fields, Phone, Accepts SMS Marketing, Tax Exempt, Tags). Guest
-vs. registered is preserved via a `imported-from-woocommerce,guest` /
-`,registered` tag, not a schema field guess.
+The 12,096 IMPORT figure, and the 6,649/5,447 registered/guest split,
+match what `customers.json` already contained — independently confirmed,
+not just inherited. What's new: **539 records that were previously
+silently dropped by `build_customers()` with no audit trail** now have
+an explicit, reviewable disposition (`reports/phase10_customer_quarantine.csv`).
 
-## 3. Import method
+Idempotency of the transformation itself: ran the dry run twice,
+manifest and statistics output were byte-identical.
 
-**Not decided.** Phase 9's ADR-011 explicitly scoped the Admin API
-decision to *products only* — it does not extend to customers. A
-ready-to-use CSV already exists (§ 2), but whether Phase 10 uses that CSV
-path, the Admin API (for parity with the product approach's idempotency
-and audit trail), or a hybrid has never been formally chosen.
+## 2. Customer field mapping
 
-## 4. Idempotency strategy
+Complete: `docs/PHASE10_CUSTOMER_MAPPING.md` / `reports/phase10_customer_mapping.csv`.
+One real gap found: shipping addresses are captured by the parser but
+never surfaced (risk #40) — not yet decided whether to add them.
 
-**Not designed.** Phase 9's product idempotency (`custom.legacy_woo_id`
-metafield, matched via a full-store scan before every write) has no
-customer-side equivalent yet. Before any write, Phase 10 needs an
-analogous mechanism — e.g. a customer metafield/note carrying the source
-WooCommerce customer ID, or an email-based match strategy with an
-explicit collision policy — so a Phase 10 test-then-bulk pattern (mirroring
-Phase 9's) doesn't risk duplicate customer records.
+## 3. Customer account architecture — verified live
 
-## 5. Test customer import plan
+This store runs **New Customer Accounts** (`customerAccountsVersion:
+NEW_CUSTOMER_ACCOUNTS`, verified via live query). `CustomerInput` has no
+password field at all (verified via schema introspection) —
+**WooCommerce password migration is confirmed technically impossible**,
+not merely inadvisable to assume. No activation/invitation email is
+required by the platform. Full detail: `docs/PHASE10_ACCOUNT_STRATEGY.md`.
 
-**Not defined.** Phase 9 never wrote directly to the bulk scope — it ran
-a 9-product controlled test first, reviewed real reconciliation results,
-then sought separate authorization for the remaining 598. No equivalent
-test-subset selection, reconciliation-report schema, or controlled-batch
-plan exists yet for customers.
+## 4. GDPR / marketing consent — real signal found, not yet applied
 
-## 6. Privacy / security / consent
+A genuine consent signal exists via FluentCRM (`wp_fc_subscribers`,
+previously never read by any script): 6,295 `subscribed`, 229
+`unsubscribed`, 21 `pending`, 5,551 with no signal at all. Whether
+FluentCRM's original opt-in is legally sufficient basis to carry into
+Shopify is a business/legal decision, not decided here. Default position:
+omit `emailMarketingConsent` for every customer until explicitly
+approved. Full detail: `docs/PHASE10_GDPR_CONSENT.md`, ADR-014.
 
-Marketing-consent handling (`Accepts Email Marketing` field on the
-prepared CSV currently defaults to `no` for every record, per a spot
-check) is an **explicitly open, already-tracked decision** — issue #19
-("Decide long-term marketing-consent handling"). Whether WooCommerce's
-original consent basis (if any) is legally sufficient to carry forward
-into Shopify's marketing system, or whether every customer needs to be
-re-permissioned, is a business/legal decision, not a technical one, and
-not this pipeline's to make.
+## 5. Import method — formal recommendation made, not approved
 
-## 7. Approval requirements
+**Recommended: Admin GraphQL API**, evaluated independently for
+customers (not copied from the product decision) — decisive factor is
+that Shopify's customer CSV import has no metafield column, so it cannot
+carry the proposed `custom.legacy_woo_customer_id` idempotency key at
+all. Full evaluation: `docs/PHASE10_CUSTOMER_STRATEGY.md` § 1.
 
-**None exist.** No comment, ADR, or authorization of any kind for a
-customer import — bulk or test — appears anywhere in this repository or
-its GitHub issues. Issue #18 ("Import customers") has minimal acceptance
-criteria (record count matches, spot-check a sample) but no method
-decision, no authorization, and is explicitly independent of Phase 9.
+## 6. Idempotency strategy — designed, not yet exercised
 
-## 8. Blocker classification
+Match by `custom.legacy_woo_customer_id` metafield once established,
+falling back to email pre-write. Deterministic CREATE/UPDATE/QUARANTINE
+outcomes for every case, including the "email changed on the Shopify
+side after a prior import" case. Full detail:
+`docs/PHASE10_CUSTOMER_STRATEGY.md` § 3.
+
+## 7. Test customer import plan — designed, not executed
+
+10-customer representative set built, covering billing/shipping address
+combinations, phone presence, all 3 real consent states plus "unknown,"
+registered/guest, and both quarantine categories:
+`reports/phase10_test_import_set.csv`. **Not imported.**
+
+## 8. A genuinely new technical blocker found this session
+
+The app installation has **no `read_customers` or `write_customers`
+scope at all** — verified live, a read-only customer query returned
+`ACCESS_DENIED`. This must be resolved (scope expansion in Shopify
+Admin) before even a read-only verification query becomes possible, let
+alone a write. Tracked as risk #39.
+
+## 9. Approval requirements
+
+**None exist.** No comment, ADR, or authorization for any customer
+write — test or bulk — appears anywhere in this repository or its
+GitHub issues (checked fresh this session). ADR-014 records the six
+decisions needed; none are answered yet.
+
+## 10. Blocker classification
 
 | Item | Classification |
 |---|---|
-| Customer import method (CSV vs. Admin API vs. hybrid) not chosen | **BUSINESS DECISION** |
-| No idempotency strategy designed for customers | **TECHNICAL BLOCKER** |
-| No test-customer-import plan/subset defined | **TECHNICAL BLOCKER** (planning) |
-| Marketing-consent/GDPR handling undecided (issue #19) | **BUSINESS DECISION** |
-| No explicit authorization for any customer write, test or bulk | **APPROVAL REQUIRED** |
-| 61%/45% of customers missing address/country data | **NON-BLOCKING RISK** — Shopify does not require a customer to have an address; affects post-import data completeness, not import feasibility |
+| App has no `read_customers`/`write_customers` scope | **TECHNICAL BLOCKER** |
+| Customer import method (Admin API recommended, not approved) | **APPROVAL REQUIRED** |
+| Marketing-consent/GDPR policy (real signal exists, not applied) | **BUSINESS DECISION** (with a genuine legal question embedded) |
+| Shipping address mapping gap | **BUSINESS DECISION** (scope choice, not urgent) |
+| Test import authorization (10-customer set, designed) | **APPROVAL REQUIRED** |
+| Bulk import authorization | **APPROVAL REQUIRED**, separate from the above |
+| 63%/61% of customers missing phone/billing address | **NON-BLOCKING RISK** — Shopify requires neither |
 
-## 9. Conclusion
+## 11. Conclusion
 
-**Phase 9 closed; Phase 10 is BLOCKED** — not by missing source data
-(12,096 clean, deduplicated, staff-excluded, schema-mapped records
-already exist), but by three unresolved prerequisites: **(1)** no
-customer import method has been chosen, **(2)** no idempotency strategy
-has been designed, and **(3)** no authorization of any kind — test or
-bulk — has been requested or granted. None of these is something this
-pipeline can decide or assume. Per the store owner's own governance
-pattern for Phase 9, the correct next step is the same shape: a formal
-readiness/decision request (method, consent policy, test-batch plan)
-posted for explicit approval — not an automatic start.
+**Phase 9 closed; Phase 10 technical preparation is now substantially
+complete** — dataset independently re-verified with full audit trail,
+field mapping documented, account architecture and consent options
+verified live (not assumed), import method formally recommended,
+idempotency and rollback designed, a representative test set built.
+**Phase 10 remains BLOCKED**, now by concrete, named items rather than
+"not yet designed": one real technical blocker (customer API scopes
+never granted) and five approval/business-decision gates (ADR-014).
+None of these is something this pipeline can resolve on its own.
 
-**Phase 10 was not started. No customer data was written, queried
-against Shopify, or otherwise touched by this assessment.**
+**Phase 10 was not started. Zero Shopify customer writes occurred. No
+customer was created, updated, or fetched by GID at any point.**

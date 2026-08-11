@@ -416,3 +416,47 @@ Regression-tested: `migration/scripts/test_phase9_pricing.py`, 8
 scenarios / 13 assertions, all passing. Full-catalog verification: 0
 fabricated £0.00 prices remain anywhere in the store; 0 legitimate
 (source-backed) £0.00 prices exist in the catalog at all.
+
+## ADR-014: Phase 10 customer import — business decisions required
+
+**Status: BUSINESS DECISION REQUIRED — not decided.** Same pattern as
+ADR-010 (Markets/B2B): this records what's being asked, not an answer.
+
+**Context**: Phase 10 technical readiness work (`docs/PHASE10_CUSTOMER_STRATEGY.md`,
+`docs/PHASE10_CUSTOMER_MAPPING.md`, `docs/PHASE10_GDPR_CONSENT.md`,
+`docs/PHASE10_ACCOUNT_STRATEGY.md`) is substantially complete: 12,096
+source customers independently re-verified and classified (12,096
+IMPORT-eligible, 539 quarantined with documented reasons, 407 redundant
+duplicate rows skipped, 1 staff account excluded), a deterministic
+idempotent dry-run pipeline built and verified (byte-identical across two
+runs), a representative 10-customer test set designed, and the target
+platform's actual customer-account architecture (New Customer Accounts,
+verified live — no password field exists at all) and consent options
+(verified via schema introspection) fully investigated. None of this
+constitutes authorization to write.
+
+**Decisions required, none made by this document**:
+
+1. **Import method**: Admin GraphQL API (recommended,
+   `docs/PHASE10_CUSTOMER_STRATEGY.md` § 1) vs. the pre-built CSV.
+2. **Marketing-consent policy**: whether FluentCRM's `subscribed` status
+   (6,295 of 12,096 customers) is legally sufficient basis to set
+   Shopify `emailMarketingConsent = SUBSCRIBED`, or whether the safe
+   default (omit the field for everyone) applies until a fresh,
+   Shopify-native consent event occurs (`docs/PHASE10_GDPR_CONSENT.md`).
+3. **Shipping address**: whether to add the currently-unmapped shipping
+   address (real for 1,209 customers, captured in source but never
+   surfaced by `database_parser.py`) to the customer schema before
+   import.
+4. **Test import authorization**: for the 10-customer representative set
+   only (`reports/phase10_test_import_set.csv`), into the same
+   `wholesale-beautyhub.myshopify.com` development store as Phase 9 —
+   not the full 12,096.
+5. **Bulk import authorization**: separate from the above, for the full
+   IMPORT-eligible set — not implied by any of the above being decided.
+
+**Not authorized by this ADR**: any Shopify customer write, of any kind,
+test or bulk. **Prerequisite, not a business decision**: the app
+installation currently lacks the `read_customers`/`write_customers`
+scopes entirely (verified live) — this must be resolved before even a
+read-only verification query against live customers is possible.

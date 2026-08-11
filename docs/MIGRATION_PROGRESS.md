@@ -623,6 +623,48 @@ can move into Phase 7/9 as soon as they're made.
 - **Production was not touched. No customers or orders were imported. No
   collections were created** (still a separate, unresolved approval gate).
 
+### 2026-08-11 — Phase 10 readiness: customer import technical preparation (read-only)
+
+- Independently re-verified the 12,096-customer dataset from raw
+  `wp_wc_customer_lookup`/`wp_usermeta` (not from `customers.json`) via
+  the new `migration/scripts/phase10_customer_dry_run.py`: 12,096
+  IMPORT-eligible, 539 quarantined (247 conflicting-identity duplicates,
+  292 missing email — both previously silently dropped with no audit
+  trail by `database_parser.py`'s `build_customers()`), 407 redundant
+  duplicate rows skipped, 1 staff account excluded. Registered/guest
+  split (6,649/5,447) and address/phone completeness (61%/63% missing)
+  both match the numbers independently found during the Phase 9 closeout
+  audit exactly.
+- **Real finding**: `shipping_*` usermeta fields are captured by
+  `database_parser.py` but never surfaced — 1,209 customers' shipping
+  addresses are currently discarded, not migrated (risk #40).
+- **Real finding**: a genuine marketing-consent signal exists via
+  FluentCRM (`wp_fc_subscribers`, previously unused by any script) for
+  6,545 of 12,096 customers (6,295 subscribed / 229 unsubscribed / 21
+  pending) — not auto-applied; flagged as a business/legal decision
+  (risk #41, ADR-014, `docs/PHASE10_GDPR_CONSENT.md`).
+- **Real finding**: this store runs Shopify's New Customer Accounts
+  (verified live) — `CustomerInput` has no password field at all
+  (verified via schema introspection). WooCommerce password migration
+  is confirmed technically impossible, not merely risky
+  (`docs/PHASE10_ACCOUNT_STRATEGY.md`).
+- **Real finding**: the app installation has no `read_customers`/
+  `write_customers` scope at all (risk #39) — a live read-only customer
+  query returned `ACCESS_DENIED`.
+- Idempotency of the dry-run transformation itself verified: ran twice,
+  byte-identical manifest and statistics output.
+- Designed a 10-customer representative test set
+  (`reports/phase10_test_import_set.csv`) covering billing/shipping
+  address combinations, phone presence, all four consent states, and
+  both quarantine categories — not imported.
+- Full strategy: `docs/PHASE10_CUSTOMER_STRATEGY.md` (import method
+  recommendation, idempotency design, quarantine rules, reconciliation
+  framework, rollback design), `docs/PHASE10_CUSTOMER_MAPPING.md`,
+  `docs/PHASE10_GDPR_CONSENT.md`, `docs/PHASE10_ACCOUNT_STRATEGY.md`.
+- **Status: still BLOCKED**, now by concrete, named items rather than
+  "not yet designed" — see `docs/PHASE10_READINESS.md`. Zero Shopify
+  writes occurred. No customer was created, updated, or queried by GID.
+
 ## Risk register
 
 Moved to [`docs/RISK_REGISTER.md`](RISK_REGISTER.md).
