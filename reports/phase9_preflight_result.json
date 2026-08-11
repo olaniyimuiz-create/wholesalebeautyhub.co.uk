@@ -4,27 +4,27 @@
     {
       "check": "authentication_and_store_identity",
       "status": "FAIL",
-      "detail": "HTTP Error 401: Unauthorized"
+      "detail": "HTTP Error 401: Unauthorized - body: {\"errors\":\"[API] Invalid API key or access token (unrecognized login or wrong password)\"}"
     },
     {
       "check": "required_scopes_granted",
       "status": "FAIL",
-      "detail": "HTTP Error 401: Unauthorized"
+      "detail": "HTTP Error 401: Unauthorized - body: {\"errors\":\"[API] Invalid API key or access token (unrecognized login or wrong password)\"}"
     },
     {
       "check": "read_products",
       "status": "FAIL",
-      "detail": "HTTP Error 401: Unauthorized"
+      "detail": "HTTP Error 401: Unauthorized - body: {\"errors\":\"[API] Invalid API key or access token (unrecognized login or wrong password)\"}"
     },
     {
       "check": "read_collections",
       "status": "FAIL",
-      "detail": "HTTP Error 401: Unauthorized"
+      "detail": "HTTP Error 401: Unauthorized - body: {\"errors\":\"[API] Invalid API key or access token (unrecognized login or wrong password)\"}"
     },
     {
       "check": "read_metaobject_definitions",
       "status": "FAIL",
-      "detail": "HTTP Error 401: Unauthorized"
+      "detail": "HTTP Error 401: Unauthorized - body: {\"errors\":\"[API] Invalid API key or access token (unrecognized login or wrong password)\"}"
     }
   ]
 }

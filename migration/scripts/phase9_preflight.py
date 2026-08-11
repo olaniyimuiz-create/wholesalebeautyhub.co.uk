@@ -66,8 +66,19 @@ def graphql_request(domain, token, api_version, query, variables=None):
             'X-Shopify-Access-Token': token,
         },
     )
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        return json.loads(resp.read().decode('utf-8'))
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return json.loads(resp.read().decode('utf-8'))
+    except urllib.error.HTTPError as e:
+        # The generic str(e) ("HTTP Error 401: Unauthorized") discards the
+        # actual Shopify response body, which carries the real diagnostic
+        # detail (e.g. "[API] Invalid API key or access token" vs. a
+        # missing-scope ACCESS_DENIED, which returns 200 with a GraphQL
+        # error instead - these are different failure classes and look
+        # identical if the body is thrown away). Surfaced here so every
+        # caller's exception message is actually useful, not guessed at.
+        body = e.read().decode('utf-8', errors='replace')
+        raise urllib.error.HTTPError(e.url, e.code, f'{e.reason} - body: {body}', e.headers, None) from None
 
 
 def check(name, fn, results):
