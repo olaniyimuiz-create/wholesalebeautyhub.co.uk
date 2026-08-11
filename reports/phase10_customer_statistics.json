@@ -25,5 +25,6 @@
   "marketing_consent_unsubscribed_fluentcrm": 229,
   "marketing_consent_pending_fluentcrm": 21,
   "marketing_consent_unknown_no_fluentcrm_record": 5551,
-  "live_shopify_customers_checked_against": 0
+  "live_shopify_customers_checked_against": 0,
+  "live_shopify_check_status": "FAILED: HTTP Error 401: Unauthorized"
 }

@@ -190,9 +190,17 @@ def main():
     config = get_config()
     domain, token, api_version = config['domain'], config['token'], config['api_version'] or '2025-01'
     live_existing_emails = set()
+    live_check_status = 'NOT_CONFIGURED'
     if domain and token:
-        live_existing_emails = fetch_live_customer_emails(domain, token, api_version)
-        print(f'{len(live_existing_emails)} customer(s) currently exist live in Shopify (read-only check)')
+        try:
+            live_existing_emails = fetch_live_customer_emails(domain, token, api_version)
+            live_check_status = 'OK'
+            print(f'{len(live_existing_emails)} customer(s) currently exist live in Shopify (read-only check)')
+        except Exception as e:
+            live_check_status = f'FAILED: {e}'
+            print(f'WARNING: live Shopify check failed ({e}) - proceeding with live_existing_emails treated as '
+                  f'unknown/empty. This does NOT affect the source-data classification below, only the '
+                  f'forward-compatible UPDATE detection (which requires live Shopify access).')
     else:
         print('NOT_CONFIGURED - proceeding with live_existing_emails treated as empty (cannot verify UPDATE candidates)')
 
@@ -338,6 +346,7 @@ def main():
         'marketing_consent_pending_fluentcrm': sum(1 for c in seen_emails.values() if fc_consent.get(c['email']) == 'pending'),
         'marketing_consent_unknown_no_fluentcrm_record': sum(1 for c in seen_emails.values() if c['email'] not in fc_consent),
         'live_shopify_customers_checked_against': len(live_existing_emails),
+        'live_shopify_check_status': live_check_status,
     }
     with open(STATISTICS_PATH, 'w', encoding='utf-8') as f:
         json.dump(stats, f, indent=2)
