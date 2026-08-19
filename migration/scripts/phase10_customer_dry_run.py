@@ -165,9 +165,24 @@ def classify(candidate, seen_emails, staff_user_ids, fc_consent, live_existing_e
     return 'IMPORT', '; '.join(notes), ''
 
 
+class LiveCustomerCheckFailed(RuntimeError):
+    """Raised when the live customer check could not be performed at all.
+
+    Deliberately NOT swallowed: 'access denied' is not the same fact as
+    'zero customers exist'. Returning an empty set here previously let the
+    caller record live_shopify_check_status = "OK" alongside
+    live_shopify_customers_checked_against = 0, which reads as a completed
+    live verification when none happened. See test_phase10_live_check.py.
+    """
+
+
 def fetch_live_customer_emails(domain, token, api_version):
     """Read-only. For forward-compatible UPDATE classification - expected
-    empty on a store where no customer has ever been imported."""
+    empty on a store where no customer has ever been imported.
+
+    Raises LiveCustomerCheckFailed if Shopify refused or errored, so the
+    caller reports a failure state rather than a false 'OK'.
+    """
     emails = set()
     cursor = None
     while True:
@@ -175,8 +190,11 @@ def fetch_live_customer_emails(domain, token, api_version):
         data = graphql_request(domain, token, api_version,
                                 '{ customers(first: 50%s) { pageInfo { hasNextPage endCursor } edges { node { email } } } }' % after)
         if 'errors' in data:
-            print('WARNING: could not read live customers (read scope may be missing) - treating live set as unknown/empty:', data['errors'])
-            return emails
+            codes = {(e.get('extensions') or {}).get('code') for e in data['errors']}
+            if 'ACCESS_DENIED' in codes:
+                raise LiveCustomerCheckFailed('ACCESS_DENIED')
+            raise LiveCustomerCheckFailed(
+                '; '.join(str(e.get('message', e)) for e in data['errors']))
         for edge in data['data']['customers']['edges']:
             if edge['node']['email']:
                 emails.add(edge['node']['email'].strip().lower())
