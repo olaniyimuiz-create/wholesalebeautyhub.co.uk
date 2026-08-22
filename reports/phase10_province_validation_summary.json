@@ -1,0 +1,15 @@
+{
+  "auditable_flag_records_written": 20,
+  "flags_by_type": {
+    "PROVINCE_CODE_SENT": 99,
+    "PROVINCE_DROPPED_COUNTRY_HAS_NO_PROVINCES": 20,
+    "PROVINCE_DROPPED_GB_RATIFIED_RULE": 3090
+  },
+  "gb_addresses_carrying_a_province_code": 0,
+  "import_customers_checked": 12096,
+  "note": "Every non-empty provinceCode was re-checked against Shopify's accepted code set for its country. GB must carry none, and a code may only appear where an address would actually be built.",
+  "province_cells_on_records_with_no_address": 0,
+  "province_codes_that_would_be_sent": 99,
+  "unvalidated_raw_strings_in_provinceCode": 0,
+  "verdict": "PASS - zero unvalidated strings reached provinceCode"
+}

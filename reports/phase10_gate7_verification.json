@@ -1,0 +1,245 @@
+{
+  "checks": [
+    {
+      "check": "manifest hash matches the approved manifest",
+      "detail": "2e31f3edbed607d3...",
+      "result": "PASS"
+    },
+    {
+      "check": "manifest IMPORT ids equal the derived IMPORT ids",
+      "detail": "12096 manifest / 12096 derived",
+      "result": "PASS"
+    },
+    {
+      "check": "13,043 = 12,096 IMPORT + 407 SKIP + 539 QUARANTINE + 1 EXCLUDE",
+      "detail": "12096 + 407 + 539 + 1 = 13043",
+      "result": "PASS"
+    },
+    {
+      "check": "IMPORT = run population + deferred name conflicts",
+      "detail": "11849 + 247 = 12096",
+      "result": "PASS"
+    },
+    {
+      "check": "run population is the approved 11,849",
+      "detail": "11849",
+      "result": "PASS"
+    },
+    {
+      "check": "every customer is in exactly one address bucket",
+      "detail": "4505 billing + 16 shipping-fallback + 7328 none = 11849",
+      "result": "PASS"
+    },
+    {
+      "check": "every customer is in exactly one phone bucket",
+      "detail": "3799 sent + 428 omitted + 7622 absent = 11849",
+      "result": "PASS"
+    },
+    {
+      "check": "address calls = billing + shipping fallback",
+      "detail": "4521 = 4505 + 16",
+      "result": "PASS"
+    },
+    {
+      "check": "every customer carries the legacy id metafield",
+      "detail": "11849 of 11849",
+      "result": "PASS"
+    },
+    {
+      "check": "mutation total = creates + address calls",
+      "detail": "11849 + 4521 = 16370",
+      "result": "PASS"
+    },
+    {
+      "check": "NO two customers in the cohort send the same phone number",
+      "detail": "invariant holds",
+      "result": "PASS"
+    },
+    {
+      "check": "every collision group resolves to a definite action",
+      "detail": "76 KEEP_ONE, 155 OMIT_FROM_ALL, 9 contested -> all members omit",
+      "result": "PASS"
+    },
+    {
+      "check": "contested groups omit rather than guess an owner",
+      "detail": "19 customer(s) hold at OMIT_PHONE_PENDING_REVIEW - created in full, without that one field",
+      "result": "PASS"
+    },
+    {
+      "check": "GB addresses never carry a provinceCode",
+      "detail": "0 violation(s)",
+      "result": "PASS"
+    },
+    {
+      "check": "no raw or invalid province text is ever sent",
+      "detail": "0 violation(s)",
+      "result": "PASS"
+    },
+    {
+      "check": "no country code is invented",
+      "detail": "0 address(es) whose country differs from source",
+      "result": "PASS"
+    },
+    {
+      "check": "postcodes are trimmed, never rewritten",
+      "detail": "0 rewritten",
+      "result": "PASS"
+    },
+    {
+      "check": "a customer survives every address failure",
+      "detail": "7328 import with no address; 0 are blocked by one",
+      "result": "PASS"
+    },
+    {
+      "check": "address creation is a separate, independently retryable stage",
+      "detail": "customerAddressCreate stages require a customer id and carry their own audit record; an address failure never re-creates the customer",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: manifest sha256",
+      "detail": "contract '2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda' vs computed '2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda'",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: source rows",
+      "detail": "contract 13043 vs computed 13043",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: IMPORT population",
+      "detail": "contract 12096 vs computed 12096",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: deferred name conflicts",
+      "detail": "contract 247 vs computed 247",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: run population",
+      "detail": "contract 11849 vs computed 11849",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: phones retained",
+      "detail": "contract 3799 vs computed 3799",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: phones omitted",
+      "detail": "contract 428 vs computed 428",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: duplicate phone sends",
+      "detail": "contract 0 vs computed 0",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: billing addresses",
+      "detail": "contract 4505 vs computed 4505",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: shipping fallbacks",
+      "detail": "contract 16 vs computed 16",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: no address",
+      "detail": "contract 7328 vs computed 7328",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: address mutations",
+      "detail": "contract 4521 vs computed 4521",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: customerCreate",
+      "detail": "contract 11849 vs computed 11849",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: total mutations",
+      "detail": "contract 16370 vs computed 16370",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: legacy id metafields",
+      "detail": "contract 11849 vs computed 11849",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: registered_at metafields",
+      "detail": "contract 6581 vs computed 6581",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: consent written",
+      "detail": "contract 0 vs computed 0",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: address policy",
+      "detail": "contract 'A_PLUS_BILLING_ELSE_SHIPPING' vs computed 'A_PLUS_BILLING_ELSE_SHIPPING'",
+      "result": "PASS"
+    },
+    {
+      "check": "contract: Gate 7 authorization not granted",
+      "detail": "the contract records no bulk authorization",
+      "result": "PASS"
+    },
+    {
+      "check": "the dry-run report matches this independent recomputation",
+      "detail": "identical",
+      "result": "PASS"
+    }
+  ],
+  "consent_note": "Gate 3 approved carrying FluentCRM subscribed forward for 6,295 records, but the import run does NOT set consent: emailMarketingConsent is absent from every payload and its absence is asserted before send. Consent is a separate customerEmailMarketingConsentUpdate pass, which is why every customer in this run counts as consent-omitted.",
+  "contract_frozen": "2026-08-22",
+  "contract_path": "C:\\Users\\muizo\\Downloads\\wholesale-beauty-hub-migration\\migration\\schema\\phase10_migration_contract.json",
+  "failures": 0,
+  "gate_7": "NOT ADJUDICATED HERE - see docs/PHASE10_GATE7_APPROVAL_PACKAGE.md",
+  "manifest_sha256": "2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda",
+  "phase_5_answers": {
+    "10_expected_customerCreate": 11849,
+    "11_expected_customerAddressCreate": 4521,
+    "12_expected_total_mutations": 16370,
+    "1_why_11849_not_12096": "ADR-014 Gate 5 selected EXCLUDE_AFFECTED_CUSTOMERS. The 247 customers whose source data holds two conflicting names for one email are held back so that nobody is created under a name no human has confirmed. 12096 - 247 = 11849. They are held, not dropped, and import unchanged once the names are confirmed.",
+    "2_deferred": 247,
+    "2_directly_imported": 11849,
+    "2_excluded_permanently": 293,
+    "2_quarantined": 539,
+    "2_skipped_duplicate_rows": 407,
+    "3_phones_omitted_by_collision": 428,
+    "4_customers_retaining_phones": 3799,
+    "5_billing_addresses": 4505,
+    "6_shipping_fallbacks": 16,
+    "7_no_address": 7328,
+    "8_names_requiring_manual_handling": 247,
+    "9_consent_records_intentionally_omitted": 11849
+  },
+  "phase_6_phone_invariant": {
+    "by_recommended_action": {
+      "KEEP_ONE": 76,
+      "MANUAL_REVIEW_REQUIRED": 9,
+      "OMIT_FROM_ALL": 155
+    },
+    "collision_groups": 240,
+    "customers_holding_pending_review": 19,
+    "duplicate_numbers_that_would_be_sent": 0
+  },
+  "phase_7_address": {
+    "billing": 4505,
+    "gb_province_violations": 0,
+    "invalid_province_violations": 0,
+    "invented_country_violations": 0,
+    "no_address": 7328,
+    "policy": "A_PLUS_BILLING_ELSE_SHIPPING",
+    "shipping_fallback": 16
+  },
+  "shopify_requests": 0,
+  "verification": "PASS",
+  "verified": true
+}

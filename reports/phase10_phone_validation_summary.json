@@ -1,0 +1,36 @@
+{
+  "categories": {
+    "INVALID_FORMAT": 10,
+    "NEEDS_NORMALIZATION": 3120,
+    "NO_PHONE": 7646,
+    "VALID_E164": 1320
+  },
+  "customers_scanned": 12096,
+  "customers_with_phone": 4450,
+  "customers_without_phone": 7646,
+  "digit_length_histogram": {
+    "10": 146,
+    "11": 2689,
+    "12": 1461,
+    "13": 135,
+    "14": 9,
+    "8": 2,
+    "9": 8
+  },
+  "dropped_phone_log": "reports\\phase10_dropped_phones.jsonl (gitignored)",
+  "exceptions_file": "reports\\phase10_phone_format_exceptions.csv (gitignored - contains real numbers)",
+  "flagged_for_review": 54,
+  "gb_plan_advisory_count": 44,
+  "normalization_note": "No value is rewritten. Shopify normalises to E.164 at write time - every GB 07... number in the Gate 6 cohort came back as +44... and reconciled clean. NEEDS_NORMALIZATION is not a predicted failure.",
+  "reasons": {
+    "INTERNATIONAL_PREFIX_00_NOT_PLUS": 11,
+    "NATIONAL_FORMAT_LEADING_ZERO": 2692,
+    "NO_COUNTRY_CODE_PREFIX": 417,
+    "PLUS_PREFIXED_INTERNATIONAL": 1320,
+    "TOO_FEW_DIGITS": 10
+  },
+  "run_id": "phone-precheck-2026-08-22T18:00:03Z",
+  "runtime_behaviour": "A phone Shopify rejects costs the phone, not the customer: phase10_import_runtime.phone_fallback drops the number, tags the customer phone-dropped-invalid, and the executor retries the create exactly once. See risk #45.",
+  "shopify_requests": 0,
+  "validation_limits": "STRUCTURAL ONLY. Characters, plus sign and digit count, plus one GB numbering-plan advisory. Shopify validates against national numbering plans this project does not hold, so VALID_E164 means \"nothing structurally wrong\", not \"Shopify will accept it\". woo_customer_id=1 passes every generic check here and was still rejected live."
+}

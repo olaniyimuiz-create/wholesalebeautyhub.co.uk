@@ -1,0 +1,23 @@
+{
+  "affected_import_customers": 247,
+  "conflicts": 247,
+  "conflicts_by_class": {
+    "ALTERNATE_BLANK_IMPORT_HAS_NAME": 87,
+    "DIFFERS_ONLY_BY_CASE_OR_WHITESPACE": 39,
+    "GENUINELY_DIFFERENT_NAMES": 94,
+    "IDENTICAL_AS_DISPLAYED_FIELD_SPLIT_DIFFERS": 11,
+    "IMPORT_BLANK_ALTERNATE_HAS_NAME": 16
+  },
+  "default_policy": "EXCLUDE_AFFECTED_CUSTOMERS",
+  "genuinely_ambiguous": 94,
+  "near_mechanical": 153,
+  "note": "Nothing is pre-selected. Every chosen_name is empty and every review_status is PENDING. No name was guessed, merged, or overwritten. The affected customers are created either way - the open question is whether they are created carrying a name no human has confirmed.",
+  "permitted_chosen_name_values": [
+    "IMPORT_NAME",
+    "ALTERNATE_NAME",
+    "MANUAL_REVIEW"
+  ],
+  "resolved": 0,
+  "unparsed_quarantine_rows": 0,
+  "unresolved": 247
+}

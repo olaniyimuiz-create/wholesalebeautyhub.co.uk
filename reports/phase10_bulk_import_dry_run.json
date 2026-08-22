@@ -1,0 +1,154 @@
+{
+  "audit_simulation": {
+    "by_status": {
+      "DRY_RUN_PLANNED": 11849
+    },
+    "checkpoint": "reports\\phase10_bulk_import_dry_run_checkpoint.jsonl",
+    "ledger": "reports\\phase10_bulk_import_dry_run.jsonl",
+    "note": "Ledger-shaped records written through the same ImportLedger a live run would use, to a dry-run path. Woo ids only - the ledger schema rejects a record carrying an email, phone, name or address.",
+    "records_written": 11849
+  },
+  "authorization": "ADR-014 Gate 7 is UNSIGNED. This is a dry run. No customer, address or metafield was created, updated or deleted.",
+  "counts": {
+    "DRY_RUN_PLANNED": 11849
+  },
+  "guards": [
+    {
+      "guard": 1,
+      "rule": "approved store identified",
+      "status": "enforced"
+    },
+    {
+      "guard": 2,
+      "rule": "production store rejected",
+      "status": "enforced"
+    },
+    {
+      "guard": 3,
+      "rule": "live mode is not the default",
+      "status": "enforced"
+    },
+    {
+      "guard": 4,
+      "rule": "DRY_RUN is the default",
+      "status": "enforced"
+    },
+    {
+      "guard": 5,
+      "rule": "missing Gate 7 authorization halts",
+      "status": "enforced"
+    },
+    {
+      "guard": 6,
+      "rule": "manifest hash matches",
+      "status": "enforced"
+    },
+    {
+      "guard": 7,
+      "rule": "population matches the approved manifest",
+      "status": "enforced"
+    },
+    {
+      "guard": 8,
+      "rule": "live customer count is the expected pre-import count",
+      "status": "enforced"
+    },
+    {
+      "guard": 9,
+      "rule": "duplicate legacy Woo ids halt",
+      "status": "enforced"
+    },
+    {
+      "guard": 10,
+      "rule": "already-present legacy id skips",
+      "status": "enforced"
+    },
+    {
+      "guard": 11,
+      "rule": "timeout verifies before retrying",
+      "status": "delegated to runtime"
+    },
+    {
+      "guard": 12,
+      "rule": "401 / token expiry halts immediately",
+      "status": "delegated to runtime"
+    },
+    {
+      "guard": 13,
+      "rule": "THROTTLED uses the tested backoff",
+      "status": "delegated to runtime"
+    },
+    {
+      "guard": 14,
+      "rule": "legacy id written in the same customerCreate",
+      "status": "enforced"
+    },
+    {
+      "guard": 15,
+      "rule": "no creation outside the approved cohort",
+      "status": "enforced"
+    },
+    {
+      "guard": 16,
+      "rule": "supplied cohort verified against the manifest",
+      "status": "enforced"
+    }
+  ],
+  "importer_commit": "86f3211",
+  "manifest": {
+    "import_rows": 12096,
+    "path": "reports\\phase10_customer_manifest.csv",
+    "sha256": "2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda"
+  },
+  "mode": "dry-run",
+  "mode_note": "dry run only; live mode not built in this revision",
+  "mutations": {
+    "expected_customerAddressCreate": 4521,
+    "expected_customerCreate": 11849,
+    "expected_retries_phone_fallback": 51,
+    "expected_throttles": 0,
+    "expected_total": 16370,
+    "expected_total_worst_case": 16421
+  },
+  "phone_collisions": {
+    "by_recommended_action": {
+      "KEEP_ONE": 76,
+      "MANUAL_REVIEW_REQUIRED": 9,
+      "OMIT_FROM_ALL": 155
+    },
+    "groups": 240,
+    "unresolved_after_transformation": 0
+  },
+  "population": {
+    "approved_run_population": 11849,
+    "deferred_name_conflicts": 247,
+    "excluded_missing_email_permanent": 292,
+    "excluded_total": 1,
+    "manifest_import_population": 12096,
+    "not_eligible_at_plan_time": 0,
+    "quarantined_total": 539,
+    "skipped_duplicate_total": 407,
+    "total_source_rows": 13043
+  },
+  "rate_plan": {
+    "cost_per_mutation_measured": 10,
+    "expected_runtime_minutes": 27.4,
+    "sustained_mutations_per_second": 10,
+    "throttle_note": "Zero throttles expected: the bucket restores 100 points/s and a mutation costs 10, so pacing at 10 mutations/s spends exactly what is restored. Any throttle that does occur is handled by the tested backoff and does not consume the transient-failure budget.",
+    "total_points": 163700
+  },
+  "run_id": "bulk-dry-run-2026-08-22T19:33:57Z",
+  "shopify_mutations_performed": 0,
+  "transformation": {
+    "billing_address": 4505,
+    "consent_applied_by_this_run": 0,
+    "consent_subscribed_in_cohort": 6065,
+    "legacy_id_metafields": 11849,
+    "no_address": 7328,
+    "phone_absent_in_source": 7622,
+    "phone_omitted_by_collision_policy": 428,
+    "phone_sent": 3799,
+    "registered_at_metafields": 6581,
+    "shipping_fallback": 16
+  }
+}

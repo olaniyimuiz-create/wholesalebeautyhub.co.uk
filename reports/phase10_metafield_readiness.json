@@ -1,0 +1,33 @@
+{
+  "import_customers": 12096,
+  "legacy_woo_customer_id": {
+    "customers_carrying_it": 12096,
+    "customers_missing_it": 0,
+    "distinct_values": 12096,
+    "key": "legacy_woo_customer_id",
+    "namespace": "custom",
+    "ratified": "YES - mandatory on every created customer",
+    "source": "wp_wc_customer_lookup.customer_id",
+    "type": "single_line_text_field",
+    "unique_across_population": true,
+    "values_that_are_not_plain_integers": 0
+  },
+  "reconciliation_chain": "Woo ID -> custom.legacy_woo_customer_id -> Shopify Customer GID",
+  "shopify_createdAt": {
+    "note": "Customer.createdAt is server-controlled and read-only. It is never written, manipulated, or approximated.",
+    "payloads_containing_it": 0,
+    "written": false
+  },
+  "woo_registered_at": {
+    "customers_carrying_it": 6649,
+    "customers_without_a_source_date": 5447,
+    "earliest_year": "2024",
+    "key": "woo_registered_at",
+    "latest_year": "2026",
+    "namespace": "custom",
+    "note": "Omitted, never invented, where the source has no date. A guest checkout row has no registration event to record.",
+    "ratified": "RETAIN as a customer metafield",
+    "source": "wp_wc_customer_lookup.date_registered",
+    "type": "single_line_text_field"
+  }
+}

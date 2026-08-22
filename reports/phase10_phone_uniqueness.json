@@ -1,0 +1,14 @@
+{
+  "collision_groups": 240,
+  "customers_in_collisions": 517,
+  "customers_in_high_risk_groups": 27,
+  "customers_with_phone": 4450,
+  "customers_with_unique_phone": 3933,
+  "customers_without_phone": 7646,
+  "high_risk_groups": 1,
+  "import_customers": 12096,
+  "largest_group_registered_accounts": 0,
+  "max_group_size": 27,
+  "note": "Collisions are detected on a UK-canonical form (0-prefix and +44 treated as the same subscriber, separators ignored) because Shopify normalises phone numbers internally. Canonicalisation is for DETECTION ONLY - no source value is rewritten.",
+  "unresolved_groups": 240
+}

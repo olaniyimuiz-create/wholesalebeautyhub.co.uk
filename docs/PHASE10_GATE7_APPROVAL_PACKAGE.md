@@ -14,8 +14,8 @@
 >    its own explicit approval immediately before it runs.
 > 2. **The live executor does not exist.** `phase10_bulk_import.py` is dry-run
 >    only by construction — no mutation document, no transport.
-> 3. **The importer is uncommitted.** An 11,849-record run must be executed from
->    an identified commit, and today's "importer commit" is a dirty tree.
+> 3. ~~The importer is uncommitted.~~ **RESOLVED 2026-08-22** - frozen at commit
+>    `86f3211`, and the dry-run evidence was regenerated against it.
 >
 > **NO SHOPIFY CUSTOMER MUTATIONS HAVE BEEN PERFORMED.**
 
@@ -41,22 +41,28 @@ count that had already proved eventually-consistent.
 
 | | |
 |---|---|
-| Branch | `main` |
-| HEAD | `d603a23ffda84bed34e4b85ba32b372025baf02a` |
-| `origin/main` | `5c546b0` — HEAD is 1 ahead, unpushed |
-| Working tree | **dirty** — 11 modified, 40+ untracked |
+| Branch | `phase10/gate7-executor-freeze` (branched from `main` at `d603a23`) |
+| HEAD | `86f3211e58a1eb69bac4ac47ccc436fd3ed17a68` |
+| `origin/main` | `5c546b0` — **not pushed**; pushing requires separate authorization |
+| Working tree | clean apart from regenerated evidence, committed separately |
 
 ## 3. Exact importer commit
 
-**There isn't one, and that is a blocker in its own right.**
+**`86f3211e58a1eb69bac4ac47ccc436fd3ed17a68`** (short `86f3211`).
 
-The entire Phase 10 codebase — runtime, province validator, bulk importer,
-verification, tests — is uncommitted. The dry-run report stamps
-`importer_commit: d603a23`, which is the *tree's* HEAD and **not** the code that
-produced the report. For a 10-record test that is untidy; for an 11,849-record
-run it means the audit trail cannot answer "what exactly ran?".
+Frozen 2026-08-22 on branch `phase10/gate7-executor-freeze`. It contains the
+runtime, the dry-run bulk importer, the verifier, the frozen contract, the
+province and phone validators, ADR-014 with Gates 1-6 signed, and 758 passing
+offline assertions.
 
-**Precondition for Gate 7: commit the importer and record the real hash here.**
+The evidence was then **regenerated against that commit**, so
+`reports/phase10_bulk_import_dry_run.json` now stamps
+`importer_commit: 86f3211` — the commit that actually produced it, not the tree
+it happened to sit in. Evidence is committed separately from code so that the
+importer commit stays the answer to "what would run?".
+
+**Not pushed.** `origin/main` is still at `5c546b0`. Pushing is a separate
+authorization.
 
 ## 4. Manifest hash
 

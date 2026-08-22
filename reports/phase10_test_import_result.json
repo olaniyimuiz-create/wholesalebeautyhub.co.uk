@@ -1,0 +1,28 @@
+{
+  "authorization": "ADR-014 Gate 6, 2026-08-22, project/store owner",
+  "cohort_size": 10,
+  "consent_set_on_any_customer": false,
+  "created": 9,
+  "customers_after": 8,
+  "customers_before": 0,
+  "failed": 1,
+  "measured_cost_points": 250,
+  "mutations": {
+    "customerAddressCreate": 6,
+    "customerCreate": 10,
+    "customerDelete": 9
+  },
+  "post_run_verification": {
+    "authoritative_customers_after_via_record_listing": 0,
+    "explanation": "customersCount lagged behind the 9 deletes - Shopify eventual consistency. Listing customer records returned 0, which is authoritative. The observed fields above are left exactly as the run recorded them: an audit record is corrected by annotation, never by overwriting.",
+    "observed_customers_after_via_count_api": 8,
+    "store_returned_to_empty_verified": true,
+    "verified": "2026-08-22"
+  },
+  "reconciliation_checks": 117,
+  "reconciliation_mismatches": 4,
+  "run_id": "test-import-2026-08-22T01:05:25Z",
+  "skipped_already_present": 0,
+  "store_returned_to_empty": false,
+  "total_mutations": 25
+}

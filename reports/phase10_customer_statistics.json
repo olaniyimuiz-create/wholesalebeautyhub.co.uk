@@ -26,5 +26,18 @@
   "marketing_consent_pending_fluentcrm": 21,
   "marketing_consent_unknown_no_fluentcrm_record": 5551,
   "live_shopify_customers_checked_against": 0,
-  "live_shopify_check_status": "OK"
+  "live_shopify_check_status": "OK",
+  "province_validation": {
+    "by_flag": {
+      "PROVINCE_CODE_SENT": 99,
+      "PROVINCE_DROPPED_COUNTRY_HAS_NO_PROVINCES": 20,
+      "PROVINCE_DROPPED_GB_RATIFIED_RULE": 3090
+    },
+    "sent": 99,
+    "omitted_gb_rule": 3090,
+    "omitted_invalid_code": 0,
+    "omitted_country_has_no_provinces": 20,
+    "omitted_country_unknown": 0,
+    "auditable_flags_written": 20
+  }
 }
