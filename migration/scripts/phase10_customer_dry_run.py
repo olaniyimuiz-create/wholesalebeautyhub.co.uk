@@ -36,6 +36,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 from database_parser import load_dump, php_unserialize, STAFF_ROLES, SQL_DUMP_PATH
 from sql_utils import iter_insert_rows
 from phase9_preflight import get_config, graphql_request
+from phase10_province_validator import (
+    ProvinceFlagLedger, validate_province_code, PROVINCE_SENT)
 
 REPORTS_DIR = 'reports'
 MANIFEST_PATH = os.path.join(REPORTS_DIR, 'phase10_customer_manifest.csv')
@@ -237,6 +239,11 @@ def main():
     fc_consent = load_fluentcrm_consent()
 
     os.makedirs(REPORTS_DIR, exist_ok=True)
+    # Province validation runs alongside classification so the manifest records
+    # what would ACTUALLY be sent as provinceCode, not the raw WooCommerce
+    # state string. Validation never affects classification - a province
+    # problem is an address-field problem, never a customer problem.
+    province_ledger = ProvinceFlagLedger()
     seen_emails = {}
     counts = {'IMPORT': 0, 'UPDATE': 0, 'SKIP': 0, 'QUARANTINE': 0, 'EXCLUDE': 0}
     quarantine_reason_counts = {}
@@ -245,6 +252,8 @@ def main():
         'company', 'billing_address1', 'billing_city', 'billing_province', 'billing_country', 'billing_zip',
         'phone', 'has_shipping_address', 'shipping_address1', 'shipping_city', 'shipping_country',
         'date_registered', 'marketing_consent_source', 'marketing_consent_status',
+        'billing_province_code_sent', 'billing_province_flag',
+        'shipping_province_code_sent', 'shipping_province_flag',
         'classification', 'reason', 'notes',
     ]
     quarantine_fields = ['woo_customer_id', 'email', 'reason', 'classification', 'notes', 'recommended_human_action']
@@ -270,6 +279,26 @@ def main():
                 quarantine_reason_counts[reason] = quarantine_reason_counts.get(reason, 0) + 1
 
             consent_status = fc_consent.get(candidate['email'])
+
+            province_cells = {}
+            for kind in ('billing', 'shipping'):
+                raw = candidate.get(kind + '_province') or ''
+                country = candidate.get(kind + '_country') or ''
+                has_address = bool((candidate.get(kind + '_address1') or '').strip())
+                # Only meaningful when an address would actually be built: with
+                # no street there is no address, so nothing is ever sent and a
+                # populated cell here would overstate what the import does.
+                if not has_address:
+                    province_cells[kind + '_province_code_sent'] = ''
+                    province_cells[kind + '_province_flag'] = ''
+                    continue
+                code, flag = validate_province_code(country, raw)
+                if flag and classification in ('IMPORT', 'UPDATE'):
+                    province_ledger.flag(candidate['woo_customer_id'], kind,
+                                         country, raw, flag)
+                province_cells[kind + '_province_code_sent'] = code or ''
+                province_cells[kind + '_province_flag'] = flag or ''
+
             mw.writerow({
                 'woo_customer_id': candidate['woo_customer_id'],
                 'user_id': candidate['user_id'] or '',
@@ -291,6 +320,7 @@ def main():
                 'date_registered': candidate['date_registered'],
                 'marketing_consent_source': 'fluentcrm' if consent_status else 'none',
                 'marketing_consent_status': consent_status or 'unknown',
+                **province_cells,
                 'classification': classification,
                 'reason': reason,
                 'notes': notes,
@@ -320,13 +350,16 @@ def main():
             ('wp_wc_customer_lookup.first_name / billing_first_name', 'firstName', 'customer field', 'customer_lookup wins, usermeta fallback'),
             ('wp_wc_customer_lookup.last_name / billing_last_name', 'lastName', 'customer field', 'customer_lookup wins, usermeta fallback'),
             ('billing_phone / order billing phone (guest fallback)', 'phone', 'customer field', 'Must be unique in Shopify if set - see quarantine rule for phone conflicts'),
-            ('billing_address_1/2, billing_city, billing_state, billing_postcode, billing_country', 'defaultAddress (CustomerAddressInput)', 'address', 'One address only - created via customerCreate\'s addresses input, not a separate mutation'),
-            ('shipping_address_1/2, shipping_city, shipping_state, shipping_postcode, shipping_country', 'NOT CURRENTLY MAPPED', 'unmapped', 'Captured in raw usermeta by database_parser.py but never surfaced - Shopify supports multiple addresses per customer; a second CustomerAddressInput could carry this, but no decision has been made to add it'),
+            ('billing_address_1/2, billing_city, billing_state, billing_postcode, billing_country', 'customerAddressCreate(customerId, address: MailingAddressInput!, setAsDefault)', 'address', 'CORRECTED 2026-08-19: previously claimed CustomerInput has an addresses input. It does not - verified by live introspection of API 2026-07. Addresses require a SEPARATE second mutation per address, and the type is MailingAddressInput, not CustomerAddressInput'),
+            ('shipping_address_1/2, shipping_city, shipping_state, shipping_postcode, shipping_country', 'NOT CURRENTLY MAPPED', 'unmapped', 'Captured in raw usermeta by database_parser.py but never surfaced. A second customerAddressCreate call could carry it. Shopify has NO billing/shipping distinction on customer addresses - both land in one list, only setAsDefault separates them. 16 customers have shipping but no billing address'),
             ('user_id (is registered vs guest)', 'tags: "imported-from-woocommerce", "registered"/"guest"', 'tag', 'Already the pattern used in the pre-built CSV'),
             ('username', 'NOT MAPPED', 'excluded', 'Shopify customer accounts are email-based; no username field exists'),
             ('customer_id (WooCommerce)', 'metafield custom.legacy_woo_customer_id', 'metafield', 'Proposed idempotency key, mirroring the product custom.legacy_woo_id pattern - not yet implemented'),
-            ('date_registered', 'metafield custom.woo_registered_at (proposed)', 'metafield', 'Informational only; Shopify sets its own createdAt on import'),
+            ('date_registered', 'metafield custom.woo_registered_at (proposed)', 'metafield', 'Informational only. Customer.createdAt is server-set and read-only, so a metafield is the ONLY possible destination'),
             ('WooCommerce customer_note (order-level, not customer-level)', 'NOT MAPPED', 'excluded', 'customer_note in WooCommerce is per-order, not per-customer profile - no customer-level note field exists in the source data read by this pipeline'),
+            ('billing_company', 'MailingAddressInput.company (address level)', 'address', 'CORRECTED 2026-08-19: CustomerInput has no company field. A customer with no address cannot carry a company at all'),
+            ('billing_country', 'countryCode (CountryCode enum, 245 values)', 'address', 'Enum, not free text. MailingAddressInput has no country field. 16 IMPORT customers have an address with no country'),
+            ('billing_state', 'provinceCode - OMITTED for GB', 'address', 'MailingAddressInput has no free-text province. 2,483 GB customers carry a county name, which is not a province code'),
             ('wp_capabilities (role)', 'exclusion filter only (STAFF_ROLES)', 'deliberately excluded', 'Staff/admin accounts are never imported as customers'),
             ('wp_fc_subscribers.status (FluentCRM)', 'emailMarketingConsent.marketingState (proposed, NOT YET APPROVED)', 'consent field', 'Real signal exists for 6,545 of 12,096 customers - see docs/PHASE10_GDPR_CONSENT.md; not applied without explicit business/legal sign-off'),
             ('No consent signal at all (5,551 of 12,096)', 'emailMarketingConsent omitted entirely (defaults to NOT_SUBSCRIBED)', 'consent field', 'Unknown consent is never treated as consent'),
@@ -365,6 +398,7 @@ def main():
         'marketing_consent_unknown_no_fluentcrm_record': sum(1 for c in seen_emails.values() if c['email'] not in fc_consent),
         'live_shopify_customers_checked_against': len(live_existing_emails),
         'live_shopify_check_status': live_check_status,
+        'province_validation': province_ledger.summary(),
     }
     with open(STATISTICS_PATH, 'w', encoding='utf-8') as f:
         json.dump(stats, f, indent=2)

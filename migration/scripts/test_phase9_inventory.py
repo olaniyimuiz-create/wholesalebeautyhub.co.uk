@@ -6,6 +6,18 @@ Two kinds of test here, labeled explicitly per test - never blurred:
   (wholesale-beautyhub.myshopify.com). Read-only except for the inventory
   writes this fix itself makes, which are the exact operation being
   verified - never touches product/variant/media data.
+
+  THESE ARE REAL MUTATIONS. Running this file used to perform live
+  inventorySetQuantities calls against products 124 and 17 with no warning
+  and no opt-in, which meant an innocuous-looking "run the tests" step
+  silently wrote to a live store. tearDownClass does restore both products
+  to 0, so the net data change is nil - but "it puts it back" is not the
+  same as "it does not write", and a caller who has been told not to modify
+  inventory needs the difference to be visible.
+
+  The LIVE class is therefore now OPT-IN. Set:
+      PHASE9_ALLOW_LIVE_INVENTORY_WRITES=1
+  to run it. Without that, the LIVE tests skip and only MOCK tests run.
 - MOCK: `graphql_request` is monkeypatched with a canned response so a
   failure mode that would be unsafe or impractical to reproduce live
   (a missing location, a malformed response) can still be exercised for
@@ -18,12 +30,22 @@ rather than skipping LIVE tests silently.
 """
 import sys
 import os
+import tempfile
 import unittest
 import uuid
 
 sys.path.insert(0, os.path.dirname(__file__))
 import phase9_test_import as pti
 from phase9_preflight import get_config
+
+# phase9_test_import.log() appends to reports/phase9_test_import_log.jsonl, a
+# TRACKED audit ledger. Running these tests used to write synthetic
+# INVENTORY_SET_FAILED records into the real import history, corrupting an
+# artifact whose whole value is being trustworthy. Redirect to a temp file for
+# the duration of the run.
+_TEST_LOG_DIR = tempfile.mkdtemp(prefix='phase9-inventory-test-')
+pti.LOG_PATH = os.path.join(_TEST_LOG_DIR, 'test_log.jsonl')
+pti.CHECKPOINT_PATH = os.path.join(_TEST_LOG_DIR, 'test_checkpoint.jsonl')
 
 RESULTS = []
 
@@ -44,6 +66,11 @@ class LiveInventoryTests(unittest.TestCase):
         cls.domain, cls.token, cls.api_version = config['domain'], config['token'], config['api_version'] or '2025-01'
         if not cls.domain or not cls.token:
             raise unittest.SkipTest('NOT_CONFIGURED - no live credentials, skipping LIVE tests')
+        if os.environ.get('PHASE9_ALLOW_LIVE_INVENTORY_WRITES') != '1':
+            raise unittest.SkipTest(
+                'SKIPPED - these tests perform REAL inventorySetQuantities mutations '
+                'against the live dev store. Set PHASE9_ALLOW_LIVE_INVENTORY_WRITES=1 '
+                'to opt in. MOCK tests still run.')
         cls.location_id = pti.get_default_location(cls.domain, cls.token, cls.api_version)
         # product 124's variant - real, already-created test data
         data = pti.graphql_request(cls.domain, cls.token, cls.api_version,

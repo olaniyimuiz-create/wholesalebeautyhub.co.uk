@@ -4,6 +4,22 @@ Formal authorization request. **Nothing in this document is that
 authorization.** No customer was created, updated, deleted, merged, or
 queried by GID in Shopify while producing it.
 
+> **Superseded in part — see [PHASE10_DECISION_MATRIX.md](PHASE10_DECISION_MATRIX.md)**
+> for the current, consolidated status of all ten open decisions, and for the
+> distinction between a technical recommendation, a business approval, and a
+> live execution authorization.
+>
+> Two blockers were identified **after** this gate document was written and are
+> not reflected below:
+>
+> * **517 customers across 240 groups share a phone number** with someone else.
+>   Shopify enforces store-wide phone uniqueness, so the phone field cannot be
+>   sent for any of them until a reviewer decides ownership. One group has
+>   **27 members** and is HIGH RISK.
+> * **`CustomerInput` has no `addresses` field** in API 2026-07. Addresses
+>   require a separate `customerAddressCreate` call per address — roughly 4,729
+>   additional operations under Option A.
+
 ## 1. Source customer count
 
 13,043 raw `wp_wc_customer_lookup` rows (independently recomputed from

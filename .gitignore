@@ -31,3 +31,58 @@ __pycache__/
 .env.*
 !.env.example
 
+
+# Phase 10 customer import runtime outputs. The ledger and checkpoint carry
+# Shopify customer GIDs tied to real people, and the phone-collision detail
+# groups customers by a shared contact number - per-record, so never tracked.
+# Only the aggregate result/summary JSON is safe to commit.
+reports/phase10_customer_import_log.jsonl
+reports/phase10_customer_import_checkpoint.jsonl
+reports/phase10_phone_collisions.csv
+!reports/phase10_customer_import_result.json
+!reports/phase10_phone_uniqueness.json
+
+# Name-conflict review sheet: contains real customer names and emails.
+reports/phase10_name_conflict_review.csv
+
+# Phone collision review: contains real phone numbers, emails and names.
+reports/phase10_phone_collision_review.csv
+!reports/phase10_phone_collision_summary.json
+!reports/phase10_name_conflict_summary.json
+
+# Address exception detail: contains real street addresses and postcodes.
+reports/phase10_address_exceptions.csv
+!reports/phase10_address_readiness.json
+
+# Credential liveness ledger: fingerprints and status only, no token values.
+!reports/phase10_credential_liveness.jsonl
+
+# Province validation audit flags: province value + customer id is an address
+# component tied to an identifier. Aggregates live in the statistics JSON.
+reports/phase10_province_validation_flags.jsonl
+
+# Tier-3 probe/test-import ledger. PII-free today (costs and statuses only),
+# but a real Tier-3 run would append Shopify customer GIDs. Same class as the
+# main import ledger, so gitignored for the same reason.
+reports/phase10_test_import_log.jsonl
+
+# Test import reconciliation: real customer field values.
+reports/phase10_test_import_reconciliation.csv
+!reports/phase10_test_import_result.json
+
+# Phone format pre-check and dropped-phone log (risk #45). The dropped-phone
+# log is the one file in Phase 10 that deliberately carries a raw phone
+# number: telling a merchant which number was lost requires the original, and
+# a hash cannot be handed back to a human to check. The exceptions CSV carries
+# the same. Neither is ever tracked; the aggregate summary has no PII.
+reports/phase10_dropped_phones.jsonl
+reports/phase10_phone_format_exceptions.csv
+!reports/phase10_phone_validation_summary.json
+
+# Bulk importer dry-run audit simulation. Ledger-shaped, Woo ids only (the
+# ledger schema rejects PII outright), but it is per-record and the same class
+# as the real import ledger, so it is gitignored for the same reason. The
+# aggregate dry-run JSON is tracked.
+reports/phase10_bulk_import_dry_run.jsonl
+reports/phase10_bulk_import_dry_run_checkpoint.jsonl
+!reports/phase10_bulk_import_dry_run.json

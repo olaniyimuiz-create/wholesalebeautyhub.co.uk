@@ -1,0 +1,120 @@
+{
+  "_contract": "Phase 10 customer migration - FROZEN EXECUTION CONTRACT",
+  "_frozen": "2026-08-22",
+  "_authority": "ADR-014 Gates 1-5, signed 2026-08-22 by the project/store owner",
+  "_enforcement": "migration/scripts/phase10_gate7_verify.py asserts every figure below against a fresh computation from source. Any difference is a HALT, not a warning.",
+  "_how_to_change": "This file is not edited to make a run pass. A figure that no longer matches means the source, the policy, or the code changed - all three require re-approval, not a re-hash.",
+
+  "manifest": {
+    "path": "reports/phase10_customer_manifest.csv",
+    "sha256": "2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda",
+    "rows": 13043,
+    "identity_check": "The 12,096 IMPORT woo_customer_id values are compared as a SET against what the source classifies today. A count match with different ids is a FAILURE, not a pass."
+  },
+
+  "classification_buckets": {
+    "_note": "These four are disjoint and sum to the source row count.",
+    "source_rows": 13043,
+    "import": 12096,
+    "duplicate_skip": 407,
+    "quarantine": 539,
+    "exclude": 1,
+    "_sum_check": "12096 + 407 + 539 + 1 = 13043"
+  },
+
+  "policy_view": {
+    "_note": "A different cut of the same rows, recorded separately because the two overlap and adding them together is wrong. The 292 missing-email records are INSIDE the 539 quarantined, not additional to them.",
+    "permanently_excluded_from_customer_import": 293,
+    "_composition": "1 EXCLUDE + 292 missing-email rows that sit inside the 539 QUARANTINE",
+    "deferred_name_conflicts": 247,
+    "_deferred_note": "Held, not dropped. Inside the 12,096. They import unchanged once a reviewer confirms their names (ADR-014 Gate 5)."
+  },
+
+  "run_population": {
+    "approved": 11849,
+    "_derivation": "12096 IMPORT - 247 deferred = 11849"
+  },
+
+  "phone": {
+    "retained": 3799,
+    "omitted_by_collision_policy": 428,
+    "absent_in_source": 7622,
+    "duplicate_numbers_that_would_be_sent": 0,
+    "_sum_check": "3799 + 428 + 7622 = 11849",
+    "_invariant": "No two customers in the cohort may send the same phone number. Verified by canonicalising every surviving phone and checking for duplicates.",
+    "collision_groups": 240,
+    "groups_keep_one": 76,
+    "groups_omit_from_all": 155,
+    "groups_contested": 9,
+    "customers_holding_pending_review": 19,
+    "_contested_note": "Contested groups omit for every member. No owner is guessed."
+  },
+
+  "address": {
+    "policy": "A_PLUS_BILLING_ELSE_SHIPPING",
+    "billing": 4505,
+    "shipping_fallback": 16,
+    "no_address": 7328,
+    "total_address_mutations": 4521,
+    "_sum_check": "4505 + 16 + 7328 = 11849; 4505 + 16 = 4521",
+    "gb_province_codes_sent": 0,
+    "invalid_province_codes_sent": 0,
+    "invented_country_codes": 0,
+    "postcodes_rewritten": 0
+  },
+
+  "mutations": {
+    "customer_create": 11849,
+    "customer_address_create": 4521,
+    "total_expected": 16370,
+    "phone_fallback_second_creates_expected": 51,
+    "total_worst_case": 16421,
+    "_sum_check": "11849 + 4521 = 16370",
+    "cost_points_per_mutation_measured": 10,
+    "total_points": 163700,
+    "expected_runtime_minutes": 27.4,
+    "expected_throttles": 0,
+    "concurrency": 1
+  },
+
+  "consent": {
+    "written_by_this_migration": false,
+    "customers_receiving_consent": 0,
+    "subscribed_records_in_cohort": 6065,
+    "_note": "ADR-014 Gate 3 approved carrying FluentCRM `subscribed` forward, and this migration pass deliberately does not apply it. emailMarketingConsent is absent from every payload and its absence is asserted before send. Consent is a separate customerEmailMarketingConsentUpdate pass that needs no re-import."
+  },
+
+  "architecture": {
+    "customer_mutation": "customerCreate",
+    "address_mutation": "customerAddressCreate",
+    "customer_set": "NOT USED - deferred, not approved. Remains out of scope unless a new explicit architecture review changes it.",
+    "legacy_id_metafield": {
+      "namespace": "custom",
+      "key": "legacy_woo_customer_id",
+      "type": "single_line_text_field",
+      "written": "inline in the same customerCreate call",
+      "mandatory": true,
+      "count": 11849
+    },
+    "registered_at_metafield": {
+      "namespace": "custom",
+      "key": "woo_registered_at",
+      "count": 6581,
+      "_note": "Present only where the source holds a registration date. Never invented. Customer.createdAt is never written."
+    },
+    "identity_merging": "NEVER automatic. The 247 conflicting-name customers must not be merged or imported under an assumed identity."
+  },
+
+  "store": {
+    "domain": "wholesale-beautyhub.myshopify.com",
+    "api_version": "2026-07",
+    "must_be_development_store": true,
+    "expected_customer_count_before_run": 0
+  },
+
+  "authorization": {
+    "gate_7_phrase": "APPROVED - EXECUTE GATE 7 BULK CUSTOMER IMPORT",
+    "granted": false,
+    "_note": "No paraphrase, no previous approval, and no engineering recommendation is a substitute."
+  }
+}
