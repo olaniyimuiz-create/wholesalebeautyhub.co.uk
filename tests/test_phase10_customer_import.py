@@ -924,7 +924,7 @@ class Tier3ExecutorBase(unittest.TestCase):
         tier3.LEDGER_PATH = os.path.join(self._dir.name, 'tier3.jsonl')
         tier3.CHECKPOINT_PATH = os.path.join(self._dir.name, 'tier3_checkpoint.jsonl')
         self.addCleanup(self._restore)
-        self.commit = tier3.git_head()
+        self.commit = tier3.reviewed_commit()
 
     def _restore(self):
         tier3.LEDGER_PATH, tier3.CHECKPOINT_PATH = self._ledger, self._checkpoint
@@ -1295,6 +1295,12 @@ class Tier3AuditSafety(Tier3ExecutorBase):
         self.assertEqual(len(result['created']), 1)
         self.assertTrue(result['created'][0]['gid'].startswith('gid://shopify/Customer/'))
         self.assertEqual(result['executor_commit'], tier3.git_head()[:7])
+
+    def test_a_docs_only_commit_does_not_invalidate_an_approval(self):
+        """reviewed_commit() tracks the files that decide behaviour, not HEAD."""
+        self.assertIn('phase10_tier3_executor.py', tier3.BEHAVIOUR_PATHS[0])
+        self.assertNotIn('docs/', ' '.join(tier3.BEHAVIOUR_PATHS))
+        self.assertEqual(len(tier3.reviewed_commit()), 40)
 
 
 class Tier3RollbackIsNotExecutable(Tier3ExecutorBase):

@@ -344,6 +344,43 @@ def git_tree_is_clean():
         return False
 
 
+# The files whose content decides what a Tier-3 run actually does. A commit
+# that touches none of them - a document, a report - cannot change behaviour,
+# and must not invalidate an approval that was given against the code.
+BEHAVIOUR_PATHS = (
+    'migration/scripts/phase10_tier3_executor.py',
+    'migration/scripts/phase10_import_runtime.py',
+    'migration/scripts/phase10_province_validator.py',
+    'migration/schema/phase10_migration_contract.json',
+)
+
+
+def reviewed_commit(paths=BEHAVIOUR_PATHS):
+    """The most recent commit touching any file that decides behaviour.
+
+    This, not HEAD, is what an approval names. Approving `fead007` and then
+    committing a document would otherwise invalidate the approval while
+    changing nothing about what would run - which trains people to pass
+    whatever HEAD happens to be, and that is the habit this check exists to
+    prevent.
+    """
+    latest = None
+    for path in paths:
+        try:
+            result = subprocess.run(
+                ['git', 'log', '-1', '--format=%H %ct', '--', path],
+                capture_output=True, text=True, timeout=30).stdout.strip()
+        except Exception:  # noqa: BLE001
+            continue
+        if not result:
+            continue
+        sha, _sep, when = result.partition(' ')
+        stamp = int(when or 0)
+        if latest is None or stamp > latest[1]:
+            latest = (sha, stamp)
+    return latest[0] if latest else ''
+
+
 def assert_expected_commit(expected, tree_check=None):
     """HEAD must be the commit the approval named, and the tree must be clean.
 
@@ -358,14 +395,15 @@ def assert_expected_commit(expected, tree_check=None):
     if not expected:
         raise Halt('live execution requires --expect-commit naming the reviewed '
                    'executor commit.')
-    head = git_head()
-    if not head.startswith(expected) and not expected.startswith(head[:len(expected)]):
-        raise Halt(f'commit mismatch: approval names {expected[:12]}, HEAD is '
-                   f'{head[:12]}.')
+    reviewed = reviewed_commit()
+    if not (reviewed.startswith(expected) or expected.startswith(reviewed[:len(expected)])):
+        raise Halt(f'commit mismatch: approval names {expected[:12]}, the reviewed '
+                   f'executor commit is {reviewed[:12]}. Something that decides '
+                   f'behaviour has changed since the approval.')
     if not (tree_check or git_tree_is_clean)():
         raise Halt('the working tree is dirty. The code about to run is not the '
                    'code that was reviewed.')
-    return head
+    return reviewed
 
 
 # --------------------------------------------------------------------------
