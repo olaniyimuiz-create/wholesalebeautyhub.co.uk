@@ -86,3 +86,14 @@ reports/phase10_phone_format_exceptions.csv
 reports/phase10_bulk_import_dry_run.jsonl
 reports/phase10_bulk_import_dry_run_checkpoint.jsonl
 !reports/phase10_bulk_import_dry_run.json
+
+# Tier-3 live-test audit trail. Ledger-shaped (the schema rejects PII), but a
+# live Tier-3 run appends Shopify customer GIDs, so it is gitignored for the
+# same reason the main import ledger is. The per-test simulation JSONs carry
+# field names and Woo ids only, and are tracked.
+reports/phase10_tier3_log.jsonl
+reports/phase10_tier3_checkpoint.jsonl
+reports/phase10_tier3_log.jsonl.simulation
+reports/phase10_tier3_checkpoint.jsonl.simulation
+!reports/phase10_tier3_simulation_tier3_test_1.json
+!reports/phase10_tier3_simulation_tier3_test_2.json

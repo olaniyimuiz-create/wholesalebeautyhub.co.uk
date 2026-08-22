@@ -1,0 +1,67 @@
+{
+  "address_writes": 0,
+  "authorization": "TIER3-TEST-2 is NOT authorized. Simulation proves the payload; execution requires the exact per-test phrase.",
+  "consent_on_any_payload": false,
+  "contract_sha256": "d889fd03a0122ece7dcc1c741381a87cba90506eabe7d074608a6459ebc9feb0",
+  "customer_writes": 0,
+  "executor_commit": "0494736",
+  "expected_customerAddressCreate": 1,
+  "expected_customerCreate": 1,
+  "manifest_sha256": "2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda",
+  "metafield_writes": 0,
+  "mode": "simulate",
+  "planned": [
+    {
+      "address_fields": [
+        [
+          "address1",
+          "city",
+          "countryCode",
+          "firstName",
+          "lastName",
+          "phone",
+          "zip"
+        ]
+      ],
+      "consent_present": false,
+      "customerAddressCreate": 1,
+      "customerCreate": 1,
+      "legacy_id_value": "2",
+      "metafield_keys": [
+        "legacy_woo_customer_id"
+      ],
+      "payload_fields": [
+        "email",
+        "firstName",
+        "lastName",
+        "metafields",
+        "phone",
+        "tags"
+      ],
+      "phone_sent": true,
+      "province_code_sent": [
+        false
+      ],
+      "set_as_default": [
+        true
+      ],
+      "woo_customer_id": 2
+    }
+  ],
+  "planned_customerAddressCreate": 1,
+  "planned_customerCreate": 1,
+  "rollback": {
+    "authorization_required": "a separate explicit authorization. Approval A granted build permission only, and rollback is a Shopify mutation like any other.",
+    "document_present": true,
+    "executable": false,
+    "operation": "customerDelete",
+    "precondition": "re-read the customer and confirm custom.legacy_woo_customer_id matches before deleting",
+    "targets": []
+  },
+  "run_id": "tier3-sim-TIER3-TEST-2-2026-08-22T19:55:56Z",
+  "shopify_mutations_performed": 0,
+  "test_id": "TIER3-TEST-2",
+  "woo_customer_ids": [
+    2
+  ]
+}

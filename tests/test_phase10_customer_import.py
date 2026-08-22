@@ -785,6 +785,595 @@ class BulkImporterCannotWrite(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
+# Tier-3 live-test executor (Approval A - build only)
+# ---------------------------------------------------------------------------
+#
+# Every test here runs against a mock. No credential is read, no socket is
+# opened, and no Shopify mutation is sent. All customer data is invented:
+# example.com emails, Ofcom 07700 900xxx phones, made-up streets.
+
+import phase10_tier3_executor as tier3    # noqa: E402
+
+# Underscores deliberately: this must NOT match the shpca_[A-Za-z0-9]+
+# credential pattern. A synthetic value shaped exactly like a real token
+# is a value that trips secret scanners and pages someone at 3am.
+FAKE_TOKEN = 'shpca_NOT_A_REAL_TOKEN_synthetic_value_for_tests_only'
+SYNTHETIC_PII = {
+    'email': 'tier3-subject@example.com',
+    'first_name': 'Grace',
+    'last_name': 'Hopper',
+    'phone': '+447700900456',
+    'address1': '5 Invented Lane',
+    'zip': 'EC1A 1BB',
+}
+
+
+def tier3_candidate(woo_id, registered=True, with_address=False, country='GB'):
+    """A synthetic manifest row. Never a real customer."""
+    return {
+        'woo_customer_id': woo_id,
+        'email': SYNTHETIC_PII['email'], 'email_raw': SYNTHETIC_PII['email'],
+        'first_name': SYNTHETIC_PII['first_name'],
+        'last_name': SYNTHETIC_PII['last_name'],
+        'company': '', 'phone': SYNTHETIC_PII['phone'],
+        'is_registered': registered,
+        'date_registered': '2021-03-04 10:00:00' if registered else '',
+        'billing_address1': SYNTHETIC_PII['address1'] if with_address else '',
+        'billing_address2': '',
+        'billing_city': 'Testville' if with_address else '',
+        'billing_province': 'Surrey' if with_address else '',
+        'billing_country': country if with_address else '',
+        'billing_zip': SYNTHETIC_PII['zip'] if with_address else '',
+        'shipping_address1': '', 'has_shipping_address': False,
+    }
+
+
+def loader_for(candidate):
+    def _load(woo_id, *_a, **_k):
+        record = dict(candidate)
+        record['woo_customer_id'] = woo_id
+        return record
+    return _load
+
+
+PREFLIGHT_OK = {
+    'data': {
+        'shop': {'name': 'Wholesale Beautyhub',
+                 'myshopifyDomain': tier3.APPROVED_STORE_DOMAIN,
+                 'plan': {'displayName': 'Grow', 'partnerDevelopment': True}},
+        'currentAppInstallation': {'accessScopes': [
+            {'handle': 'read_customers'}, {'handle': 'write_customers'}]},
+        'customersCount': {'count': 0},
+        '__type': {'inputFields': [{'name': n} for n in
+                                   ('email', 'firstName', 'lastName', 'phone',
+                                    'tags', 'metafields')]},
+    }
+}
+
+NO_LEGACY_MATCH = {'data': {'customers': {'edges': []}}}
+
+
+def created_customer(variables, woo_id):
+    sent = variables['input']
+    return {'data': {'customerCreate': {
+        'customer': {
+            'id': f'gid://shopify/Customer/{700000 + woo_id}',
+            'email': sent.get('email'), 'firstName': sent.get('firstName'),
+            'lastName': sent.get('lastName'), 'phone': sent.get('phone'),
+            'tags': sent.get('tags'), 'createdAt': '2026-08-22T00:00:00Z',
+            'metafields': {'edges': [{'node': {'key': m['key'], 'value': m['value'],
+                                               'type': m['type']}}
+                                     for m in sent['metafields']]},
+        },
+        'userErrors': [],
+    }}}
+
+
+def created_address(variables):
+    sent = variables['address']
+    return {'data': {'customerAddressCreate': {
+        'address': dict(sent, id='gid://shopify/MailingAddress/1',
+                        countryCodeV2=sent.get('countryCode')),
+        'userErrors': [],
+    }}}
+
+
+class MockShopify:
+    """Dispatches by document. Records everything. Never touches a network."""
+
+    def __init__(self, preflight=None, legacy=None, woo_id=220,
+                 create_behaviour=None, address_behaviour=None):
+        self.preflight = preflight or PREFLIGHT_OK
+        self.legacy = legacy or NO_LEGACY_MATCH
+        self.woo_id = woo_id
+        self.create_behaviour = create_behaviour
+        self.address_behaviour = address_behaviour
+        self.sent = []
+        self.mutations_sent = 0
+
+    def __call__(self, document, variables=None):
+        self.sent.append(document)
+        if document.strip().startswith('mutation'):
+            self.mutations_sent += 1
+        if 'shop {' in document:
+            return self.preflight
+        if 'customers(first: 5' in document:
+            return self.legacy if not callable(self.legacy) else self.legacy()
+        if 'customerCreate' in document:
+            if callable(self.create_behaviour):
+                return self.create_behaviour(variables, len(self.sent))
+            return self.create_behaviour or created_customer(variables, self.woo_id)
+        if 'customerAddressCreate' in document:
+            if callable(self.address_behaviour):
+                return self.address_behaviour(variables)
+            return self.address_behaviour or created_address(variables)
+        raise AssertionError(f'unexpected document: {document[:60]}')
+
+    @property
+    def documents_sent(self):
+        return list(self.sent)
+
+
+class Tier3ExecutorBase(unittest.TestCase):
+    """Redirects the audit destinations into a tempdir for every test."""
+
+    def setUp(self):
+        self._dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self._dir.cleanup)
+        self._ledger, self._checkpoint = tier3.LEDGER_PATH, tier3.CHECKPOINT_PATH
+        tier3.LEDGER_PATH = os.path.join(self._dir.name, 'tier3.jsonl')
+        tier3.CHECKPOINT_PATH = os.path.join(self._dir.name, 'tier3_checkpoint.jsonl')
+        self.addCleanup(self._restore)
+        self.commit = tier3.git_head()
+
+    def _restore(self):
+        tier3.LEDGER_PATH, tier3.CHECKPOINT_PATH = self._ledger, self._checkpoint
+
+    def ledger_text(self):
+        out = ''
+        for path in (tier3.LEDGER_PATH, tier3.CHECKPOINT_PATH):
+            if os.path.exists(path):
+                out += open(path, encoding='utf-8').read()
+        return out
+
+
+class Tier3TargetRestrictions(Tier3ExecutorBase):
+    """1-3, 22-24: what this executor will and will not be pointed at."""
+
+    def test_1_a_wrong_test_id_is_rejected(self):
+        with self.assertRaises(tier3.Halt):
+            tier3.resolve_test('TIER3-TEST-99')
+
+    def test_2_an_arbitrary_customer_id_is_rejected(self):
+        """There is no argument that accepts a customer id, so the only way to
+        target one is to edit this file - which is a reviewable act."""
+        with self.assertRaises(tier3.Halt):
+            tier3.resolve_test('220')
+        mode, test_id, auth, commit = tier3.parse_argv(
+            ['--execute', '220', '--customer', '999'])
+        self.assertEqual(test_id, '220')
+        with self.assertRaises(tier3.Halt):
+            tier3.resolve_test(test_id)
+
+    def test_3_the_bulk_manifest_is_rejected(self):
+        for target in ('reports/phase10_customer_manifest.csv', 'ALL', '11849'):
+            with self.assertRaises(tier3.Halt):
+                tier3.resolve_test(target)
+
+    def test_24_a_cohort_sized_definition_is_refused(self):
+        oversized = tier3.Tier3Test(
+            test_id='X', woo_ids=list(range(50)), expected_creates=50,
+            expected_addresses=0, authorization_phrase='x', description='x',
+            expected_metafield_keys=(), expected_phone_sent=False)
+        with self.assertRaises(tier3.Halt):
+            tier3.assert_not_bulk(oversized)
+
+    def test_22_test_1_authorization_cannot_run_test_2(self):
+        test2 = tier3.resolve_test('TIER3-TEST-2')
+        with self.assertRaises(tier3.TestNotAuthorized):
+            tier3.assert_test_authorization(
+                test2, tier3.TESTS['TIER3-TEST-1'].authorization_phrase)
+
+    def test_23_test_1_authorization_cannot_run_test_3(self):
+        test3 = tier3.resolve_test('TIER3-TEST-3')
+        with self.assertRaises(tier3.TestNotAuthorized):
+            tier3.assert_test_authorization(
+                test3, tier3.TESTS['TIER3-TEST-1'].authorization_phrase)
+
+    def test_each_test_has_its_own_phrase(self):
+        phrases = [t.authorization_phrase for t in tier3.TESTS.values()]
+        self.assertEqual(len(phrases), len(set(phrases)))
+
+    def test_test_3_cohort_is_not_frozen_and_cannot_run(self):
+        """No approved 10-customer Tier-3 cohort exists. Inventing one would be
+        manufacturing the approval this module exists to require."""
+        with self.assertRaises(tier3.CohortNotFrozen):
+            tier3.assert_cohort_frozen(tier3.resolve_test('TIER3-TEST-3'))
+
+    def test_test_3_records_woo_1_as_its_required_member(self):
+        self.assertEqual(tier3.TIER3_TEST_3_REQUIRED_MEMBER, 1)
+        self.assertIn('risk #45', tier3.TESTS['TIER3-TEST-3'].notes)
+
+
+class Tier3PayloadCorrectness(Tier3ExecutorBase):
+    """4-10: the payloads themselves."""
+
+    def simulate_test_1(self):
+        return tier3.simulate('TIER3-TEST-1',
+                              candidate_loader=loader_for(tier3_candidate(220)))
+
+    def simulate_test_2(self):
+        return tier3.simulate(
+            'TIER3-TEST-2',
+            candidate_loader=loader_for(tier3_candidate(2, registered=False,
+                                                        with_address=True)))
+
+    def test_4_test_1_payload_is_correct(self):
+        result = self.simulate_test_1()
+        planned = result['planned'][0]
+        self.assertEqual(planned['woo_customer_id'], 220)
+        self.assertEqual(planned['customerCreate'], 1)
+        self.assertEqual(sorted(planned['payload_fields']),
+                         ['email', 'firstName', 'lastName', 'metafields', 'phone', 'tags'])
+
+    def test_5_test_1_contains_no_address(self):
+        result = self.simulate_test_1()
+        self.assertEqual(result['planned_customerAddressCreate'], 0)
+        self.assertEqual(result['planned'][0]['customerAddressCreate'], 0)
+
+    def test_6_test_1_contains_no_consent(self):
+        result = self.simulate_test_1()
+        self.assertFalse(result['consent_on_any_payload'])
+        self.assertNotIn('emailMarketingConsent', result['planned'][0]['payload_fields'])
+
+    def test_7_test_1_contains_the_legacy_id(self):
+        result = self.simulate_test_1()
+        planned = result['planned'][0]
+        self.assertIn(rt.LEGACY_KEY, planned['metafield_keys'])
+        self.assertEqual(planned['legacy_id_value'], '220')
+        self.assertEqual(planned['metafield_keys'],
+                         [rt.LEGACY_KEY, rt.REGISTERED_AT_KEY])
+
+    def test_8_test_2_contains_exactly_one_address(self):
+        result = self.simulate_test_2()
+        self.assertEqual(result['planned_customerAddressCreate'], 1)
+
+    def test_9_gb_province_code_is_omitted(self):
+        result = self.simulate_test_2()
+        self.assertEqual(result['planned'][0]['province_code_sent'], [False])
+
+    def test_10_postcode_is_unchanged(self):
+        """build_plan halts if the zip is anything but the trimmed source."""
+        candidate = tier3_candidate(2, registered=False, with_address=True)
+        candidate['billing_zip'] = '  ' + SYNTHETIC_PII['zip'] + '  '
+        stages = tier3.build_plan(tier3.resolve_test('TIER3-TEST-2'), candidate,
+                                  phone_allowed=True)
+        self.assertEqual(stages[1]['address']['zip'], SYNTHETIC_PII['zip'])
+
+    def test_a_forbidden_field_halts_before_send(self):
+        for field in ('addresses', 'emailMarketingConsent', 'password', 'username',
+                      'company', 'wp_capabilities'):
+            payload = {'email': 'a@example.com',
+                       'metafields': [rt.legacy_metafield(220)], field: 'x'}
+            with self.assertRaises(tier3.Halt, msg=field):
+                tier3.assert_payload_contract(payload, 220)
+
+    def test_an_undocumented_field_halts(self):
+        payload = {'email': 'a@example.com', 'metafields': [rt.legacy_metafield(220)],
+                   'loyaltyTier': 'gold'}
+        with self.assertRaises(tier3.Halt):
+            tier3.assert_payload_contract(payload, 220)
+
+    def test_the_address_stage_requires_a_customer_id(self):
+        result = self.simulate_test_2()
+        self.assertEqual(result['planned'][0]['set_as_default'], [True])
+
+
+class Tier3LiveGuards(Tier3ExecutorBase):
+    """11-14, 17-21: the guards that stand between the executor and Shopify."""
+
+    def run_test_1(self, mock, authorization=None, commit=None):
+        return tier3.execute(
+            'TIER3-TEST-1',
+            authorization or tier3.TESTS['TIER3-TEST-1'].authorization_phrase,
+            commit or self.commit, mock, tier3.APPROVED_STORE_DOMAIN,
+            tier3.EXPECTED_API_VERSION,
+            candidate_loader=loader_for(tier3_candidate(220)),
+            sleep=lambda _s: None, tree_check=lambda: True)
+
+    def test_11_an_existing_legacy_id_halts(self):
+        present = {'data': {'customers': {'edges': [{'node': {
+            'id': 'gid://shopify/Customer/1',
+            'metafield': {'value': '220'}}}]}}}
+        mock = MockShopify(legacy=present)
+        with self.assertRaises(tier3.Halt) as caught:
+            self.run_test_1(mock)
+        self.assertIn('already exists', str(caught.exception))
+        self.assertEqual(mock.mutations_sent, 0)
+
+    def test_12_a_timeout_verifies_before_retrying(self):
+        """The write may have landed. Ask before re-sending, or risk a duplicate."""
+        state = {'calls': 0, 'created': False}
+
+        def create(variables, _n):
+            state['calls'] += 1
+            if state['calls'] == 1:
+                state['created'] = True          # it landed, then the socket died
+                raise TimeoutError('connection reset')
+            raise AssertionError('retried without acting on the verification')
+
+        def legacy():
+            if state['created']:
+                return {'data': {'customers': {'edges': [{'node': {
+                    'id': 'gid://shopify/Customer/5',
+                    'metafield': {'value': '220'}}}]}}}
+            return NO_LEGACY_MATCH
+
+        mock = MockShopify(legacy=legacy, create_behaviour=create)
+        with self.assertRaises(tier3.Halt) as caught:
+            self.run_test_1(mock)
+        self.assertIn('verified as having landed', str(caught.exception))
+        self.assertEqual(state['calls'], 1)
+
+    def test_13_a_401_halts_and_is_never_retried(self):
+        def create(_variables, _n):
+            raise RuntimeError('HTTP 401 Unauthorized')
+
+        mock = MockShopify(create_behaviour=create)
+        with self.assertRaises(rt.HaltMigration):
+            self.run_test_1(mock)
+
+    def test_13b_access_denied_in_the_preflight_halts(self):
+        denied = {'errors': [{'message': 'denied',
+                              'extensions': {'code': 'ACCESS_DENIED'}}]}
+        mock = MockShopify(preflight=denied)
+        with self.assertRaises(tier3.Halt):
+            self.run_test_1(mock)
+        self.assertEqual(mock.mutations_sent, 0)
+
+    def test_14_throttling_uses_the_existing_runtime(self):
+        """No second throttle implementation: the executor imports the tested one."""
+        source = open(os.path.join(SCRIPTS, 'phase10_tier3_executor.py'),
+                      encoding='utf-8').read()
+        # The loop is local because the runtime refuses mutation documents by
+        # construction. The POLICY is entirely the runtime's: no schedule, no
+        # jitter and no classification is defined in the executor.
+        self.assertNotIn('class ThrottleController', source)
+        self.assertNotIn('BACKOFF_SCHEDULE =', source)
+        self.assertIn('rt.ThrottleController()', source)
+        self.assertIn('rt.backoff_delay(', source)
+        self.assertIn('rt.classify_response(', source)
+        self.assertIn('rt.classify_exception(', source)
+        self.assertIn('rt.MAX_TRANSIENT_ATTEMPTS', source)
+        self.assertEqual(rt.BACKOFF_SCHEDULE, (1, 2, 4, 8, 16))
+        with self.assertRaises(rt.HaltMigration):
+            rt.execute_with_retry(lambda d, v: {}, tier3.CUSTOMER_CREATE)
+
+    def test_17_a_production_store_is_rejected(self):
+        production = json.loads(json.dumps(PREFLIGHT_OK))
+        production['data']['shop']['plan'] = {'displayName': 'Shopify Plus',
+                                              'partnerDevelopment': False}
+        mock = MockShopify(preflight=production)
+        with self.assertRaises(tier3.Halt) as caught:
+            self.run_test_1(mock)
+        self.assertIn('development store', str(caught.exception))
+        self.assertEqual(mock.mutations_sent, 0)
+
+    def test_18_missing_partner_development_is_treated_as_unsafe(self):
+        unknown = json.loads(json.dumps(PREFLIGHT_OK))
+        unknown['data']['shop']['plan'] = {'displayName': 'Grow'}
+        mock = MockShopify(preflight=unknown)
+        with self.assertRaises(tier3.Halt):
+            self.run_test_1(mock)
+        self.assertEqual(mock.mutations_sent, 0)
+
+    def test_19_schema_drift_halts(self):
+        drifted = json.loads(json.dumps(PREFLIGHT_OK))
+        drifted['data']['__type']['inputFields'].append({'name': 'addresses'})
+        mock = MockShopify(preflight=drifted)
+        with self.assertRaises(tier3.Halt) as caught:
+            self.run_test_1(mock)
+        self.assertIn('schema drift', str(caught.exception))
+
+    def test_19b_a_missing_scope_halts(self):
+        thin = json.loads(json.dumps(PREFLIGHT_OK))
+        thin['data']['currentAppInstallation']['accessScopes'] = [
+            {'handle': 'read_customers'}]
+        with self.assertRaises(tier3.Halt):
+            self.run_test_1(MockShopify(preflight=thin))
+
+    def test_19c_a_nonempty_store_halts_test_1(self):
+        occupied = json.loads(json.dumps(PREFLIGHT_OK))
+        occupied['data']['customersCount']['count'] = 3
+        with self.assertRaises(tier3.Halt) as caught:
+            self.run_test_1(MockShopify(preflight=occupied))
+        self.assertIn('requires an empty store', str(caught.exception))
+
+    def test_19d_an_unexpected_api_version_halts(self):
+        with self.assertRaises(tier3.Halt):
+            tier3.execute('TIER3-TEST-1',
+                          tier3.TESTS['TIER3-TEST-1'].authorization_phrase,
+                          self.commit, MockShopify(), tier3.APPROVED_STORE_DOMAIN,
+                          '2024-01',
+                          candidate_loader=loader_for(tier3_candidate(220)),
+                          tree_check=lambda: True)
+
+    def test_19e_the_wrong_store_halts(self):
+        with self.assertRaises(tier3.Halt):
+            tier3.execute('TIER3-TEST-1',
+                          tier3.TESTS['TIER3-TEST-1'].authorization_phrase,
+                          self.commit, MockShopify(), 'someone-else.myshopify.com',
+                          tier3.EXPECTED_API_VERSION,
+                          candidate_loader=loader_for(tier3_candidate(220)),
+                          tree_check=lambda: True)
+
+    def test_20_a_wrong_contract_hash_halts(self):
+        with self.assertRaises(tier3.Halt) as caught:
+            tier3.assert_contract_unchanged(expected='0' * 64)
+        self.assertIn('contract hash mismatch', str(caught.exception))
+
+    def test_20b_the_frozen_contract_hash_matches_today(self):
+        self.assertEqual(tier3.assert_contract_unchanged(), tier3.CONTRACT_SHA256)
+
+    def test_21_a_wrong_commit_halts(self):
+        mock = MockShopify()
+        with self.assertRaises(tier3.Halt) as caught:
+            self.run_test_1(mock, commit='deadbeefdeadbeef')
+        self.assertIn('commit mismatch', str(caught.exception))
+        self.assertEqual(mock.mutations_sent, 0)
+
+    def test_21b_a_missing_commit_halts(self):
+        with self.assertRaises(tier3.Halt):
+            tier3.assert_expected_commit(None)
+
+    def test_authorization_is_checked_before_the_store_is_touched(self):
+        mock = MockShopify()
+        with self.assertRaises(tier3.TestNotAuthorized):
+            self.run_test_1(mock, authorization='please')
+        self.assertEqual(mock.documents_sent, [])
+
+
+class Tier3AuditSafety(Tier3ExecutorBase):
+    """15-16: what reaches the audit trail."""
+
+    def successful_run(self):
+        mock = MockShopify()
+        result = tier3.execute(
+            'TIER3-TEST-1', tier3.TESTS['TIER3-TEST-1'].authorization_phrase,
+            self.commit, mock, tier3.APPROVED_STORE_DOMAIN,
+            tier3.EXPECTED_API_VERSION,
+            candidate_loader=loader_for(tier3_candidate(220)),
+            sleep=lambda _s: None, tree_check=lambda: True)
+        return mock, result
+
+    def test_15_the_token_is_never_logged(self):
+        _mock, _result = self.successful_run()
+        self.assertNotIn(FAKE_TOKEN, self.ledger_text())
+        source = open(os.path.join(SCRIPTS, 'phase10_tier3_executor.py'),
+                      encoding='utf-8').read()
+        for leak in ("print(token", "print(config['token']", 'log(token'):
+            self.assertNotIn(leak, source)
+
+    def test_16_no_pii_reaches_the_audit_trail(self):
+        _mock, _result = self.successful_run()
+        text = self.ledger_text()
+        self.assertTrue(text)
+        for value in SYNTHETIC_PII.values():
+            self.assertNotIn(value, text)
+        self.assertIn('220', text)
+
+    def test_16b_user_errors_are_sanitized_before_being_written(self):
+        def create(variables, _n):
+            return {'data': {'customerCreate': {'customer': None, 'userErrors': [
+                {'field': ['email'],
+                 'message': f"Email {SYNTHETIC_PII['email']} is invalid"}]}}}
+
+        mock = MockShopify(create_behaviour=create)
+        tier3.execute('TIER3-TEST-1',
+                      tier3.TESTS['TIER3-TEST-1'].authorization_phrase,
+                      self.commit, mock, tier3.APPROVED_STORE_DOMAIN,
+                      tier3.EXPECTED_API_VERSION,
+                      candidate_loader=loader_for(tier3_candidate(220)),
+                      sleep=lambda _s: None, tree_check=lambda: True)
+        text = self.ledger_text()
+        self.assertNotIn(SYNTHETIC_PII['email'], text)
+        self.assertIn('EMAIL_REDACTED', text)
+
+    def test_the_ledger_schema_permits_only_approved_identifiers(self):
+        _mock, _result = self.successful_run()
+        for line in self.ledger_text().splitlines():
+            record = json.loads(line)
+            if 'woo_id' in record:      # checkpoint line
+                self.assertEqual(set(record), {'woo_id', 'gid', 'action'})
+            else:
+                rt.assert_ledger_record_safe(record)
+
+    def test_a_successful_run_records_the_gid_and_the_commit(self):
+        _mock, result = self.successful_run()
+        self.assertEqual(result['mutations']['customerCreate'], 1)
+        self.assertEqual(result['mutations']['customerAddressCreate'], 0)
+        self.assertEqual(len(result['created']), 1)
+        self.assertTrue(result['created'][0]['gid'].startswith('gid://shopify/Customer/'))
+        self.assertEqual(result['executor_commit'], tier3.git_head()[:7])
+
+
+class Tier3RollbackIsNotExecutable(Tier3ExecutorBase):
+    """Rollback is a mutation, and Approval A did not grant it."""
+
+    def test_the_delete_document_exists_but_has_no_caller(self):
+        source = open(os.path.join(SCRIPTS, 'phase10_tier3_executor.py'),
+                      encoding='utf-8').read()
+        self.assertIn('customerDelete', tier3.CUSTOMER_DELETE)
+        self.assertEqual(source.count('CUSTOMER_DELETE'), 1)
+
+    def test_execute_rollback_raises(self):
+        with self.assertRaises(tier3.RollbackNotAuthorized):
+            tier3.execute_rollback([{'woo_customer_id': 220, 'gid': 'gid://x'}])
+
+    def test_the_rollback_flag_is_false(self):
+        self.assertFalse(tier3.ROLLBACK_AUTHORIZED)
+
+    def test_the_spec_describes_without_doing(self):
+        spec = tier3.rollback_spec([{'woo_customer_id': 220, 'gid': 'gid://x'}])
+        self.assertFalse(spec['executable'])
+        self.assertTrue(spec['document_present'])
+        self.assertIn('separate explicit authorization', spec['authorization_required'])
+
+
+class Tier3NoNetworkWrites(Tier3ExecutorBase):
+    """25 + the critical no-write proof."""
+
+    SOURCE = None
+
+    def setUp(self):
+        super().setUp()
+        self.SOURCE = open(os.path.join(SCRIPTS, 'phase10_tier3_executor.py'),
+                           encoding='utf-8').read()
+
+    def test_25_transport_is_never_imported_at_module_level(self):
+        """The import lives inside main(), so a simulation cannot reach the
+        network even by accident."""
+        for line in self.SOURCE.splitlines():
+            if 'from phase9_preflight import' in line:
+                self.assertTrue(line.startswith('    '),
+                                'transport must only be imported inside main()')
+        self.assertNotIn('\nimport urllib', self.SOURCE)
+        self.assertNotIn('\nimport requests', self.SOURCE)
+
+    def test_25b_execute_requires_injected_transport(self):
+        import inspect
+        self.assertIn('send', inspect.signature(tier3.execute).parameters)
+
+    def test_25c_simulation_sends_nothing(self):
+        result = tier3.simulate('TIER3-TEST-1',
+                                candidate_loader=loader_for(tier3_candidate(220)))
+        self.assertEqual(result['shopify_mutations_performed'], 0)
+        self.assertEqual(result['customer_writes'], 0)
+        self.assertEqual(result['address_writes'], 0)
+        self.assertEqual(result['metafield_writes'], 0)
+
+    def test_25d_the_forbidden_mutations_are_absent(self):
+        for forbidden in ('customerSet', 'bulkOperationRunMutation', 'customerUpdate',
+                          'metafieldsSet', 'customerAddressDelete',
+                          'inventorySetQuantities', 'productCreate', 'orderCreate',
+                          'collectionCreate'):
+            self.assertNotIn(forbidden, self.SOURCE, forbidden)
+
+    def test_25e_only_three_mutation_documents_exist(self):
+        documents = [name for name in dir(tier3)
+                     if isinstance(getattr(tier3, name), str)
+                     and getattr(tier3, name).strip().startswith('mutation')]
+        self.assertEqual(sorted(documents),
+                         ['CUSTOMER_ADDRESS_CREATE', 'CUSTOMER_CREATE',
+                          'CUSTOMER_DELETE'])
+
+    def test_25f_default_mode_is_simulation(self):
+        self.assertEqual(tier3.DEFAULT_MODE, tier3.MODE_SIMULATE)
+        mode, test_id, _a, _c = tier3.parse_argv(['--simulate', 'TIER3-TEST-1'])
+        self.assertEqual(mode, tier3.MODE_SIMULATE)
+
+
+# ---------------------------------------------------------------------------
 # Guarantees this change must not have weakened
 # ---------------------------------------------------------------------------
 
