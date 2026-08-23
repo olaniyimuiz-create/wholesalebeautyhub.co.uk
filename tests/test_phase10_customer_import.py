@@ -1920,6 +1920,303 @@ class Tier3SourceBackedLoader(Tier3ExecutorBase):
 
 
 # ---------------------------------------------------------------------------
+# Bulk import executor - Gate 7 capability, unauthorized
+# ---------------------------------------------------------------------------
+#
+# This is the only module in the project that can write 11,849 customers, so
+# these tests are mostly about what it refuses. Everything is mocked; no test
+# reaches Shopify and none loads the source dump.
+
+import phase10_bulk_import_executor as bx     # noqa: E402
+
+
+BULK_PREFLIGHT_OK = {'data': {
+    'shop': {'name': 'Wholesale Beautyhub',
+             'myshopifyDomain': bx.APPROVED_STORE_DOMAIN,
+             'plan': {'displayName': 'Grow', 'partnerDevelopment': True}},
+    'currentAppInstallation': {'accessScopes': [
+        {'handle': 'read_customers'}, {'handle': 'write_customers'}]},
+    'customersCount': {'count': 0},
+    '__type': {'inputFields': [{'name': n} for n in
+                               ('email', 'firstName', 'lastName', 'phone',
+                                'tags', 'metafields')]}}}
+
+
+def bulk_payload(woo_id=4242, phone=True):
+    p = {'email': f'c{woo_id}@example.com',
+         'tags': ['imported-from-woocommerce', 'guest'],
+         'metafields': [rt.legacy_metafield(woo_id)],
+         'firstName': 'Ada', 'lastName': 'Lovelace'}
+    if phone:
+        p['phone'] = '+447700900321'
+    return p
+
+
+class BulkExecutorGuards(unittest.TestCase):
+    """Each guard HALTS. A guard that warns is a guard that gets ignored."""
+
+    def test_guard_1_rejects_any_other_store(self):
+        with self.assertRaises(bx.Halt):
+            bx.guard_1_approved_store('somewhere-else.myshopify.com')
+        self.assertTrue(bx.guard_1_approved_store(bx.APPROVED_STORE_DOMAIN))
+
+    def test_guard_2_rejects_production_and_missing_information(self):
+        with self.assertRaises(bx.Halt):
+            bx.guard_2_reject_production(
+                {'plan': {'partnerDevelopment': False}, 'myshopifyDomain': 'x'})
+        with self.assertRaises(bx.Halt):
+            bx.guard_2_reject_production({'plan': {}, 'myshopifyDomain': 'x'})
+        with self.assertRaises(bx.Halt):
+            bx.guard_2_reject_production(
+                {'plan': {'partnerDevelopment': True},
+                 'myshopifyDomain': 'beautyhub-production.myshopify.com'})
+
+    def test_guard_3_and_4_plan_is_the_default(self):
+        self.assertEqual(bx.DEFAULT_MODE, bx.MODE_PLAN)
+        self.assertEqual(bx.guard_3_live_is_not_default(None), bx.MODE_PLAN)
+        self.assertTrue(bx.guard_4_plan_is_the_default())
+        mode, auth, commit, cohort = bx.parse_argv([])
+        self.assertIsNone(mode)
+
+    def test_guard_5_requires_the_exact_contract_phrase(self):
+        phrase = bx.gate_7_phrase()
+        self.assertTrue(bx.guard_5_gate_7_authorization(phrase))
+        for wrong in (None, '', 'approved', phrase.lower(), phrase + ' ',
+                      'APPROVED - EXECUTE GATE 7',
+                      'APPROVED - EXECUTE TIER-3 TEST 3 FOR THE FROZEN 10-CUSTOMER COHORT'):
+            with self.assertRaises(bx.NotAuthorized):
+                bx.guard_5_gate_7_authorization(wrong)
+
+    def test_guard_5_rejects_the_em_dash_variant(self):
+        """The task brief wrote the phrase with an em dash; the frozen contract
+        uses a hyphen. One authoritative copy, and near-misses are refused."""
+        with self.assertRaises(bx.NotAuthorized):
+            bx.guard_5_gate_7_authorization(
+                'APPROVED — EXECUTE GATE 7 BULK CUSTOMER IMPORT')
+
+    def test_the_phrase_is_read_from_the_contract_not_hardcoded(self):
+        source = open(os.path.join(SCRIPTS, 'phase10_bulk_import_executor.py'),
+                      encoding='utf-8').read()
+        self.assertNotIn("'APPROVED - EXECUTE GATE 7", source)
+        self.assertIn("load_contract()['authorization']['gate_7_phrase']", source)
+
+    def test_guard_6_hashes(self):
+        self.assertEqual(bx.guard_6_manifest_hash(
+            os.path.join(REPO_ROOT, bx.MANIFEST_PATH)), bx.MANIFEST_SHA256)
+        self.assertEqual(bx.guard_6b_contract_hash(
+            os.path.join(REPO_ROOT, bx.CONTRACT_PATH)), bx.CONTRACT_SHA256)
+        with tempfile.NamedTemporaryFile('w', suffix='.csv', delete=False) as h:
+            h.write('woo_customer_id,classification\n1,IMPORT\n')
+            path = h.name
+        self.addCleanup(os.unlink, path)
+        with self.assertRaises(bx.Halt):
+            bx.guard_6_manifest_hash(path)
+
+    def test_guard_7_compares_id_sets_not_counts(self):
+        manifest = list(range(bx.APPROVED_IMPORT_POPULATION))
+        run = manifest[:bx.APPROVED_RUN_POPULATION]
+        self.assertTrue(bx.guard_7_population(manifest, run))
+        # same sizes, different people
+        shifted = [i + 10 ** 7 for i in run]
+        with self.assertRaises(bx.Halt):
+            bx.guard_7_population(manifest, shifted)
+        with self.assertRaises(bx.Halt):
+            bx.guard_7_population(manifest[:-1], run)
+        with self.assertRaises(bx.Halt):
+            bx.guard_7_population(manifest, run[:-1])
+
+    def test_guard_8_allows_a_clean_store_and_a_recognised_resume(self):
+        self.assertTrue(bx.guard_8_store_state(0, {}))
+        self.assertTrue(bx.guard_8_store_state(
+            2, {'220': {'gid': 'g1'}, '2': {'gid': 'g2'}}))
+
+    def test_guard_8_halts_when_something_else_has_written(self):
+        """A customer with no recognised legacy id means the idempotency map
+        cannot be trusted, and a bulk run on an untrustworthy map creates
+        duplicates."""
+        with self.assertRaises(bx.Halt) as caught:
+            bx.guard_8_store_state(5, {'220': {'gid': 'g1'}})
+        self.assertIn('not from this migration', str(caught.exception))
+
+    def test_guard_9_halts_on_duplicate_legacy_ids(self):
+        self.assertTrue(bx.guard_9_no_duplicate_legacy_ids([1, 2, 3]))
+        with self.assertRaises(bx.Halt):
+            bx.guard_9_no_duplicate_legacy_ids([1, 2, 2])
+
+    def test_guard_10_skips_a_customer_already_present(self):
+        self.assertEqual(bx.guard_10_skip_if_present(7, {'7': {'gid': 'gid://x'}}),
+                         'gid://x')
+        self.assertIsNone(bx.guard_10_skip_if_present(7, {}))
+
+    def test_guards_11_12_13_are_delegated_and_present(self):
+        self.assertTrue(bx.guard_11_verify_before_retry())
+        self.assertTrue(bx.guard_12_auth_failure_halts())
+        self.assertTrue(bx.guard_13_throttle_backoff())
+
+    def test_guard_14_enforces_the_legacy_metafield(self):
+        self.assertTrue(bx.guard_14_legacy_metafield_inline(bulk_payload(), 4242))
+        with self.assertRaises(bx.Halt):
+            bx.guard_14_legacy_metafield_inline({'email': 'a@example.com'}, 1)
+
+    def test_guard_15_refuses_anything_outside_the_population(self):
+        self.assertTrue(bx.guard_15_within_cohort(1, {1, 2}))
+        with self.assertRaises(bx.Halt):
+            bx.guard_15_within_cohort(999, {1, 2})
+
+    def test_guard_16_refuses_a_supplied_list_with_an_outsider(self):
+        with tempfile.NamedTemporaryFile('w', suffix='.txt', delete=False) as h:
+            h.write('1\n2\n999\n')
+            path = h.name
+        self.addCleanup(os.unlink, path)
+        with self.assertRaises(bx.Halt):
+            bx.guard_16_verify_supplied_cohort(path, {1, 2, 3})
+
+    def test_all_sixteen_guards_are_registered(self):
+        self.assertEqual([n for n, _ in bx.GUARDS], list(range(1, 17)))
+
+
+class BulkExecutorPayloadContract(unittest.TestCase):
+
+    def test_forbidden_fields_halt(self):
+        for field in ('addresses', 'emailMarketingConsent', 'password', 'username',
+                      'company', 'wp_capabilities', 'smsMarketingConsent'):
+            payload = dict(bulk_payload(), **{field: 'x'})
+            with self.assertRaises(bx.Halt, msg=field):
+                bx.assert_payload_contract(payload, 4242)
+
+    def test_an_undocumented_field_halts(self):
+        with self.assertRaises(bx.Halt):
+            bx.assert_payload_contract(dict(bulk_payload(), loyaltyTier='gold'), 4242)
+
+    def test_a_conforming_payload_passes(self):
+        self.assertTrue(bx.assert_payload_contract(bulk_payload(), 4242))
+
+    def test_the_legacy_metafield_is_mandatory_on_every_payload(self):
+        payload = bulk_payload()
+        payload['metafields'] = []
+        with self.assertRaises(bx.Halt):
+            bx.assert_payload_contract(payload, 4242)
+
+
+class BulkExecutorCannotWriteWithoutAuthorization(unittest.TestCase):
+
+    SOURCE = os.path.join(SCRIPTS, 'phase10_bulk_import_executor.py')
+
+    def test_there_is_no_customer_delete_document(self):
+        source = open(self.SOURCE, encoding='utf-8').read()
+        self.assertNotIn('customerDelete', source.replace(
+            '# There is deliberately NO customerDelete document in this file.', ''))
+
+    def test_only_two_mutation_documents_exist(self):
+        docs = [n for n in dir(bx) if isinstance(getattr(bx, n), str)
+                and getattr(bx, n).strip().startswith('mutation')]
+        self.assertEqual(sorted(docs), ['CUSTOMER_ADDRESS_CREATE', 'CUSTOMER_CREATE'])
+
+    def test_transport_is_imported_only_inside_main(self):
+        for line in open(self.SOURCE, encoding='utf-8'):
+            if 'from phase9_preflight import' in line:
+                self.assertTrue(line.startswith('    '))
+
+    def test_execute_requires_injected_transport(self):
+        import inspect
+        self.assertIn('send', inspect.signature(bx.execute).parameters)
+
+    def test_execute_refuses_without_the_phrase_before_touching_the_store(self):
+        calls = []
+        with self.assertRaises(bx.NotAuthorized):
+            bx.execute('please', 'abc', lambda d, v=None: calls.append(d),
+                       bx.APPROVED_STORE_DOMAIN, bx.EXPECTED_API_VERSION)
+        self.assertEqual(calls, [])
+
+    def test_execute_refuses_on_a_commit_mismatch(self):
+        calls = []
+        with self.assertRaises(bx.Halt):
+            bx.execute(bx.gate_7_phrase(), 'deadbeefdeadbeef',
+                       lambda d, v=None: calls.append(d),
+                       bx.APPROVED_STORE_DOMAIN, bx.EXPECTED_API_VERSION,
+                       tree_check=lambda: True)
+        self.assertEqual(calls, [])
+
+    def test_the_dry_run_bulk_importer_is_untouched_and_still_cannot_write(self):
+        """Three programs, not one with a flag. The dry-run planner keeps its
+        guarantee even though a live executor now exists beside it."""
+        dry = open(os.path.join(SCRIPTS, 'phase10_bulk_import.py'),
+                   encoding='utf-8').read()
+        for name in ('customerCreate(', 'customerAddressCreate(', 'customerDelete('):
+            self.assertNotIn(name, dry)
+        self.assertNotIn('graphql_request', dry)
+        self.assertIn('LiveModeNotBuilt', dry)
+
+
+class BulkExecutorReusesTheRuntime(unittest.TestCase):
+
+    SOURCE = os.path.join(SCRIPTS, 'phase10_bulk_import_executor.py')
+
+    def test_no_second_throttle_or_backoff_implementation(self):
+        source = open(self.SOURCE, encoding='utf-8').read()
+        self.assertNotIn('class ThrottleController', source)
+        self.assertNotIn('BACKOFF_SCHEDULE =', source)
+        self.assertIn('rt.ThrottleController()', source)
+        self.assertIn('rt.backoff_delay(', source)
+        self.assertIn('rt.classify_response(', source)
+        self.assertIn('rt.classify_exception(', source)
+
+    def test_the_runtime_still_refuses_the_executors_own_documents(self):
+        for doc in (bx.CUSTOMER_CREATE, bx.CUSTOMER_ADDRESS_CREATE):
+            with self.assertRaises(rt.HaltMigration):
+                rt.execute_with_retry(lambda d, v: {}, doc)
+
+    def test_the_phone_fallback_is_wired_in(self):
+        source = open(self.SOURCE, encoding='utf-8').read()
+        self.assertIn('rt.is_phone_user_error(errors)', source)
+        self.assertIn('rt.phone_fallback(', source)
+        self.assertIn('log_path=rt.DROPPED_PHONES_PATH', source)
+
+    def test_it_uses_the_shared_ledger_and_legacy_map(self):
+        source = open(self.SOURCE, encoding='utf-8').read()
+        self.assertIn('rt.ImportLedger(', source)
+        self.assertIn('rt.fetch_existing_legacy_map(', source)
+
+
+class BulkExecutorPlanMatchesTheContract(unittest.TestCase):
+    """The plan is generated from source; the contract was frozen separately.
+    They must agree, or one of them is wrong."""
+
+    PATH = os.path.join(REPO_ROOT, 'reports', 'phase10_bulk_import_executor_plan.json')
+
+    def setUp(self):
+        if not os.path.exists(self.PATH):
+            self.skipTest('run the executor in plan mode first')
+        with open(self.PATH, encoding='utf-8') as handle:
+            self.plan = json.load(handle)
+        with open(os.path.join(REPO_ROOT, bx.CONTRACT_PATH), encoding='utf-8') as handle:
+            self.contract = json.load(handle)
+
+    def test_it_wrote_nothing(self):
+        self.assertEqual(self.plan['shopify_mutations_performed'], 0)
+
+    def test_population_matches(self):
+        self.assertEqual(self.plan['population']['run_population'],
+                         self.contract['run_population']['approved'])
+
+    def test_mutation_counts_match(self):
+        c, p = self.contract['mutations'], self.plan['mutations']
+        self.assertEqual(p['customerCreate'], c['customer_create'])
+        self.assertEqual(p['customerAddressCreate'], c['customer_address_create'])
+        self.assertEqual(p['total'], c['total_expected'])
+        self.assertEqual(p['phone_fallback_second_creates_expected'],
+                         c['phone_fallback_second_creates_expected'])
+
+    def test_consent_is_not_applied_by_this_run(self):
+        self.assertEqual(self.plan['content']['consent_applied_by_this_run'], 0)
+        self.assertFalse(self.contract['consent']['written_by_this_migration'])
+
+    def test_the_plan_records_the_reviewed_commit_not_head(self):
+        self.assertEqual(len(self.plan['executor_commit']), 40)
+        self.assertIn('head_commit', self.plan)
+
+
+# ---------------------------------------------------------------------------
 # Guarantees this change must not have weakened
 # ---------------------------------------------------------------------------
 
