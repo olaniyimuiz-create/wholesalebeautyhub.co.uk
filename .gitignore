@@ -102,3 +102,11 @@ reports/phase10_tier3_checkpoint.jsonl.simulation
 # development entries is reversible. Same contents, same rule: it carries raw
 # phone numbers and is never tracked.
 reports/phase10_dropped_phones.pre-cleanup-backup.jsonl
+
+# Gate 7 bulk run outputs. The ledger and checkpoint carry Shopify customer
+# GIDs tied to real people, one row per record, exactly like the Tier-3 and
+# dry-run ledgers - never tracked. The aggregate result JSON has no per-customer
+# data and is safe to commit.
+reports/phase10_bulk_import_ledger.jsonl
+reports/phase10_bulk_import_checkpoint.jsonl
+!reports/phase10_bulk_import_executor_result.json
