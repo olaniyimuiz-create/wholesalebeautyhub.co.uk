@@ -1,0 +1,88 @@
+{
+  "authorization": "Approval B - TIER3-TEST-2 only, pinned to cb8abd7. CONSUMED.",
+  "contract_sha256": "d889fd03a0122ece7dcc1c741381a87cba90506eabe7d074608a6459ebc9feb0",
+  "credential_fingerprint": "e30de9cf119a",
+  "errors": [],
+  "executed": true,
+  "executed_at": "2026-08-23T20:07:17Z",
+  "head_commit_at_execution": "ce68a310364a94e53b625b7a093a23dd859b0fb4",
+  "manifest_sha256": "2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda",
+  "mutations": {
+    "customerAddressCreate": 1,
+    "customerCreate": 1,
+    "customerDelete": 0,
+    "metafield_mutations_as_separate_calls": 0,
+    "rollback": 0,
+    "total": 2
+  },
+  "not_authorized": [
+    "TIER3-TEST-3",
+    "bulk import",
+    "Gate 7",
+    "customerDelete / rollback",
+    "push",
+    "Phase 11"
+  ],
+  "pii": "none - no email, phone, name or address value in this file",
+  "preflight": {
+    "api_version": "2026-07",
+    "customers_before": 1,
+    "development_store": true,
+    "exit_code": 0,
+    "expected_customer_count": 1,
+    "expected_preexisting_woo_ids": [
+      220
+    ],
+    "preexisting_identity_verified": true,
+    "scopes": 24
+  },
+  "purposes_validated": {
+    "address_transformation": true,
+    "billing_address_selection_policy": true,
+    "customerAddressCreate": true,
+    "customer_then_address_sequence": true,
+    "gb_county_to_province_omission": true,
+    "postcode_preservation": true
+  },
+  "reviewed_behavioural_commit": "cb8abd7069a60d65a11825a83e4af85906825f67",
+  "rollback_authorized": false,
+  "rollback_required": false,
+  "run_id": "tier3-TIER3-TEST-2-2026-08-23T20:07:17Z",
+  "shopify_customer_gid": "gid://shopify/Customer/10160661102848",
+  "test_id": "TIER3-TEST-2",
+  "verification": {
+    "address_fields_sent": [
+      "address1",
+      "city",
+      "countryCode",
+      "firstName",
+      "lastName",
+      "phone",
+      "zip"
+    ],
+    "address_is_default": true,
+    "address_kind_selected": "billing",
+    "addresses_created": 1,
+    "consent_sent_in_payload": false,
+    "email_marketing_consent_state": "NOT_SUBSCRIBED",
+    "identity_fields_match_sent_payload": true,
+    "legacy_woo_customer_id": "2",
+    "live_country_code": "GB",
+    "live_province": null,
+    "live_province_code": null,
+    "metafield_count": 1,
+    "one_record_per_legacy_id": true,
+    "phone_same_subscriber_as_sent": true,
+    "postcode_live_equals_sent_byte_for_byte": true,
+    "postcode_sent_equals_source_trimmed": true,
+    "sms_marketing_consent_state": "NOT_SUBSCRIBED",
+    "source_county_present_and_deliberately_not_sent": true,
+    "store_customer_count_after": 2,
+    "test1_addresses_still_zero": true,
+    "test1_customer_unmodified": true,
+    "unexpected_customers": 0,
+    "unexpected_mutations": 0,
+    "woo_registered_at_absent_guest": true
+  },
+  "woo_customer_id": 2
+}
