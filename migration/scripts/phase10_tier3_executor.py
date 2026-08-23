@@ -984,8 +984,13 @@ def execute(test_id, authorization, expect_commit, send, domain, api_version,
 
     for woo_id in definition.woo_ids:
         candidate = candidate_loader(woo_id)
+        # Per customer, not per test. The flat expected_phone_sent is None for a
+        # mixed cohort, and bool(None) would have silently omitted every phone -
+        # caught by the per-customer guard before any mutation, which is what it
+        # is for.
         stages = build_plan(definition, candidate,
-                            phone_allowed=bool(definition.expected_phone_sent))
+                            phone_allowed=bool(
+                                expectations_for(definition, woo_id)['phone_sent']))
         payload = stages[0]['input']
 
         def verify():

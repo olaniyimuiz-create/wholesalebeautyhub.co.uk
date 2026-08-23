@@ -1827,6 +1827,15 @@ class Tier3PerCustomerExpectations(Tier3ExecutorBase):
         self.assertFalse(tier3.expectations_for(d, 70)['province_omitted'])
         self.assertTrue(tier3.expectations_for(d, 1)['province_omitted'])
 
+    def test_execute_uses_the_per_customer_phone_expectation(self):
+        """Regression: execute() read the FLAT expected_phone_sent, which is None
+        for a mixed cohort, so bool(None) omitted every phone. The per-customer
+        guard halted it before any mutation - this pins the fix."""
+        source = open(os.path.join(SCRIPTS, 'phase10_tier3_executor.py'),
+                      encoding='utf-8').read()
+        self.assertNotIn('phone_allowed=bool(definition.expected_phone_sent)', source)
+        self.assertIn("expectations_for(definition, woo_id)['phone_sent']", source)
+
     def test_a_mismatch_against_the_per_customer_expectation_halts(self):
         d = tier3.TESTS['TIER3-TEST-3']
         # woo 227 must plan zero addresses; hand it one and the plan must refuse
