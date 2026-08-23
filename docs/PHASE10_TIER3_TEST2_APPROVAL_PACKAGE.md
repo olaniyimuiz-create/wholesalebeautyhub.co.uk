@@ -16,10 +16,16 @@ new one:
 | | |
 |---|---|
 | Reviewed commit at Test 1 | `7987aa7e58e7942bad3a9eec737a87baffe6ca35` |
-| **Reviewed commit for Test 2** | **`cb53ab475f4df2224142b493f0eeee72e44ac794`** |
+| Auditability correction | `cb53ab475f4df2224142b493f0eeee72e44ac794` |
+| **Reviewed commit for Test 2** | **`cb8abd7069a60d65a11825a83e4af85906825f67`** |
 
-`--expect-commit 7987aa7…` will now **halt**, correctly — something that decides
-behaviour has changed since that approval was given.
+`--expect-commit 7987aa7…` or `cb53ab4…` will now **halt**, correctly — something
+that decides behaviour has changed since those approvals were given.
+
+**Amended 2026-08-23 under Approval A**: the empty-store blocker described in §9
+of the previous revision is resolved. Test 2 now requires an exact pre-test
+customer count of **1**, and requires that customer to be **verifiably woo 220**
+by its legacy metafield. That is stricter than the flag it replaces.
 
 ## 1. Source identity
 
@@ -137,29 +143,38 @@ source value.
 | Development store | `partnerDevelopment: true`; missing information is treated as production |
 | Schema | `CustomerInput` must still have no `addresses` field |
 | Contract sha256 | `d889fd03…9feb0` |
-| `--expect-commit` | `cb53ab47…` and a **clean working tree** |
+| `--expect-commit` | `cb8abd70…` and a **clean working tree** |
 | Legacy id 2 absent from the live store | required |
-| **Customer count** | **the definition requires 0; the store now holds 1** |
+| **Customer count** | **exactly 1** — asserted, and the store holds 1 |
+| **Pre-existing identity** | **woo 220 must be verifiably present** by legacy metafield |
 
-**This is the one open item.** Test 2's definition inherited
-`requires_store_empty = True`. With the Test-1 customer live, the pre-flight
-will halt. Three ways forward, all needing your decision — I have taken none:
+**RESOLVED 2026-08-23 under Approval A.** `requires_store_empty` was the
+`Tier3Test` class default, inherited by a test designed to run *after* Test 1.
+It is replaced by an explicit two-part invariant:
 
-1. **Authorize rollback of the Test-1 customer** first, restoring an empty
-   store. Rollback is a separate authorization and is currently refused.
-2. **Authorize a definition change** so Test 2 accepts a store holding exactly
-   the Test-1 customer. That edits a behavioural file and moves the reviewed
-   commit again.
-3. **Leave it** and accept that Test 2 cannot run while Test 1's customer lives.
+```
+expected_customer_count       = 1        exact; 0, 2, 3+ all halt
+expected_preexisting_woo_ids  = (220,)   verified by legacy metafield
+```
+
+Both halves run inside `preflight()`, **before any mutation**. The identity half
+is why both are needed: a store holding exactly one customer satisfies
+`count == 1` whether that customer is the Test-1 record or something nobody
+authorized, and only the metafield lookup distinguishes them.
+
+Covered by 16 tests: counts 0/1/2/3+, an unexpected customer, the Test-1
+customer plus an intruder, the correct count with an unverifiable identity, and
+the correct state proceeding — every one offline, with a mock that raises if a
+mutation is attempted.
 
 ## 10. Reviewed executor commit
 
-**`cb53ab475f4df2224142b493f0eeee72e44ac794`**
+**`cb8abd7069a60d65a11825a83e4af85906825f67`**
 
 Behavioural files at this commit:
 
 ```
-phase10_tier3_executor.py        (changed by the auditability fix)
+phase10_tier3_executor.py        changed - store-state guard (this amendment)
 phase10_import_runtime.py        unchanged since 7987aa7
 phase10_province_validator.py    unchanged since 7987aa7
 phase10_migration_contract.json  unchanged since 7987aa7
