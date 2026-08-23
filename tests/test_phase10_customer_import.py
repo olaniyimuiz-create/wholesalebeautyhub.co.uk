@@ -889,10 +889,12 @@ class MockShopify:
         self.create_behaviour = create_behaviour
         self.address_behaviour = address_behaviour
         self.sent = []
+        self.variables_sent = []
         self.mutations_sent = 0
 
     def __call__(self, document, variables=None):
         self.sent.append(document)
+        self.variables_sent.append(variables)
         if document.strip().startswith('mutation'):
             self.mutations_sent += 1
         if 'shop {' in document:
@@ -912,6 +914,12 @@ class MockShopify:
     @property
     def documents_sent(self):
         return list(self.sent)
+
+    @property
+    def inputs(self):
+        """The CustomerInput payloads actually sent, in order."""
+        return [v['input'] for v in self.variables_sent
+                if isinstance(v, dict) and 'input' in v]
 
 
 class Tier3ExecutorBase(unittest.TestCase):
@@ -984,11 +992,13 @@ class Tier3TargetRestrictions(Tier3ExecutorBase):
         phrases = [t.authorization_phrase for t in tier3.TESTS.values()]
         self.assertEqual(len(phrases), len(set(phrases)))
 
-    def test_test_3_cohort_is_not_frozen_and_cannot_run(self):
-        """No approved 10-customer Tier-3 cohort exists. Inventing one would be
-        manufacturing the approval this module exists to require."""
-        with self.assertRaises(tier3.CohortNotFrozen):
-            tier3.assert_cohort_frozen(tier3.resolve_test('TIER3-TEST-3'))
+    def test_test_3_cohort_is_frozen_and_still_needs_its_own_approval(self):
+        """Frozen 2026-08-23 under Approval 2. Freezing the cohort settles WHO;
+        it does not authorize the run."""
+        d = tier3.resolve_test('TIER3-TEST-3')
+        self.assertTrue(tier3.assert_cohort_frozen(d))
+        with self.assertRaises(tier3.TestNotAuthorized):
+            tier3.assert_test_authorization(d, 'looks fine')
 
     def test_test_3_records_woo_1_as_its_required_member(self):
         self.assertEqual(tier3.TIER3_TEST_3_REQUIRED_MEMBER, 1)
@@ -1568,17 +1578,23 @@ class Tier3StoreStateGuard(Tier3ExecutorBase):
                             tier3.EXPECTED_API_VERSION)
         self.assertIn('expects exactly 0', str(caught.exception))
 
-    def test_test_3_asserts_no_count(self):
-        """Unchanged intent: Test 3 runs after 1 and 2 and its cohort is not
-        frozen, so no exact prior population can be stated."""
+    def test_test_3_expects_the_two_earlier_test_customers(self):
+        """Once the cohort was frozen the prior population became statable, so
+        Test 3 got the same exact invariant as Test 2 rather than keeping the
+        'assert nothing' placeholder."""
         d = tier3.TESTS['TIER3-TEST-3']
-        self.assertIsNone(d.expected_customer_count)
-        self.assertEqual(d.expected_preexisting_woo_ids, ())
-        for count in (0, 1, 2, 50):
-            state = tier3.preflight(StoreMock(count=count), d,
-                                    tier3.APPROVED_STORE_DOMAIN,
-                                    tier3.EXPECTED_API_VERSION)
-            self.assertEqual(state['customers_before'], count)
+        self.assertEqual(d.expected_customer_count, 2)
+        self.assertEqual(sorted(d.expected_preexisting_woo_ids), [2, 220])
+        good = StoreMock(count=2, present={220: TEST1_GID,
+                                           2: 'gid://shopify/Customer/10160661102848'})
+        state = tier3.preflight(good, d, tier3.APPROVED_STORE_DOMAIN,
+                                tier3.EXPECTED_API_VERSION)
+        self.assertEqual(state['customers_before'], 2)
+        for count in (0, 1, 3):
+            with self.assertRaises(tier3.Halt):
+                tier3.preflight(StoreMock(count=count, present={220: TEST1_GID}),
+                                d, tier3.APPROVED_STORE_DOMAIN,
+                                tier3.EXPECTED_API_VERSION)
 
     def test_the_old_boolean_is_gone(self):
         """No code path reads the old flag. The name still appears in one
@@ -1655,6 +1671,243 @@ class Tier3Test2PayloadUnchanged(Tier3ExecutorBase):
         self.assertEqual(sorted(planned['payload_fields']),
                          ['email', 'firstName', 'lastName', 'metafields',
                           'phone', 'tags'])
+
+
+# ---------------------------------------------------------------------------
+# Tier-3 executor: phone fallback, source-backed loader, frozen Test-3 cohort
+# ---------------------------------------------------------------------------
+
+
+def phone_error_then_success(woo_id):
+    """Reject the first create on the phone, accept the retry. Mirrors what
+    Shopify did to woo_customer_id=1 in the Gate 6 run."""
+    state = {'n': 0}
+
+    def behave(variables, _seq):
+        state['n'] += 1
+        sent = variables['input']
+        if state['n'] == 1:
+            assert 'phone' in sent, 'the first attempt should carry the phone'
+            return {'data': {'customerCreate': {'customer': None, 'userErrors': [
+                {'field': ['phone'], 'message': 'Phone is invalid'}]}}}
+        assert 'phone' not in sent, 'the retry must not carry the phone'
+        return created_customer(variables, woo_id)
+    return behave
+
+
+class Tier3PhoneFallback(Tier3ExecutorBase):
+    """Risk #45 in the Tier-3 executor. Before this, a phone Shopify rejected
+    cost the whole customer - the failure the fix exists to prevent."""
+
+    def setUp(self):
+        super().setUp()
+        self._dropped = os.path.join(self._dir.name, 'dropped.jsonl')
+        self._orig = rt.DROPPED_PHONES_PATH
+        rt.DROPPED_PHONES_PATH = self._dropped
+        self.addCleanup(setattr, rt, 'DROPPED_PHONES_PATH', self._orig)
+
+    def run_test_1(self, mock):
+        return tier3.execute(
+            'TIER3-TEST-1', tier3.TESTS['TIER3-TEST-1'].authorization_phrase,
+            tier3.reviewed_commit(), mock, tier3.APPROVED_STORE_DOMAIN,
+            tier3.EXPECTED_API_VERSION,
+            candidate_loader=loader_for(tier3_candidate(220)),
+            sleep=lambda _s: None, tree_check=lambda: True)
+
+    def test_a_rejected_phone_no_longer_costs_the_customer(self):
+        mock = MockShopify(create_behaviour=phone_error_then_success(220))
+        result = self.run_test_1(mock)
+        self.assertEqual(len(result['created']), 1)
+        self.assertEqual(result['failed'], [])
+        self.assertEqual(result['phone_fallbacks'], [220])
+        self.assertEqual(result['customers_saved_by_phone_fallback'], [220])
+
+    def test_the_fallback_costs_a_second_create_call(self):
+        mock = MockShopify(create_behaviour=phone_error_then_success(220))
+        result = self.run_test_1(mock)
+        self.assertEqual(result['mutations']['customerCreate'], 2)
+        self.assertEqual(len(result['created']), 1)
+
+    def test_the_cap_is_on_customers_created_not_calls(self):
+        """Counting calls would halt a correct run AFTER the writes landed."""
+        mock = MockShopify(create_behaviour=phone_error_then_success(220))
+        result = self.run_test_1(mock)   # 2 calls, 1 customer, expected_creates=1
+        self.assertEqual(len(result['created']),
+                         tier3.TESTS['TIER3-TEST-1'].expected_creates)
+
+    def test_the_drop_is_tagged_and_logged(self):
+        mock = MockShopify(create_behaviour=phone_error_then_success(220))
+        self.run_test_1(mock)
+        retry = mock.inputs[1]
+        self.assertIn(rt.TAG_PHONE_DROPPED, retry['tags'])
+        self.assertTrue(os.path.exists(self._dropped))
+        events = [json.loads(l) for l in
+                  open(self._dropped, encoding='utf-8').read().splitlines() if l.strip()]
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0]['woo_customer_id'], 220)
+        self.assertEqual(events[0]['reason'], rt.PHONE_DROP_INVALID)
+
+    def test_the_legacy_metafield_survives_the_retry(self):
+        mock = MockShopify(create_behaviour=phone_error_then_success(220))
+        self.run_test_1(mock)
+        retry = mock.inputs[1]
+        self.assertEqual([m['value'] for m in retry['metafields']
+                          if m['key'] == rt.LEGACY_KEY], ['220'])
+
+    def test_the_ledger_records_the_drop(self):
+        mock = MockShopify(create_behaviour=phone_error_then_success(220))
+        self.run_test_1(mock)
+        statuses = [json.loads(l)['status'] for l in self.ledger_text().splitlines()
+                    if l.strip() and 'status' in l]
+        self.assertIn('PHONE_DROPPED_RETRYING', statuses)
+        self.assertIn('CREATED_PHONE_DROPPED', statuses)
+
+    def test_the_retry_happens_once_and_only_once(self):
+        def always_phone_error(_variables, _seq):
+            return {'data': {'customerCreate': {'customer': None, 'userErrors': [
+                {'field': ['phone'], 'message': 'Phone is invalid'}]}}}
+        mock = MockShopify(create_behaviour=always_phone_error)
+        result = self.run_test_1(mock)
+        self.assertEqual(result['mutations']['customerCreate'], 2)
+        self.assertEqual(result['failed'], [220])
+        self.assertEqual(result['created'], [])
+
+    def test_a_non_phone_error_is_not_retried(self):
+        def email_error(_variables, _seq):
+            return {'data': {'customerCreate': {'customer': None, 'userErrors': [
+                {'field': ['email'], 'message': 'Email is invalid'}]}}}
+        mock = MockShopify(create_behaviour=email_error)
+        result = self.run_test_1(mock)
+        self.assertEqual(result['mutations']['customerCreate'], 1)
+        self.assertEqual(result['phone_fallbacks'], [])
+
+    def test_a_clean_create_neither_retries_nor_logs(self):
+        mock = MockShopify()
+        result = self.run_test_1(mock)
+        self.assertEqual(result['mutations']['customerCreate'], 1)
+        self.assertEqual(result['phone_fallbacks'], [])
+        self.assertFalse(os.path.exists(self._dropped))
+
+    def test_the_test_suite_cannot_write_to_the_real_dropped_phone_log(self):
+        """Regression. rt.phone_fallback's log_path default binds at definition
+        time, so rebinding rt.DROPPED_PHONES_PATH in setUp did nothing and 31
+        fabricated entries reached the real audit log. The executor now reads
+        the attribute at call time, which is what makes the redirect work."""
+        real = os.path.join(REPO_ROOT, 'reports', 'phase10_dropped_phones.jsonl')
+        before = os.path.getsize(real) if os.path.exists(real) else 0
+        mock = MockShopify(create_behaviour=phone_error_then_success(220))
+        self.run_test_1(mock)
+        after = os.path.getsize(real) if os.path.exists(real) else 0
+        self.assertEqual(before, after,
+                         'the test suite wrote to the real dropped-phone log')
+        self.assertTrue(os.path.exists(self._dropped),
+                        'the redirect did not take effect')
+
+    def test_the_executor_resolves_the_log_path_at_call_time(self):
+        source = open(os.path.join(SCRIPTS, 'phase10_tier3_executor.py'),
+                      encoding='utf-8').read()
+        self.assertIn('log_path=rt.DROPPED_PHONES_PATH', source)
+
+
+class Tier3PerCustomerExpectations(Tier3ExecutorBase):
+    """A ten-customer cohort has ten shapes; flat expectations cannot describe
+    it, and loosening them to fit would be worse than describing them."""
+
+    def test_flat_expectations_still_apply_when_no_override_exists(self):
+        e = tier3.expectations_for(tier3.TESTS['TIER3-TEST-1'], 220)
+        self.assertEqual(e['addresses'], 0)
+        self.assertEqual(e['metafields'], (rt.LEGACY_KEY, rt.REGISTERED_AT_KEY))
+        self.assertTrue(e['phone_sent'])
+
+    def test_per_customer_overrides_the_flat_fields(self):
+        d = tier3.TESTS['TIER3-TEST-3']
+        self.assertEqual(tier3.expectations_for(d, 227)['addresses'], 0)
+        self.assertEqual(tier3.expectations_for(d, 17)['phone_sent'], False)
+        self.assertEqual(tier3.expectations_for(d, 70)['country'], 'IE')
+        self.assertFalse(tier3.expectations_for(d, 70)['province_omitted'])
+        self.assertTrue(tier3.expectations_for(d, 1)['province_omitted'])
+
+    def test_a_mismatch_against_the_per_customer_expectation_halts(self):
+        d = tier3.TESTS['TIER3-TEST-3']
+        # woo 227 must plan zero addresses; hand it one and the plan must refuse
+        with self.assertRaises(tier3.Halt):
+            tier3.build_plan(d, tier3_candidate(227, registered=True,
+                                                with_address=True),
+                             phone_allowed=False)
+
+
+class Tier3FrozenCohort(Tier3ExecutorBase):
+
+    COHORT = [1, 17, 957, 3, 227, 4, 217, 6, 70, 1669]
+
+    def test_the_cohort_is_frozen(self):
+        d = tier3.TESTS['TIER3-TEST-3']
+        self.assertTrue(d.cohort_frozen)
+        self.assertEqual(list(d.woo_ids), self.COHORT)
+        self.assertTrue(tier3.assert_cohort_frozen(d))
+
+    def test_exactly_ten_unique_ids_including_woo_1(self):
+        d = tier3.TESTS['TIER3-TEST-3']
+        self.assertEqual(len(d.woo_ids), 10)
+        self.assertEqual(len(set(d.woo_ids)), 10)
+        self.assertIn(tier3.TIER3_TEST_3_REQUIRED_MEMBER, d.woo_ids)
+        self.assertTrue(tier3.assert_no_duplicate_ids(d))
+
+    def test_no_test_1_or_test_2_customer_is_reused(self):
+        d = tier3.TESTS['TIER3-TEST-3']
+        self.assertNotIn(220, d.woo_ids)
+        self.assertNotIn(2, d.woo_ids)
+
+    def test_the_totals_reconcile(self):
+        d = tier3.TESTS['TIER3-TEST-3']
+        self.assertEqual(d.expected_creates, 10)
+        self.assertEqual(d.expected_addresses, 9)
+        self.assertEqual(sum(e['addresses'] for e in d.per_customer.values()), 9)
+        self.assertEqual(len(d.per_customer), 10)
+
+    def test_it_expects_the_test_1_and_test_2_customers_to_be_present(self):
+        d = tier3.TESTS['TIER3-TEST-3']
+        self.assertEqual(d.expected_customer_count, 2)
+        self.assertEqual(sorted(d.expected_preexisting_woo_ids), [2, 220])
+
+    def test_it_is_still_bounded_at_ten(self):
+        self.assertTrue(tier3.assert_not_bulk(tier3.TESTS['TIER3-TEST-3']))
+        self.assertEqual(len(tier3.TESTS['TIER3-TEST-3'].woo_ids),
+                         tier3.TIER3_MAX_CUSTOMERS)
+
+    def test_its_authorization_is_still_its_own(self):
+        d = tier3.TESTS['TIER3-TEST-3']
+        for other in ('TIER3-TEST-1', 'TIER3-TEST-2'):
+            with self.assertRaises(tier3.TestNotAuthorized):
+                tier3.assert_test_authorization(
+                    d, tier3.TESTS[other].authorization_phrase)
+
+
+class Tier3SourceBackedLoader(Tier3ExecutorBase):
+    """The manifest says who is approved; the source supplies the fields. It
+    carries no shipping postcode or province, which is why a shipping-fallback
+    member cannot be built from it."""
+
+    def test_the_manifest_lacks_the_shipping_fields(self):
+        import csv
+        path = os.path.join(REPO_ROOT, tier3.MANIFEST_PATH)
+        if not os.path.exists(path):
+            self.skipTest('manifest not present')
+        header = next(csv.reader(open(path, encoding='utf-8')))
+        self.assertNotIn('shipping_zip', header)
+        self.assertNotIn('shipping_province', header)
+
+    def test_both_entry_points_default_to_the_source_backed_loader(self):
+        import inspect
+        for fn in (tier3.simulate, tier3.execute):
+            default = inspect.signature(fn).parameters['candidate_loader'].default
+            self.assertIs(default, tier3.load_approved_candidate)
+
+    def test_the_loader_checks_the_manifest_first(self):
+        source = open(os.path.join(SCRIPTS, 'phase10_tier3_executor.py'),
+                      encoding='utf-8').read()
+        self.assertIn('load_manifest_candidate(woo_id, path, expected_hash)', source)
+        self.assertIn('disagree on identity', source)
 
 
 # ---------------------------------------------------------------------------

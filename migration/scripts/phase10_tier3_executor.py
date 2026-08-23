@@ -176,7 +176,7 @@ class Tier3Test:
                  expected_phone_sent, expected_country=None,
                  province_must_be_omitted=False, cohort_frozen=True,
                  expected_customer_count=0, expected_preexisting_woo_ids=(),
-                 notes=''):
+                 per_customer=None, notes=''):
         self.test_id = test_id
         self.woo_ids = tuple(woo_ids) if woo_ids else ()
         self.expected_creates = expected_creates
@@ -199,6 +199,13 @@ class Tier3Test:
         # inferred from the count. A count of 1 does not establish that the one
         # customer is the one we think it is.
         self.expected_preexisting_woo_ids = tuple(expected_preexisting_woo_ids)
+        # A multi-customer cohort has mixed shapes: some members carry two
+        # metafields and some one, some send a phone and some omit it, some
+        # send a provinceCode and some must not. The flat expected_* fields
+        # describe a single-customer test; per_customer overrides them per Woo
+        # id so a 10-record cohort can still be asserted exactly rather than
+        # loosely.
+        self.per_customer = dict(per_customer or {})
         self.notes = notes
 
 
@@ -244,27 +251,61 @@ TESTS = {
 
     'TIER3-TEST-3': Tier3Test(
         test_id='TIER3-TEST-3',
-        woo_ids=[],                      # NOT FROZEN - see cohort_frozen
+        # FROZEN 2026-08-23 under Approval 2. Every id was derived from the
+        # approved manifest and the source classification - none was chosen for
+        # being a convenient number, and none is a Test-1 or Test-2 customer.
+        woo_ids=[1, 17, 957, 3, 227, 4, 217, 6, 70, 1669],
         expected_creates=10,
-        expected_addresses=None,         # unknown until the cohort is frozen
-        expected_metafield_keys=(rt.LEGACY_KEY,),
-        expected_phone_sent=None,
-        cohort_frozen=False,
-        # Unchanged intent: runs after 1 and 2 may still be live, and the cohort
-        # is not frozen, so the exact prior population cannot be stated yet.
-        expected_customer_count=None,
+        expected_addresses=9,            # 9 of the 10 plan exactly one address
+        expected_metafield_keys=(rt.LEGACY_KEY,),   # overridden per customer
+        expected_phone_sent=None,                    # overridden per customer
+        cohort_frozen=True,
+        # The store holds the Test-1 and Test-2 customers. Same invariant the
+        # Test-2 amendment introduced: an exact count AND verified identity.
+        expected_customer_count=2,
+        expected_preexisting_woo_ids=(220, 2),
+        # A ten-customer cohort has ten different shapes. Every value below was
+        # computed from source, not asserted by hand.
+        per_customer={
+            1: {'addresses': 1, 'metafields': (rt.LEGACY_KEY,), 'phone_sent': True,
+                'country': 'GB', 'province_omitted': True},
+            17: {'addresses': 1, 'metafields': (rt.LEGACY_KEY,), 'phone_sent': False,
+                 'country': 'GB', 'province_omitted': True},
+            957: {'addresses': 1,
+                  'metafields': (rt.LEGACY_KEY, rt.REGISTERED_AT_KEY),
+                  'phone_sent': False, 'country': 'FR', 'province_omitted': True},
+            3: {'addresses': 1, 'metafields': (rt.LEGACY_KEY,), 'phone_sent': True,
+                'country': 'GB', 'province_omitted': True},
+            227: {'addresses': 0,
+                  'metafields': (rt.LEGACY_KEY, rt.REGISTERED_AT_KEY),
+                  'phone_sent': False, 'country': None, 'province_omitted': True},
+            4: {'addresses': 1, 'metafields': (rt.LEGACY_KEY,), 'phone_sent': True,
+                'country': 'GB', 'province_omitted': True},
+            217: {'addresses': 1,
+                  'metafields': (rt.LEGACY_KEY, rt.REGISTERED_AT_KEY),
+                  'phone_sent': True, 'country': 'GB', 'province_omitted': True},
+            6: {'addresses': 1, 'metafields': (rt.LEGACY_KEY,), 'phone_sent': True,
+                'country': 'GB', 'province_omitted': True},
+            70: {'addresses': 1, 'metafields': (rt.LEGACY_KEY,), 'phone_sent': True,
+                 'country': 'IE', 'province_omitted': False},
+            1669: {'addresses': 1, 'metafields': (rt.LEGACY_KEY,), 'phone_sent': True,
+                   'country': 'IE', 'province_omitted': False},
+        },
         authorization_phrase='APPROVED - EXECUTE TIER-3 TEST 3 FOR THE FROZEN 10-CUSTOMER COHORT',
         description=('Ten mixed customers exercising resume, duplicate '
                      'prevention, checkpointing, address fallback, phone '
                      'handling, timeout recovery and throttle handling.'),
-        notes=('COHORT NOT FROZEN. No approved 10-customer Tier-3 cohort exists, '
-               'and inventing one here would be manufacturing the approval this '
-               'module exists to require. Freezing it is its own decision. '
-               'Required member: woo 1, the only case that exercises the risk #45 '
-               'phone fallback against live Shopify. Note also that a cohort '
-               'containing a shipping-fallback customer cannot be built from the '
-               'manifest - it carries no shipping postcode or province - so such '
-               'a cohort must be derived from source.')),
+        notes=('FROZEN 2026-08-23. Coverage: woo 1 is the known risk #45 case '
+               '(GB national number of the wrong length) and woo 1669 is a second, '
+               'structurally different route to the same fallback; woo 17 has its '
+               'phone omitted by the collision policy; woo 957 is the A_PLUS '
+               'billing-to-shipping fallback; woo 227 has no address at all; woo 70 '
+               'and woo 1669 send a non-GB provinceCode, a path never exercised '
+               'live; woo 217 is registered and holds BOTH addresses, proving '
+               'A_PLUS sends only one. Candidates load from source, not from the '
+               'manifest, because the manifest carries no shipping postcode or '
+               'province - measured on woo 957, which planned 0 addresses instead '
+               'of 1 when built from the manifest.')),
 }
 
 TIER3_TEST_3_REQUIRED_MEMBER = 1
@@ -273,6 +314,21 @@ TIER3_TEST_3_REQUIRED_MEMBER = 1
 # --------------------------------------------------------------------------
 # Guards
 # --------------------------------------------------------------------------
+
+def expectations_for(definition, woo_id):
+    """What THIS customer must produce. Falls back to the flat fields when the
+    test names no per-customer expectation, so single-customer tests are
+    unchanged."""
+    entry = definition.per_customer.get(int(woo_id), {})
+    return {
+        'addresses': entry.get('addresses', definition.expected_addresses),
+        'metafields': tuple(entry.get('metafields', definition.expected_metafield_keys)),
+        'phone_sent': entry.get('phone_sent', definition.expected_phone_sent),
+        'country': entry.get('country', definition.expected_country),
+        'province_omitted': entry.get('province_omitted',
+                                      definition.province_must_be_omitted),
+    }
+
 
 def resolve_test(test_id):
     """Only a defined test id. No arbitrary customer, ever."""
@@ -596,6 +652,54 @@ def load_manifest_candidate(woo_id, path=MANIFEST_PATH, expected_hash=MANIFEST_S
                f'manifest. Refusing.')
 
 
+_SOURCE_CACHE = {}
+
+
+def _source_population():
+    """The parsed source population, loaded once per process.
+
+    Imported lazily: the dump parse is expensive and nothing that only
+    simulates a payload from an injected candidate should pay for it.
+    """
+    if 'by_id' not in _SOURCE_CACHE:
+        from phase10_run_plan import load_population  # noqa: PLC0415
+        imports, conflicted, _consent = load_population()
+        _SOURCE_CACHE['by_id'] = {c['woo_customer_id']: c for c in imports}
+        _SOURCE_CACHE['conflicted'] = set(conflicted)
+    return _SOURCE_CACHE['by_id'], _SOURCE_CACHE['conflicted']
+
+
+def load_approved_candidate(woo_id, path=MANIFEST_PATH, expected_hash=MANIFEST_SHA256):
+    """Approval from the manifest, field VALUES from the source.
+
+    The manifest is the artifact that says WHO was approved, and its hash is
+    checked first - but it carries no shipping postcode or province, so a
+    shipping-fallback customer built from it silently loses its postcode and
+    plans zero addresses instead of one. That was measured on woo 957, not
+    assumed.
+
+    So the two are used for what each is actually good for: the manifest
+    authorises the customer, the source supplies the fields, and the two must
+    agree on identity or this halts. A disagreement means the source no longer
+    matches what was approved, which is a re-approval, not a re-run.
+    """
+    approved = load_manifest_candidate(woo_id, path, expected_hash)
+    by_id, conflicted = _source_population()
+    candidate = by_id.get(int(woo_id))
+    if candidate is None:
+        raise Halt(f'woo_customer_id={woo_id} is in the approved manifest but not '
+                   f'in the source population. Refusing.')
+    if int(woo_id) in conflicted:
+        raise Halt(f'woo_customer_id={woo_id} is deferred by ADR-014 Gate 5 '
+                   f'(name conflict) and must not be imported.')
+    manifest_email = (approved.get('email') or '').strip().lower()
+    source_email = (candidate.get('email') or '').strip().lower()
+    if manifest_email != source_email:
+        raise Halt(f'woo_customer_id={woo_id}: the approved manifest and the source '
+                   f'disagree on identity. Re-approval required, not a re-run.')
+    return candidate
+
+
 def assert_payload_contract(payload, woo_id):
     """Exactly the fields the contract permits, and no others."""
     present = FORBIDDEN_CUSTOMER_FIELDS & set(payload)
@@ -630,30 +734,33 @@ def build_plan(definition, candidate, phone_allowed):
     payload = stages[0]['input']
     assert_payload_contract(payload, candidate['woo_customer_id'])
 
+    woo_id = candidate['woo_customer_id']
+    expect = expectations_for(definition, woo_id)
+
     addresses = [s for s in stages if s['stage'] == rt.STAGE_ADDRESS]
-    if len(addresses) != definition.expected_addresses:
-        raise Halt(f'{definition.test_id}: plan produces {len(addresses)} address '
-                   f'call(s), the approved test expects '
-                   f'{definition.expected_addresses}.')
+    if expect['addresses'] is not None and len(addresses) != expect['addresses']:
+        raise Halt(f'{definition.test_id}: woo {woo_id} plans {len(addresses)} '
+                   f'address call(s), the approved test expects '
+                   f'{expect["addresses"]}.')
 
     keys = tuple(m['key'] for m in payload['metafields'])
-    if keys != definition.expected_metafield_keys:
-        raise Halt(f'{definition.test_id}: metafields {keys} do not match the '
-                   f'approved {definition.expected_metafield_keys}.')
+    if keys != expect['metafields']:
+        raise Halt(f'{definition.test_id}: woo {woo_id} metafields {keys} do not '
+                   f'match the approved {expect["metafields"]}.')
 
-    if definition.expected_phone_sent is not None:
+    if expect['phone_sent'] is not None:
         sent = 'phone' in payload
-        if sent != definition.expected_phone_sent:
-            raise Halt(f'{definition.test_id}: phone sent={sent}, approved test '
-                       f'expects {definition.expected_phone_sent}.')
+        if sent != expect['phone_sent']:
+            raise Halt(f'{definition.test_id}: woo {woo_id} phone sent={sent}, '
+                       f'approved test expects {expect["phone_sent"]}.')
 
     for stage in addresses:
         address = stage['address']
-        if definition.expected_country and address.get('countryCode') != definition.expected_country:
-            raise Halt(f'{definition.test_id}: countryCode '
+        if expect['country'] and address.get('countryCode') != expect['country']:
+            raise Halt(f'{definition.test_id}: woo {woo_id} countryCode '
                        f'{address.get("countryCode")!r}, expected '
-                       f'{definition.expected_country!r}.')
-        if definition.province_must_be_omitted and 'provinceCode' in address:
+                       f'{expect["country"]!r}.')
+        if expect['province_omitted'] and 'provinceCode' in address:
             raise Halt(f'{definition.test_id}: provinceCode present on a '
                        f'{address.get("countryCode")} address; it must be omitted.')
         source_zip = (candidate.get(stage['kind'] + '_zip') or '').strip()
@@ -771,7 +878,7 @@ def _ledger(run_id, simulate):
                            run_id=run_id, importer_commit=reviewed_commit())
 
 
-def simulate(test_id, candidate_loader=load_manifest_candidate, phone_allowed=None):
+def simulate(test_id, candidate_loader=load_approved_candidate, phone_allowed=None):
     """Full validation with no network of any kind. Requirement: this must be
     possible before any real mutation path is invoked."""
     definition = resolve_test(test_id)
@@ -785,8 +892,8 @@ def simulate(test_id, candidate_loader=load_manifest_candidate, phone_allowed=No
     planned = []
     for woo_id in definition.woo_ids:
         candidate = candidate_loader(woo_id)
-        allowed = (definition.expected_phone_sent if phone_allowed is None
-                   else phone_allowed)
+        expect = expectations_for(definition, woo_id)
+        allowed = (expect['phone_sent'] if phone_allowed is None else phone_allowed)
         stages = build_plan(definition, candidate, phone_allowed=bool(allowed))
         payload = stages[0]['input']
         addresses = [s for s in stages if s['stage'] == rt.STAGE_ADDRESS]
@@ -814,6 +921,10 @@ def simulate(test_id, candidate_loader=load_manifest_candidate, phone_allowed=No
     if creates != definition.expected_creates:
         raise Halt(f'{test_id}: {creates} creates planned, approved test expects '
                    f'{definition.expected_creates}.')
+    if (definition.expected_addresses is not None
+            and address_calls != definition.expected_addresses):
+        raise Halt(f'{test_id}: {address_calls} address call(s) planned, approved '
+                   f'test expects {definition.expected_addresses}.')
 
     result = {
         'test_id': test_id,
@@ -846,7 +957,7 @@ def simulate(test_id, candidate_loader=load_manifest_candidate, phone_allowed=No
 
 
 def execute(test_id, authorization, expect_commit, send, domain, api_version,
-            candidate_loader=load_manifest_candidate, throttle=None, sleep=None,
+            candidate_loader=load_approved_candidate, throttle=None, sleep=None,
             tree_check=None):
     """The live path. Every guard above must pass before a single mutation.
 
@@ -868,7 +979,7 @@ def execute(test_id, authorization, expect_commit, send, domain, api_version,
     run_id = f'tier3-{test_id}-' + time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
     ledger = _ledger(run_id, simulate=False)
     throttle = throttle if throttle is not None else rt.ThrottleController()
-    created, failed = [], []
+    created, failed, phone_fallbacks = [], [], []
     mutations = {'customerCreate': 0, 'customerAddressCreate': 0}
 
     for woo_id in definition.woo_ids:
@@ -894,6 +1005,40 @@ def execute(test_id, authorization, expect_commit, send, domain, api_version,
         result = response['data']['customerCreate']
         errors = result.get('userErrors') or []
 
+        # Risk #45. Shopify rejects the WHOLE mutation on a phone validation
+        # error, so without this a bad number costs the customer, not the
+        # field - which is exactly how woo_customer_id=1 was lost in the Gate 6
+        # run. Drop the number, tag the customer so the loss is visible in
+        # Shopify itself, log the original, and re-issue ONCE. The decision and
+        # the retry payload are the runtime's; only the send is local.
+        fallback_event = None
+        if (errors or not result.get('customer')) and rt.is_phone_user_error(errors) \
+                and 'phone' in payload:
+            # log_path is passed explicitly and read from the module attribute at
+            # CALL time. Its default binds at definition time, so a test that
+            # rebinds rt.DROPPED_PHONES_PATH would otherwise still write to the
+            # real audit log - which is exactly what happened, 31 times, before
+            # this line existed.
+            fallback = rt.phone_fallback(payload, errors, woo_id,
+                                         operation=rt.STAGE_CUSTOMER, run_id=run_id,
+                                         log_path=rt.DROPPED_PHONES_PATH)
+            retry_payload = fallback['input']
+            # A retry is a fresh payload and faces the same scrutiny as the first.
+            assert_payload_contract(retry_payload, woo_id)
+            ledger.record(woo_id, rt.STAGE_CUSTOMER, 'PHONE_DROPPED_RETRYING',
+                          attempt=attempts, error_class=fallback['event']['reason'],
+                          error_detail=json.dumps(fallback['event']['user_errors']),
+                          reconciliation_status='PENDING')
+            response, retry_attempts = send_mutation(
+                send, CUSTOMER_CREATE, {'input': retry_payload},
+                throttle=throttle, sleep=sleep)
+            mutations['customerCreate'] += 1
+            attempts += retry_attempts
+            phone_fallbacks.append(woo_id)
+            fallback_event = fallback['event']
+            result = response['data']['customerCreate']
+            errors = result.get('userErrors') or []
+
         if errors or not result.get('customer'):
             failed.append(woo_id)
             ledger.record(woo_id, rt.STAGE_CUSTOMER, 'FAILED', attempt=attempts,
@@ -911,9 +1056,12 @@ def execute(test_id, authorization, expect_commit, send, domain, api_version,
                        f'{live_metafields.get(rt.LEGACY_KEY)!r}. The identity chain '
                        f'is broken.')
         created.append({'woo_customer_id': woo_id, 'gid': gid,
-                        'live': customer, 'addresses': [], 'plan': stages})
-        ledger.record(woo_id, rt.STAGE_CUSTOMER, 'CREATED', shopify_gid=gid,
-                      attempt=attempts, reconciliation_status='PENDING')
+                        'live': customer, 'addresses': [], 'plan': stages,
+                        'phone_dropped': fallback_event is not None})
+        ledger.record(woo_id, rt.STAGE_CUSTOMER,
+                      'CREATED_PHONE_DROPPED' if fallback_event else 'CREATED',
+                      shopify_gid=gid, attempt=attempts,
+                      reconciliation_status='PENDING')
 
         for stage in stages[1:]:
             aresp, aattempts = send_mutation(
@@ -940,9 +1088,15 @@ def execute(test_id, authorization, expect_commit, send, domain, api_version,
                               address_status=rt.ADDRESS_STATUS_PLANNED,
                               reconciliation_status='PENDING')
 
-    if mutations['customerCreate'] > definition.expected_creates:
-        raise Halt(f'{test_id}: {mutations["customerCreate"]} creates exceeded the '
+    # The cap is on customers CREATED, not on create CALLS. A phone fallback
+    # spends a second call on the same customer, and counting calls here would
+    # halt a correct run after the writes had already happened.
+    if len(created) > definition.expected_creates:
+        raise Halt(f'{test_id}: {len(created)} customers created exceeded the '
                    f'approved {definition.expected_creates}.')
+    if mutations['customerAddressCreate'] > (definition.expected_addresses or 0):
+        raise Halt(f'{test_id}: {mutations["customerAddressCreate"]} address call(s) '
+                   f'exceeded the approved {definition.expected_addresses}.')
 
     return {
         'test_id': test_id, 'mode': MODE_EXECUTE, 'run_id': run_id,
@@ -950,8 +1104,12 @@ def execute(test_id, authorization, expect_commit, send, domain, api_version,
         'contract_sha256': contract_hash(),
         'store_state_before': state, 'mutations': mutations,
         'created': [{'woo_customer_id': c['woo_customer_id'], 'gid': c['gid'],
-                     'addresses': len(c['addresses'])} for c in created],
+                     'addresses': len(c['addresses']),
+                     'phone_dropped': c.get('phone_dropped', False)} for c in created],
         'failed': failed,
+        'phone_fallbacks': phone_fallbacks,
+        'customers_saved_by_phone_fallback': [w for w in phone_fallbacks
+                                              if w not in failed],
         'rollback': rollback_spec(created),
     }
 
