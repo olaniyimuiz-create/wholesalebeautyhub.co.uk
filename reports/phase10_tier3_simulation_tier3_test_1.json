@@ -4,9 +4,10 @@
   "consent_on_any_payload": false,
   "contract_sha256": "d889fd03a0122ece7dcc1c741381a87cba90506eabe7d074608a6459ebc9feb0",
   "customer_writes": 0,
-  "executor_commit": "0494736",
+  "executor_commit": "cb53ab475f4df2224142b493f0eeee72e44ac794",
   "expected_customerAddressCreate": 0,
   "expected_customerCreate": 1,
+  "head_commit": "cb53ab475f4df2224142b493f0eeee72e44ac794",
   "manifest_sha256": "2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda",
   "metafield_writes": 0,
   "mode": "simulate",
@@ -45,7 +46,7 @@
     "precondition": "re-read the customer and confirm custom.legacy_woo_customer_id matches before deleting",
     "targets": []
   },
-  "run_id": "tier3-sim-TIER3-TEST-1-2026-08-22T19:55:46Z",
+  "run_id": "tier3-sim-TIER3-TEST-1-2026-08-23T19:38:25Z",
   "shopify_mutations_performed": 0,
   "test_id": "TIER3-TEST-1",
   "woo_customer_ids": [
