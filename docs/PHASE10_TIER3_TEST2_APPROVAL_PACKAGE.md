@@ -100,10 +100,9 @@ and simply not sent — nothing is rewritten, coerced, or guessed.
 Store expected to hold **1** customer before Test 2 (the Test-1 customer) and
 **2** after.
 
-**Note a difference from Test 1**: Test 1 required an empty store. Test 2's
-definition sets `requires_store_empty = True` as well, so **the pre-flight will
-halt** on the Test-1 customer still being present. See §9 — this needs a
-decision before Test 2 can run.
+**Note a difference from Test 1**: Test 1 expects an empty store (count 0).
+Test 2 expects exactly the Test-1 customer (count 1, woo 220 verified). Both are
+explicit; neither is inherited. See §9.
 
 ## 5. Expected metafields
 
