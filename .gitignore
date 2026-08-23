@@ -97,3 +97,8 @@ reports/phase10_tier3_log.jsonl.simulation
 reports/phase10_tier3_checkpoint.jsonl.simulation
 !reports/phase10_tier3_simulation_tier3_test_1.json
 !reports/phase10_tier3_simulation_tier3_test_2.json
+
+# Pre-cleanup copy of the dropped-phone log, kept so the removal of 31 synthetic
+# development entries is reversible. Same contents, same rule: it carries raw
+# phone numbers and is never tracked.
+reports/phase10_dropped_phones.pre-cleanup-backup.jsonl
