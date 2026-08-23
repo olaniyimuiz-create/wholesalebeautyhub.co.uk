@@ -175,7 +175,8 @@ class Tier3Test:
                  authorization_phrase, description, expected_metafield_keys,
                  expected_phone_sent, expected_country=None,
                  province_must_be_omitted=False, cohort_frozen=True,
-                 requires_store_empty=True, notes=''):
+                 expected_customer_count=0, expected_preexisting_woo_ids=(),
+                 notes=''):
         self.test_id = test_id
         self.woo_ids = tuple(woo_ids) if woo_ids else ()
         self.expected_creates = expected_creates
@@ -187,7 +188,17 @@ class Tier3Test:
         self.expected_country = expected_country
         self.province_must_be_omitted = province_must_be_omitted
         self.cohort_frozen = cohort_frozen
-        self.requires_store_empty = requires_store_empty
+        # The store state this test expects BEFORE it runs, stated as a number
+        # rather than a boolean. `requires_store_empty=True` was the class
+        # default and was inherited by Test 2, which is designed to run AFTER
+        # Test 1 - so it blocked itself on a condition nobody chose for it.
+        # None means "do not assert a count" and is used only where a test is
+        # explicitly indifferent.
+        self.expected_customer_count = expected_customer_count
+        # WHO must already be there, verified by legacy metafield rather than
+        # inferred from the count. A count of 1 does not establish that the one
+        # customer is the one we think it is.
+        self.expected_preexisting_woo_ids = tuple(expected_preexisting_woo_ids)
         self.notes = notes
 
 
@@ -199,6 +210,8 @@ TESTS = {
         expected_addresses=0,
         expected_metafield_keys=(rt.LEGACY_KEY, rt.REGISTERED_AT_KEY),
         expected_phone_sent=True,
+        expected_customer_count=0,       # first write; an empty store is the
+        expected_preexisting_woo_ids=(),  # only correct starting state
         authorization_phrase='APPROVED - EXECUTE TIER-3 TEST 1 FOR WOO CUSTOMER 220',
         description=('One registered customer with no address in source. Proves '
                      'customerCreate, both metafields inline, phone policy, and '
@@ -214,6 +227,11 @@ TESTS = {
         expected_phone_sent=True,
         expected_country='GB',
         province_must_be_omitted=True,
+        # AMENDED 2026-08-23 under Approval A. Test 2 runs after Test 1, so it
+        # expects exactly the Test-1 customer to be present - not an empty
+        # store, and not "any one customer". Both halves are checked.
+        expected_customer_count=1,
+        expected_preexisting_woo_ids=(220,),
         authorization_phrase='APPROVED - EXECUTE TIER-3 TEST 2 FOR WOO CUSTOMER 2',
         description=('One guest customer with a GB billing address carrying a '
                      'county. Proves the address stage, the GB provinceCode '
@@ -232,7 +250,9 @@ TESTS = {
         expected_metafield_keys=(rt.LEGACY_KEY,),
         expected_phone_sent=None,
         cohort_frozen=False,
-        requires_store_empty=False,      # runs after 1 and 2 may still be live
+        # Unchanged intent: runs after 1 and 2 may still be live, and the cohort
+        # is not frozen, so the exact prior population cannot be stated yet.
+        expected_customer_count=None,
         authorization_phrase='APPROVED - EXECUTE TIER-3 TEST 3 FOR THE FROZEN 10-CUSTOMER COHORT',
         description=('Ten mixed customers exercising resume, duplicate '
                      'prevention, checkpointing, address fallback, phone '
@@ -450,32 +470,75 @@ def preflight(send, definition, domain, api_version):
         if required not in fields:
             raise Halt(f'GUARD: schema drift - CustomerInput has no {required!r}.')
 
+    # State invariant, in two halves. Both run BEFORE any mutation, and either
+    # one halting means nothing is sent.
     count = data['customersCount']['count']
-    if definition.requires_store_empty and count != 0:
+    expected = definition.expected_customer_count
+    if expected is not None and count != expected:
         raise Halt(f'GUARD: store holds {count} customer(s); {definition.test_id} '
-                   f'requires an empty store. Do not reinterpret this result.')
+                   f'expects exactly {expected}. Do not reinterpret this result - '
+                   f'an unexpected count means the store is not in the state this '
+                   f'test was approved against.')
+    assert_expected_preexisting_customers(send, definition)
 
     return {'store': domain_live, 'development_store': True, 'scopes': len(scopes),
-            'customers_before': count, 'api_version': api_version}
+            'customers_before': count, 'expected_customer_count': expected,
+            'expected_preexisting_woo_ids': list(definition.expected_preexisting_woo_ids),
+            'api_version': api_version}
 
 
-def assert_legacy_id_absent(send, woo_id):
-    """Idempotency (requirements 21-22). Returns None, or HALTS if present."""
+def find_customer_by_legacy_id(send, woo_id, context='lookup'):
+    """The Shopify GID carrying custom.legacy_woo_customer_id = woo_id, or None.
+
+    One implementation, used by both the idempotency check (which requires
+    ABSENCE) and the pre-existing-state check (which requires PRESENCE). Two
+    copies of this query would be two things that could drift, and a drifted
+    identity lookup is the kind of defect that only shows up as a duplicate
+    customer.
+    """
     query = LEGACY_LOOKUP % (
         "metafields.custom.legacy_woo_customer_id:'%s'" % woo_id)
     response = send(query, None)
     klass, detail = rt.classify_response(response)
     if klass == rt.AUTH_FAILURE:
-        raise Halt(f'authentication failed during the idempotency check - {detail}')
+        raise Halt(f'authentication failed during the {context} - {detail}')
     if klass != rt.OK:
-        raise Halt(f'idempotency check failed - {klass}: {detail}')
+        raise Halt(f'{context} failed - {klass}: {detail}')
     edges = (((response.get('data') or {}).get('customers') or {}).get('edges') or [])
     for edge in edges:
         node = edge.get('node') or {}
         if ((node.get('metafield') or {}).get('value')) == str(woo_id):
-            raise Halt(f'HALT: woo_customer_id={woo_id} already exists in Shopify as '
-                       f'{node.get("id")}. A second customer is never created.')
+            return node.get('id')
     return None
+
+
+def assert_legacy_id_absent(send, woo_id):
+    """Idempotency (requirements 21-22). Returns None, or HALTS if present."""
+    existing = find_customer_by_legacy_id(send, woo_id, context='idempotency check')
+    if existing:
+        raise Halt(f'HALT: woo_customer_id={woo_id} already exists in Shopify as '
+                   f'{existing}. A second customer is never created.')
+    return None
+
+
+def assert_expected_preexisting_customers(send, definition):
+    """Every customer this test expects to ALREADY be there must be verifiably
+    there, identified by its legacy metafield.
+
+    The count check alone is not enough and was never meant to be. A store
+    holding exactly one customer satisfies `count == 1` whether that customer is
+    the Test-1 record or something nobody authorized; only the identity check
+    tells those apart, and they mean completely different things.
+    """
+    for woo_id in definition.expected_preexisting_woo_ids:
+        gid = find_customer_by_legacy_id(send, woo_id,
+                                         context='pre-existing state check')
+        if not gid:
+            raise Halt(
+                f'GUARD: {definition.test_id} expects woo_customer_id={woo_id} to '
+                f'already exist in Shopify and it does not. The store is not in the '
+                f'state this test was approved against.')
+    return True
 
 
 # --------------------------------------------------------------------------

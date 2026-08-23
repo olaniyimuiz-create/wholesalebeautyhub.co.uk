@@ -1187,7 +1187,7 @@ class Tier3LiveGuards(Tier3ExecutorBase):
         occupied['data']['customersCount']['count'] = 3
         with self.assertRaises(tier3.Halt) as caught:
             self.run_test_1(MockShopify(preflight=occupied))
-        self.assertIn('requires an empty store', str(caught.exception))
+        self.assertIn('expects exactly 0', str(caught.exception))
 
     def test_19d_an_unexpected_api_version_halts(self):
         with self.assertRaises(tier3.Halt):
@@ -1408,6 +1408,253 @@ class Tier3NoNetworkWrites(Tier3ExecutorBase):
         self.assertEqual(tier3.DEFAULT_MODE, tier3.MODE_SIMULATE)
         mode, test_id, _a, _c = tier3.parse_argv(['--simulate', 'TIER3-TEST-1'])
         self.assertEqual(mode, tier3.MODE_SIMULATE)
+
+
+# ---------------------------------------------------------------------------
+# Test-2 store-state guard (Approval A, 2026-08-23)
+# ---------------------------------------------------------------------------
+#
+# The amendment replaced an inherited boolean (`requires_store_empty`) with an
+# explicit two-part invariant: an EXACT expected customer count, and the
+# IDENTITY of whoever must already be there. Both run before any mutation.
+#
+# Every test here is offline. The store is a dict.
+
+TEST1_GID = 'gid://shopify/Customer/10159741272320'
+
+
+def preflight_response(count, scopes=('read_customers', 'write_customers')):
+    return {'data': {
+        'shop': {'name': 'Wholesale Beautyhub',
+                 'myshopifyDomain': tier3.APPROVED_STORE_DOMAIN,
+                 'plan': {'displayName': 'Grow', 'partnerDevelopment': True}},
+        'currentAppInstallation': {'accessScopes': [{'handle': h} for h in scopes]},
+        'customersCount': {'count': count},
+        '__type': {'inputFields': [{'name': n} for n in
+                                   ('email', 'firstName', 'lastName', 'phone',
+                                    'tags', 'metafields')]},
+    }}
+
+
+def legacy_hit(woo_id, gid):
+    return {'data': {'customers': {'edges': [
+        {'node': {'id': gid, 'metafield': {'value': str(woo_id)}}}]}}}
+
+
+LEGACY_MISS = {'data': {'customers': {'edges': []}}}
+
+
+class StoreMock:
+    """Answers the pre-flight and per-id legacy lookups. Never a network."""
+
+    def __init__(self, count, present=None):
+        self.count = count
+        self.present = dict(present or {})   # {woo_id: gid}
+        self.sent = []
+        self.mutations_sent = 0
+
+    def __call__(self, document, variables=None):
+        self.sent.append(document)
+        if document.strip().startswith('mutation'):
+            self.mutations_sent += 1
+            raise AssertionError('a mutation was sent while the state guard was '
+                                 'supposed to have halted')
+        if 'shop {' in document:
+            return preflight_response(self.count)
+        m = re.search(r"legacy_woo_customer_id:'(\d+)'", document)
+        if m:
+            woo = int(m.group(1))
+            gid = self.present.get(woo)
+            return legacy_hit(woo, gid) if gid else LEGACY_MISS
+        raise AssertionError(f'unexpected document: {document[:60]}')
+
+
+class Tier3StoreStateGuard(Tier3ExecutorBase):
+
+    def preflight_test2(self, mock):
+        return tier3.preflight(mock, tier3.TESTS['TIER3-TEST-2'],
+                               tier3.APPROVED_STORE_DOMAIN,
+                               tier3.EXPECTED_API_VERSION)
+
+    # ---- A: an empty store is now WRONG for Test 2 -----------------------
+    def test_A_count_zero_halts(self):
+        """Test 2 runs after Test 1. An empty store means Test 1's customer is
+        gone, which is a state nobody approved."""
+        mock = StoreMock(count=0)
+        with self.assertRaises(tier3.Halt) as caught:
+            self.preflight_test2(mock)
+        self.assertIn('expects exactly 1', str(caught.exception))
+        self.assertEqual(mock.mutations_sent, 0)
+
+    # ---- B: exactly one, and it is the Test-1 customer -------------------
+    def test_B_count_one_with_the_test1_customer_passes_the_state_guard(self):
+        mock = StoreMock(count=1, present={220: TEST1_GID})
+        state = self.preflight_test2(mock)
+        self.assertEqual(state['customers_before'], 1)
+        self.assertEqual(state['expected_customer_count'], 1)
+        self.assertEqual(state['expected_preexisting_woo_ids'], [220])
+        self.assertEqual(mock.mutations_sent, 0)
+
+    # ---- C / D: too many ------------------------------------------------
+    def test_C_count_two_halts(self):
+        mock = StoreMock(count=2, present={220: TEST1_GID})
+        with self.assertRaises(tier3.Halt) as caught:
+            self.preflight_test2(mock)
+        self.assertIn('store holds 2', str(caught.exception))
+        self.assertEqual(mock.mutations_sent, 0)
+
+    def test_D_count_three_or_more_halts(self):
+        for count in (3, 10, 11849):
+            mock = StoreMock(count=count, present={220: TEST1_GID})
+            with self.assertRaises(tier3.Halt):
+                self.preflight_test2(mock)
+            self.assertEqual(mock.mutations_sent, 0)
+
+    # ---- E: an unexpected customer --------------------------------------
+    def test_E_an_unexpected_customer_halts(self):
+        """One customer, but not the one that should be there. The count check
+        passes; only the identity check catches this."""
+        mock = StoreMock(count=1, present={999: 'gid://shopify/Customer/1'})
+        with self.assertRaises(tier3.Halt) as caught:
+            self.preflight_test2(mock)
+        self.assertIn('expects woo_customer_id=220 to already exist',
+                      str(caught.exception))
+        self.assertEqual(mock.mutations_sent, 0)
+
+    # ---- F: Test-1 customer present but something else appeared ---------
+    def test_F_test1_customer_plus_another_halts(self):
+        mock = StoreMock(count=2, present={220: TEST1_GID, 999: 'gid://shopify/Customer/2'})
+        with self.assertRaises(tier3.Halt) as caught:
+            self.preflight_test2(mock)
+        self.assertIn('store holds 2', str(caught.exception))
+        self.assertEqual(mock.mutations_sent, 0)
+
+    # ---- G: right count, identity unverifiable --------------------------
+    def test_G_correct_count_but_test1_customer_unverifiable_halts(self):
+        """The case that makes the identity check worth having: the count is
+        exactly right and the store is still wrong."""
+        mock = StoreMock(count=1, present={})
+        with self.assertRaises(tier3.Halt) as caught:
+            self.preflight_test2(mock)
+        self.assertIn('does not', str(caught.exception))
+        self.assertEqual(mock.mutations_sent, 0)
+
+    # ---- H: correct count, verified identity, proceed -------------------
+    def test_H_correct_state_proceeds_to_the_remaining_checks(self):
+        mock = StoreMock(count=1, present={220: TEST1_GID})
+        state = self.preflight_test2(mock)
+        self.assertTrue(state['development_store'])
+        self.assertEqual(state['scopes'], 2)
+        self.assertEqual(state['api_version'], tier3.EXPECTED_API_VERSION)
+        # the identity lookup really was issued, not skipped
+        self.assertTrue(any("legacy_woo_customer_id:'220'" in d for d in mock.sent))
+        self.assertEqual(mock.mutations_sent, 0)
+
+    # ---- the amendment did not weaken anything --------------------------
+    def test_the_guard_is_stricter_than_disabling_the_check(self):
+        """`requires_store_empty=False` would have accepted any store at all.
+        The replacement accepts exactly one state."""
+        for count in (0, 2, 3):
+            with self.assertRaises(tier3.Halt):
+                self.preflight_test2(StoreMock(count=count, present={220: TEST1_GID}))
+
+    def test_test_1_still_requires_an_empty_store(self):
+        d = tier3.TESTS['TIER3-TEST-1']
+        self.assertEqual(d.expected_customer_count, 0)
+        self.assertEqual(d.expected_preexisting_woo_ids, ())
+        mock = StoreMock(count=1, present={220: TEST1_GID})
+        with self.assertRaises(tier3.Halt) as caught:
+            tier3.preflight(mock, d, tier3.APPROVED_STORE_DOMAIN,
+                            tier3.EXPECTED_API_VERSION)
+        self.assertIn('expects exactly 0', str(caught.exception))
+
+    def test_test_3_asserts_no_count(self):
+        """Unchanged intent: Test 3 runs after 1 and 2 and its cohort is not
+        frozen, so no exact prior population can be stated."""
+        d = tier3.TESTS['TIER3-TEST-3']
+        self.assertIsNone(d.expected_customer_count)
+        self.assertEqual(d.expected_preexisting_woo_ids, ())
+        for count in (0, 1, 2, 50):
+            state = tier3.preflight(StoreMock(count=count), d,
+                                    tier3.APPROVED_STORE_DOMAIN,
+                                    tier3.EXPECTED_API_VERSION)
+            self.assertEqual(state['customers_before'], count)
+
+    def test_the_old_boolean_is_gone(self):
+        """No code path reads the old flag. The name still appears in one
+        comment explaining why it was replaced, which is documentation worth
+        keeping - so this asserts the absence of the parameter and the
+        attribute, not the absence of the word."""
+        source = open(os.path.join(SCRIPTS, 'phase10_tier3_executor.py'),
+                      encoding='utf-8').read()
+        import inspect
+        params = inspect.signature(tier3.Tier3Test.__init__).parameters
+        self.assertNotIn('requires_store_empty', params)
+        self.assertIn('expected_customer_count', params)
+        self.assertIn('expected_preexisting_woo_ids', params)
+        # code-only forms; these cannot appear in explanatory prose
+        self.assertNotIn('self.requires_store_empty', source)
+        self.assertNotIn('definition.requires_store_empty', source)
+        for test in tier3.TESTS.values():
+            self.assertFalse(hasattr(test, 'requires_store_empty'))
+            self.assertTrue(hasattr(test, 'expected_customer_count'))
+
+    def test_one_lookup_implementation_serves_both_checks(self):
+        """Absence and presence share find_customer_by_legacy_id. Two copies
+        would be two things that could drift."""
+        source = open(os.path.join(SCRIPTS, 'phase10_tier3_executor.py'),
+                      encoding='utf-8').read()
+        self.assertEqual(source.count('LEGACY_LOOKUP %'), 1)
+        self.assertIn('find_customer_by_legacy_id', source)
+
+    def test_the_state_guard_runs_before_any_mutation(self):
+        """End to end with mocks: a bad state sends zero mutations even though
+        the authorization and commit are both valid."""
+        mock = StoreMock(count=0)
+        with self.assertRaises(tier3.Halt):
+            tier3.execute('TIER3-TEST-2',
+                          tier3.TESTS['TIER3-TEST-2'].authorization_phrase,
+                          tier3.reviewed_commit(), mock,
+                          tier3.APPROVED_STORE_DOMAIN, tier3.EXPECTED_API_VERSION,
+                          candidate_loader=loader_for(
+                              tier3_candidate(2, registered=False, with_address=True)),
+                          sleep=lambda _s: None, tree_check=lambda: True)
+        self.assertEqual(mock.mutations_sent, 0)
+
+
+class Tier3Test2PayloadUnchanged(Tier3ExecutorBase):
+    """The store-state guard is the only behavioural change. The payload the
+    test would send must be exactly what was approved."""
+
+    def test_the_definition_is_otherwise_untouched(self):
+        d = tier3.TESTS['TIER3-TEST-2']
+        self.assertEqual(list(d.woo_ids), [2])
+        self.assertEqual(d.expected_creates, 1)
+        self.assertEqual(d.expected_addresses, 1)
+        self.assertEqual(d.expected_metafield_keys, (rt.LEGACY_KEY,))
+        self.assertTrue(d.expected_phone_sent)
+        self.assertEqual(d.expected_country, 'GB')
+        self.assertTrue(d.province_must_be_omitted)
+        self.assertEqual(d.authorization_phrase,
+                         'APPROVED - EXECUTE TIER-3 TEST 2 FOR WOO CUSTOMER 2')
+
+    def test_the_payload_shape_is_unchanged(self):
+        result = tier3.simulate(
+            'TIER3-TEST-2',
+            candidate_loader=loader_for(tier3_candidate(2, registered=False,
+                                                        with_address=True)))
+        planned = result['planned'][0]
+        self.assertEqual(planned['customerCreate'], 1)
+        self.assertEqual(planned['customerAddressCreate'], 1)
+        self.assertEqual(planned['metafield_keys'], [rt.LEGACY_KEY])
+        self.assertEqual(planned['legacy_id_value'], '2')
+        self.assertTrue(planned['phone_sent'])
+        self.assertFalse(planned['consent_present'])
+        self.assertEqual(planned['province_code_sent'], [False])
+        self.assertEqual(planned['set_as_default'], [True])
+        self.assertEqual(sorted(planned['payload_fields']),
+                         ['email', 'firstName', 'lastName', 'metafields',
+                          'phone', 'tags'])
 
 
 # ---------------------------------------------------------------------------
