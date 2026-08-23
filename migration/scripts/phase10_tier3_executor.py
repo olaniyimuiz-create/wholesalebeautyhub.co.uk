@@ -705,7 +705,7 @@ def _ledger(run_id, simulate):
     suffix = '.simulation' if simulate else ''
     return rt.ImportLedger(ledger_path=LEDGER_PATH + suffix,
                            checkpoint_path=CHECKPOINT_PATH + suffix,
-                           run_id=run_id, importer_commit=git_head()[:7])
+                           run_id=run_id, importer_commit=reviewed_commit())
 
 
 def simulate(test_id, candidate_loader=load_manifest_candidate, phone_allowed=None):
@@ -756,7 +756,12 @@ def simulate(test_id, candidate_loader=load_manifest_candidate, phone_allowed=No
         'test_id': test_id,
         'mode': MODE_SIMULATE,
         'run_id': run_id,
-        'executor_commit': git_head()[:7],
+        # The commit the executor ENFORCES via reviewed_commit(), not the tree
+        # it happens to sit in. HEAD is recorded separately so the two are
+        # distinguishable rather than conflated - conflating them is the
+        # auditability defect this replaces.
+        'executor_commit': reviewed_commit(),
+        'head_commit': git_head(),
         'contract_sha256': contract_hash(),
         'manifest_sha256': MANIFEST_SHA256,
         'woo_customer_ids': list(definition.woo_ids),
@@ -878,7 +883,8 @@ def execute(test_id, authorization, expect_commit, send, domain, api_version,
 
     return {
         'test_id': test_id, 'mode': MODE_EXECUTE, 'run_id': run_id,
-        'executor_commit': git_head()[:7], 'contract_sha256': contract_hash(),
+        'executor_commit': reviewed_commit(), 'head_commit': git_head(),
+        'contract_sha256': contract_hash(),
         'store_state_before': state, 'mutations': mutations,
         'created': [{'woo_customer_id': c['woo_customer_id'], 'gid': c['gid'],
                      'addresses': len(c['addresses'])} for c in created],

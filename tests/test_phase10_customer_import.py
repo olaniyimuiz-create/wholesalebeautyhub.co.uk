@@ -1294,7 +1294,38 @@ class Tier3AuditSafety(Tier3ExecutorBase):
         self.assertEqual(result['mutations']['customerAddressCreate'], 0)
         self.assertEqual(len(result['created']), 1)
         self.assertTrue(result['created'][0]['gid'].startswith('gid://shopify/Customer/'))
-        self.assertEqual(result['executor_commit'], tier3.git_head()[:7])
+        self.assertEqual(result['executor_commit'], tier3.reviewed_commit())
+
+    def test_the_result_records_the_enforced_commit_not_head(self):
+        """The Test-1 auditability defect. The result used to stamp HEAD, so an
+        evidence file could name a commit that decides nothing - at Test 1, HEAD
+        was ec2e61d while the guard enforced 7987aa7. The two are now recorded
+        separately and executor_commit is the one that was enforced."""
+        _mock, result = self.successful_run()
+        self.assertEqual(result['executor_commit'], tier3.reviewed_commit())
+        self.assertEqual(result['head_commit'], tier3.git_head())
+        self.assertEqual(len(result['executor_commit']), 40)
+
+    def test_executor_commit_differs_from_head_when_docs_moved_on(self):
+        """Only meaningful while HEAD has advanced past the behavioural commit -
+        which is exactly the situation that produced the defect."""
+        if tier3.reviewed_commit() == tier3.git_head():
+            self.skipTest('HEAD is the behavioural commit; nothing to distinguish')
+        _mock, result = self.successful_run()
+        self.assertNotEqual(result['executor_commit'], result['head_commit'])
+
+    def test_the_audit_ledger_stamps_the_enforced_commit(self):
+        _mock, _result = self.successful_run()
+        for line in self.ledger_text().splitlines():
+            record = json.loads(line)
+            if 'importer_commit' in record:
+                self.assertEqual(record['importer_commit'], tier3.reviewed_commit())
+
+    def test_the_simulation_result_records_both_commits(self):
+        result = tier3.simulate('TIER3-TEST-1',
+                                candidate_loader=loader_for(tier3_candidate(220)))
+        self.assertEqual(result['executor_commit'], tier3.reviewed_commit())
+        self.assertEqual(result['head_commit'], tier3.git_head())
 
     def test_a_docs_only_commit_does_not_invalidate_an_approval(self):
         """reviewed_commit() tracks the files that decide behaviour, not HEAD."""
