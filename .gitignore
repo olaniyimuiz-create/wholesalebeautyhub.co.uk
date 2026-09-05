@@ -110,3 +110,9 @@ reports/phase10_dropped_phones.pre-cleanup-backup.jsonl
 reports/phase10_bulk_import_ledger.jsonl
 reports/phase10_bulk_import_checkpoint.jsonl
 !reports/phase10_bulk_import_executor_result.json
+
+# Phase 9/10/11 intermediate caches. .legacy_map_cache.pkl is a pickled
+# customer/product map that contains real customer PII; .live_ids.json is a
+# regenerable id cache. Both are rebuildable from source - never commit them.
+reports/.legacy_map_cache.pkl
+reports/.live_ids.json

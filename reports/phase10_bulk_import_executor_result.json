@@ -1,0 +1,34 @@
+{
+  "consent_applied": 0,
+  "contract_sha256": "d889fd03a0122ece7dcc1c741381a87cba90506eabe7d074608a6459ebc9feb0",
+  "counts": {
+    "ADDRESS_CREATED": 4507,
+    "CREATED": 11684,
+    "CREATED_PHONE_DROPPED": 148,
+    "FAILED": 5,
+    "PHONE_DROPPED_RETRYING": 148,
+    "SKIPPED_ALREADY_PRESENT": 12
+  },
+  "created": 11832,
+  "executor_commit": "45a081f226427b469450dcd1506327ad7f14da57",
+  "failed": 5,
+  "head_commit": "ef53f1002c06640e9f8bf4c0eaf17201f545dd43",
+  "importer_commit": "45a081f226427b469450dcd1506327ad7f14da57",
+  "manifest_sha256": "2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda",
+  "mode": "execute",
+  "mutations": {
+    "customerAddressCreate": 4507,
+    "customerCreate": 11985
+  },
+  "phone_fallbacks": 148,
+  "run_id": "bulk-2026-08-23T22:56:09Z",
+  "skipped_already_present": 12,
+  "store_state_before": {
+    "api_version": "2026-07",
+    "customers_before": 12,
+    "development_store": true,
+    "scopes": 24,
+    "store": "wholesale-beautyhub.myshopify.com"
+  },
+  "total_mutations": 16492
+}
