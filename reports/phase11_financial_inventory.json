@@ -1,0 +1,231 @@
+{
+  "note": "Source values preserved verbatim; no normalization applied. Decimal arithmetic throughout, quantized to 2dp only on output.",
+  "totals": {
+    "subtotal": "427220.51",
+    "discount": "35.20",
+    "shipping": "37349.37",
+    "tax": "9483.00",
+    "fees": "0.00",
+    "refunds": "4827.15",
+    "total": "474050.49"
+  },
+  "by_year": {
+    "2024": {
+      "subtotal": "134958.20",
+      "discount": "5.10",
+      "shipping": "11496.37",
+      "tax": "0.00",
+      "fees": "0.00",
+      "refunds": "1696.71",
+      "total": "146454.80"
+    },
+    "2025": {
+      "subtotal": "292262.32",
+      "discount": "30.10",
+      "shipping": "25853.00",
+      "tax": "9483.00",
+      "fees": "0.00",
+      "refunds": "3130.44",
+      "total": "327595.69"
+    }
+  },
+  "by_status": {
+    "wc-cancelled": {
+      "subtotal": "6599.23",
+      "discount": "0.00",
+      "shipping": "527.12",
+      "tax": "336.42",
+      "fees": "0.00",
+      "refunds": "0.00",
+      "total": "7462.67"
+    },
+    "wc-checkout-draft": {
+      "subtotal": "0.00",
+      "discount": "0.00",
+      "shipping": "10.00",
+      "tax": "5.50",
+      "fees": "0.00",
+      "refunds": "0.00",
+      "total": "43.00"
+    },
+    "wc-completed": {
+      "subtotal": "396286.43",
+      "discount": "35.20",
+      "shipping": "34356.06",
+      "tax": "8344.00",
+      "fees": "0.00",
+      "refunds": "1595.43",
+      "total": "438955.88"
+    },
+    "wc-failed": {
+      "subtotal": "21010.02",
+      "discount": "0.00",
+      "shipping": "2104.19",
+      "tax": "688.59",
+      "fees": "0.00",
+      "refunds": "0.00",
+      "total": "23803.62"
+    },
+    "wc-pending": {
+      "subtotal": "196.60",
+      "discount": "0.00",
+      "shipping": "41.00",
+      "tax": "20.00",
+      "fees": "0.00",
+      "refunds": "0.00",
+      "total": "257.60"
+    },
+    "wc-processing": {
+      "subtotal": "221.67",
+      "discount": "0.00",
+      "shipping": "30.00",
+      "tax": "44.33",
+      "fees": "0.00",
+      "refunds": "0.00",
+      "total": "296.00"
+    },
+    "wc-refunded": {
+      "subtotal": "2906.56",
+      "discount": "0.00",
+      "shipping": "281.00",
+      "tax": "44.16",
+      "fees": "0.00",
+      "refunds": "3231.72",
+      "total": "3231.72"
+    }
+  },
+  "by_currency": {
+    "EUR": {
+      "subtotal": "268.10",
+      "discount": "0.00",
+      "shipping": "39.00",
+      "tax": "0.00",
+      "fees": "0.00",
+      "refunds": "0.00",
+      "total": "307.10"
+    },
+    "GBP": {
+      "subtotal": "426943.41",
+      "discount": "35.20",
+      "shipping": "37303.37",
+      "tax": "9483.00",
+      "fees": "0.00",
+      "refunds": "4827.15",
+      "total": "473727.39"
+    },
+    "USD": {
+      "subtotal": "9.00",
+      "discount": "0.00",
+      "shipping": "7.00",
+      "tax": "0.00",
+      "fees": "0.00",
+      "refunds": "0.00",
+      "total": "16.00"
+    }
+  },
+  "refund_classification": {
+    "no_refund": 8067,
+    "full_refund": 52,
+    "partial_refund": 86,
+    "multiple_refunds": 4
+  },
+  "tax_model_observed": {
+    "order_level_tax": "wp_wc_orders.tax_amount",
+    "shipping_tax": "wp_wc_order_operational_data.shipping_tax_amount",
+    "discount_tax": "wp_wc_order_operational_data.discount_tax_amount",
+    "line_level_tax": "_line_tax / _line_subtotal_tax in order itemmeta",
+    "prices_include_tax_flag": "wp_wc_order_operational_data.prices_include_tax"
+  },
+  "financial_mismatch_examples": [
+    {
+      "order_id": 2289,
+      "recomputed": "13.09",
+      "source_total": "13.00",
+      "delta": "0.09"
+    },
+    {
+      "order_id": 2306,
+      "recomputed": "30.44",
+      "source_total": "31.00",
+      "delta": "-0.56"
+    },
+    {
+      "order_id": 2308,
+      "recomputed": "30.44",
+      "source_total": "31.00",
+      "delta": "-0.56"
+    },
+    {
+      "order_id": 2309,
+      "recomputed": "52.29",
+      "source_total": "53.00",
+      "delta": "-0.71"
+    },
+    {
+      "order_id": 2310,
+      "recomputed": "52.29",
+      "source_total": "52.00",
+      "delta": "0.29"
+    },
+    {
+      "order_id": 2314,
+      "recomputed": "89.34",
+      "source_total": "90.00",
+      "delta": "-0.66"
+    },
+    {
+      "order_id": 2433,
+      "recomputed": "23.29",
+      "source_total": "23.00",
+      "delta": "0.29"
+    },
+    {
+      "order_id": 2434,
+      "recomputed": "53.69",
+      "source_total": "54.00",
+      "delta": "-0.31"
+    },
+    {
+      "order_id": 2435,
+      "recomputed": "60.10",
+      "source_total": "60.00",
+      "delta": "0.10"
+    },
+    {
+      "order_id": 2466,
+      "recomputed": "126.65",
+      "source_total": "127.00",
+      "delta": "-0.35"
+    },
+    {
+      "order_id": 2467,
+      "recomputed": "52.50",
+      "source_total": "53.00",
+      "delta": "-0.50"
+    },
+    {
+      "order_id": 2496,
+      "recomputed": "23.05",
+      "source_total": "23.00",
+      "delta": "0.05"
+    },
+    {
+      "order_id": 2497,
+      "recomputed": "42.05",
+      "source_total": "43.00",
+      "delta": "-0.95"
+    },
+    {
+      "order_id": 2498,
+      "recomputed": "33.50",
+      "source_total": "34.00",
+      "delta": "-0.50"
+    },
+    {
+      "order_id": 2499,
+      "recomputed": "33.50",
+      "source_total": "34.00",
+      "delta": "-0.50"
+    }
+  ]
+}

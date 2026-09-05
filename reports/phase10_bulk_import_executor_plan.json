@@ -1,0 +1,96 @@
+{
+  "authorization": "ADR-014 Gate 7 is UNSIGNED. This is a plan, not permission.",
+  "content": {
+    "consent_applied_by_this_run": 0,
+    "customers_with_a_phone_sent": 3799,
+    "customers_with_both_metafields": 6581
+  },
+  "contract_sha256": "d889fd03a0122ece7dcc1c741381a87cba90506eabe7d074608a6459ebc9feb0",
+  "executor_commit": "86f3211e58a1eb69bac4ac47ccc436fd3ed17a68",
+  "guards": [
+    {
+      "guard": 1,
+      "rule": "approved store identified"
+    },
+    {
+      "guard": 2,
+      "rule": "production store rejected"
+    },
+    {
+      "guard": 3,
+      "rule": "live is not the default"
+    },
+    {
+      "guard": 4,
+      "rule": "plan-only is the default"
+    },
+    {
+      "guard": 5,
+      "rule": "missing Gate 7 authorization halts"
+    },
+    {
+      "guard": 6,
+      "rule": "manifest hash matches"
+    },
+    {
+      "guard": 7,
+      "rule": "population matches the approved manifest, by id set"
+    },
+    {
+      "guard": 8,
+      "rule": "store state is empty or a recognised resume"
+    },
+    {
+      "guard": 9,
+      "rule": "duplicate legacy Woo ids halt"
+    },
+    {
+      "guard": 10,
+      "rule": "already-present legacy id skips"
+    },
+    {
+      "guard": 11,
+      "rule": "timeout verifies before retrying"
+    },
+    {
+      "guard": 12,
+      "rule": "401 / token expiry halts immediately"
+    },
+    {
+      "guard": 13,
+      "rule": "THROTTLED uses the tested backoff"
+    },
+    {
+      "guard": 14,
+      "rule": "legacy id written in the same customerCreate"
+    },
+    {
+      "guard": 15,
+      "rule": "no creation outside the approved population"
+    },
+    {
+      "guard": 16,
+      "rule": "supplied cohort verified against the manifest"
+    }
+  ],
+  "head_commit": "c12e54e204c9ed5360e445d8be1279d23a5391be",
+  "manifest_sha256": "2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda",
+  "mode": "plan",
+  "mutations": {
+    "customerAddressCreate": 4521,
+    "customerCreate": 11849,
+    "phone_fallback_second_creates_expected": 51,
+    "total": 16370,
+    "total_worst_case": 16421
+  },
+  "population": {
+    "approved_import": 12096,
+    "run_population": 11849
+  },
+  "rate_plan": {
+    "estimated_minutes": 27.4,
+    "expected_throttles": 0,
+    "target_mutations_per_second": 10
+  },
+  "shopify_mutations_performed": 0
+}

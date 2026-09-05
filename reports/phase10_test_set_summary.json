@@ -1,0 +1,23 @@
+{
+  "authorization": "NOT AUTHORIZED - ADR-014 Gate 6 is open. This file was built, not executed. No Shopify record was created.",
+  "cohort_size": 10,
+  "coverage": {
+    "one_metafield": 6,
+    "phone_omitted": 3,
+    "phone_sent": 7,
+    "province_dropped": 4,
+    "province_sent": 1,
+    "two_metafields": 4,
+    "with_address": 7,
+    "without_address": 3
+  },
+  "eligible_pool": 11849,
+  "excluded_for_name_conflict": 247,
+  "expected_mutations_if_authorized": {
+    "customerAddressCreate": 7,
+    "customerCreate": 10,
+    "estimated_cost_points": 170,
+    "total": 17
+  },
+  "slots_unfilled": []
+}

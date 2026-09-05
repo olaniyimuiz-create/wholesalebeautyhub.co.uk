@@ -1,0 +1,53 @@
+{
+  "authorization": "ADR-014 Gate 7 is UNSIGNED. This is a plan, not permission.",
+  "content": {
+    "consent_subscribed_in_run": 6065,
+    "customers_with_a_phone_in_source": 4227,
+    "customers_with_an_address": 4521,
+    "customers_with_both_metafields": 6581,
+    "customers_with_legacy_id_only": 5268,
+    "phones_actually_sent": 3799,
+    "phones_omitted_by_gate_1": 428
+  },
+  "cost": {
+    "estimated_minutes": 27.4,
+    "points_per_mutation_measured": 10,
+    "sustained_mutations_per_second": 10,
+    "total_points": 163700
+  },
+  "mutations": {
+    "customerAddressCreate": 4521,
+    "customerCreate": 11849,
+    "phone_fallback_second_creates_expected": 51,
+    "total": 16370,
+    "total_worst_case_with_fallbacks": 16421
+  },
+  "notes": {
+    "addresses": "A_PLUS sends at most one address per customer: billing, or shipping when there is no billing address.",
+    "consent": "Approved but not applied by this plan: consent can be set post-import with customerEmailMarketingConsentUpdate.",
+    "not_built": "No bulk importer exists. phase10_test_import.py is capped at 10 records. Gate 7 authorizes a run that still has to be written and reviewed.",
+    "phone_fallback": "Every customer whose phone the offline pre-check flags is expected to cost one extra customerCreate, because Shopify rejects the whole mutation on a phone error and the runtime retries once without the number. The customer is never lost. This is an estimate from a STRUCTURAL check - Shopify validates against numbering plans this project does not hold, so treat it as a floor."
+  },
+  "phone_collision_groups": {
+    "by_recommended_action": {
+      "KEEP_ONE": 76,
+      "MANUAL_REVIEW_REQUIRED": 9,
+      "OMIT_FROM_ALL": 155
+    },
+    "customers_affected": 517,
+    "groups": 240
+  },
+  "population": {
+    "held_back_by_gate_5": 247,
+    "import_classified": 12096,
+    "ineligible_at_plan_time": 0,
+    "to_import": 11849
+  },
+  "signed_policies": {
+    "gate_1_phone": "recommendations confirmed; 9 contested groups omit",
+    "gate_2_address": "A_PLUS_BILLING_ELSE_SHIPPING",
+    "gate_3_consent": "carry FluentCRM subscribed forward",
+    "gate_4_missing_email": "PERMANENT_EXCLUSION",
+    "gate_5_names": "EXCLUDE_AFFECTED_CUSTOMERS"
+  }
+}

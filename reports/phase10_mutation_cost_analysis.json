@@ -1,0 +1,52 @@
+{
+  "aborted": null,
+  "api_version": "2026-07",
+  "customers_after": 0,
+  "customers_before": 0,
+  "measured_at": "2026-08-21T23:58:15Z",
+  "method": "field-validation-rejected mutations; cost extensions returned, no record created",
+  "probes": [
+    {
+      "actual_cost": 10,
+      "currently_available": 1990,
+      "maximum_available": 2000.0,
+      "mutation": "customerCreate",
+      "outcome": "REJECTED_BY_VALIDATION",
+      "requested_cost": 10,
+      "restore_rate": 100.0
+    },
+    {
+      "actual_cost": 10,
+      "currently_available": 1990,
+      "maximum_available": 2000.0,
+      "mutation": "customerUpdate",
+      "outcome": "REJECTED_BY_VALIDATION",
+      "requested_cost": 10,
+      "restore_rate": 100.0
+    },
+    {
+      "actual_cost": 10,
+      "currently_available": 1990,
+      "maximum_available": 2000.0,
+      "mutation": "customerAddressCreate",
+      "outcome": "REJECTED_BY_VALIDATION",
+      "requested_cost": 10,
+      "restore_rate": 100.0
+    }
+  ],
+  "rate_plan": {
+    "address_creates_option_a": 4713,
+    "address_creates_option_b": 5922,
+    "assumption_was": "correct",
+    "burst_capacity_mutations": 200,
+    "customer_creates": 12096,
+    "estimated_seconds_option_a": 1681,
+    "estimated_seconds_option_b": 1802,
+    "measured_mutation_cost": 10.0,
+    "note": "Concurrency stays 1: the bucket is account-wide, so parallelism buys nothing against a fixed restore rate and makes throttle recovery and checkpoint ordering harder.",
+    "previous_assumed_cost": 10,
+    "safe_concurrency": 1,
+    "sustained_mutations_per_second": 10.0
+  },
+  "records_created": 0
+}

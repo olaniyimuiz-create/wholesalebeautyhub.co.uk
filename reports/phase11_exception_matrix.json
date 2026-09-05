@@ -1,0 +1,41 @@
+{
+  "note": "Tags are not mutually exclusive; an order may carry several. IMPORT_READY is assigned only when no other tag applies.",
+  "matrix": {
+    "FINANCIAL_MISMATCH": {
+      "orders": 22,
+      "value": "1085.00"
+    },
+    "IMPORT_READY": {
+      "orders": 7780,
+      "value": "439842.59"
+    },
+    "MISSING_CUSTOMER": {
+      "orders": 126,
+      "value": "8449.97"
+    },
+    "MISSING_ORDER_DATA": {
+      "orders": 2,
+      "value": "43.00"
+    },
+    "MISSING_PRODUCT": {
+      "orders": 262,
+      "value": "24164.65"
+    },
+    "MISSING_VARIANT": {
+      "orders": 58,
+      "value": "5480.19"
+    },
+    "PAYMENT_AMBIGUOUS": {
+      "orders": 9,
+      "value": "194.03"
+    },
+    "REFUND_COMPLEX": {
+      "orders": 4,
+      "value": "95.16"
+    },
+    "UNSUPPORTED_CURRENCY": {
+      "orders": 4,
+      "value": "323.10"
+    }
+  }
+}

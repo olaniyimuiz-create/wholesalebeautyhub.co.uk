@@ -419,44 +419,430 @@ fabricated £0.00 prices remain anywhere in the store; 0 legitimate
 
 ## ADR-014: Phase 10 customer import — business decisions required
 
-**Status: BUSINESS DECISION REQUIRED — not decided.** Same pattern as
-ADR-010 (Markets/B2B): this records what's being asked, not an answer.
+**Status: PARTIALLY SIGNED (2026-08-22). Gates 3 and 6 decided; Gates 1, 2, 4, 5 and 7 remain open.**
 
-**Context**: Phase 10 technical readiness work (`docs/PHASE10_CUSTOMER_STRATEGY.md`,
-`docs/PHASE10_CUSTOMER_MAPPING.md`, `docs/PHASE10_GDPR_CONSENT.md`,
-`docs/PHASE10_ACCOUNT_STRATEGY.md`) is substantially complete: 12,096
-source customers independently re-verified and classified (12,096
-IMPORT-eligible, 539 quarantined with documented reasons, 407 redundant
-duplicate rows skipped, 1 staff account excluded), a deterministic
-idempotent dry-run pipeline built and verified (byte-identical across two
-runs), a representative 10-customer test set designed, and the target
-platform's actual customer-account architecture (New Customer Accounts,
-verified live — no password field exists at all) and consent options
-(verified via schema introspection) fully investigated. None of this
-constitutes authorization to write.
+This records what is being asked and provides the form in which an answer is
+recorded. It is not an answer. Every `Decision:` field below is deliberately
+blank, and a blank field means the gate is open.
 
-**Decisions required, none made by this document**:
+**Nothing in this ADR authorizes a Shopify write of any kind.**
 
-1. **Import method**: Admin GraphQL API (recommended,
-   `docs/PHASE10_CUSTOMER_STRATEGY.md` § 1) vs. the pre-built CSV.
-2. **Marketing-consent policy**: whether FluentCRM's `subscribed` status
-   (6,295 of 12,096 customers) is legally sufficient basis to set
-   Shopify `emailMarketingConsent = SUBSCRIBED`, or whether the safe
-   default (omit the field for everyone) applies until a fresh,
-   Shopify-native consent event occurs (`docs/PHASE10_GDPR_CONSENT.md`).
-3. **Shipping address**: whether to add the currently-unmapped shipping
-   address (real for 1,209 customers, captured in source but never
-   surfaced by `database_parser.py`) to the customer schema before
-   import.
-4. **Test import authorization**: for the 10-customer representative set
-   only (`reports/phase10_test_import_set.csv`), into the same
-   `wholesale-beautyhub.myshopify.com` development store as Phase 9 —
-   not the full 12,096.
-5. **Bulk import authorization**: separate from the above, for the full
-   IMPORT-eligible set — not implied by any of the above being decided.
+### What has changed since this ADR was first written
 
-**Not authorized by this ADR**: any Shopify customer write, of any kind,
-test or bulk. **Prerequisite, not a business decision**: the app
-installation currently lacks the `read_customers`/`write_customers`
-scopes entirely (verified live) — this must be resolved before even a
-read-only verification query against live customers is possible.
+Three of the original five items are resolved, and the prerequisite is cleared:
+
+* **Item 1, import method — RESOLVED.** Admin GraphQL API, specifically
+  `customerCreate` + `customerAddressCreate`, ratified 2026-08-21 (see
+  `docs/PHASE10_CUSTOMER_SET_DECISION.md`). `customerSet` is out of scope.
+* **Item 3, shipping address — SUPERSEDED.** Now Gate 2 below, restated as a
+  policy choice with measured call counts rather than a yes/no on schema work.
+* **Prerequisite, customer scopes — CLEARED.** `read_customers` and
+  `write_customers` are granted; 24 scopes verified live 2026-08-22.
+* Also newly established, and not visible when this ADR was drafted: **517
+  customers share a phone number** with someone else (Gate 1), and **247 carry
+  a conflicting name** (Gate 5). Neither existed as a known issue before.
+
+### Verified state at the time of signing
+
+Reproduced byte-identically across runs; re-verify with
+`python migration/scripts/phase10_preflight.py` before signing.
+
+| | |
+|---|---|
+| Source rows | 13,043 |
+| IMPORT-eligible | 12,096 |
+| Duplicate SKIP / QUARANTINE / EXCLUDE | 407 / 539 / 1 |
+| Live Shopify customers | 0 |
+| Mutation cost | 10 points, measured, 0 records created |
+| Technical pre-flight | 13 passed, 0 failed |
+
+---
+
+### GATE 1 — Phone collisions
+
+**Question**: 240 groups covering 517 customers share a phone number. Shopify
+enforces store-wide uniqueness, so the field cannot be sent for all of them.
+
+**Prepared**: `reports/phase10_phone_collision_review.csv` (gitignored, 578
+rows). Applying the approved ownership rule produced 76 `KEEP_ONE`, 155
+`OMIT_FROM_ALL`, and 9 `MANUAL_REVIEW_REQUIRED`. Per customer: 76 send, 422
+omit, 19 held. The 27-customer group is `OMIT_FROM_ALL` — all 27 are guest rows
+with zero registered accounts.
+
+**What is needed**: a verdict on the 9 contested groups, and confirmation or
+override of the other 231. Unresolved groups default to omitting the phone; the
+customer is still created.
+
+```
+Decision:      CONFIRMED — the 231 recommendations stand as issued; the 9
+               contested groups omit the phone for every member
+Decided by:    Project/store owner
+Date:          2026-08-22
+```
+
+**Recorded scope**: **76** customers send their number, **441** omit it (422
+recommended `OMIT`, plus the 19 held in the 9 contested groups). All 517 are
+created in full — omitting a phone never omits a customer.
+
+**No phone number is deleted or altered in WooCommerce.** The only question this
+gate settled is whether a number is *sent* to Shopify.
+
+**Deliberately left open, and not a blocker**: the 9 contested groups were not
+adjudicated. Each has two or more members with genuine individual ownership
+evidence, and the owner chose the safe default rather than a guess. Those 19
+customers can be reviewed at any time and the number added afterwards with
+`customerUpdate` — no re-import, no rework. Choosing wrong now would attach one
+person's phone number to another person's record, which is the one outcome here
+with a real-world cost.
+
+---
+
+### GATE 2 — Address policy
+
+**Question**: billing only, or billing + shipping?
+
+**Measured**: Option A = 4,713 address calls · Option B = 5,922. 4,730 customers
+end with at least one address; 7,351 have none in source; 1,193 have both; 16
+have shipping only.
+
+**No recommendation is offered, deliberately.** The deciding question is whether
+an unlabelled second address on 1,193 records helps or confuses staff — Shopify
+draws no billing/shipping distinction, so both land in one list ordered by
+`setAsDefault`. That is an operational judgment about how the team works, not a
+technical one. The runtime supports either via `include_shipping`.
+
+```
+Decision (A or B):   A_PLUS — billing, falling back to shipping ONLY for a
+                     customer who has no billing address
+Decided by:          Project/store owner
+Date:                2026-08-22
+```
+
+**A third shape, introduced at decision time.** A and B were not the only
+options available, and the binary hid a real cost in each: option A would have
+imported **17** customers with no address at all while usable address data sat
+unused in the source, and option B would have given **1,192** customers a second
+address that Shopify renders with no billing/shipping label. A_PLUS pays
+neither price.
+
+| | Calls | Customers with address data left addressless | Customers with an unlabelled second address |
+|---|---:|---:|---:|
+| A — billing only | 4,713 | **17** | 0 |
+| B — billing + shipping | 5,922 | 0 | **1,192** |
+| **A_PLUS — selected** | **4,730** | **0** | **0** |
+
+Measured across all 12,096 by `phase10_address_readiness.py`, not estimated:
+4,713 + 17 = 4,730 ✓. The cost over option A is **17 extra calls**.
+
+**Implemented and tested**: `rt.ADDRESS_POLICY_BILLING_ELSE_SHIPPING`, selected
+via `plan_addresses(policy=…)`. A policy string nothing implements raises
+`UnknownAddressPolicy` rather than falling back to a real policy — importing
+thousands of customers under a rule nobody chose is the failure this prevents.
+Options A and B remain implemented, because a decision recorded in a document
+is a decision that can be revised.
+
+**One earlier figure corrected**: the narrative above says "1,193 have both; 16
+have shipping only". Measured per customer, it is **1,192 both and 17
+shipping-only**. The 4,713 / 5,922 call counts are unchanged and were always
+right; only the per-customer split was off by one in each direction.
+
+---
+
+### GATE 3 — Marketing consent
+
+**Question**: may FluentCRM's `subscribed` status be carried into Shopify's
+`emailMarketingConsent`?
+
+**Scope**: 6,295 `subscribed` records. The other three cases need no decision —
+229 `unsubscribed` (honour the opt-out), 21 `pending` (double opt-in never
+completed), 5,551 no signal (safe default).
+
+**Current policy, unchanged**: `emailMarketingConsent` is omitted for **all
+12,096**. The open question is legal, not technical: whether FluentCRM's
+original opt-in mechanism is a sufficient basis under UK GDPR/PECR to carry
+consent into a different platform. Nothing in the database export answers it.
+
+**This is the one gate that is not the store owner's alone to close** — it needs
+the data controller, or their advisor. The verbatim statement to sign or decline
+is in `docs/PHASE10_GDPR_CONSENT.md` § 5.
+
+```
+Decision (approve / decline):  APPROVED — carry FluentCRM `subscribed` forward
+Decided by (role):             Project/store owner
+Date:                          2026-08-22
+```
+
+**Recorded scope of this approval**: `emailMarketingConsent.marketingState =
+SUBSCRIBED` for the **6,295** FluentCRM `subscribed` records. The other three
+cases are unchanged and were never in question: 229 `unsubscribed` remain
+UNSUBSCRIBED, 21 `pending` are omitted (double opt-in never completed), 5,551
+with no signal are omitted.
+
+**Recorded limits of what was verified** — stated because a consent decision
+should carry its evidentiary basis, not because it reopens the decision. This
+pipeline has no visibility into how FluentCRM originally collected consent:
+single vs. double opt-in, and what disclosure was shown, are not present in the
+database export and were not established. The approval above is the owner's
+judgment that the original opt-in is a valid basis under UK GDPR/PECR; it is not
+a technical finding, and this project did not verify it.
+
+**Not yet applied.** No customer carries consent, because no customer exists.
+This governs the full import. The Gate 6 test cohort runs with consent omitted,
+which is what Gate 6 authorized.
+
+**Implementation note**: consent can also be applied after import via
+`customerEmailMarketingConsentUpdate` without re-importing anyone, so this
+decision does not block or gate the import order.
+
+---
+
+### GATE 4 — 292 missing-email records
+
+**Question**: permanently exclude, or attempt recovery?
+
+**Evidence**: all 292 are guest rows — no user account, no phone, no billing
+address; 291 have only a name. The guest fallback reads `wp_wc_order_addresses`
+**keyed by email**, so it cannot recover one. No other source in the parsed dump
+carries an email for these rows.
+
+**Recommendation**: `PERMANENT_EXCLUSION`. No email is fabricated or
+synthesised. Their orders remain migratable separately as guest orders.
+
+```
+Decision:      PERMANENT_EXCLUSION — confirmed
+Decided by:    Project/store owner
+Date:          2026-08-22
+```
+
+**Recorded scope**: the 292 are excluded from the customer import permanently,
+not deferred. No email is fabricated, synthesised, or derived. They are already
+outside the 12,096 IMPORT population, so this confirms the existing
+classification rather than changing any number.
+
+**What this does not decide**: their orders. Those remain migratable separately
+as guest orders, which is an order-migration question and not this gate's.
+
+---
+
+### GATE 5 — 247 conflicting-name records
+
+**Question**: which name is correct, and what does an unresolved conflict do to
+the run?
+
+**Prepared**: `reports/phase10_name_conflict_review.csv` (gitignored, 247 rows,
+every `chosen_name` empty). Reviewer writes `IMPORT_NAME`, `ALTERNATE_NAME`, or
+`MANUAL_REVIEW`; an unrecognised token raises rather than being interpreted.
+Triage: **94 genuinely ambiguous, 153 near-mechanical** — of which 16 would
+otherwise import with no name at all and are worth doing first.
+
+**Nothing is pre-selected and nothing can be.** WooCommerce records no ordering
+or authority between the two variants, so there is no evidence to score.
+
+**Policy recommendation**: `EXCLUDE_AFFECTED_CUSTOMERS` — import 11,849 now, the
+247 once confirmed. Blocking all 12,096 is disproportionate; creating a customer
+under an unconfirmed name is the option with a real-world cost.
+
+```
+Name decisions:   NOT REQUIRED under the selected policy — all 247 remain
+                  unresolved in reports/phase10_name_conflict_review.csv
+Policy decision:  EXCLUDE_AFFECTED_CUSTOMERS
+Decided by:       Project/store owner
+Date:             2026-08-22
+```
+
+**Recorded scope**: the bulk import population becomes **11,849**, not 12,096.
+The 247 affected customers are held back, not dropped — they import unchanged
+once a reviewer fills `chosen_name`, with no rework and nothing lost.
+
+**Why the names could be left unresolved**: this policy means no customer is
+ever created carrying a name no human has confirmed, so the 247 name decisions
+stop being a precondition for the run. They remain genuinely owed to those
+customers — 16 of them would otherwise import with no name at all — but they are
+now follow-up work rather than a gate.
+
+**Enforced, not assumed**: `name_conflict_gate()` raises if the policy is
+`BLOCK_ENTIRE_MIGRATION` and conflicts remain, and removes the affected Woo IDs
+from the population under `EXCLUDE_AFFECTED_CUSTOMERS`. An unrecognised
+`chosen_name` token raises rather than being interpreted.
+
+---
+
+### GATE 6 — Test cohort authorization (Step 10)
+
+**Separate from Gates 1–5 and not implied by any of them.**
+
+**Question**: authorize a 10-customer test import into
+`wholesale-beautyhub.myshopify.com` (development store, 0 customers) using
+`reports/phase10_test_import_set.csv`?
+
+**This creates real customer records containing real people's data.** It is
+reversible via `customerDelete`, and the rollback window closes when the store
+goes live.
+
+**Prerequisite**: Gates 1–5 govern what is *sent*. A test import run before they
+close would exercise the pipeline under provisional rules — which is a
+legitimate thing to want, but it should be a deliberate choice rather than an
+oversight. State explicitly whether the test may precede them.
+
+```
+Decision:                            AUTHORIZED — create, reconcile, then delete
+May the test precede Gates 1–5:      yes
+Decided by:                          Project/store owner
+Date:                                2026-08-22
+```
+
+**Authorized scope, exactly**: the 10 customers in
+`reports/phase10_test_import_set.csv`, into
+`wholesale-beautyhub.myshopify.com` (development store), under these
+provisional rules:
+
+* `emailMarketingConsent` **omitted for all 10** — Gate 3's approval governs the
+  full import, not this test
+* **Option A addressing** (billing only) — 7 `customerAddressCreate` calls
+* phone **omitted** for the 3 collision-affected customers
+* name-conflict customers **excluded** from the cohort entirely
+* `custom.legacy_woo_customer_id` on every record, inline
+
+**Expected: 10 `customerCreate` + 7 `customerAddressCreate` + 10
+`customerDelete` = 27 mutations.** The store returns to 0 customers.
+
+**Not authorized by this gate**: any customer outside those 10, any second run,
+and the full import (Gate 7).
+
+### Gate 6 — EXECUTED 2026-08-22
+
+| | |
+|---|---|
+| Cohort | 10 |
+| Created | **9** |
+| Failed | **1** (woo 1 — `Phone is invalid`, customer not created) |
+| Address calls | 6 succeeded of 7 planned (the 7th belonged to the failed customer) |
+| Deleted | 9 — all created records removed |
+| Mutations | 25 (10 create, 6 address, 9 delete), 250 points |
+| Store after | **0 customers**, verified by listing records, not by count alone |
+| Consent set on any customer | **No** — as authorized |
+| Reconciliation | 117 field checks, 4 apparent mismatches, **0 real** |
+
+**The 4 mismatches were Shopify normalising UK phone numbers to E.164** —
+planned `07…`, live `+44…`, same subscriber, confirmed digit-by-digit. The
+reconciliation now compares canonical forms so a future run does not report a
+false mismatch.
+
+**The test earned its keep by failing.** `woo 1` was rejected outright on an
+invalid phone and **no customer was created** — see risk register #45. The
+design already specified retry-without-phone for exactly this case; the executor
+did not implement it. That gap is now recorded and must be closed before Gate 7.
+
+**Closed 2026-08-22.** `phase10_import_runtime.phone_fallback()` now decides the
+retry and builds the payload — phone removed, customer tagged
+`phone-dropped-invalid`, legacy metafield asserted through — and
+`phase10_test_import.create_customer()` re-issues the create exactly once. The
+runtime still cannot send a mutation; it decides and transforms, the executor
+sends.
+
+`phase10_phone_format_validator.py` sizes the exposure offline, without a single
+request: of the **4,450** customers carrying a phone, **10** are structurally
+invalid and **44** carry a GB national number of the wrong length — **54**
+flagged, woo 1 among them. That is the expected fallback rate for the bulk run:
+roughly 54 customers who keep their record and lose their number, not 54
+customers lost.
+
+The pre-check is structural and cannot certify that Shopify will accept a
+number. woo 1 passes every generic length test and was still rejected, which is
+precisely why the retry — not the pre-check — is what makes the bulk run safe.
+
+**Idempotency confirmed**: the startup legacy-id scan ran, found 0 existing, and
+every created customer carried `custom.legacy_woo_customer_id` verified against
+the live response before proceeding. Deletion re-verified the legacy id on each
+record before removing it.
+
+---
+
+### GATE 7 — Bulk import authorization
+
+Separate again, for the full IMPORT-eligible set. **Not implied by Gate 6.**
+
+**REQUESTED 2026-08-22.** Gates 1–6 are signed, every technical precondition
+passes, and the run has been planned against the signed policies rather than
+against the pre-decision figures. What follows is the request; the `Decision:`
+field below is the only thing that grants it.
+
+#### What is being asked for
+
+Authorization to create **11,849** customers in
+`wholesale-beautyhub.myshopify.com`, once, under the policies signed above.
+
+| | |
+|---|---|
+| Customers created | **11,849** (12,096 IMPORT minus 247 held by Gate 5) |
+| `customerCreate` | 11,849 |
+| `customerAddressCreate` | 4,521 |
+| **Total mutations** | **16,370** (16,421 worst case with phone fallbacks) |
+| Cost | 163,700 points at the measured 10/mutation |
+| Duration | **~27 minutes** at the measured sustained 10 mutations/s |
+| Addresses | 4,521 customers get exactly one; none gets two |
+| Phones sent | 3,799 · 428 omitted by Gate 1 · 51 expected to fall back |
+| Metafields | 11,849 legacy ids · 6,581 also carry `woo_registered_at` |
+| Consent | not applied by this run — 6,065 in-run `subscribed` records can be set afterwards |
+
+Measured by `phase10_run_plan.py`, offline, from the source dump. It reproduces
+the 240 collision groups and the 76/155/9 split exactly, which is what gives
+confidence the rest of its arithmetic is reading the same population every other
+report reads.
+
+#### What authorizing this does NOT do
+
+* **It does not make a run possible today.** No bulk importer exists.
+  `phase10_test_import.py` is hard-capped at 10 records and
+  `phase10_import_runtime.py` refuses mutation documents by construction. Gate 7
+  authorizes a program that still has to be written, and that program should be
+  reviewed before it is pointed at 11,849 customers.
+* **It does not authorize a second run.** Resume after an interrupted run is
+  supported through the legacy-id map, but a fresh full run is a fresh decision.
+* **It does not authorize consent.** Gate 3 approved it; applying it is a
+  separate `customerEmailMarketingConsentUpdate` pass.
+
+#### What is known to go wrong, before it does
+
+* **~51 customers will have their phone number dropped** (risk #45). Shopify
+  rejects the whole `customerCreate` on a phone validation error, so the runtime
+  drops the number, tags the customer `phone-dropped-invalid`, logs the original,
+  and retries once. Nobody is lost; roughly 51 people arrive without a phone.
+  That figure is a floor — the pre-check is structural, and Shopify validates
+  against numbering plans this project does not hold.
+* **19 customers keep no phone** pending the 9 contested collision groups.
+* **247 customers do not import at all** until their names are confirmed.
+* **15 customers import with no address**, their source address being
+  unusable — no country, and GB is never assumed.
+
+#### Rollback
+
+`customerDelete` per record, driven by the ledger, within the window before the
+store goes live. **Mass deletion is explicitly not the rollback mechanism** — see
+`PHASE10_IMPORT_PROCEDURE.md` §11. After go-live, a created customer is a real
+customer and deletion is a business decision, not a technical one.
+
+#### Preconditions, all currently true
+
+| | |
+|---|---|
+| Pre-flight | 15 passed, 0 failed, 0 gates open, exit 0 (2026-08-22) |
+| Store | 0 customers, verified by listing records |
+| Gates 1–6 | signed |
+| Offline suite | 644 + 63 assertions passing |
+| Test import | executed and reverted; 9 created, 1 lost to risk #45, now fixed |
+
+```
+Decision:
+Decided by:
+Date:
+Store and date the run is authorized for:
+```
+
+---
+
+**Not authorized by this ADR**: any Shopify customer write, of any kind, test or
+bulk. A gate is closed only when its `Decision:` field is filled in and dated.
+`phase10_preflight.py` reads the blocking column of
+`docs/PHASE10_DECISION_MATRIX.md` and will not report READY while any gate
+remains open.

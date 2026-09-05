@@ -1,0 +1,385 @@
+{
+  "address_writes": 0,
+  "authorization": "TIER3-TEST-3 is NOT authorized. Simulation proves the payload; execution requires the exact per-test phrase.",
+  "consent_on_any_payload": false,
+  "contract_sha256": "d889fd03a0122ece7dcc1c741381a87cba90506eabe7d074608a6459ebc9feb0",
+  "customer_writes": 0,
+  "executor_commit": "6699fd160f84cab0b69f3b77c9ecc2ab48aea7e6",
+  "expected_customerAddressCreate": 9,
+  "expected_customerCreate": 10,
+  "head_commit": "6699fd160f84cab0b69f3b77c9ecc2ab48aea7e6",
+  "manifest_sha256": "2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda",
+  "metafield_writes": 0,
+  "mode": "simulate",
+  "planned": [
+    {
+      "address_fields": [
+        [
+          "address1",
+          "city",
+          "countryCode",
+          "firstName",
+          "lastName",
+          "phone",
+          "zip"
+        ]
+      ],
+      "consent_present": false,
+      "customerAddressCreate": 1,
+      "customerCreate": 1,
+      "legacy_id_value": "1",
+      "metafield_keys": [
+        "legacy_woo_customer_id"
+      ],
+      "payload_fields": [
+        "email",
+        "firstName",
+        "lastName",
+        "metafields",
+        "phone",
+        "tags"
+      ],
+      "phone_sent": true,
+      "province_code_sent": [
+        false
+      ],
+      "set_as_default": [
+        true
+      ],
+      "woo_customer_id": 1
+    },
+    {
+      "address_fields": [
+        [
+          "address1",
+          "city",
+          "countryCode",
+          "firstName",
+          "lastName",
+          "phone",
+          "zip"
+        ]
+      ],
+      "consent_present": false,
+      "customerAddressCreate": 1,
+      "customerCreate": 1,
+      "legacy_id_value": "17",
+      "metafield_keys": [
+        "legacy_woo_customer_id"
+      ],
+      "payload_fields": [
+        "email",
+        "firstName",
+        "lastName",
+        "metafields",
+        "tags"
+      ],
+      "phone_sent": false,
+      "province_code_sent": [
+        false
+      ],
+      "set_as_default": [
+        true
+      ],
+      "woo_customer_id": 17
+    },
+    {
+      "address_fields": [
+        [
+          "address1",
+          "address2",
+          "city",
+          "countryCode",
+          "zip"
+        ]
+      ],
+      "consent_present": false,
+      "customerAddressCreate": 1,
+      "customerCreate": 1,
+      "legacy_id_value": "957",
+      "metafield_keys": [
+        "legacy_woo_customer_id",
+        "woo_registered_at"
+      ],
+      "payload_fields": [
+        "email",
+        "metafields",
+        "tags"
+      ],
+      "phone_sent": false,
+      "province_code_sent": [
+        false
+      ],
+      "set_as_default": [
+        true
+      ],
+      "woo_customer_id": 957
+    },
+    {
+      "address_fields": [
+        [
+          "address1",
+          "city",
+          "countryCode",
+          "firstName",
+          "lastName",
+          "phone",
+          "zip"
+        ]
+      ],
+      "consent_present": false,
+      "customerAddressCreate": 1,
+      "customerCreate": 1,
+      "legacy_id_value": "3",
+      "metafield_keys": [
+        "legacy_woo_customer_id"
+      ],
+      "payload_fields": [
+        "email",
+        "firstName",
+        "lastName",
+        "metafields",
+        "phone",
+        "tags"
+      ],
+      "phone_sent": true,
+      "province_code_sent": [
+        false
+      ],
+      "set_as_default": [
+        true
+      ],
+      "woo_customer_id": 3
+    },
+    {
+      "address_fields": [],
+      "consent_present": false,
+      "customerAddressCreate": 0,
+      "customerCreate": 1,
+      "legacy_id_value": "227",
+      "metafield_keys": [
+        "legacy_woo_customer_id",
+        "woo_registered_at"
+      ],
+      "payload_fields": [
+        "email",
+        "metafields",
+        "tags"
+      ],
+      "phone_sent": false,
+      "province_code_sent": [],
+      "set_as_default": [],
+      "woo_customer_id": 227
+    },
+    {
+      "address_fields": [
+        [
+          "address1",
+          "city",
+          "countryCode",
+          "firstName",
+          "lastName",
+          "phone",
+          "zip"
+        ]
+      ],
+      "consent_present": false,
+      "customerAddressCreate": 1,
+      "customerCreate": 1,
+      "legacy_id_value": "4",
+      "metafield_keys": [
+        "legacy_woo_customer_id"
+      ],
+      "payload_fields": [
+        "email",
+        "firstName",
+        "lastName",
+        "metafields",
+        "phone",
+        "tags"
+      ],
+      "phone_sent": true,
+      "province_code_sent": [
+        false
+      ],
+      "set_as_default": [
+        true
+      ],
+      "woo_customer_id": 4
+    },
+    {
+      "address_fields": [
+        [
+          "address1",
+          "city",
+          "countryCode",
+          "firstName",
+          "lastName",
+          "phone",
+          "zip"
+        ]
+      ],
+      "consent_present": false,
+      "customerAddressCreate": 1,
+      "customerCreate": 1,
+      "legacy_id_value": "217",
+      "metafield_keys": [
+        "legacy_woo_customer_id",
+        "woo_registered_at"
+      ],
+      "payload_fields": [
+        "email",
+        "firstName",
+        "lastName",
+        "metafields",
+        "phone",
+        "tags"
+      ],
+      "phone_sent": true,
+      "province_code_sent": [
+        false
+      ],
+      "set_as_default": [
+        true
+      ],
+      "woo_customer_id": 217
+    },
+    {
+      "address_fields": [
+        [
+          "address1",
+          "address2",
+          "city",
+          "countryCode",
+          "firstName",
+          "lastName",
+          "phone",
+          "zip"
+        ]
+      ],
+      "consent_present": false,
+      "customerAddressCreate": 1,
+      "customerCreate": 1,
+      "legacy_id_value": "6",
+      "metafield_keys": [
+        "legacy_woo_customer_id"
+      ],
+      "payload_fields": [
+        "email",
+        "firstName",
+        "lastName",
+        "metafields",
+        "phone",
+        "tags"
+      ],
+      "phone_sent": true,
+      "province_code_sent": [
+        false
+      ],
+      "set_as_default": [
+        true
+      ],
+      "woo_customer_id": 6
+    },
+    {
+      "address_fields": [
+        [
+          "address1",
+          "address2",
+          "city",
+          "company",
+          "countryCode",
+          "firstName",
+          "lastName",
+          "phone",
+          "provinceCode"
+        ]
+      ],
+      "consent_present": false,
+      "customerAddressCreate": 1,
+      "customerCreate": 1,
+      "legacy_id_value": "70",
+      "metafield_keys": [
+        "legacy_woo_customer_id"
+      ],
+      "payload_fields": [
+        "email",
+        "firstName",
+        "lastName",
+        "metafields",
+        "phone",
+        "tags"
+      ],
+      "phone_sent": true,
+      "province_code_sent": [
+        true
+      ],
+      "set_as_default": [
+        true
+      ],
+      "woo_customer_id": 70
+    },
+    {
+      "address_fields": [
+        [
+          "address1",
+          "city",
+          "countryCode",
+          "firstName",
+          "lastName",
+          "phone",
+          "provinceCode",
+          "zip"
+        ]
+      ],
+      "consent_present": false,
+      "customerAddressCreate": 1,
+      "customerCreate": 1,
+      "legacy_id_value": "1669",
+      "metafield_keys": [
+        "legacy_woo_customer_id"
+      ],
+      "payload_fields": [
+        "email",
+        "firstName",
+        "lastName",
+        "metafields",
+        "phone",
+        "tags"
+      ],
+      "phone_sent": true,
+      "province_code_sent": [
+        true
+      ],
+      "set_as_default": [
+        true
+      ],
+      "woo_customer_id": 1669
+    }
+  ],
+  "planned_customerAddressCreate": 9,
+  "planned_customerCreate": 10,
+  "rollback": {
+    "authorization_required": "a separate explicit authorization. Approval A granted build permission only, and rollback is a Shopify mutation like any other.",
+    "document_present": true,
+    "executable": false,
+    "operation": "customerDelete",
+    "precondition": "re-read the customer and confirm custom.legacy_woo_customer_id matches before deleting",
+    "targets": []
+  },
+  "run_id": "tier3-sim-TIER3-TEST-3-2026-08-23T21:13:36Z",
+  "shopify_mutations_performed": 0,
+  "test_id": "TIER3-TEST-3",
+  "woo_customer_ids": [
+    1,
+    17,
+    957,
+    3,
+    227,
+    4,
+    217,
+    6,
+    70,
+    1669
+  ]
+}

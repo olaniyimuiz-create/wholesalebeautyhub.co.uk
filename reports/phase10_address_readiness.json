@@ -1,0 +1,51 @@
+{
+  "address_calls_option_a_billing_only": 4713,
+  "address_calls_option_a_plus_billing_else_shipping": 4730,
+  "address_calls_option_b_billing_plus_shipping": 5922,
+  "billing": {
+    "by_status": {
+      "ADDRESS_PLANNED": 4713,
+      "SKIPPED_INVALID_COUNTRY": 16,
+      "SKIPPED_NO_ADDRESS1": 7367
+    },
+    "planned": 4713,
+    "skip_reasons": {
+      "MISSING_CITY": 14,
+      "MISSING_CITY; MISSING_ZIP": 12,
+      "MISSING_CITY; MISSING_ZIP; PROVINCE_DROPPED_GB_RATIFIED_RULE": 3,
+      "MISSING_CITY; PROVINCE_DROPPED_GB_RATIFIED_RULE": 2,
+      "MISSING_COUNTRY": 16,
+      "MISSING_ZIP": 12,
+      "NO_ADDRESS1": 7367,
+      "PROVINCE_DROPPED_COUNTRY_HAS_NO_PROVINCES": 15,
+      "PROVINCE_DROPPED_GB_RATIFIED_RULE": 2478
+    }
+  },
+  "customers_blocked_by_an_address_problem": 0,
+  "customers_whose_only_address_was_skipped": 15,
+  "customers_with_at_least_one_planned_address": 4730,
+  "customers_with_both_addresses": 1192,
+  "customers_with_shipping_but_no_billing": 17,
+  "exception_rows_for_review": 16,
+  "gate_2_note": "ADR-014 Gate 2 selected A_PLUS on 2026-08-22: billing, falling back to shipping only for a customer with no billing address. Under option A those customers would have imported with no address at all despite having usable address data; under option B every customer with both would carry a second address Shopify shows without a billing/shipping label. A_PLUS gives at most one address per customer and leaves nobody with address data addressless.",
+  "gate_2_selected_policy": "A_PLUS_BILLING_ELSE_SHIPPING",
+  "import_customers": 12096,
+  "note": "No customer is blocked by an address problem - that is the ratified rule and it is asserted, not assumed. A skipped address removes the address, never the customer. No country value was defaulted, inferred, or invented.",
+  "ratified_rule": "Customer = IMPORT, Address = SKIPPED_INVALID_COUNTRY; GB never assumed",
+  "shipping": {
+    "by_status": {
+      "ADDRESS_PLANNED": 1209,
+      "SKIPPED_NO_ADDRESS1": 10887
+    },
+    "planned": 1209,
+    "skip_reasons": {
+      "MISSING_CITY": 7,
+      "MISSING_CITY; MISSING_ZIP": 3,
+      "MISSING_CITY; PROVINCE_DROPPED_GB_RATIFIED_RULE": 1,
+      "MISSING_ZIP": 1,
+      "NO_ADDRESS1": 10887,
+      "PROVINCE_DROPPED_COUNTRY_HAS_NO_PROVINCES": 5,
+      "PROVINCE_DROPPED_GB_RATIFIED_RULE": 606
+    }
+  }
+}

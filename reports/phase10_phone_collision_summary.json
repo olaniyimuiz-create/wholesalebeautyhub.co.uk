@@ -1,0 +1,17 @@
+{
+  "collision_groups": 240,
+  "customers_held_pending_manual_review": 19,
+  "customers_recommended_omit_phone": 422,
+  "customers_recommended_send_phone": 76,
+  "groups_by_recommended_action": {
+    "KEEP_ONE": 76,
+    "MANUAL_REVIEW_REQUIRED": 9,
+    "OMIT_FROM_ALL": 155
+  },
+  "high_risk_groups": 1,
+  "import_customers_affected": 517,
+  "largest_group": 27,
+  "non_import_rows_listed_as_context": 61,
+  "note": "Recommendations only - every reviewer_decision column is empty. No phone number was deleted or altered in the source; the only question here is whether a number is SENT to Shopify. A customer whose phone is omitted is still created in full.",
+  "reviewer_decisions_recorded": 0
+}

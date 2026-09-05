@@ -1,0 +1,96 @@
+{
+  "note": "Root causes for Phase 11 exception classes. IDs only, no PII.",
+  "customer_exceptions": {
+    "orders_affected": 126,
+    "distinct_customer_ids": 89,
+    "root_cause_by_order": {
+      "IN_LOOKUP_BUT_NOT_IMPORTED_unexplained": 104,
+      "PHASE10_QUARANTINED": 21,
+      "PHASE10_IMPORT_FAILED_invalid_email": 1
+    },
+    "distinct_customer_ids_by_cause": {
+      "IN_LOOKUP_BUT_NOT_IMPORTED_unexplained": 73,
+      "PHASE10_QUARANTINED": 15,
+      "PHASE10_IMPORT_FAILED_invalid_email": 1
+    },
+    "sample_ids_by_cause": {
+      "IN_LOOKUP_BUT_NOT_IMPORTED_unexplained": [
+        23,
+        52,
+        61,
+        133,
+        152,
+        189,
+        210,
+        212,
+        219,
+        221
+      ],
+      "PHASE10_QUARANTINED": [
+        318,
+        407,
+        475,
+        488,
+        577,
+        606,
+        733,
+        847,
+        899,
+        933
+      ],
+      "PHASE10_IMPORT_FAILED_invalid_email": [
+        797
+      ]
+    }
+  },
+  "product_exceptions": {
+    "orders_affected": 296,
+    "distinct_product_ids": 16,
+    "root_cause_by_line_item": {
+      "DELETED_FROM_WOO_never_in_catalogue": 204,
+      "PHASE9_QUARANTINED_product": 126
+    },
+    "value_by_cause": {
+      "DELETED_FROM_WOO_never_in_catalogue": "2969.13",
+      "PHASE9_QUARANTINED_product": "9889.57"
+    },
+    "sample_deleted_product_ids": [
+      111,
+      358,
+      1740,
+      1741,
+      1742,
+      1744,
+      1764,
+      2333,
+      2342,
+      2351,
+      3654
+    ],
+    "phase9_quarantined_hit": [
+      1726,
+      2369,
+      2370,
+      2371,
+      2372
+    ]
+  },
+  "variant_exceptions": {
+    "orders_affected": 61,
+    "distinct_variation_ids": 15,
+    "root_cause_by_line_item": {
+      "PARENT_PRODUCT_ALSO_UNMAPPED": 69,
+      "VARIATION_NOT_IN_PHASE9_MAPPING": 12
+    }
+  },
+  "reference_sets": {
+    "phase9_catalogue": 611,
+    "phase9_imported": 596,
+    "phase9_quarantined": 15,
+    "phase9_variant_map": 497,
+    "phase10_mapped_customers": 11844,
+    "phase10_quarantined_customers": 539,
+    "phase10_failed_customers": 5,
+    "wp_wc_customer_lookup_ids": 13043
+  }
+}

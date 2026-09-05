@@ -1,0 +1,192 @@
+{
+  "audit": {
+    "by_status": {
+      "ADDRESS_CREATED": 10,
+      "CREATED": 10,
+      "CREATED_PHONE_DROPPED": 2,
+      "PHONE_DROPPED_RETRYING": 2
+    },
+    "dropped_phone_entries_this_run": 2,
+    "ledger_entries": 24
+  },
+  "authorization": "Approval 3 - TIER3-TEST-3 only, pinned to 6699fd1. CONSUMED.",
+  "cohort": [
+    1,
+    17,
+    957,
+    3,
+    227,
+    4,
+    217,
+    6,
+    70,
+    1669
+  ],
+  "contract_sha256": "d889fd03a0122ece7dcc1c741381a87cba90506eabe7d074608a6459ebc9feb0",
+  "credential_fingerprint": "e30de9cf119a",
+  "errors": [],
+  "executed": true,
+  "executed_at": "2026-08-23T21:15:34Z",
+  "head_commit_at_execution": "1201e0c44c61c11a917617446a90a88c867bbe72",
+  "manifest_sha256": "2e31f3edbed607d3cec3bf2790ee9deae57e7c0e2f7dd07c14a0b1c4bcecdfda",
+  "mutations": {
+    "create_calls_include_fallback_retries": 2,
+    "customerAddressCreate": 9,
+    "customerCreate": 12,
+    "customerDelete": 0,
+    "rollback": 0,
+    "total": 21
+  },
+  "not_authorized": [
+    "bulk import",
+    "Gate 7",
+    "customerDelete / rollback",
+    "push"
+  ],
+  "outcome": {
+    "addresses_created": 9,
+    "customers_created": 10,
+    "customers_saved_by_phone_fallback": [
+      1,
+      1669
+    ],
+    "duplicate_legacy_ids": 0,
+    "failed": 0,
+    "phone_fallbacks": [
+      1,
+      1669
+    ],
+    "store_customer_count_after": 12,
+    "unexpected_customers": 0,
+    "unexpected_mutations": 0
+  },
+  "per_customer_verified": {
+    "1": {
+      "addresses": 1,
+      "country": "GB",
+      "metafields": 1,
+      "phone_dropped": true,
+      "phone_sent": false,
+      "province_code": null,
+      "tagged": true
+    },
+    "1669": {
+      "addresses": 1,
+      "country": "IE",
+      "metafields": 1,
+      "phone_dropped": true,
+      "phone_sent": false,
+      "province_code": "LD",
+      "tagged": true
+    },
+    "17": {
+      "addresses": 1,
+      "country": "GB",
+      "metafields": 1,
+      "phone_dropped": false,
+      "phone_sent": false,
+      "province_code": null,
+      "tagged": false
+    },
+    "217": {
+      "addresses": 1,
+      "country": "GB",
+      "metafields": 2,
+      "phone_dropped": false,
+      "phone_sent": true,
+      "province_code": null,
+      "tagged": false
+    },
+    "227": {
+      "addresses": 0,
+      "country": null,
+      "metafields": 2,
+      "phone_dropped": false,
+      "phone_sent": false,
+      "province_code": null,
+      "tagged": false
+    },
+    "3": {
+      "addresses": 1,
+      "country": "GB",
+      "metafields": 1,
+      "phone_dropped": false,
+      "phone_sent": true,
+      "province_code": null,
+      "tagged": false
+    },
+    "4": {
+      "addresses": 1,
+      "country": "GB",
+      "metafields": 1,
+      "phone_dropped": false,
+      "phone_sent": true,
+      "province_code": null,
+      "tagged": false
+    },
+    "6": {
+      "addresses": 1,
+      "country": "GB",
+      "metafields": 1,
+      "phone_dropped": false,
+      "phone_sent": true,
+      "province_code": null,
+      "tagged": false
+    },
+    "70": {
+      "addresses": 1,
+      "country": "IE",
+      "metafields": 1,
+      "phone_dropped": false,
+      "phone_sent": true,
+      "province_code": "LH",
+      "tagged": false
+    },
+    "957": {
+      "addresses": 1,
+      "country": "FR",
+      "metafields": 2,
+      "phone_dropped": false,
+      "phone_sent": false,
+      "province_code": null,
+      "tagged": false
+    }
+  },
+  "pii": "none - no email, phone value, name or address in this file",
+  "preflight": {
+    "api_version": "2026-07",
+    "customers_before": 2,
+    "development_store": true,
+    "expected_customer_count": 2,
+    "expected_preexisting_woo_ids": [
+      220,
+      2
+    ],
+    "preexisting_identity_verified": true,
+    "scopes": 24
+  },
+  "prior_test_customers_untouched": {
+    "2": {
+      "addresses": 1,
+      "last_updated": "2026-08-23T20:07:30Z",
+      "note": "its own address creation at Test-2 time, not Test 3"
+    },
+    "220": {
+      "addresses": 0,
+      "created_equals_updated": true
+    }
+  },
+  "reviewed_behavioural_commit": "6699fd160f84cab0b69f3b77c9ecc2ab48aea7e6",
+  "risks_proven_live": {
+    "a_plus_shipping_fallback": "woo 957 had no billing address; the shipping address was used, country FR.",
+    "both_addresses_customer": "woo 217 holds both in source; exactly one address was created.",
+    "gb_province_omitted": "every GB address stored provinceCode null despite a county in source.",
+    "no_address_customer": "woo 227 created with zero addresses.",
+    "non_gb_province_sent": "IE provinceCode LH and LD transmitted and stored - the province-SENT path, never exercised live before.",
+    "risk_45_phone_fallback": "woo 1 - the customer Gate 6 lost to 'Phone is invalid' - was created without its phone, tagged, and kept its address and legacy id. woo 1669 confirmed the offline prediction by a different route (digit count)."
+  },
+  "rollback_authorized": false,
+  "rollback_required": false,
+  "run_id": "tier3-TIER3-TEST-3-2026-08-23T21:15:34Z",
+  "test_id": "TIER3-TEST-3"
+}
