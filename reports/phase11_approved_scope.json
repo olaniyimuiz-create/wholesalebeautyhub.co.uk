@@ -1,0 +1,48 @@
+{
+  "decisions_applied": {
+    "D-1": "exclude wc-checkout-draft only",
+    "D-2": "guest orders: email only, no customer association",
+    "D-4": "absent products: productId=null, retain title/sku/price",
+    "D-5": "orphan variations: supply productId, omit variantId"
+  },
+  "decisions_still_open": [
+    "D-3",
+    "D-6",
+    "D-7",
+    "D-9"
+  ],
+  "disposition": {
+    "APPROVED_FOR_IMPORT": {
+      "orders": 8053,
+      "value": "464097.26"
+    },
+    "PENDING_DECISION": {
+      "orders": 154,
+      "value": "9910.23"
+    },
+    "EXCLUDED_D1_checkout_draft": {
+      "orders": 2,
+      "value": "43.00"
+    }
+  },
+  "holds_breakdown": {
+    "D-7_source_financial_variance": 20,
+    "D-6_non_gbp": 4,
+    "D-3_unmapped_customer": 126,
+    "D-9_refund_complex": 4
+  },
+  "transformation_effects": {
+    "line_items_with_null_productId": 285,
+    "line_items_omitting_variantId": 77
+  },
+  "checkout_draft_order_ids": [
+    15690,
+    15698
+  ],
+  "orders_with_no_line_items": [
+    15690,
+    15698
+  ],
+  "no_line_item_orders_are_exactly_the_drafts": true,
+  "PII_NOTE": "Order IDs and aggregates only."
+}
