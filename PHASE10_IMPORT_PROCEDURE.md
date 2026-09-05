@@ -3,8 +3,19 @@
 Companion to `MIGRATION_BRIEF.md`. **Do not load, read into working context, or act on this
 file until Gates E–H are explicitly cleared.**
 
-**Status: BLOCKED.** Zero Shopify customer writes have ever occurred. No customer has been
-created, updated, deleted, merged, or fetched by GID at any point in this project.
+**Status update (2026-09-05, superseding the line below): the bulk customer import has
+executed.** Live query, paged in full: **11,844 customers exist in the store, every one
+carrying `custom.legacy_woo_customer_id`** — an exact match to the run ledger. Gate 7
+authorization is recorded in `migration/schema/phase10_migration_contract.json` as
+owner-confirmed retrospectively (see that file's `authorization` block for the exact
+provenance and its stated evidence gap). Gate A below (`read_customers`/`write_customers`)
+is also live-confirmed **GRANTED** as of this date — re-verify before relying on it, since
+this project has already seen these scopes granted, then expire, more than once.
+
+**Original status line, kept for the historical record it was written against:** "BLOCKED.
+Zero Shopify customer writes have ever occurred. No customer has been created, updated,
+deleted, merged, or fetched by GID at any point in this project." That was accurate through
+2026-08-17. It is not accurate now — do not cite it as current state.
 
 > **Provenance note.** The gate lettering (A–J) and the 18-step numbering are an organizing
 > device introduced by this document to make the existing material executable. Every fact,
@@ -61,8 +72,8 @@ authorization gates referenced by `MIGRATION_BRIEF.md`.**
 
 | Gate | Requirement | Type | Status |
 |---|---|---|---|
-| **A** | `read_customers` + `write_customers` granted on the app | TECHNICAL | **BLOCKED** — verified live 2026-08-17: `customersCount` → `ACCESS_DENIED`. Risk #39, issue #43 |
-| **B** | Import method approved (Admin GraphQL API recommended) | APPROVAL | Open — issue #44 |
+| **A** | `read_customers` + `write_customers` granted on the app | TECHNICAL | **CLEARED** — live-verified 2026-09-05, both scopes GRANTED, `customersCount` no longer denied. (Was BLOCKED 2026-08-17; this scope has flipped granted→revoked→granted at least once in this project's history — re-verify live before treating as settled.) |
+| **B** | Import method approved (Admin GraphQL API recommended) | APPROVAL | The bulk run already executed via `customerCreate`/`customerAddressCreate` per `phase10_migration_contract.json` — treat as exercised in practice. No separate written approval statement for this exact phrase has been located in this repository; if one exists elsewhere, link it here. |
 | **C** | Marketing-consent policy decided | BUSINESS + LEGAL | Open — issue #19, ADR-014 |
 | **D** | Shipping-address mapping decided (add, or accept billing-only gap) | BUSINESS | Open — risk #40 |
 | **E** | `custom.legacy_woo_customer_id` metafield design approved for implementation | APPROVAL | Open |
